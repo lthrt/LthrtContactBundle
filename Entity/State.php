@@ -2,12 +2,12 @@
 
 namespace Lthrt\ContactBundle\Entity;
 
-use Lthrt\EntityJSONBundle\Entity\LoggedEntity;
+use Lthrt\EntityJSONBundle\Entity\UnloggedEntity;
 
 /**
- * State.
+ * State
  */
-class State extends LoggedEntity implements \JSONSerializable
+class State extends UnloggedEntity implements \JSONSerializable
 {
     /**
      * @var string
@@ -20,7 +20,7 @@ class State extends LoggedEntity implements \JSONSerializable
     private $name;
 
     /**
-     * Get abbr.
+     * Get abbr
      *
      * @return string
      */
@@ -30,10 +30,9 @@ class State extends LoggedEntity implements \JSONSerializable
     }
 
     /**
-     * Set abbr.
+     * Set abbr
      *
      * @param string $abbr
-     *
      * @return State
      */
     public function setAbbr($abbr)
@@ -44,7 +43,7 @@ class State extends LoggedEntity implements \JSONSerializable
     }
 
     /**
-     * Get name.
+     * Get name
      *
      * @return string
      */
@@ -54,10 +53,9 @@ class State extends LoggedEntity implements \JSONSerializable
     }
 
     /**
-     * Set name.
+     * Set name
      *
      * @param string $name
-     *
      * @return State
      */
     public function setName($name)
@@ -68,15 +66,16 @@ class State extends LoggedEntity implements \JSONSerializable
     }
 
     /** jsonSerialize
-     *
-     */
+      *
+      */
     public function JSONSerialize()
     {
         return [
             'class' => 'Lthrt_ContactBundle_Entity_State',
-            'id'    => $this->id,
-            'abbr'  => $this->abbr,
-            'name'  => $this->name,
+            'id' => $this->id,
+            'abbr' => $this->abbr,
+            'name' => $this->name,
         ];
     }
+
 }

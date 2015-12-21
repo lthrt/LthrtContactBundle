@@ -2,12 +2,12 @@
 
 namespace Lthrt\ContactBundle\Entity;
 
-use Lthrt\EntityJSONBundle\Entity\LoggedEntity;
+use Lthrt\EntityJSONBundle\Entity\UnloggedEntity;
 
 /**
- * City.
+ * City
  */
-class City extends LoggedEntity implements \JSONSerializable
+class City extends UnloggedEntity implements \JSONSerializable
 {
     /**
      * @var string
@@ -19,10 +19,12 @@ class City extends LoggedEntity implements \JSONSerializable
      */
     private $state;
 
+
+
     /**
-     * Get name.
+     * Get name
      *
-     * @return string
+     * @return string 
      */
     public function getName()
     {
@@ -30,10 +32,9 @@ class City extends LoggedEntity implements \JSONSerializable
     }
 
     /**
-     * Set name.
+     * Set name
      *
      * @param string $name
-     *
      * @return City
      */
     public function setName($name)
@@ -44,10 +45,9 @@ class City extends LoggedEntity implements \JSONSerializable
     }
 
     /**
-     * Set state.
+     * Set state
      *
      * @param \Lthrt\ContactBundle\Entity\State $state
-     *
      * @return City
      */
     public function setState(\Lthrt\ContactBundle\Entity\State $state = null)
@@ -58,9 +58,9 @@ class City extends LoggedEntity implements \JSONSerializable
     }
 
     /**
-     * Get state.
+     * Get state
      *
-     * @return \Lthrt\ContactBundle\Entity\State
+     * @return \Lthrt\ContactBundle\Entity\State 
      */
     public function getState()
     {
@@ -68,15 +68,16 @@ class City extends LoggedEntity implements \JSONSerializable
     }
 
     /** jsonSerialize
-     *
-     */
+      *
+      */
     public function JSONSerialize()
     {
         return [
             'class' => 'Lthrt_ContactBundle_Entity_City',
-            'id'    => $this->id,
-            'name'  => $this->name,
-            'state' => ['class' => 'Lthrt_ContactBundle_Entity_State','id' => $this->state->id],
+            'id' => $this->id,
+            'name' => $this->name,
+            'state' => $this->state ? ['class' => 'Lthrt_ContactBundle_Entity_State','id'=>$this->state->id,]:'{}',
         ];
     }
+
 }
