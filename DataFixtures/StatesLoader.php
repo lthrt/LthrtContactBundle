@@ -5,7 +5,37 @@ use Lthrt\ContactBundle\Entity\State;
 
 class StatesLoader
 {
-    private $states = [
+
+   // because of length, source array at end of class
+
+
+    private $em;
+
+    public function __construct($em)
+    {
+        $this->em = $em;
+    }
+
+    public function load($overwrite = false)
+    {
+        $dbStates = $this->em->getRepository('LthrtContactBundle:State')
+        ->createQueryBuilder('state', 'state.abbr')->getQuery()->getResult();
+
+        $missingStates = array_diff_key($this->states, $dbStates);
+
+        foreach ($missingStates as $abbr => $name) {
+            $state = new State();
+            $state->setAbbr($abbr);
+            $state->setName($name);
+            $this->em->persist($state);
+        }
+
+        $this->em->flush();
+        ksort($missingStates);
+        return $missingStates;
+    }
+
+    protected $states = [
         'AL' => 'Alabama',
         'AK' => 'Alaska',
         'AZ' => 'Arizona',
@@ -58,30 +88,4 @@ class StatesLoader
         'WI' => 'Wisconsin',
         'WY' => 'Wyoming',
     ];
-
-    private $em;
-
-    public function __construct($em)
-    {
-        $this->em = $em;
-    }
-
-    public function load($overwrite = false)
-    {
-        $dbStates = $this->em->getRepository('LthrtContactBundle:State')
-        ->createQueryBuilder('state', 'state.abbr')->getQuery()->getResult();
-
-        $missingStates = array_diff_key($this->states, $dbStates);
-
-        foreach ($missingStates as $abbr => $name) {
-            $state = new State();
-            $state->setAbbr($abbr);
-            $state->setName($name);
-            $this->em->persist($state);
-        }
-
-        $this->em->flush();
-
-        return $missingStates;
-    }
 }

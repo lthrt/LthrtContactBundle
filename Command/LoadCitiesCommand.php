@@ -18,7 +18,7 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Lthrt\ContactBundle\DataFixtures\StatesLoader;
+use Lthrt\ContactBundle\DataFixtures\CitiesLoader;
 
 /**
  * Generate entity classes from mapping information.
@@ -29,7 +29,7 @@ use Lthrt\ContactBundle\DataFixtures\StatesLoader;
  *
  * Modified by lthrt to be more in line with his purposes
  */
-class LoadStatesCommand extends ContainerAwareCommand
+class LoadCitiesCommand extends ContainerAwareCommand
 {
     /**
      * {@inheritDoc}
@@ -37,14 +37,14 @@ class LoadStatesCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('lthrt:load:states')
-            ->setAliases(['lthrt:lo:st'])
-            ->setDescription('Loads states into database, skipping states already present')
-            ->addOption('overwrite', null, InputOption::VALUE_NONE, 'Overwrite even if abbreviation exists')
+            ->setName('lthrt:load:cities')
+            ->setAliases(['lthrt:lo:ci'])
+            ->setDescription('Loads cities into database, skipping cities already present')
+            ->addOption('overwrite', null, InputOption::VALUE_NONE, 'Overwrite even if city exists')
             ->addOption('em', null, InputOption::VALUE_REQUIRED, 'entity manager')
             ->setHelp(<<<EOT
-The <info>lthrt:load:states</info> Loads states into a database if they are not already present.
-States are 'present' in database if their abbreviation already exists
+The <info>lthrt:load:cities</info> Loads states into a database if they are not already present.
+States are 'present' in database if their abbreviation already exists.  Then cities are loaded.
 
 
 EOT
@@ -59,13 +59,13 @@ EOT
         $overwrite = $input->getOption('overwrite') ?: false;
         $emName    = $input->getOption('em');
         $manager   = $this->getContainer()->get('doctrine')->getManager($emName);
-        $loader    = new StatesLoader($manager);
-        $states    = $loader->load($overwrite);
-        if (count($states)) {
-            $inserted = implode(', ', array_keys($states));
-            $output->writeln("<info>".$inserted. " added.</info>");
-        } else {
+        $loader    = new CitiesLoader($manager);
+        $result    = $loader->load($overwrite);
+        if (0 === $result['states']) {
             $output->writeln("<info>No states added.</info>");
+        } else {
+            $output->writeln("<info>".$result['states']. " added.</info>");
         }
+        $output->writeln("<info>".$result['cities']. " cities added.</info>");
     }
 }
