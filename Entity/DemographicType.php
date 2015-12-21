@@ -2,22 +2,25 @@
 
 namespace Lthrt\ContactBundle\Entity;
 
-use Lthrt\EntityJSONBundle\Entity\LoggedEntity;
+use Lthrt\EntityJSONBundle\Entity\UnloggedEntity;
 
 /**
- * DemographicType.
+ * DemographicType
  */
-class DemographicType extends LoggedEntity implements \JSONSerializable
+
+class DemographicType extends UnloggedEntity implements \JSONSerializable
 {
     /**
      * @var string
      */
     private $name;
 
+
+
     /**
-     * Get name.
+     * Get name
      *
-     * @return string
+     * @return string 
      */
     public function getName()
     {
@@ -25,10 +28,9 @@ class DemographicType extends LoggedEntity implements \JSONSerializable
     }
 
     /**
-     * Set name.
+     * Set name
      *
      * @param string $name
-     *
      * @return DemographicType
      */
     public function setName($name)
@@ -39,14 +41,15 @@ class DemographicType extends LoggedEntity implements \JSONSerializable
     }
 
     /** jsonSerialize
-     *
-     */
+      *
+      */
     public function JSONSerialize()
     {
         return [
             'class' => 'Lthrt_ContactBundle_Entity_DemographicType',
-            'id'    => $this->id,
-            'name'  => $this->name,
+            'id' => $this->id,
+            'name' => $this->name,
         ];
     }
+
 }

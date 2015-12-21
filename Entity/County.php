@@ -5,10 +5,10 @@ namespace Lthrt\ContactBundle\Entity;
 use Lthrt\EntityJSONBundle\Entity\UnloggedEntity;
 
 /**
- * City
+ * County
  */
 
-class City extends UnloggedEntity implements \JSONSerializable
+class County extends UnloggedEntity implements \JSONSerializable
 {
     /**
      * @var string
@@ -16,9 +16,9 @@ class City extends UnloggedEntity implements \JSONSerializable
     private $name;
 
     /**
-     * @var \Lthrt\ContactBundle\Entity\State
+     * @var \Doctrine\Common\Collections\Collection
      */
-    private $state;
+    private $city;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -28,7 +28,7 @@ class City extends UnloggedEntity implements \JSONSerializable
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
-    private $county;
+    private $state;
 
 
     /**
@@ -36,8 +36,9 @@ class City extends UnloggedEntity implements \JSONSerializable
      */
     public function __construct()
     {
+        $this->city = new \Doctrine\Common\Collections\ArrayCollection();
         $this->zip = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->county = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->state = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
 
@@ -55,7 +56,7 @@ class City extends UnloggedEntity implements \JSONSerializable
      * Set name
      *
      * @param string $name
-     * @return City
+     * @return County
      */
     public function setName($name)
     {
@@ -65,33 +66,46 @@ class City extends UnloggedEntity implements \JSONSerializable
     }
 
     /**
-     * Set state
+     * Add city
      *
-     * @param \Lthrt\ContactBundle\Entity\State $state
-     * @return City
+     * @param \Lthrt\ContactBundle\Entity\City $city
+     * @return County
      */
-    public function setState(\Lthrt\ContactBundle\Entity\State $state = null)
+    public function addCity(\Lthrt\ContactBundle\Entity\City $city)
     {
-        $this->state = $state;
+        if ($this->city->contains($city)) {
+        } else {
+            $this->city[] = $city;
+        }
 
         return $this;
     }
 
     /**
-     * Get state
+     * Remove city
      *
-     * @return \Lthrt\ContactBundle\Entity\State 
+     * @param \Lthrt\ContactBundle\Entity\City $city
      */
-    public function getState()
+    public function removeCity(\Lthrt\ContactBundle\Entity\City $city)
     {
-        return $this->state;
+        $this->city->removeElement($city);
+    }
+
+    /**
+     * Get city
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCity()
+    {
+        return $this->city;
     }
 
     /**
      * Add zip
      *
      * @param \Lthrt\ContactBundle\Entity\Zip $zip
-     * @return City
+     * @return County
      */
     public function addZip(\Lthrt\ContactBundle\Entity\Zip $zip)
     {
@@ -124,39 +138,39 @@ class City extends UnloggedEntity implements \JSONSerializable
     }
 
     /**
-     * Add county
+     * Add state
      *
-     * @param \Lthrt\ContactBundle\Entity\County $county
-     * @return City
+     * @param \Lthrt\ContactBundle\Entity\State $state
+     * @return County
      */
-    public function addCounty(\Lthrt\ContactBundle\Entity\County $county)
+    public function addState(\Lthrt\ContactBundle\Entity\State $state)
     {
-        if ($this->county->contains($county)) {
+        if ($this->state->contains($state)) {
         } else {
-            $this->county[] = $county;
+            $this->state[] = $state;
         }
 
         return $this;
     }
 
     /**
-     * Remove county
+     * Remove state
      *
-     * @param \Lthrt\ContactBundle\Entity\County $county
+     * @param \Lthrt\ContactBundle\Entity\State $state
      */
-    public function removeCounty(\Lthrt\ContactBundle\Entity\County $county)
+    public function removeState(\Lthrt\ContactBundle\Entity\State $state)
     {
-        $this->county->removeElement($county);
+        $this->state->removeElement($state);
     }
 
     /**
-     * Get county
+     * Get state
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getCounty()
+    public function getState()
     {
-        return $this->county;
+        return $this->state;
     }
 
     /** jsonSerialize
@@ -165,12 +179,12 @@ class City extends UnloggedEntity implements \JSONSerializable
     public function JSONSerialize()
     {
         return [
-            'class' => 'Lthrt_ContactBundle_Entity_City',
+            'class' => 'Lthrt_ContactBundle_Entity_County',
             'id' => $this->id,
             'name' => $this->name,
-            'state' => $this->state ? ['class' => 'Lthrt_ContactBundle_Entity_State','id'=>$this->state->id,]:'{}',
+            'city' => $this->city->map(function($e){return ['class' => 'Lthrt_ContactBundle_Entity_City','id' => $e->getId(),];})->toArray(),
             'zip' => $this->zip->map(function($e){return ['class' => 'Lthrt_ContactBundle_Entity_Zip','id' => $e->getId(),];})->toArray(),
-            'county' => $this->county->map(function($e){return ['class' => 'Lthrt_ContactBundle_Entity_County','id' => $e->getId(),];})->toArray(),
+            'state' => $this->state->map(function($e){return ['class' => 'Lthrt_ContactBundle_Entity_State','id' => $e->getId(),];})->toArray(),
         ];
     }
 

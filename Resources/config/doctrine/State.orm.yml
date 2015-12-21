@@ -14,6 +14,15 @@ Lthrt\ContactBundle\Entity\State:
             column: name
             type: string
             length: 63
-            nullable: false
+            nullable: true
+
+    manyToMany:
+        county:
+            targetEntity: County
+            mappedBy: state
+        zip:
+            targetEntity: Zip
+            mappedBy: state
+
 
     lifecycleCallbacks: { }

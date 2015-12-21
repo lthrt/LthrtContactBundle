@@ -16,4 +16,12 @@ Lthrt\ContactBundle\Entity\City:
             joinColumn:
                 name: state_id
 
+    manyToMany:
+        zip:
+            targetEntity: Zip
+            mappedBy: city
+        county:
+            targetEntity: County
+            mappedBy: city
+
     lifecycleCallbacks: { }

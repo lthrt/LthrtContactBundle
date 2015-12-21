@@ -5,8 +5,9 @@ namespace Lthrt\ContactBundle\Entity;
 use Lthrt\EntityJSONBundle\Entity\LoggedEntity;
 
 /**
- * Person.
+ * Person
  */
+
 class Person extends LoggedEntity implements \JSONSerializable
 {
     /**
@@ -39,20 +40,22 @@ class Person extends LoggedEntity implements \JSONSerializable
      */
     private $address;
 
+
     /**
-     * Constructor.
+     * Constructor
      */
     public function __construct()
     {
-        $this->contact     = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->contact = new \Doctrine\Common\Collections\ArrayCollection();
         $this->demographic = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->address     = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->address = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
+
     /**
-     * Get firstName.
+     * Get firstName
      *
-     * @return string
+     * @return string 
      */
     public function getFirstName()
     {
@@ -60,10 +63,9 @@ class Person extends LoggedEntity implements \JSONSerializable
     }
 
     /**
-     * Set firstName.
+     * Set firstName
      *
      * @param string $firstName
-     *
      * @return Person
      */
     public function setFirstName($firstName)
@@ -74,9 +76,9 @@ class Person extends LoggedEntity implements \JSONSerializable
     }
 
     /**
-     * Get lastName.
+     * Get lastName
      *
-     * @return string
+     * @return string 
      */
     public function getLastName()
     {
@@ -84,10 +86,9 @@ class Person extends LoggedEntity implements \JSONSerializable
     }
 
     /**
-     * Set lastName.
+     * Set lastName
      *
      * @param string $lastName
-     *
      * @return Person
      */
     public function setLastName($lastName)
@@ -98,9 +99,9 @@ class Person extends LoggedEntity implements \JSONSerializable
     }
 
     /**
-     * Get dob.
+     * Get dob
      *
-     * @return \DateTime
+     * @return \DateTime 
      */
     public function getDob()
     {
@@ -108,10 +109,9 @@ class Person extends LoggedEntity implements \JSONSerializable
     }
 
     /**
-     * Set dob.
+     * Set dob
      *
      * @param \DateTime $dob
-     *
      * @return Person
      */
     public function setDob($dob)
@@ -122,10 +122,9 @@ class Person extends LoggedEntity implements \JSONSerializable
     }
 
     /**
-     * Add contact.
+     * Add contact
      *
      * @param \Lthrt\ContactBundle\Entity\Contact $contact
-     *
      * @return Person
      */
     public function addContact(\Lthrt\ContactBundle\Entity\Contact $contact)
@@ -139,7 +138,7 @@ class Person extends LoggedEntity implements \JSONSerializable
     }
 
     /**
-     * Remove contact.
+     * Remove contact
      *
      * @param \Lthrt\ContactBundle\Entity\Contact $contact
      */
@@ -149,9 +148,9 @@ class Person extends LoggedEntity implements \JSONSerializable
     }
 
     /**
-     * Get contact.
+     * Get contact
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection 
      */
     public function getContact()
     {
@@ -159,10 +158,9 @@ class Person extends LoggedEntity implements \JSONSerializable
     }
 
     /**
-     * Add demographic.
+     * Add demographic
      *
      * @param \Lthrt\ContactBundle\Entity\Demographic $demographic
-     *
      * @return Person
      */
     public function addDemographic(\Lthrt\ContactBundle\Entity\Demographic $demographic)
@@ -176,7 +174,7 @@ class Person extends LoggedEntity implements \JSONSerializable
     }
 
     /**
-     * Remove demographic.
+     * Remove demographic
      *
      * @param \Lthrt\ContactBundle\Entity\Demographic $demographic
      */
@@ -186,9 +184,9 @@ class Person extends LoggedEntity implements \JSONSerializable
     }
 
     /**
-     * Get demographic.
+     * Get demographic
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection 
      */
     public function getDemographic()
     {
@@ -196,10 +194,9 @@ class Person extends LoggedEntity implements \JSONSerializable
     }
 
     /**
-     * Add address.
+     * Add address
      *
      * @param \Lthrt\ContactBundle\Entity\Address $address
-     *
      * @return Person
      */
     public function addAddress(\Lthrt\ContactBundle\Entity\Address $address)
@@ -213,7 +210,7 @@ class Person extends LoggedEntity implements \JSONSerializable
     }
 
     /**
-     * Remove address.
+     * Remove address
      *
      * @param \Lthrt\ContactBundle\Entity\Address $address
      */
@@ -223,9 +220,9 @@ class Person extends LoggedEntity implements \JSONSerializable
     }
 
     /**
-     * Get address.
+     * Get address
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection 
      */
     public function getAddress()
     {
@@ -233,19 +230,20 @@ class Person extends LoggedEntity implements \JSONSerializable
     }
 
     /** jsonSerialize
-     *
-     */
+      *
+      */
     public function JSONSerialize()
     {
         return [
-            'class'     => 'Lthrt_ContactBundle_Entity_Person',
-            'id'        => $this->id,
+            'class' => 'Lthrt_ContactBundle_Entity_Person',
+            'id' => $this->id,
             'firstName' => $this->firstName,
-            'lastName'  => $this->lastName,
-            'dob'       => $this->dob,
-            'contact'   => $this->contact->map(function ($e) {return ['class' => 'Lthrt_ContactBundle_Entity_Contact', 'id' => $e->getId()];})->toArray(),
-            'demographic'                                                     => $this->demographic->map(function ($e) {return ['class' => 'Lthrt_ContactBundle_Entity_Demographic', 'id' => $e->getId()];})->toArray(),
-            'address'                                                                                                                   => $this->address->map(function ($e) {return ['class' => 'Lthrt_ContactBundle_Entity_Address', 'id' => $e->getId()];})->toArray(),
+            'lastName' => $this->lastName,
+            'dob' => $this->dob,
+            'contact' => $this->contact->map(function($e){return ['class' => 'Lthrt_ContactBundle_Entity_Contact','id' => $e->getId(),];})->toArray(),
+            'demographic' => $this->demographic->map(function($e){return ['class' => 'Lthrt_ContactBundle_Entity_Demographic','id' => $e->getId(),];})->toArray(),
+            'address' => $this->address->map(function($e){return ['class' => 'Lthrt_ContactBundle_Entity_Address','id' => $e->getId(),];})->toArray(),
         ];
     }
+
 }

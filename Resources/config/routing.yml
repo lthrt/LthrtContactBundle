@@ -1,3 +1,7 @@
+lthrt_contact_zip:
+    resource: "@LthrtContactBundle/Resources/config/routing/zip.yml"
+    prefix:   /zip
+
 lthrt_contact_demographictype:
     resource: "@LthrtContactBundle/Resources/config/routing/demographictype.yml"
     prefix:   /demographictype

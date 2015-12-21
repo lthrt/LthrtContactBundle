@@ -1,0 +1,38 @@
+zip:
+    path:     /
+    defaults: { _controller: "LthrtContactBundle:Zip:index" }
+
+zip_create:
+    path:     /create
+    defaults: { _controller: "LthrtContactBundle:Zip:create" }
+    methods:  POST
+
+zip_delete:
+    path:     /{zip}/delete
+    defaults: { _controller: "LthrtContactBundle:Zip:delete" }
+    methods:  [POST, DELETE]
+    requirements:
+        zip: \d+
+
+zip_edit:
+    path:     /{zip}/edit
+    defaults: { _controller: "LthrtContactBundle:Zip:edit" }
+    requirements:
+        zip: \d+
+
+zip_new:
+    path:     /new
+    defaults: { _controller: "LthrtContactBundle:Zip:new" }
+
+zip_show:
+    path:     /{zip}/show
+    defaults: { _controller: "LthrtContactBundle:Zip:show" }
+    requirements:
+        zip: \d+
+
+zip_update:
+    path:     /{zip}/update
+    defaults: { _controller: "LthrtContactBundle:Zip:update" }
+    methods:  [POST, PUT]
+    requirements:
+        zip: \d+

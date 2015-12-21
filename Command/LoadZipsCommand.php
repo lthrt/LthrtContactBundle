@@ -18,7 +18,7 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Lthrt\ContactBundle\DataFixtures\CitiesLoader;
+use Lthrt\ContactBundle\DataFixtures\ZipLoader;
 
 /**
  * Generate entity classes from mapping information.
@@ -29,7 +29,7 @@ use Lthrt\ContactBundle\DataFixtures\CitiesLoader;
  *
  * Modified by lthrt to be more in line with his purposes
  */
-class LoadCitiesCommand extends ContainerAwareCommand
+class LoadZipsCommand extends ContainerAwareCommand
 {
     /**
      * {@inheritDoc}
@@ -37,14 +37,15 @@ class LoadCitiesCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('lthrt:load:cities')
-            ->setAliases(['lthrt:lo:ci'])
-            ->setDescription('Loads cities into database, skipping cities already present')
+            ->setName('lthrt:load:zips')
+            ->setAliases(['lthrt:lo:zi'])
+            ->setDescription('Loads zips and cities into database, skipping zips and cities already present')
             ->addOption('overwrite', null, InputOption::VALUE_NONE, 'Overwrite even if city exists')
             ->addOption('em', null, InputOption::VALUE_REQUIRED, 'entity manager')
             ->setHelp(<<<EOT
 The <info>lthrt:load:cities</info> Loads states into a database if they are not already present.
-States are 'present' in database if their abbreviation already exists.  Then cities are loaded.
+States are 'present' in database if their abbreviation already exists.  Then cities and zips
+are loaded.
 
 
 EOT
@@ -59,7 +60,7 @@ EOT
         $overwrite = $input->getOption('overwrite') ?: false;
         $emName    = $input->getOption('em');
         $manager   = $this->getContainer()->get('doctrine')->getManager($emName);
-        $loader    = new CitiesLoader($manager);
+        $loader    = new ZipLoader($manager);
         $result    = $loader->load($overwrite);
         if (0 === $result['states']) {
             $output->writeln("<info>No states added.</info>");
@@ -67,5 +68,7 @@ EOT
             $output->writeln("<info>".$result['states']. " added.</info>");
         }
         $output->writeln("<info>".$result['cities']. " cities added.</info>");
+        $output->writeln("<info>".$result['counties']. " counties added.</info>");
+        $output->writeln("<info>".$result['zips']. " zip codes added.</info>");
     }
 }

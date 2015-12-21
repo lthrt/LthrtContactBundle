@@ -1,0 +1,39 @@
+{% extends 'LthrtContactBundle:Zip:zip.html.twig' %}
+
+{% block body -%}
+    <h1>Zip list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Zip</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for zip in zipCollection %}
+            <tr>
+                <td><a href="{{ path('zip_show', { 'zip': zip.id }) }}">{{ zip.zip }}</a></td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('zip_show', { 'zip' : zip.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('zip_edit', { 'zip' : zip.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('zip_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+{% endblock body %}

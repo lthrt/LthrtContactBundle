@@ -14,11 +14,10 @@ Lthrt\ContactBundle\Entity\Address:
             type: string
             length: 63
             nullable: true
-
-        zip:
-            column: zip
+        zipExt:
+            column: zip_ext
             type: string
-            length: 15
+            length: 4
             nullable: true
 
     manyToOne:
@@ -34,6 +33,10 @@ Lthrt\ContactBundle\Entity\Address:
             targetEntity: State
             joinColumn:
                 name: state_id
+        zip:
+            targetEntity: Zip
+            joinColumn:
+                name: zip_id
     manyToMany:
         person:
             targetEntity: Person
