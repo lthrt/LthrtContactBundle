@@ -1,0 +1,39 @@
+{% extends 'LthrtContactBundle:ContactType:contacttype.html.twig' %}
+
+{% block body -%}
+    <h1>ContactType list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for contacttype in contacttypeCollection %}
+            <tr>
+                <td><a href="{{ path('contacttype_show', { 'contacttype': contacttype.id }) }}">{{ contacttype.name }}</a></td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('contacttype_show', { 'contacttype' : contacttype.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('contacttype_edit', { 'contacttype' : contacttype.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('contacttype_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+{% endblock body %}

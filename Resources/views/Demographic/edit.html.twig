@@ -1,0 +1,19 @@
+{% extends 'LthrtContactBundle:Demographic:demographic.html.twig' %}
+
+{% block body -%}
+    <h1>Demographic Edit</h1>
+    {{ form_start(form) }}
+    {{ form_row(form.value) }}
+    {{ form_row(form.demographicType) }}
+    {{ form_rest(form) }}
+    {{ form_end(form) }}
+
+    <ul class="record_actions">
+    <li>
+        <a href="{{ path('demographic') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

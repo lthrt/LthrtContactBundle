@@ -1,0 +1,19 @@
+{% extends 'LthrtContactBundle:Contact:contact.html.twig' %}
+
+{% block body -%}
+    <h1>Contact Create</h1>
+
+    {{ form_start(form) }}
+    {{ form_row(form.value) }}
+    {{ form_row(form.contactType) }}
+    {{ form_rest(form) }}
+    {{ form_end(form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('contact') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}

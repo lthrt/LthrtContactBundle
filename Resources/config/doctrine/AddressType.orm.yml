@@ -1,0 +1,13 @@
+Lthrt\ContactBundle\Entity\AddressType:
+    type: entity
+    table: address_type
+    repositoryClass: Lthrt\ContactBundle\Repository\AddressTypeRepository
+
+    fields:
+        name:
+            column: name
+            type: string
+            length: 63
+            nullable: false
+
+    lifecycleCallbacks: { }

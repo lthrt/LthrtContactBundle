@@ -1,0 +1,38 @@
+# entity:
+#     path:     /
+#     defaults: { _controller: "LthrtContactBundle:Entity:index" }
+
+# entity_create:
+#     path:     /create
+#     defaults: { _controller: "LthrtContactBundle:Entity:create" }
+#     methods:  POST
+
+# entity_delete:
+#     path:     /{entity}/delete
+#     defaults: { _controller: "LthrtContactBundle:Entity:delete" }
+#     methods:  [POST, DELETE]
+#     requirements:
+#         entity: \d+
+
+# entity_edit:
+#     path:     /{entity}/edit
+#     defaults: { _controller: "LthrtContactBundle:Entity:edit" }
+#     requirements:
+#         entity: \d+
+
+# entity_new:
+#     path:     /new
+#     defaults: { _controller: "LthrtContactBundle:Entity:new" }
+
+# entity_show:
+#     path:     /{entity}/show
+#     defaults: { _controller: "LthrtContactBundle:Entity:show" }
+#     requirements:
+#         entity: \d+
+
+# entity_update:
+#     path:     /{entity}/update
+#     defaults: { _controller: "LthrtContactBundle:Entity:update" }
+#     methods:  [POST, PUT]
+#     requirements:
+#         entity: \d+

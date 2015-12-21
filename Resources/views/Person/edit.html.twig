@@ -1,0 +1,23 @@
+{% extends 'LthrtContactBundle:Person:person.html.twig' %}
+
+{% block body -%}
+    <h1>Person Edit</h1>
+    {{ form_start(form) }}
+    {{ form_row(form.firstName) }}
+    {{ form_row(form.lastName) }}
+    {{ form_row(form.dob) }}
+    {{ form_row(form.contact) }}
+    {{ form_row(form.demographic) }}
+    {{ form_row(form.address) }}
+    {{ form_rest(form) }}
+    {{ form_end(form) }}
+
+    <ul class="record_actions">
+    <li>
+        <a href="{{ path('person') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

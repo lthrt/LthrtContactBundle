@@ -1,0 +1,38 @@
+{
+    "name": "lthrt/contact-bundle",
+    "description": "lthrt Contact Management Bundle for Symfony2",
+    "keywords": [
+        "lthrt",
+        "contact",
+        "bundle"
+    ],
+    "homepage": "https://github.com/lthrt/ContactBundle",
+    "license": "MIT",
+    "type": "symfony-bundle",
+    "authors": [
+        {
+            "name": "lthrt",
+            "email": "lighthart.coder@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.2",
+        "lthrt/entity-json-bundle": "dev-master"
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/lthrt/EntityJSONBundle.git"
+        }
+    ],
+    "require-dev": {
+        "symfony/framework-bundle": "~2.7"
+    },
+    "autoload": {
+        "psr-0": {
+            "Lthrt\\ContactBundle": ""
+        }
+    },
+    "minimum-stability": "dev",
+    "target-dir": "Lthrt/ContactBundle"
+}

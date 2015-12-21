@@ -1,0 +1,38 @@
+state:
+    path:     /
+    defaults: { _controller: "LthrtContactBundle:State:index" }
+
+state_create:
+    path:     /create
+    defaults: { _controller: "LthrtContactBundle:State:create" }
+    methods:  POST
+
+state_delete:
+    path:     /{state}/delete
+    defaults: { _controller: "LthrtContactBundle:State:delete" }
+    methods:  [POST, DELETE]
+    requirements:
+        state: \d+
+
+state_edit:
+    path:     /{state}/edit
+    defaults: { _controller: "LthrtContactBundle:State:edit" }
+    requirements:
+        state: \d+
+
+state_new:
+    path:     /new
+    defaults: { _controller: "LthrtContactBundle:State:new" }
+
+state_show:
+    path:     /{state}/show
+    defaults: { _controller: "LthrtContactBundle:State:show" }
+    requirements:
+        state: \d+
+
+state_update:
+    path:     /{state}/update
+    defaults: { _controller: "LthrtContactBundle:State:update" }
+    methods:  [POST, PUT]
+    requirements:
+        state: \d+

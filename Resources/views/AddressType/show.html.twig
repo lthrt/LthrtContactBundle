@@ -1,0 +1,29 @@
+{% extends 'LthrtContactBundle:AddressType:addresstype.html.twig' %}
+
+{% block body -%}
+    <h1>AddressType</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Name</th>
+                <td>{{ addresstype.name }}</td>
+            </tr>
+        </tbody>
+    </table>
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('addresstype') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('addresstype_edit', { 'addresstype' : addresstype.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+
+{{addresstype | json_encode | json_pretty | raw}}
+{% endblock %}

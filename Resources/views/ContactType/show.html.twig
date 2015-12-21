@@ -1,0 +1,28 @@
+{% extends 'LthrtContactBundle:ContactType:contacttype.html.twig' %}
+
+{% block body -%}
+    <h1>ContactType</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Name</th>
+                <td>{{ contacttype.name }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('contacttype') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('contacttype_edit', { 'contacttype' : contacttype.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

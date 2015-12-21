@@ -1,0 +1,42 @@
+Lthrt\ContactBundle\Entity\Address:
+    type: entity
+    table: address
+    repositoryClass: Lthrt\ContactBundle\Repository\AddressRepository
+
+    fields:
+        line:
+            column: line
+            type: string
+            length: 63
+            nullable: false
+        line2:
+            column: line_2
+            type: string
+            length: 63
+            nullable: true
+
+        zip:
+            column: zip
+            type: string
+            length: 15
+            nullable: true
+
+    manyToOne:
+        addressType:
+            targetEntity: AddressType
+            joinColumn:
+                name: address_type_id
+        city:
+            targetEntity: City
+            joinColumn:
+                name: city_id
+        state:
+            targetEntity: State
+            joinColumn:
+                name: state_id
+    manyToMany:
+        person:
+            targetEntity: Person
+            mappedBy: address
+
+    lifecycleCallbacks: { }

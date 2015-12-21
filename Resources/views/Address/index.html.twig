@@ -1,0 +1,43 @@
+{% extends 'LthrtContactBundle:Address:address.html.twig' %}
+
+{% block body -%}
+    <h1>Address list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Line</th>
+                <th>Line2</th>
+                <th>Zip</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for address in addressCollection %}
+            <tr>
+                <td><a href="{{ path('address_show', { 'address': address.id }) }}">{{ address.line }}</a></td>
+                <td>{{ address.line2 }}</td>
+                <td>{{ address.zip }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('address_show', { 'address' : address.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('address_edit', { 'address' : address.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('address_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+{% endblock body %}

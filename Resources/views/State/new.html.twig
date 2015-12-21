@@ -1,0 +1,19 @@
+{% extends 'LthrtContactBundle:State:state.html.twig' %}
+
+{% block body -%}
+    <h1>State Create</h1>
+
+    {{ form_start(form) }}
+    {{ form_row(form.abbr) }}
+    {{ form_row(form.name) }}
+    {{ form_rest(form) }}
+    {{ form_end(form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('state') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}

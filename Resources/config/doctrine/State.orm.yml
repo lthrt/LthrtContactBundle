@@ -1,0 +1,19 @@
+Lthrt\ContactBundle\Entity\State:
+    type: entity
+    table: state
+    repositoryClass: Lthrt\ContactBundle\Repository\StateRepository
+
+    fields:
+        abbr:
+            column: abbr
+            type: string
+            length: 2
+            nullable: false
+
+        name:
+            column: name
+            type: string
+            length: 63
+            nullable: false
+
+    lifecycleCallbacks: { }

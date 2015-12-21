@@ -1,0 +1,39 @@
+{% extends 'LthrtContactBundle:Contact:contact.html.twig' %}
+
+{% block body -%}
+    <h1>Contact list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Value</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for contact in contactCollection %}
+            <tr>
+                <td><a href="{{ path('contact_show', { 'contact': contact.id }) }}">{{ contact.value }}</a></td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('contact_show', { 'contact' : contact.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('contact_edit', { 'contact' : contact.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('contact_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+{% endblock body %}

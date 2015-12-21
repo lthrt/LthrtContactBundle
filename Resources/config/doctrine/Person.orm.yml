@@ -1,0 +1,54 @@
+Lthrt\ContactBundle\Entity\Person:
+    type: entity
+    table: person
+    repositoryClass: Lthrt\ContactBundle\Repository\PersonRepository
+
+    fields:
+        firstName:
+            column: first_name
+            type: string
+            length: 63
+            nullable: false
+
+        lastName:
+            column: last_name
+            type: string
+            length: 63
+            nullable: false
+        dob:
+            column: dob
+            type: date
+
+
+    manyToMany:
+        contact:
+            targetEntity: Contact
+            joinTable:
+                name: person__contact
+                joinColumns:
+                    person_id: ~
+                inverseJoinColumns:
+                    contact_id: ~
+            # inversedBy: person
+
+        demographic:
+            targetEntity: Demographic
+            joinTable:
+                name: person__demographic
+                joinColumns:
+                    person_id: ~
+                inverseJoinColumns:
+                    demographic_id: ~
+            # inversedBy: person
+
+        address:
+            targetEntity: Address
+            joinTable:
+                name: person__address
+                joinColumns:
+                    person_id: ~
+                inverseJoinColumns:
+                    address_id: ~
+            inversedBy: person
+
+    lifecycleCallbacks: { }

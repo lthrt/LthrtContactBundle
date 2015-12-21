@@ -1,0 +1,18 @@
+{% extends 'LthrtContactBundle:AddressType:addresstype.html.twig' %}
+
+{% block body -%}
+    <h1>AddressType Edit</h1>
+    {{ form_start(form) }}
+    {{ form_row(form.name) }}
+    {{ form_rest(form) }}
+    {{ form_end(form) }}
+
+    <ul class="record_actions">
+    <li>
+        <a href="{{ path('addresstype') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

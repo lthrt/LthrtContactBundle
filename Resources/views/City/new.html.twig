@@ -1,0 +1,19 @@
+{% extends 'LthrtContactBundle:City:city.html.twig' %}
+
+{% block body -%}
+    <h1>City Create</h1>
+
+    {{ form_start(form) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.state) }}
+    {{ form_rest(form) }}
+    {{ form_end(form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('city') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}

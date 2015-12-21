@@ -1,0 +1,38 @@
+address:
+    path:     /
+    defaults: { _controller: "LthrtContactBundle:Address:index" }
+
+address_create:
+    path:     /create
+    defaults: { _controller: "LthrtContactBundle:Address:create" }
+    methods:  POST
+
+address_delete:
+    path:     /{address}/delete
+    defaults: { _controller: "LthrtContactBundle:Address:delete" }
+    methods:  [POST, DELETE]
+    requirements:
+        address: \d+
+
+address_edit:
+    path:     /{address}/edit
+    defaults: { _controller: "LthrtContactBundle:Address:edit" }
+    requirements:
+        address: \d+
+
+address_new:
+    path:     /new
+    defaults: { _controller: "LthrtContactBundle:Address:new" }
+
+address_show:
+    path:     /{address}/show
+    defaults: { _controller: "LthrtContactBundle:Address:show" }
+    requirements:
+        address: \d+
+
+address_update:
+    path:     /{address}/update
+    defaults: { _controller: "LthrtContactBundle:Address:update" }
+    methods:  [POST, PUT]
+    requirements:
+        address: \d+

@@ -1,0 +1,44 @@
+person:
+    path:     /
+    defaults: { _controller: "LthrtContactBundle:Person:index" }
+
+person_clone:
+    path:     /clone/{person}
+    defaults: { _controller: "LthrtContactBundle:Person:clone" }
+    requirements:
+        person: \d+
+
+person_create:
+    path:     /create
+    defaults: { _controller: "LthrtContactBundle:Person:create" }
+    methods:  POST
+
+person_delete:
+    path:     /{person}/delete
+    defaults: { _controller: "LthrtContactBundle:Person:delete" }
+    methods:  [POST, DELETE]
+    requirements:
+        person: \d+
+
+person_edit:
+    path:     /{person}/edit
+    defaults: { _controller: "LthrtContactBundle:Person:edit" }
+    requirements:
+        person: \d+
+
+person_new:
+    path:     /new
+    defaults: { _controller: "LthrtContactBundle:Person:new" }
+
+person_show:
+    path:     /{person}/show
+    defaults: { _controller: "LthrtContactBundle:Person:show" }
+    requirements:
+        person: \d+
+
+person_update:
+    path:     /{person}/update
+    defaults: { _controller: "LthrtContactBundle:Person:update" }
+    methods:  [POST, PUT]
+    requirements:
+        person: \d+

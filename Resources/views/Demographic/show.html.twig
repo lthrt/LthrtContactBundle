@@ -1,0 +1,28 @@
+{% extends 'LthrtContactBundle:Demographic:demographic.html.twig' %}
+
+{% block body -%}
+    <h1>Demographic</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Value</th>
+                <td>{{ demographic.value }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('demographic') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('demographic_edit', { 'demographic' : demographic.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

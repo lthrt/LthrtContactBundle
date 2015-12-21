@@ -1,0 +1,39 @@
+{% extends 'LthrtContactBundle:Demographic:demographic.html.twig' %}
+
+{% block body -%}
+    <h1>Demographic list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Value</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for demographic in demographicCollection %}
+            <tr>
+                <td><a href="{{ path('demographic_show', { 'demographic': demographic.id }) }}">{{ demographic.value }}</a></td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('demographic_show', { 'demographic' : demographic.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('demographic_edit', { 'demographic' : demographic.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('demographic_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+{% endblock body %}

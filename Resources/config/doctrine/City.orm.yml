@@ -1,0 +1,19 @@
+Lthrt\ContactBundle\Entity\City:
+    type: entity
+    table: city
+    repositoryClass: Lthrt\ContactBundle\Repository\CityRepository
+
+    fields:
+        name:
+            column: name
+            type: string
+            length: 63
+            nullable: false
+
+    manyToOne:
+        state:
+            targetEntity: State
+            joinColumn:
+                name: state_id
+
+    lifecycleCallbacks: { }

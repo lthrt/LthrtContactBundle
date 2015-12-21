@@ -1,0 +1,37 @@
+{% extends 'LthrtContactBundle:Address:address.html.twig' %}
+
+{% block body -%}
+    <h1>Address</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Line</th>
+                <td>{{ address.line }}</td>
+            </tr>
+            <tr>
+                <th>Line2</th>
+                <td>{{ address.line2 }}</td>
+            </tr>
+            <tr>
+                <th>Zip</th>
+                <td>{{ address.zip }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('address') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('address_edit', { 'address' : address.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{{address | json_encode | json_pretty | raw}}
+{% endblock %}

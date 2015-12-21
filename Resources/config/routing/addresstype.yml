@@ -1,0 +1,45 @@
+addresstype:
+    path:     /
+    defaults: { _controller: "LthrtContactBundle:AddressType:index" }
+
+
+person_clone:
+    path:     /clone/{addresstype}
+    defaults: { _controller: "LthrtContactBundle:AddressType:clone" }
+    requirements:
+        person: \d+
+
+addresstype_create:
+    path:     /create
+    defaults: { _controller: "LthrtContactBundle:AddressType:create" }
+    methods:  POST
+
+addresstype_delete:
+    path:     /{addresstype}/delete
+    defaults: { _controller: "LthrtContactBundle:AddressType:delete" }
+    methods:  [POST, DELETE]
+    requirements:
+        addresstype: \d+
+
+addresstype_edit:
+    path:     /{addresstype}/edit
+    defaults: { _controller: "LthrtContactBundle:AddressType:edit" }
+    requirements:
+        addresstype: \d+
+
+addresstype_new:
+    path:     /new
+    defaults: { _controller: "LthrtContactBundle:AddressType:new" }
+
+addresstype_show:
+    path:     /{addresstype}/show
+    defaults: { _controller: "LthrtContactBundle:AddressType:show" }
+    requirements:
+        addresstype: \d+
+
+addresstype_update:
+    path:     /{addresstype}/update
+    defaults: { _controller: "LthrtContactBundle:AddressType:update" }
+    methods:  [POST, PUT]
+    requirements:
+        addresstype: \d+

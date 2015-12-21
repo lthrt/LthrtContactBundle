@@ -1,0 +1,38 @@
+demographic:
+    path:     /
+    defaults: { _controller: "LthrtContactBundle:Demographic:index" }
+
+demographic_create:
+    path:     /create
+    defaults: { _controller: "LthrtContactBundle:Demographic:create" }
+    methods:  POST
+
+demographic_delete:
+    path:     /{demographic}/delete
+    defaults: { _controller: "LthrtContactBundle:Demographic:delete" }
+    methods:  [POST, DELETE]
+    requirements:
+        demographic: \d+
+
+demographic_edit:
+    path:     /{demographic}/edit
+    defaults: { _controller: "LthrtContactBundle:Demographic:edit" }
+    requirements:
+        demographic: \d+
+
+demographic_new:
+    path:     /new
+    defaults: { _controller: "LthrtContactBundle:Demographic:new" }
+
+demographic_show:
+    path:     /{demographic}/show
+    defaults: { _controller: "LthrtContactBundle:Demographic:show" }
+    requirements:
+        demographic: \d+
+
+demographic_update:
+    path:     /{demographic}/update
+    defaults: { _controller: "LthrtContactBundle:Demographic:update" }
+    methods:  [POST, PUT]
+    requirements:
+        demographic: \d+

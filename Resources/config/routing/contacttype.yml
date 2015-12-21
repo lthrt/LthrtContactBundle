@@ -1,0 +1,38 @@
+contacttype:
+    path:     /
+    defaults: { _controller: "LthrtContactBundle:ContactType:index" }
+
+contacttype_create:
+    path:     /create
+    defaults: { _controller: "LthrtContactBundle:ContactType:create" }
+    methods:  POST
+
+contacttype_delete:
+    path:     /{contacttype}/delete
+    defaults: { _controller: "LthrtContactBundle:ContactType:delete" }
+    methods:  [POST, DELETE]
+    requirements:
+        contacttype: \d+
+
+contacttype_edit:
+    path:     /{contacttype}/edit
+    defaults: { _controller: "LthrtContactBundle:ContactType:edit" }
+    requirements:
+        contacttype: \d+
+
+contacttype_new:
+    path:     /new
+    defaults: { _controller: "LthrtContactBundle:ContactType:new" }
+
+contacttype_show:
+    path:     /{contacttype}/show
+    defaults: { _controller: "LthrtContactBundle:ContactType:show" }
+    requirements:
+        contacttype: \d+
+
+contacttype_update:
+    path:     /{contacttype}/update
+    defaults: { _controller: "LthrtContactBundle:ContactType:update" }
+    methods:  [POST, PUT]
+    requirements:
+        contacttype: \d+

@@ -1,0 +1,40 @@
+{% extends 'LthrtContactBundle:Person:person.html.twig' %}
+
+{% block body -%}
+    <h1>Person</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Firstname</th>
+                <td>{{ person.firstName }}</td>
+            </tr>
+            <tr>
+                <th>Lastname</th>
+                <td>{{ person.lastName }}</td>
+            </tr>
+            <tr>
+                <th>Dob</th>
+                <td>{{ person.dob|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Log</th>
+                <td>{{ person.log | json_pretty | raw }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('person') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('person_edit', { 'person' : person.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}
