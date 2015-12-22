@@ -1,3 +1,7 @@
+lthrt_contact_county:
+    resource: "@LthrtContactBundle/Resources/config/routing/county.yml"
+    prefix:   /county
+
 lthrt_contact_zip:
     resource: "@LthrtContactBundle/Resources/config/routing/zip.yml"
     prefix:   /zip
