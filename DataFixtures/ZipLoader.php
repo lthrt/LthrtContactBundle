@@ -73,9 +73,7 @@ class ZipLoader extends StatesLoader
         array_walk(
             $dbCounties,
             function($c) use (&$counties) {
-                foreach ($c->getState() as $countyState) {
-                    $counties[$c->getName()."__".$countyState->getAbbr()] = $c;
-                }
+                $counties[$c->getName()."__".$c->getState()->getAbbr()] = $c;
             }
         );
         unset($dbCounties);
@@ -90,21 +88,21 @@ class ZipLoader extends StatesLoader
                 continue;
             }
 
-            if (isset($cities[$zipRef['city'].'__'.$state->getAbbr()])) {
-                $city = $cities[$zipRef['city'].'__'.$state->getAbbr()];
+            if (isset($cities[$zipRef['city'].'__'.$zipRef['state']])) {
+                $city = $cities[$zipRef['city'].'__'.$zipRef['state']];
             } else {
                 $city = new City();
                 $city->setName($zipRef['city']);
-                $cities[$city->getName().'__'.$state->getAbbr()] = $city;
+                $cities[$city->getName().'__'.$zipRef['state']] = $city;
                 $result['cities']++;
             }
 
-            if (isset($counties[$zipRef['county'].'__'.$state->getAbbr()])) {
-                $county = $counties[$zipRef['county'].'__'.$state->getAbbr()];
+            if (isset($counties[$zipRef['county'].'__'.$zipRef['state']])) {
+                $county = $counties[$zipRef['county'].'__'.$zipRef['state']];
             } else {
                 $county = new County();
                 $county->setName($zipRef['county']);
-                $counties[$county->getName().'__'.$state->getAbbr()] = $county;
+                $counties[$county->getName().'__'.$zipRef['state']] = $county;
                 $result['counties']++;
             }
 
