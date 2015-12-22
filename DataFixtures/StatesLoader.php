@@ -16,26 +16,36 @@ class StatesLoader
     public function __construct($em)
     {
         $this->em = $em;
-        $this->getStates();
+        $this->states = $this->getStates();
     }
 
-    public function load($overwrite = false)
+    public function loadStates($overwrite = false)
     {
         $dbStates = $this->em->getRepository('LthrtContactBundle:State')
         ->createQueryBuilder('state', 'state.abbr')->getQuery()->getResult();
 
         ksort($this->states);
-        $missingStates = array_diff_key($this->states, $dbStates);
 
-        foreach ($missingStates as $abbr => $name) {
-            $state = new State();
+        $updatedStates = [];
+        $newStates = [];
+
+        foreach ($this->states as $abbr => $name) {
+            if ('header' == $abbr) { continue;}
+            if (in_array($abbr, array_keys($dbStates))) {
+                $state = $dbStates[$abbr];
+                $updatedStates[$abbr] = $state->getAbbr();
+            } else {
+                $state = new State();
+                $newStates[$abbr] = $state->getAbbr();
+            }
             $state->setAbbr($abbr);
             $state->setName($name);
             $this->em->persist($state);
+            $this->em->flush();
         }
 
-        $this->em->flush();
-        ksort($missingStates);
-        return $missingStates;
+        if ($updatedStates) { ksort($updatedStates); }
+        if ($newStates) { ksort($newStates); }
+        return ['updatedStates' => $updatedStates, 'newStates' => $newStates];
     }
 }

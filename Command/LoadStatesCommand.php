@@ -60,12 +60,15 @@ EOT
         $emName    = $input->getOption('em');
         $manager   = $this->getContainer()->get('doctrine')->getManager($emName);
         $loader    = new StatesLoader($manager);
-        $states    = $loader->load($overwrite);
-        if (count($states)) {
-            $inserted = implode(', ', array_keys($states));
+        $result    = $loader->loadStates($overwrite);
+        if (isset($result['newStates']) && count($result['newStates'])) {
+            $inserted = implode(', ', array_keys($result['newStates']));
             $output->writeln("<info>".$inserted. " added.</info>");
-        } else {
-            $output->writeln("<info>No states added.</info>");
+            $output->writeln("");
+        }
+        if (isset($result['updatedStates']) && count($result['updatedStates'])) {
+            $updated = implode(', ', array_keys($result['updatedStates']));
+            $output->writeln("<info>".$updated. " updated.</info>");
         }
     }
 }

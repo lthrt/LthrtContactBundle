@@ -15,10 +15,9 @@ class ZipLoader extends StatesLoader
 
     // because of length, source array at end of class
 
-    private $em;
-
     public function __construct($em)
     {
+        parent::__construct($em);
         $this->em = $em;
 
         // initialize via file load
@@ -30,38 +29,19 @@ class ZipLoader extends StatesLoader
         $this->getStates();
     }
 
-    public function load($overwrite = false)
+    public function loadZips($overwrite = false)
     {
 
         $this->em->getConnection()->getConfiguration()->setSQLLogger(null);
 
         $dbStates = $this->em->getRepository('LthrtContactBundle:State')
         ->createQueryBuilder('state', 'state.abbr')
-        ->getQuery()->getScalarResult();
+        ->getQuery()->getResult();
 
-        $states = array_diff_key($this->states, $dbStates);
-        if (count($states) > 1) {
-            foreach ($states as $abbr => $name) {
-                if ('header' == $abbr) { continue; }
-                if (!in_array($abbr, array_keys($dbStates))) {
-                    $state = new State();
-                    $state->setAbbr($abbr);
-                    $state->setName($name);
-                    $this->em->persist($state);
-                    $this->em->flush($state);
-                    $states[$state->getAbbr()] = $state->getId();
-                    $dbStates[$state->getAbbr()] = $state;
-                }
-            }
+        if (0 == count($dbStates)) {
+            return [ 'noStates' => true ];
         }
 
-        $this->em->flush();
-
-        if (count($states) > 1) {
-            $result['states'] = implode(', ',array_diff(array_keys($states),['header']));
-        } else {
-            $result['states'] = 0;
-        }
         $result['cities']   = 0;
         $result['zips']     = 0;
         $result['counties'] = 0;
@@ -105,9 +85,9 @@ class ZipLoader extends StatesLoader
             if (isset($dbStates[$zipRef['state']])) {
                 $state = $dbStates[$zipRef['state']];
             } else {
-                $state = new State();
-                $state->setAbbr($zipRef['state']);
-                $dbStates[$state->getAbbr()] = $state;
+                // if zip has miscoded state reference,
+                // don't add new
+                continue;
             }
 
             if (isset($cities[$zipRef['city'].'__'.$state->getAbbr()])) {
@@ -144,10 +124,8 @@ class ZipLoader extends StatesLoader
             $city->setState($state);
             $city->addCounty($county);
 
-            $county->addState($state);
+            $county->setState($state);
 
-            $this->em->persist($state);
-            $this->em->flush($state);
             $this->em->persist($county);
             $this->em->flush($county);
             $this->em->persist($city);
@@ -155,7 +133,6 @@ class ZipLoader extends StatesLoader
             $this->em->persist($zip);
             $this->em->flush($zip);
         }
-
 
         return $result;
     }

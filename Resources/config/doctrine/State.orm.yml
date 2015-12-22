@@ -16,10 +16,12 @@ Lthrt\ContactBundle\Entity\State:
             length: 63
             nullable: true
 
-    manyToMany:
+    oneToMany:
         county:
             targetEntity: County
             mappedBy: state
+
+    manyToMany:
         zip:
             targetEntity: Zip
             mappedBy: state

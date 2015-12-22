@@ -39,14 +39,15 @@ class LoadZipsCommand extends ContainerAwareCommand
         $this
             ->setName('lthrt:load:zips')
             ->setAliases(['lthrt:lo:zi'])
-            ->setDescription('Loads zips and cities into database, skipping zips and cities already present')
+            ->setDescription('Loads zips, counties, and cities into database, skipping zips and cities already present')
             ->addOption('overwrite', null, InputOption::VALUE_NONE, 'Overwrite even if city exists')
             ->addOption('em', null, InputOption::VALUE_REQUIRED, 'entity manager')
             ->setHelp(<<<EOT
-The <info>lthrt:load:cities</info> Loads states into a database if they are not already present.
-States are 'present' in database if their abbreviation already exists.  Then cities and zips
-are loaded.
+The <info>lthrt:load:zips</info> Loads zips, counties, and cities database
+if they are not already present.  States must be loaded first
+(with <comment>lthrt:load:states</comment>)
 
+You really want to use the <comment>--no-debug</comment> flag
 
 EOT
         );
@@ -61,14 +62,15 @@ EOT
         $emName    = $input->getOption('em');
         $manager   = $this->getContainer()->get('doctrine')->getManager($emName);
         $loader    = new ZipLoader($manager);
-        $result    = $loader->load($overwrite);
-        if (0 === $result['states']) {
-            $output->writeln("<info>No states added.</info>");
+        $result    = $loader->loadZips($overwrite);
+
+        if (isset($result['noStates'])) {
+            $output->writeln("States must be loaded first: <comment>lthrt:load:states</comment>");
         } else {
-            $output->writeln("<info>".$result['states']. " added.</info>");
+            $output->writeln("<info>".$result['cities']. " cities added.</info>");
+            $output->writeln("<info>".$result['counties']. " counties added.</info>");
+            $output->writeln("<info>".$result['zips']. " zip codes added.</info>");
         }
-        $output->writeln("<info>".$result['cities']. " cities added.</info>");
-        $output->writeln("<info>".$result['counties']. " counties added.</info>");
-        $output->writeln("<info>".$result['zips']. " zip codes added.</info>");
+
     }
 }

@@ -10,6 +10,13 @@ Lthrt\ContactBundle\Entity\County:
             length: 63
             nullable: false
 
+    manyToOne:
+        state:
+            targetEntity: State
+            inversedBy: county
+            joinColumn:
+                name: state_id
+
     manyToMany:
         city:
             targetEntity: City
@@ -23,14 +30,14 @@ Lthrt\ContactBundle\Entity\County:
         zip:
             targetEntity: Zip
             mappedBy: county
-        state:
-            targetEntity: State
-            inversedBy: county
-            joinTable:
-                name: county__state
-                joinColumns:
-                    county_id: ~
-                inverseJoinColumns:
-                    state_id: ~
+        # state:
+        #     targetEntity: State
+        #     inversedBy: county
+        #     joinTable:
+        #         name: county__state
+        #         joinColumns:
+        #             county_id: ~
+        #         inverseJoinColumns:
+        #             state_id: ~
 
     lifecycleCallbacks: { }
