@@ -34,7 +34,7 @@ class CountyStateType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $counties = $this->options['state']
-                    ? $this->countyRep->findByState($this->options['state']->getAbbr())
+                    ? $this->countyRep->findByStateAbbr($this->options['state']->getAbbr())
                     : $this->countyRep->findNames();
 
         $counties = $counties->getQuery()->getResult();

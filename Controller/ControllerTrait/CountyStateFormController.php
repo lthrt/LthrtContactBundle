@@ -28,7 +28,7 @@ trait CountyStateFormController
             new CountyStateType($this->getDoctrine()->getManager(), $options),
              null,
             [
-                'method' => 'PUT',
+                'method' => 'POST',
                 'action' => $options['action'],
             ]
         );

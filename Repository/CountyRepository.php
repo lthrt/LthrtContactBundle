@@ -26,7 +26,7 @@ class CountyRepository extends \Doctrine\ORM\EntityRepository
     }
 
     public function findByStateAbbr($abbr){
-        $qb = $this->findAll();
+        $qb = $this->findNames();
         $qb->join(self::ROOT.'.state', StateRepository::ROOT);
         $qb->andWhere($qb->expr()->eq(StateRepository::ROOT.'.abbr', ':abbr'));
         $qb->setParameter('abbr', $abbr);
