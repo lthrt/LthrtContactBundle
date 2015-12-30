@@ -13,7 +13,12 @@ use Lthrt\ContactBundle\Form\AddressType;
 trait ContactBundleRepository
 {
     private function qb($index = null){
-        $qb = $this->createQueryBuilder(SELF::ROOT, self::ROOT.'.'.$index);
+        if ($index) {
+            $qb = $this->createQueryBuilder(self::ROOT, self::ROOT.'.'.$index);
+        } else {
+            $qb = $this->createQueryBuilder(self::ROOT);
+        }
+
         return $qb;
     }
 }

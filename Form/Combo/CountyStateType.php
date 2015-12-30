@@ -1,10 +1,11 @@
 <?php
 
-namespace Lthrt\ContactBundle\Form;
+namespace Lthrt\ContactBundle\Form\Combo;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Lthrt\ContactBundle\Form\Combo\Listener\CountyStateCountySubscriber;
 
 class CountyStateType extends AbstractType
 {
@@ -32,24 +33,32 @@ class CountyStateType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $counties = $this->options['state']
+                    ? $this->countyRep->findByState($this->options['state']->getAbbr())
+                    : $this->countyRep->findNames();
+
+        $counties = $counties->getQuery()->getResult();
+        // Doctrine returns an array of array for select
+        // so transform to choice list
+        $counties = array_map(function($county){return $county['name'];},$counties);
+
         $builder
         ->add('county', 'county',
             [
-                'data' => $this->options['county'],
-                'query_builder' => $this->options['state']
-                                    ? $this->countyRep->findByState($optiopns['state'])
-                                    : $this->countyRep->findAll(),
+                'data'              => $this->options['county']?$this->options['county']->getName():'',
+                'choices'           => $counties,
             ]
         )
         ->add('state', 'state',
             [
                 'data'          => $this->options['state'],
                 'query_builder' => $this->options['county']
-                                    ? $this->stateRep->findByCounty($options['county'])
+                                    ? $this->stateRep->findByCounty($options['county']->getName())
                                     : $this->stateRep->findAll(),
             ]
         )
         ;
+        $builder->get('county')->addEventSubscriber(new CountyStateCountySubscriber($this->countyRep));
     }
 
     /**

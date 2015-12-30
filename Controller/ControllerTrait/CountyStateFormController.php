@@ -3,7 +3,7 @@
 namespace Lthrt\ContactBundle\Controller\ControllerTrait;
 use Lthrt\ContactBundle\Entity\County;
 use Lthrt\ContactBundle\Entity\State;
-use Lthrt\ContactBundle\Form\CountyStateType;
+use Lthrt\ContactBundle\Form\Combo\CountyStateType;
 
 //
 // CountyFormController Trait.
@@ -19,6 +19,7 @@ trait CountyStateFormController
             [
                 'county' => null,
                 'state'  => null,
+                'action' => null,
             ],
             $options
         );
@@ -28,6 +29,7 @@ trait CountyStateFormController
              null,
             [
                 'method' => 'PUT',
+                'action' => $options['action'],
             ]
         );
 

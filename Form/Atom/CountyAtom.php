@@ -31,14 +31,13 @@ class CountyAtom extends AbstractType
                 'class'        => 'LthrtContactBundle:County',
                 'label'        => 'County',
                 'placeholder'  => '',
-                'choice_label' => 'name',
             ]
         );
     }
 
     public function getParent()
     {
-        return 'entity';
+        return 'choice';
     }
 
     /**

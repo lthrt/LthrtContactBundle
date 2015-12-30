@@ -23,9 +23,11 @@ class StateRepository extends \Doctrine\ORM\EntityRepository
         return $qb;
     }
 
-    public function findByCounty(State $state){
+    public function findByCounty($name){
         $qb = $this->findAll();
         $qb->join(self::ROOT.'.county', StateRepository::ROOT);
+        $qb->andWhere($qb->expr()->eq(CountRepository::ROOT.'.name', ':name'));
+        $qb->setParameter('name', $name);
         return $qb;
     }
 }
