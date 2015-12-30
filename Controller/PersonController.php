@@ -2,11 +2,12 @@
 
 namespace Lthrt\ContactBundle\Controller;
 
-use Lthrt\ContactBundle\Controller\ControllerTrait\PersonFormController;
-use Lthrt\ContactBundle\Entity\Person;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\JsonResponse;
+
 use Symfony\Component\HttpFoundation\Request;
+use Lthrt\ContactBundle\Entity\Person;
+use Lthrt\ContactBundle\Controller\ControllerTrait\PersonFormController;
 
 //
 // Person controller.
@@ -17,14 +18,6 @@ class PersonController extends Controller
 {
     use PersonFormController;
 
-    public function cloneAction(Request $request, Person $person)
-    {
-        return $this->render('LthrtContactBundle:Person:clone.html.twig', [
-            'person' => $person,
-            'class'  => str_replace('\\', '_', get_class($person)),
-        ]);
-    }
-
     //
     // Creates a new Person entity.
     //
@@ -32,7 +25,7 @@ class PersonController extends Controller
     public function createAction(Request $request)
     {
         $person = new Person();
-        $form   = $this->createCreateForm($person);
+        $form = $this->createCreateForm($person);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -45,7 +38,7 @@ class PersonController extends Controller
 
         return $this->render('LthrtContactBundle:Person:new.html.twig', [
             'person' => $person,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         ]);
     }
 
@@ -81,33 +74,30 @@ class PersonController extends Controller
             throw $this->createNotFoundException('Unable to find Person entity.');
         }
 
-        $form       = $this->createEditForm($person);
+        $form = $this->createEditForm($person);
         $deleteForm = $this->createDeleteForm($person);
 
         return $this->render('LthrtContactBundle:Person:edit.html.twig', [
-            'person'      => $person,
-            'form'        => $form->createView(),
+            'person' => $person,
+            'form' => $form->createView(),
             'delete_form' => $deleteForm->createView(),
         ]);
     }
+
 
     //
     // Lists all Person entities.
     //
     //
-    public function indexAction(Request $request, $json = false)
+    public function indexAction(Request $request)
     {
         $personCollection = $this->getDoctrine()->getManager()->getRepository('LthrtContactBundle:Person')->findAll();
 
-        return $json ?
-        $this->render('LthrtContactBundle:Person:json.html.twig', [
-            'json' => json_encode($personCollection),
-        ])
-        :
-        $this->render('LthrtContactBundle:Person:index.html.twig', [
+        return $this->render('LthrtContactBundle:Person:index.html.twig', [
             'personCollection' => $personCollection,
         ]);
     }
+
 
     //
     // Displays a form to create a new Person entity.
@@ -117,18 +107,19 @@ class PersonController extends Controller
     {
         $person = new Person();
         $form   = $this->createCreateForm($person);
-
+    
         return $this->render('LthrtContactBundle:Person:new.html.twig', [
             'person' => $person,
             'form'   => $form->createView(),
         ]);
     }
 
+
     //
     // Finds and displays a Person entity.
     //
     //
-    public function showAction(Request $request, Person $person, $json = false)
+    public function showAction(Request $request, Person $person)
     {
         if (!$person) {
             throw $this->createNotFoundException('Unable to find Person entity.');
@@ -136,28 +127,12 @@ class PersonController extends Controller
 
         $deleteForm = $this->createDeleteForm($person);
 
-        return $json ?
-        $this->render('LthrtContactBundle:Person:json.html.twig', [
-            'json' => json_encode($person),
-        ])
-        :
-        $this->render('LthrtContactBundle:Person:show.html.twig', [
-            'person'      => $person,
+        return $this->render('LthrtContactBundle:Person:show.html.twig', [
+            'person' => $person,
             'delete_form' => $deleteForm->createView(),
         ]);
-
-        // if ($json) {
-        //     $response = new JsonResponse();
-        //     $response->setData($person);
-        //     return $response;
-        // } else {
-        //     $this->render('LthrtContactBundle:Person:show.html.twig', [
-        //         'person'      => $person,
-        //         'delete_form' => $deleteForm->createView(),
-        //     ])
-        //     ;
-        // }
     }
+
 
     //
     // Edits an existing Person entity.
@@ -171,9 +146,11 @@ class PersonController extends Controller
 
         $form = $this->createEditForm($person);
         $form->handleRequest($request);
+
         if ($form->isValid()) {
-            $this->getDoctrine()->getManager()->persist($person);
-            $this->getDoctrine()->getManager()->flush();
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($person);
+            $em->flush();
 
             return $this->redirect($this->generateUrl('person_show', [ 'person' => $person->getId() ]));
         }
@@ -182,8 +159,9 @@ class PersonController extends Controller
 
         return $this->render('LthrtContactBundle:Person:show.html.twig', [
             'person'      => $person,
-            'form'        => $form->createView(),
+            'form' => $form->createView(),
             'delete_form' => $deleteForm->createView(),
         ]);
     }
+
 }

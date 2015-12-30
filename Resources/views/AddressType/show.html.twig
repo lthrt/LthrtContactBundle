@@ -11,6 +11,7 @@
             </tr>
         </tbody>
     </table>
+
         <ul class="record_actions">
     <li>
         <a href="{{ path('addresstype') }}">
@@ -24,6 +25,4 @@
     </li>
     <li>{{ form(delete_form) }}</li>
 </ul>
-
-{{addresstype | json_encode | json_pretty | raw}}
-{% endblock %}
+{% endblock body %}

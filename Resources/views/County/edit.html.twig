@@ -2,14 +2,7 @@
 
 {% block body -%}
     <h1>County Edit</h1>
-    {{ form_start(form) }}
-    {{ form_row(form.name) }}
-    {{ form_row(form.state) }}
-    {{ form_row(form.city) }}
-    {{ form_row(form.zip) }}
-    {{ form_rest(form) }}
-    {{ form_end(form) }}
-
+    {% include 'LthrtContactBundle:County:form.html.twig' %}
     <ul class="record_actions">
     <li>
         <a href="{{ path('county') }}">

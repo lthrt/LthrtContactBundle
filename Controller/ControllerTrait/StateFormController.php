@@ -1,7 +1,6 @@
 <?php
 
 namespace Lthrt\ContactBundle\Controller\ControllerTrait;
-
 use Lthrt\ContactBundle\Entity\State;
 use Lthrt\ContactBundle\Form\StateType;
 
@@ -12,6 +11,8 @@ use Lthrt\ContactBundle\Form\StateType;
 
 trait StateFormController
 {
+
+
     //
     // Creates a form to create a State entity.
     //
@@ -44,7 +45,8 @@ trait StateFormController
             ->setAction($this->generateUrl('state_delete', [ 'state' => $state->getId() ]))
             ->setMethod('DELETE')
             ->add('submit', 'submit', [ 'label' => 'Delete' ])
-            ->getForm();
+            ->getForm()
+        ;
     }
 
     //
@@ -65,4 +67,5 @@ trait StateFormController
 
         return $form;
     }
+
 }

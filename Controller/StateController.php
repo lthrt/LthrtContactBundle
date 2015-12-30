@@ -2,10 +2,12 @@
 
 namespace Lthrt\ContactBundle\Controller;
 
-use Lthrt\ContactBundle\Controller\ControllerTrait\StateFormController;
-use Lthrt\ContactBundle\Entity\State;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
 use Symfony\Component\HttpFoundation\Request;
+use Lthrt\ContactBundle\Entity\State;
+use Lthrt\ContactBundle\Controller\ControllerTrait\StateFormController;
 
 //
 // State controller.
@@ -23,7 +25,7 @@ class StateController extends Controller
     public function createAction(Request $request)
     {
         $state = new State();
-        $form  = $this->createCreateForm($state);
+        $form = $this->createCreateForm($state);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -36,7 +38,7 @@ class StateController extends Controller
 
         return $this->render('LthrtContactBundle:State:new.html.twig', [
             'state' => $state,
-            'form'  => $form->createView(),
+            'form' => $form->createView(),
         ]);
     }
 
@@ -72,15 +74,16 @@ class StateController extends Controller
             throw $this->createNotFoundException('Unable to find State entity.');
         }
 
-        $form       = $this->createEditForm($state);
+        $form = $this->createEditForm($state);
         $deleteForm = $this->createDeleteForm($state);
 
         return $this->render('LthrtContactBundle:State:edit.html.twig', [
-            'state'       => $state,
-            'form'        => $form->createView(),
+            'state' => $state,
+            'form' => $form->createView(),
             'delete_form' => $deleteForm->createView(),
         ]);
     }
+
 
     //
     // Lists all State entities.
@@ -95,20 +98,22 @@ class StateController extends Controller
         ]);
     }
 
+
     //
     // Displays a form to create a new State entity.
     //
     //
     public function newAction(Request $request)
     {
-        $state  = new State();
+        $state = new State();
         $form   = $this->createCreateForm($state);
-
+    
         return $this->render('LthrtContactBundle:State:new.html.twig', [
-            'state'  => $state,
+            'state' => $state,
             'form'   => $form->createView(),
         ]);
     }
+
 
     //
     // Finds and displays a State entity.
@@ -123,10 +128,11 @@ class StateController extends Controller
         $deleteForm = $this->createDeleteForm($state);
 
         return $this->render('LthrtContactBundle:State:show.html.twig', [
-            'state'       => $state,
+            'state' => $state,
             'delete_form' => $deleteForm->createView(),
         ]);
     }
+
 
     //
     // Edits an existing State entity.
@@ -142,7 +148,9 @@ class StateController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager()->flush();
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($state);
+            $em->flush();
 
             return $this->redirect($this->generateUrl('state_show', [ 'state' => $state->getId() ]));
         }
@@ -150,9 +158,10 @@ class StateController extends Controller
         $deleteForm = $this->createDeleteForm($state);
 
         return $this->render('LthrtContactBundle:State:show.html.twig', [
-            'state'       => $state,
-            'form'        => $form->createView(),
+            'state'      => $state,
+            'form' => $form->createView(),
             'delete_form' => $deleteForm->createView(),
         ]);
     }
+
 }

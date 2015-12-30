@@ -1,0 +1,8 @@
+{% block body -%}
+    <h1>State Edit</h1>
+    {{ form_start(form) }}
+    {{ form_row(form.abbr) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.zip) }}
+    {{ form_rest(form) }}
+    {{ form_end(form) }}

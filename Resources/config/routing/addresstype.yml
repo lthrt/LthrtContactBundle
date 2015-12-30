@@ -2,13 +2,6 @@ addresstype:
     path:     /
     defaults: { _controller: "LthrtContactBundle:AddressType:index" }
 
-
-person_clone:
-    path:     /clone/{addresstype}
-    defaults: { _controller: "LthrtContactBundle:AddressType:clone" }
-    requirements:
-        person: \d+
-
 addresstype_create:
     path:     /create
     defaults: { _controller: "LthrtContactBundle:AddressType:create" }

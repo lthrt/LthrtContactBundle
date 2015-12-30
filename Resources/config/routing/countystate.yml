@@ -1,0 +1,7 @@
+county_state:
+    path:     /county/{county}/state/{state}
+    defaults: { _controller: "LthrtContactBundle:CountyState:form", county: 0, state: 0 }
+    requirements:
+        county: \d*
+        state: \d*
+

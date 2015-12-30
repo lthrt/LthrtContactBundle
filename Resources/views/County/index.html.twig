@@ -7,7 +7,6 @@
         <thead>
             <tr>
                 <th>Name</th>
-                <th>State</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -15,7 +14,6 @@
         {% for county in countyCollection %}
             <tr>
                 <td><a href="{{ path('county_show', { 'county': county.id }) }}">{{ county.name }}</a></td>
-                <td><a href="{{ path('state_show', { 'state': county.state.id }) }}">{{ county.state.abbr }}</a></td>
                 <td>
                 <ul>
                     <li>

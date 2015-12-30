@@ -101,7 +101,11 @@ class ZipLoader extends StatesLoader
                 $county = $counties[$zipRef['county'].'__'.$zipRef['state']];
             } else {
                 $county = new County();
-                $county->setName($zipRef['county']);
+                if ($zipRef['county']){
+                    $county->setName($zipRef['county']);
+                } else {
+                    $county->setName($strtoupper($zipRef['city']).'_'.$key.'_'.strtoupper($zipRef['state']));
+                }
                 $counties[$county->getName().'__'.$zipRef['state']] = $county;
                 $result['counties']++;
             }

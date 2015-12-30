@@ -2,10 +2,12 @@
 
 namespace Lthrt\ContactBundle\Controller;
 
-use Lthrt\ContactBundle\Controller\ControllerTrait\ContactTypeFormController;
-use Lthrt\ContactBundle\Entity\ContactType;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
 use Symfony\Component\HttpFoundation\Request;
+use Lthrt\ContactBundle\Entity\ContactType;
+use Lthrt\ContactBundle\Controller\ControllerTrait\ContactTypeFormController;
 
 //
 // ContactType controller.
@@ -23,7 +25,7 @@ class ContactTypeController extends Controller
     public function createAction(Request $request)
     {
         $contacttype = new ContactType();
-        $form        = $this->createCreateForm($contacttype);
+        $form = $this->createCreateForm($contacttype);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -36,7 +38,7 @@ class ContactTypeController extends Controller
 
         return $this->render('LthrtContactBundle:ContactType:new.html.twig', [
             'contacttype' => $contacttype,
-            'form'        => $form->createView(),
+            'form' => $form->createView(),
         ]);
     }
 
@@ -72,15 +74,16 @@ class ContactTypeController extends Controller
             throw $this->createNotFoundException('Unable to find ContactType entity.');
         }
 
-        $form       = $this->createEditForm($contacttype);
+        $form = $this->createEditForm($contacttype);
         $deleteForm = $this->createDeleteForm($contacttype);
 
         return $this->render('LthrtContactBundle:ContactType:edit.html.twig', [
             'contacttype' => $contacttype,
-            'form'        => $form->createView(),
+            'form' => $form->createView(),
             'delete_form' => $deleteForm->createView(),
         ]);
     }
+
 
     //
     // Lists all ContactType entities.
@@ -95,6 +98,7 @@ class ContactTypeController extends Controller
         ]);
     }
 
+
     //
     // Displays a form to create a new ContactType entity.
     //
@@ -102,13 +106,14 @@ class ContactTypeController extends Controller
     public function newAction(Request $request)
     {
         $contacttype = new ContactType();
-        $form        = $this->createCreateForm($contacttype);
-
+        $form   = $this->createCreateForm($contacttype);
+    
         return $this->render('LthrtContactBundle:ContactType:new.html.twig', [
             'contacttype' => $contacttype,
-            'form'        => $form->createView(),
+            'form'   => $form->createView(),
         ]);
     }
+
 
     //
     // Finds and displays a ContactType entity.
@@ -128,6 +133,7 @@ class ContactTypeController extends Controller
         ]);
     }
 
+
     //
     // Edits an existing ContactType entity.
     //
@@ -142,7 +148,9 @@ class ContactTypeController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager()->flush();
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($contacttype);
+            $em->flush();
 
             return $this->redirect($this->generateUrl('contacttype_show', [ 'contacttype' => $contacttype->getId() ]));
         }
@@ -151,8 +159,9 @@ class ContactTypeController extends Controller
 
         return $this->render('LthrtContactBundle:ContactType:show.html.twig', [
             'contacttype'      => $contacttype,
-            'form'             => $form->createView(),
-            'delete_form'      => $deleteForm->createView(),
+            'form' => $form->createView(),
+            'delete_form' => $deleteForm->createView(),
         ]);
     }
+
 }

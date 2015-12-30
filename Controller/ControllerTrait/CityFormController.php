@@ -1,7 +1,6 @@
 <?php
 
 namespace Lthrt\ContactBundle\Controller\ControllerTrait;
-
 use Lthrt\ContactBundle\Entity\City;
 use Lthrt\ContactBundle\Form\CityType;
 
@@ -12,6 +11,8 @@ use Lthrt\ContactBundle\Form\CityType;
 
 trait CityFormController
 {
+
+
     //
     // Creates a form to create a City entity.
     //
@@ -44,7 +45,8 @@ trait CityFormController
             ->setAction($this->generateUrl('city_delete', [ 'city' => $city->getId() ]))
             ->setMethod('DELETE')
             ->add('submit', 'submit', [ 'label' => 'Delete' ])
-            ->getForm();
+            ->getForm()
+        ;
     }
 
     //
@@ -65,4 +67,5 @@ trait CityFormController
 
         return $form;
     }
+
 }
