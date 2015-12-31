@@ -1,8 +1,10 @@
 <?php
 namespace Lthrt\ContactBundle\Entity;
+
 use Lthrt\EntityJSONBundle\Entity\UnloggedEntity;
+
 /**
- * Zip
+ * Zip.
  */
 class Zip extends UnloggedEntity implements \JSONSerializable
 {
@@ -23,38 +25,41 @@ class Zip extends UnloggedEntity implements \JSONSerializable
      */
     private $state;
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
-        $this->city = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->city   = new \Doctrine\Common\Collections\ArrayCollection();
         $this->county = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->state = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->state  = new \Doctrine\Common\Collections\ArrayCollection();
     }
     /**
-     * Get zip
+     * Get zip.
      *
-     * @return string 
+     * @return string
      */
     public function getZip()
     {
         return $this->zip;
     }
     /**
-     * Set zip
+     * Set zip.
      *
      * @param string $zip
+     *
      * @return Zip
      */
     public function setZip($zip)
     {
         $this->zip = $zip;
+
         return $this;
     }
     /**
-     * Add city
+     * Add city.
      *
      * @param \Lthrt\ContactBundle\Entity\City $city
+     *
      * @return Zip
      */
     public function addCity(\Lthrt\ContactBundle\Entity\City $city)
@@ -63,10 +68,11 @@ class Zip extends UnloggedEntity implements \JSONSerializable
         } else {
             $this->city[] = $city;
         }
+
         return $this;
     }
     /**
-     * Remove city
+     * Remove city.
      *
      * @param \Lthrt\ContactBundle\Entity\City $city
      */
@@ -75,18 +81,19 @@ class Zip extends UnloggedEntity implements \JSONSerializable
         $this->city->removeElement($city);
     }
     /**
-     * Get city
+     * Get city.
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getCity()
     {
         return $this->city;
     }
     /**
-     * Add county
+     * Add county.
      *
      * @param \Lthrt\ContactBundle\Entity\County $county
+     *
      * @return Zip
      */
     public function addCounty(\Lthrt\ContactBundle\Entity\County $county)
@@ -95,10 +102,11 @@ class Zip extends UnloggedEntity implements \JSONSerializable
         } else {
             $this->county[] = $county;
         }
+
         return $this;
     }
     /**
-     * Remove county
+     * Remove county.
      *
      * @param \Lthrt\ContactBundle\Entity\County $county
      */
@@ -107,18 +115,19 @@ class Zip extends UnloggedEntity implements \JSONSerializable
         $this->county->removeElement($county);
     }
     /**
-     * Get county
+     * Get county.
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getCounty()
     {
         return $this->county;
     }
     /**
-     * Add state
+     * Add state.
      *
      * @param \Lthrt\ContactBundle\Entity\state $state
+     *
      * @return Zip
      */
     public function addState(\Lthrt\ContactBundle\Entity\state $state)
@@ -127,10 +136,11 @@ class Zip extends UnloggedEntity implements \JSONSerializable
         } else {
             $this->state[] = $state;
         }
+
         return $this;
     }
     /**
-     * Remove state
+     * Remove state.
      *
      * @param \Lthrt\ContactBundle\Entity\state $state
      */
@@ -139,29 +149,27 @@ class Zip extends UnloggedEntity implements \JSONSerializable
         $this->state->removeElement($state);
     }
     /**
-     * Get state
+     * Get state.
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getState()
     {
         return $this->state;
     }
 
-
     /** jsonSerialize
-      *
-      */
+     *
+     */
     public function JSONSerialize()
     {
         return [
             'class' => 'Lthrt_ContactBundle_Entity_Zip',
-            'id' => $this->id,
-            'zip' => $this->zip,
-            'city' => $this->city->map(function($e){return ['class' => 'Lthrt_ContactBundle_Entity_City','id' => $e->getId(),];})->toArray(),
-            'county' => $this->county->map(function($e){return ['class' => 'Lthrt_ContactBundle_Entity_County','id' => $e->getId(),];})->toArray(),
-            'state' => $this->state->map(function($e){return ['class' => 'Lthrt_ContactBundle_Entity_state','id' => $e->getId(),];})->toArray(),
+            'id'    => $this->id,
+            'zip'   => $this->zip,
+            'city'  => $this->city->map(function ($e) {return ['class' => 'Lthrt_ContactBundle_Entity_City', 'id' => $e->getId()];})->toArray(),
+            'county'                                                   => $this->county->map(function ($e) {return ['class' => 'Lthrt_ContactBundle_Entity_County', 'id' => $e->getId()];})->toArray(),
+            'state'                                                                                                         => $this->state->map(function ($e) {return ['class' => 'Lthrt_ContactBundle_Entity_state', 'id' => $e->getId()];})->toArray(),
         ];
     }
-
 }

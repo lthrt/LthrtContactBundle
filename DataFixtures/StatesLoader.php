@@ -1,8 +1,8 @@
 <?php
 namespace  Lthrt\ContactBundle\DataFixtures;
 
-use Lthrt\ContactBundle\Entity\State;
 use Lthrt\ContactBundle\DataFixtures\DataTrait\StatesTrait;
+use Lthrt\ContactBundle\Entity\State;
 
 class StatesLoader
 {
@@ -15,7 +15,7 @@ class StatesLoader
 
     public function __construct($em)
     {
-        $this->em = $em;
+        $this->em     = $em;
         $this->states = $this->getStates();
     }
 
@@ -27,15 +27,17 @@ class StatesLoader
         ksort($this->states);
 
         $updatedStates = [];
-        $newStates = [];
+        $newStates     = [];
 
         foreach ($this->states as $abbr => $name) {
-            if ('header' == $abbr) { continue;}
+            if ('header' == $abbr) {
+                continue;
+            }
             if (in_array($abbr, array_keys($dbStates))) {
-                $state = $dbStates[$abbr];
+                $state                = $dbStates[$abbr];
                 $updatedStates[$abbr] = $state->getAbbr();
             } else {
-                $state = new State();
+                $state            = new State();
                 $newStates[$abbr] = $state->getAbbr();
             }
             $state->setAbbr($abbr);
@@ -44,8 +46,13 @@ class StatesLoader
             $this->em->flush();
         }
 
-        if ($updatedStates) { ksort($updatedStates); }
-        if ($newStates) { ksort($newStates); }
+        if ($updatedStates) {
+            ksort($updatedStates);
+        }
+        if ($newStates) {
+            ksort($newStates);
+        }
+
         return ['updatedStates' => $updatedStates, 'newStates' => $newStates];
     }
 }

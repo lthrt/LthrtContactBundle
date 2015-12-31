@@ -1,8 +1,10 @@
 <?php
 namespace Lthrt\ContactBundle\Entity;
+
 use Lthrt\EntityJSONBundle\Entity\UnloggedEntity;
+
 /**
- * AddressType
+ * AddressType.
  */
 class AddressType extends UnloggedEntity implements \JSONSerializable
 {
@@ -11,37 +13,37 @@ class AddressType extends UnloggedEntity implements \JSONSerializable
      */
     private $name;
     /**
-     * Get name
+     * Get name.
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
         return $this->name;
     }
     /**
-     * Set name
+     * Set name.
      *
      * @param string $name
+     *
      * @return AddressType
      */
     public function setName($name)
     {
         $this->name = $name;
+
         return $this;
     }
 
-
     /** jsonSerialize
-      *
-      */
+     *
+     */
     public function JSONSerialize()
     {
         return [
             'class' => 'Lthrt_ContactBundle_Entity_AddressType',
-            'id' => $this->id,
-            'name' => $this->name,
+            'id'    => $this->id,
+            'name'  => $this->name,
         ];
     }
-
 }

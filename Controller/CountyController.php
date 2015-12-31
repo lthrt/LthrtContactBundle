@@ -2,12 +2,10 @@
 
 namespace Lthrt\ContactBundle\Controller;
 
-
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
-use Symfony\Component\HttpFoundation\Request;
-use Lthrt\ContactBundle\Entity\County;
 use Lthrt\ContactBundle\Controller\ControllerTrait\CountyFormController;
+use Lthrt\ContactBundle\Entity\County;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 //
 // County controller.
@@ -25,7 +23,7 @@ class CountyController extends Controller
     public function createAction(Request $request)
     {
         $county = new County();
-        $form = $this->createCreateForm($county);
+        $form   = $this->createCreateForm($county);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -38,7 +36,7 @@ class CountyController extends Controller
 
         return $this->render('LthrtContactBundle:County:new.html.twig', [
             'county' => $county,
-            'form' => $form->createView(),
+            'form'   => $form->createView(),
         ]);
     }
 
@@ -74,16 +72,15 @@ class CountyController extends Controller
             throw $this->createNotFoundException('Unable to find County entity.');
         }
 
-        $form = $this->createEditForm($county);
+        $form       = $this->createEditForm($county);
         $deleteForm = $this->createDeleteForm($county);
 
         return $this->render('LthrtContactBundle:County:edit.html.twig', [
-            'county' => $county,
-            'form' => $form->createView(),
+            'county'      => $county,
+            'form'        => $form->createView(),
             'delete_form' => $deleteForm->createView(),
         ]);
     }
-
 
     //
     // Lists all County entities.
@@ -98,7 +95,6 @@ class CountyController extends Controller
         ]);
     }
 
-
     //
     // Displays a form to create a new County entity.
     //
@@ -107,13 +103,12 @@ class CountyController extends Controller
     {
         $county = new County();
         $form   = $this->createCreateForm($county);
-    
+
         return $this->render('LthrtContactBundle:County:new.html.twig', [
             'county' => $county,
             'form'   => $form->createView(),
         ]);
     }
-
 
     //
     // Finds and displays a County entity.
@@ -128,11 +123,10 @@ class CountyController extends Controller
         $deleteForm = $this->createDeleteForm($county);
 
         return $this->render('LthrtContactBundle:County:show.html.twig', [
-            'county' => $county,
+            'county'      => $county,
             'delete_form' => $deleteForm->createView(),
         ]);
     }
-
 
     //
     // Edits an existing County entity.
@@ -159,9 +153,8 @@ class CountyController extends Controller
 
         return $this->render('LthrtContactBundle:County:show.html.twig', [
             'county'      => $county,
-            'form' => $form->createView(),
+            'form'        => $form->createView(),
             'delete_form' => $deleteForm->createView(),
         ]);
     }
-
 }

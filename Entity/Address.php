@@ -5,9 +5,8 @@ namespace Lthrt\ContactBundle\Entity;
 use Lthrt\EntityJSONBundle\Entity\LoggedEntity;
 
 /**
- * Address
+ * Address.
  */
-
 class Address extends LoggedEntity implements \JSONSerializable
 {
     /**
@@ -50,20 +49,18 @@ class Address extends LoggedEntity implements \JSONSerializable
      */
     private $person;
 
-
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
         $this->person = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
-
     /**
-     * Get line
+     * Get line.
      *
-     * @return string 
+     * @return string
      */
     public function getLine()
     {
@@ -71,9 +68,10 @@ class Address extends LoggedEntity implements \JSONSerializable
     }
 
     /**
-     * Set line
+     * Set line.
      *
      * @param string $line
+     *
      * @return Address
      */
     public function setLine($line)
@@ -84,9 +82,9 @@ class Address extends LoggedEntity implements \JSONSerializable
     }
 
     /**
-     * Get line2
+     * Get line2.
      *
-     * @return string 
+     * @return string
      */
     public function getLine2()
     {
@@ -94,9 +92,10 @@ class Address extends LoggedEntity implements \JSONSerializable
     }
 
     /**
-     * Set line2
+     * Set line2.
      *
      * @param string $line2
+     *
      * @return Address
      */
     public function setLine2($line2)
@@ -107,9 +106,9 @@ class Address extends LoggedEntity implements \JSONSerializable
     }
 
     /**
-     * Get zipExt
+     * Get zipExt.
      *
-     * @return string 
+     * @return string
      */
     public function getZipExt()
     {
@@ -117,9 +116,10 @@ class Address extends LoggedEntity implements \JSONSerializable
     }
 
     /**
-     * Set zipExt
+     * Set zipExt.
      *
      * @param string $zipExt
+     *
      * @return Address
      */
     public function setZipExt($zipExt)
@@ -130,9 +130,10 @@ class Address extends LoggedEntity implements \JSONSerializable
     }
 
     /**
-     * Set addressType
+     * Set addressType.
      *
      * @param \Lthrt\ContactBundle\Entity\AddressType $addressType
+     *
      * @return Address
      */
     public function setAddressType(\Lthrt\ContactBundle\Entity\AddressType $addressType = null)
@@ -143,9 +144,9 @@ class Address extends LoggedEntity implements \JSONSerializable
     }
 
     /**
-     * Get addressType
+     * Get addressType.
      *
-     * @return \Lthrt\ContactBundle\Entity\AddressType 
+     * @return \Lthrt\ContactBundle\Entity\AddressType
      */
     public function getAddressType()
     {
@@ -153,9 +154,10 @@ class Address extends LoggedEntity implements \JSONSerializable
     }
 
     /**
-     * Set city
+     * Set city.
      *
      * @param \Lthrt\ContactBundle\Entity\City $city
+     *
      * @return Address
      */
     public function setCity(\Lthrt\ContactBundle\Entity\City $city = null)
@@ -166,9 +168,9 @@ class Address extends LoggedEntity implements \JSONSerializable
     }
 
     /**
-     * Get city
+     * Get city.
      *
-     * @return \Lthrt\ContactBundle\Entity\City 
+     * @return \Lthrt\ContactBundle\Entity\City
      */
     public function getCity()
     {
@@ -176,9 +178,10 @@ class Address extends LoggedEntity implements \JSONSerializable
     }
 
     /**
-     * Set state
+     * Set state.
      *
      * @param \Lthrt\ContactBundle\Entity\State $state
+     *
      * @return Address
      */
     public function setState(\Lthrt\ContactBundle\Entity\State $state = null)
@@ -189,9 +192,9 @@ class Address extends LoggedEntity implements \JSONSerializable
     }
 
     /**
-     * Get state
+     * Get state.
      *
-     * @return \Lthrt\ContactBundle\Entity\State 
+     * @return \Lthrt\ContactBundle\Entity\State
      */
     public function getState()
     {
@@ -199,9 +202,10 @@ class Address extends LoggedEntity implements \JSONSerializable
     }
 
     /**
-     * Set zip
+     * Set zip.
      *
      * @param \Lthrt\ContactBundle\Entity\Zip $zip
+     *
      * @return Address
      */
     public function setZip(\Lthrt\ContactBundle\Entity\Zip $zip = null)
@@ -212,9 +216,9 @@ class Address extends LoggedEntity implements \JSONSerializable
     }
 
     /**
-     * Get zip
+     * Get zip.
      *
-     * @return \Lthrt\ContactBundle\Entity\Zip 
+     * @return \Lthrt\ContactBundle\Entity\Zip
      */
     public function getZip()
     {
@@ -222,9 +226,10 @@ class Address extends LoggedEntity implements \JSONSerializable
     }
 
     /**
-     * Add person
+     * Add person.
      *
      * @param \Lthrt\ContactBundle\Entity\Person $person
+     *
      * @return Address
      */
     public function addPerson(\Lthrt\ContactBundle\Entity\Person $person)
@@ -238,7 +243,7 @@ class Address extends LoggedEntity implements \JSONSerializable
     }
 
     /**
-     * Remove person
+     * Remove person.
      *
      * @param \Lthrt\ContactBundle\Entity\Person $person
      */
@@ -248,9 +253,9 @@ class Address extends LoggedEntity implements \JSONSerializable
     }
 
     /**
-     * Get person
+     * Get person.
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getPerson()
     {
@@ -258,22 +263,21 @@ class Address extends LoggedEntity implements \JSONSerializable
     }
 
     /** jsonSerialize
-      *
-      */
+     *
+     */
     public function JSONSerialize()
     {
         return [
-            'class' => 'Lthrt_ContactBundle_Entity_Address',
-            'id' => $this->id,
-            'line' => $this->line,
-            'line2' => $this->line2,
-            'zipExt' => $this->zipExt,
-            'addressType' => $this->addressType ? ['class' => 'Lthrt_ContactBundle_Entity_AddressType','id'=>$this->addressType->id,]:'{}',
-            'city' => $this->city ? ['class' => 'Lthrt_ContactBundle_Entity_City','id'=>$this->city->id,]:'{}',
-            'state' => $this->state ? ['class' => 'Lthrt_ContactBundle_Entity_State','id'=>$this->state->id,]:'{}',
-            'zip' => $this->zip ? ['class' => 'Lthrt_ContactBundle_Entity_Zip','id'=>$this->zip->id,]:'{}',
-            'person' => $this->person->map(function($e){return ['class' => 'Lthrt_ContactBundle_Entity_Person','id' => $e->getId(),];})->toArray(),
+            'class'       => 'Lthrt_ContactBundle_Entity_Address',
+            'id'          => $this->id,
+            'line'        => $this->line,
+            'line2'       => $this->line2,
+            'zipExt'      => $this->zipExt,
+            'addressType' => $this->addressType ? ['class'                     => 'Lthrt_ContactBundle_Entity_AddressType','id' => $this->addressType->id] : '{}',
+            'city'        => $this->city ? ['class'                            => 'Lthrt_ContactBundle_Entity_City','id' => $this->city->id] : '{}',
+            'state'       => $this->state ? ['class'                           => 'Lthrt_ContactBundle_Entity_State','id' => $this->state->id] : '{}',
+            'zip'         => $this->zip ? ['class'                             => 'Lthrt_ContactBundle_Entity_Zip','id' => $this->zip->id] : '{}',
+            'person'      => $this->person->map(function ($e) {return ['class' => 'Lthrt_ContactBundle_Entity_Person', 'id' => $e->getId()];})->toArray(),
         ];
     }
-
 }

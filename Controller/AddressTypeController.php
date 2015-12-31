@@ -2,12 +2,10 @@
 
 namespace Lthrt\ContactBundle\Controller;
 
-
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
-use Symfony\Component\HttpFoundation\Request;
-use Lthrt\ContactBundle\Entity\AddressType;
 use Lthrt\ContactBundle\Controller\ControllerTrait\AddressTypeFormController;
+use Lthrt\ContactBundle\Entity\AddressType;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 //
 // AddressType controller.
@@ -25,7 +23,7 @@ class AddressTypeController extends Controller
     public function createAction(Request $request)
     {
         $addresstype = new AddressType();
-        $form = $this->createCreateForm($addresstype);
+        $form        = $this->createCreateForm($addresstype);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -38,7 +36,7 @@ class AddressTypeController extends Controller
 
         return $this->render('LthrtContactBundle:AddressType:new.html.twig', [
             'addresstype' => $addresstype,
-            'form' => $form->createView(),
+            'form'        => $form->createView(),
         ]);
     }
 
@@ -74,16 +72,15 @@ class AddressTypeController extends Controller
             throw $this->createNotFoundException('Unable to find AddressType entity.');
         }
 
-        $form = $this->createEditForm($addresstype);
+        $form       = $this->createEditForm($addresstype);
         $deleteForm = $this->createDeleteForm($addresstype);
 
         return $this->render('LthrtContactBundle:AddressType:edit.html.twig', [
             'addresstype' => $addresstype,
-            'form' => $form->createView(),
+            'form'        => $form->createView(),
             'delete_form' => $deleteForm->createView(),
         ]);
     }
-
 
     //
     // Lists all AddressType entities.
@@ -98,7 +95,6 @@ class AddressTypeController extends Controller
         ]);
     }
 
-
     //
     // Displays a form to create a new AddressType entity.
     //
@@ -106,14 +102,13 @@ class AddressTypeController extends Controller
     public function newAction(Request $request)
     {
         $addresstype = new AddressType();
-        $form   = $this->createCreateForm($addresstype);
-    
+        $form        = $this->createCreateForm($addresstype);
+
         return $this->render('LthrtContactBundle:AddressType:new.html.twig', [
             'addresstype' => $addresstype,
-            'form'   => $form->createView(),
+            'form'        => $form->createView(),
         ]);
     }
-
 
     //
     // Finds and displays a AddressType entity.
@@ -132,7 +127,6 @@ class AddressTypeController extends Controller
             'delete_form' => $deleteForm->createView(),
         ]);
     }
-
 
     //
     // Edits an existing AddressType entity.
@@ -159,9 +153,8 @@ class AddressTypeController extends Controller
 
         return $this->render('LthrtContactBundle:AddressType:show.html.twig', [
             'addresstype'      => $addresstype,
-            'form' => $form->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'form'             => $form->createView(),
+            'delete_form'      => $deleteForm->createView(),
         ]);
     }
-
 }

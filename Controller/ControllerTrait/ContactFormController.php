@@ -1,6 +1,7 @@
 <?php
 
 namespace Lthrt\ContactBundle\Controller\ControllerTrait;
+
 use Lthrt\ContactBundle\Entity\Contact;
 use Lthrt\ContactBundle\Form\ContactType;
 
@@ -11,8 +12,6 @@ use Lthrt\ContactBundle\Form\ContactType;
 
 trait ContactFormController
 {
-
-
     //
     // Creates a form to create a Contact entity.
     //
@@ -45,8 +44,7 @@ trait ContactFormController
             ->setAction($this->generateUrl('contact_delete', [ 'contact' => $contact->getId() ]))
             ->setMethod('DELETE')
             ->add('submit', 'submit', [ 'label' => 'Delete' ])
-            ->getForm()
-        ;
+            ->getForm();
     }
 
     //
@@ -67,5 +65,4 @@ trait ContactFormController
 
         return $form;
     }
-
 }

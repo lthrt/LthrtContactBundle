@@ -5,9 +5,8 @@ namespace Lthrt\ContactBundle\Entity;
 use Lthrt\EntityJSONBundle\Entity\UnloggedEntity;
 
 /**
- * Demographic
+ * Demographic.
  */
-
 class Demographic extends UnloggedEntity implements \JSONSerializable
 {
     /**
@@ -20,12 +19,10 @@ class Demographic extends UnloggedEntity implements \JSONSerializable
      */
     private $demographicType;
 
-
-
     /**
-     * Get value
+     * Get value.
      *
-     * @return string 
+     * @return string
      */
     public function getValue()
     {
@@ -33,9 +30,10 @@ class Demographic extends UnloggedEntity implements \JSONSerializable
     }
 
     /**
-     * Set value
+     * Set value.
      *
      * @param string $value
+     *
      * @return Demographic
      */
     public function setValue($value)
@@ -46,9 +44,10 @@ class Demographic extends UnloggedEntity implements \JSONSerializable
     }
 
     /**
-     * Set demographicType
+     * Set demographicType.
      *
      * @param \Lthrt\ContactBundle\Entity\DemographicType $demographicType
+     *
      * @return Demographic
      */
     public function setDemographicType(\Lthrt\ContactBundle\Entity\DemographicType $demographicType = null)
@@ -59,9 +58,9 @@ class Demographic extends UnloggedEntity implements \JSONSerializable
     }
 
     /**
-     * Get demographicType
+     * Get demographicType.
      *
-     * @return \Lthrt\ContactBundle\Entity\DemographicType 
+     * @return \Lthrt\ContactBundle\Entity\DemographicType
      */
     public function getDemographicType()
     {
@@ -69,16 +68,15 @@ class Demographic extends UnloggedEntity implements \JSONSerializable
     }
 
     /** jsonSerialize
-      *
-      */
+     *
+     */
     public function JSONSerialize()
     {
         return [
-            'class' => 'Lthrt_ContactBundle_Entity_Demographic',
-            'id' => $this->id,
-            'value' => $this->value,
-            'demographicType' => $this->demographicType ? ['class' => 'Lthrt_ContactBundle_Entity_DemographicType','id'=>$this->demographicType->id,]:'{}',
+            'class'           => 'Lthrt_ContactBundle_Entity_Demographic',
+            'id'              => $this->id,
+            'value'           => $this->value,
+            'demographicType' => $this->demographicType ? ['class' => 'Lthrt_ContactBundle_Entity_DemographicType','id' => $this->demographicType->id] : '{}',
         ];
     }
-
 }

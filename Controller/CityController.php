@@ -2,12 +2,10 @@
 
 namespace Lthrt\ContactBundle\Controller;
 
-
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
-use Symfony\Component\HttpFoundation\Request;
-use Lthrt\ContactBundle\Entity\City;
 use Lthrt\ContactBundle\Controller\ControllerTrait\CityFormController;
+use Lthrt\ContactBundle\Entity\City;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 //
 // City controller.
@@ -74,16 +72,15 @@ class CityController extends Controller
             throw $this->createNotFoundException('Unable to find City entity.');
         }
 
-        $form = $this->createEditForm($city);
+        $form       = $this->createEditForm($city);
         $deleteForm = $this->createDeleteForm($city);
 
         return $this->render('LthrtContactBundle:City:edit.html.twig', [
-            'city' => $city,
-            'form' => $form->createView(),
+            'city'        => $city,
+            'form'        => $form->createView(),
             'delete_form' => $deleteForm->createView(),
         ]);
     }
-
 
     //
     // Lists all City entities.
@@ -98,22 +95,20 @@ class CityController extends Controller
         ]);
     }
 
-
     //
     // Displays a form to create a new City entity.
     //
     //
     public function newAction(Request $request)
     {
-        $city = new City();
+        $city   = new City();
         $form   = $this->createCreateForm($city);
-    
+
         return $this->render('LthrtContactBundle:City:new.html.twig', [
-            'city' => $city,
+            'city'   => $city,
             'form'   => $form->createView(),
         ]);
     }
-
 
     //
     // Finds and displays a City entity.
@@ -128,11 +123,10 @@ class CityController extends Controller
         $deleteForm = $this->createDeleteForm($city);
 
         return $this->render('LthrtContactBundle:City:show.html.twig', [
-            'city' => $city,
+            'city'        => $city,
             'delete_form' => $deleteForm->createView(),
         ]);
     }
-
 
     //
     // Edits an existing City entity.
@@ -158,10 +152,9 @@ class CityController extends Controller
         $deleteForm = $this->createDeleteForm($city);
 
         return $this->render('LthrtContactBundle:City:show.html.twig', [
-            'city'      => $city,
-            'form' => $form->createView(),
+            'city'        => $city,
+            'form'        => $form->createView(),
             'delete_form' => $deleteForm->createView(),
         ]);
     }
-
 }

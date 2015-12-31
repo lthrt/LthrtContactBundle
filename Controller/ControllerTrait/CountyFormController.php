@@ -1,6 +1,7 @@
 <?php
 
 namespace Lthrt\ContactBundle\Controller\ControllerTrait;
+
 use Lthrt\ContactBundle\Entity\County;
 use Lthrt\ContactBundle\Form\CountyType;
 
@@ -11,8 +12,6 @@ use Lthrt\ContactBundle\Form\CountyType;
 
 trait CountyFormController
 {
-
-
     //
     // Creates a form to create a County entity.
     //
@@ -45,8 +44,7 @@ trait CountyFormController
             ->setAction($this->generateUrl('county_delete', [ 'county' => $county->getId() ]))
             ->setMethod('DELETE')
             ->add('submit', 'submit', [ 'label' => 'Delete' ])
-            ->getForm()
-        ;
+            ->getForm();
     }
 
     //
@@ -67,5 +65,4 @@ trait CountyFormController
 
         return $form;
     }
-
 }

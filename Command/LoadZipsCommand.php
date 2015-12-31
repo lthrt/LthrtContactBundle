@@ -14,11 +14,11 @@
 
 namespace Lthrt\ContactBundle\Command;
 
+use Lthrt\ContactBundle\DataFixtures\ZipLoader;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Lthrt\ContactBundle\DataFixtures\ZipLoader;
 
 /**
  * Generate entity classes from mapping information.
@@ -67,10 +67,9 @@ EOT
         if (isset($result['noStates'])) {
             $output->writeln("States must be loaded first: <comment>lthrt:load:states</comment>");
         } else {
-            $output->writeln("<info>".$result['cities']. "</info> cities added.>");
-            $output->writeln("<info>".$result['counties']. "</info> counties added.");
-            $output->writeln("<info>".$result['zips']. "</info> zip codes added.");
+            $output->writeln("<info>" . $result['cities'] . "</info> cities added.>");
+            $output->writeln("<info>" . $result['counties'] . "</info> counties added.");
+            $output->writeln("<info>" . $result['zips'] . "</info> zip codes added.");
         }
-
     }
 }

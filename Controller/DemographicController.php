@@ -2,12 +2,10 @@
 
 namespace Lthrt\ContactBundle\Controller;
 
-
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
-use Symfony\Component\HttpFoundation\Request;
-use Lthrt\ContactBundle\Entity\Demographic;
 use Lthrt\ContactBundle\Controller\ControllerTrait\DemographicFormController;
+use Lthrt\ContactBundle\Entity\Demographic;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 //
 // Demographic controller.
@@ -25,7 +23,7 @@ class DemographicController extends Controller
     public function createAction(Request $request)
     {
         $demographic = new Demographic();
-        $form = $this->createCreateForm($demographic);
+        $form        = $this->createCreateForm($demographic);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -38,7 +36,7 @@ class DemographicController extends Controller
 
         return $this->render('LthrtContactBundle:Demographic:new.html.twig', [
             'demographic' => $demographic,
-            'form' => $form->createView(),
+            'form'        => $form->createView(),
         ]);
     }
 
@@ -74,16 +72,15 @@ class DemographicController extends Controller
             throw $this->createNotFoundException('Unable to find Demographic entity.');
         }
 
-        $form = $this->createEditForm($demographic);
+        $form       = $this->createEditForm($demographic);
         $deleteForm = $this->createDeleteForm($demographic);
 
         return $this->render('LthrtContactBundle:Demographic:edit.html.twig', [
             'demographic' => $demographic,
-            'form' => $form->createView(),
+            'form'        => $form->createView(),
             'delete_form' => $deleteForm->createView(),
         ]);
     }
-
 
     //
     // Lists all Demographic entities.
@@ -98,7 +95,6 @@ class DemographicController extends Controller
         ]);
     }
 
-
     //
     // Displays a form to create a new Demographic entity.
     //
@@ -106,14 +102,13 @@ class DemographicController extends Controller
     public function newAction(Request $request)
     {
         $demographic = new Demographic();
-        $form   = $this->createCreateForm($demographic);
-    
+        $form        = $this->createCreateForm($demographic);
+
         return $this->render('LthrtContactBundle:Demographic:new.html.twig', [
             'demographic' => $demographic,
-            'form'   => $form->createView(),
+            'form'        => $form->createView(),
         ]);
     }
-
 
     //
     // Finds and displays a Demographic entity.
@@ -132,7 +127,6 @@ class DemographicController extends Controller
             'delete_form' => $deleteForm->createView(),
         ]);
     }
-
 
     //
     // Edits an existing Demographic entity.
@@ -159,9 +153,8 @@ class DemographicController extends Controller
 
         return $this->render('LthrtContactBundle:Demographic:show.html.twig', [
             'demographic'      => $demographic,
-            'form' => $form->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'form'             => $form->createView(),
+            'delete_form'      => $deleteForm->createView(),
         ]);
     }
-
 }

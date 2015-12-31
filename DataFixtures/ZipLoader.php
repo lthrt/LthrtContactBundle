@@ -1,12 +1,12 @@
 <?php
 namespace  Lthrt\ContactBundle\DataFixtures;
 
-use Lthrt\ContactBundle\Entity\County;
-use Lthrt\ContactBundle\Entity\City;
-use Lthrt\ContactBundle\Entity\State;
-use Lthrt\ContactBundle\Entity\Zip;
 use Lthrt\ContactBundle\DataFixtures\DataTrait\StatesTrait;
 use Lthrt\ContactBundle\DataFixtures\DataTrait\ZipsTrait;
+use Lthrt\ContactBundle\Entity\City;
+use Lthrt\ContactBundle\Entity\County;
+use Lthrt\ContactBundle\Entity\State;
+use Lthrt\ContactBundle\Entity\Zip;
 
 class ZipLoader extends StatesLoader
 {
@@ -31,7 +31,6 @@ class ZipLoader extends StatesLoader
 
     public function loadZips($overwrite = false)
     {
-
         $this->em->getConnection()->getConfiguration()->setSQLLogger(null);
 
         $dbStates = $this->em->getRepository('LthrtContactBundle:State')
@@ -58,28 +57,29 @@ class ZipLoader extends StatesLoader
         $dbZips = $this->em->getRepository('LthrtContactBundle:Zip')
         ->createQueryBuilder('zip', 'zip.zip')->getQuery()->getResult();
 
-        $cities = [];
+        $cities   = [];
         $counties = [];
 
         array_walk(
             $dbCities,
-            function($c) use (&$cities) {
-                $cities[$c->getName()."__".$c->getState()->getAbbr()] = $c;
+            function ($c) use (&$cities) {
+                $cities[$c->getName() . "__" . $c->getState()->getAbbr()] = $c;
             }
         );
         unset($dbCities);
 
-
         array_walk(
             $dbCounties,
-            function($c) use (&$counties) {
-                $counties[$c->getName()."__".$c->getState()->getAbbr()] = $c;
+            function ($c) use (&$counties) {
+                $counties[$c->getName() . "__" . $c->getState()->getAbbr()] = $c;
             }
         );
         unset($dbCounties);
 
         foreach ($importZips as $key => $zipRef) {
-            if ('header' == $key) { continue; }
+            if ('header' == $key) {
+                continue;
+            }
             if (isset($dbStates[$zipRef['state']])) {
                 $state = $dbStates[$zipRef['state']];
             } else {
@@ -88,25 +88,25 @@ class ZipLoader extends StatesLoader
                 continue;
             }
 
-            if (isset($cities[$zipRef['city'].'__'.$zipRef['state']])) {
-                $city = $cities[$zipRef['city'].'__'.$zipRef['state']];
+            if (isset($cities[$zipRef['city'] . '__' . $zipRef['state']])) {
+                $city = $cities[$zipRef['city'] . '__' . $zipRef['state']];
             } else {
                 $city = new City();
                 $city->setName($zipRef['city']);
-                $cities[$city->getName().'__'.$zipRef['state']] = $city;
+                $cities[$city->getName() . '__' . $zipRef['state']] = $city;
                 $result['cities']++;
             }
 
-            if (isset($counties[$zipRef['county'].'__'.$zipRef['state']])) {
-                $county = $counties[$zipRef['county'].'__'.$zipRef['state']];
+            if (isset($counties[$zipRef['county'] . '__' . $zipRef['state']])) {
+                $county = $counties[$zipRef['county'] . '__' . $zipRef['state']];
             } else {
                 $county = new County();
-                if ($zipRef['county']){
+                if ($zipRef['county']) {
                     $county->setName($zipRef['county']);
                 } else {
-                    $county->setName(strtoupper($zipRef['city']).'_'.strtoupper($zipRef['state']).'_'.$key);
+                    $county->setName(strtoupper($zipRef['city']) . '_' . strtoupper($zipRef['state']) . '_' . $key);
                 }
-                $counties[$county->getName().'__'.$zipRef['state']] = $county;
+                $counties[$county->getName() . '__' . $zipRef['state']] = $county;
                 $result['counties']++;
             }
 
@@ -119,8 +119,8 @@ class ZipLoader extends StatesLoader
                 $result['zips']++;
             }
 
-            $zip->addCounty($counties[$county->getName().'__'.$state->getAbbr()]);
-            $zip->addCity($cities[$city->getName().'__'.$state->getAbbr()]);
+            $zip->addCounty($counties[$county->getName() . '__' . $state->getAbbr()]);
+            $zip->addCity($cities[$city->getName() . '__' . $state->getAbbr()]);
             $zip->addState($state);
 
             $city->setState($state);

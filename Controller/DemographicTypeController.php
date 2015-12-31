@@ -2,12 +2,10 @@
 
 namespace Lthrt\ContactBundle\Controller;
 
-
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
-use Symfony\Component\HttpFoundation\Request;
-use Lthrt\ContactBundle\Entity\DemographicType;
 use Lthrt\ContactBundle\Controller\ControllerTrait\DemographicTypeFormController;
+use Lthrt\ContactBundle\Entity\DemographicType;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 //
 // DemographicType controller.
@@ -25,7 +23,7 @@ class DemographicTypeController extends Controller
     public function createAction(Request $request)
     {
         $demographictype = new DemographicType();
-        $form = $this->createCreateForm($demographictype);
+        $form            = $this->createCreateForm($demographictype);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -38,7 +36,7 @@ class DemographicTypeController extends Controller
 
         return $this->render('LthrtContactBundle:DemographicType:new.html.twig', [
             'demographictype' => $demographictype,
-            'form' => $form->createView(),
+            'form'            => $form->createView(),
         ]);
     }
 
@@ -74,16 +72,15 @@ class DemographicTypeController extends Controller
             throw $this->createNotFoundException('Unable to find DemographicType entity.');
         }
 
-        $form = $this->createEditForm($demographictype);
+        $form       = $this->createEditForm($demographictype);
         $deleteForm = $this->createDeleteForm($demographictype);
 
         return $this->render('LthrtContactBundle:DemographicType:edit.html.twig', [
             'demographictype' => $demographictype,
-            'form' => $form->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'form'            => $form->createView(),
+            'delete_form'     => $deleteForm->createView(),
         ]);
     }
-
 
     //
     // Lists all DemographicType entities.
@@ -98,7 +95,6 @@ class DemographicTypeController extends Controller
         ]);
     }
 
-
     //
     // Displays a form to create a new DemographicType entity.
     //
@@ -106,14 +102,13 @@ class DemographicTypeController extends Controller
     public function newAction(Request $request)
     {
         $demographictype = new DemographicType();
-        $form   = $this->createCreateForm($demographictype);
-    
+        $form            = $this->createCreateForm($demographictype);
+
         return $this->render('LthrtContactBundle:DemographicType:new.html.twig', [
             'demographictype' => $demographictype,
-            'form'   => $form->createView(),
+            'form'            => $form->createView(),
         ]);
     }
-
 
     //
     // Finds and displays a DemographicType entity.
@@ -129,10 +124,9 @@ class DemographicTypeController extends Controller
 
         return $this->render('LthrtContactBundle:DemographicType:show.html.twig', [
             'demographictype' => $demographictype,
-            'delete_form' => $deleteForm->createView(),
+            'delete_form'     => $deleteForm->createView(),
         ]);
     }
-
 
     //
     // Edits an existing DemographicType entity.
@@ -159,9 +153,8 @@ class DemographicTypeController extends Controller
 
         return $this->render('LthrtContactBundle:DemographicType:show.html.twig', [
             'demographictype'      => $demographictype,
-            'form' => $form->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'form'                 => $form->createView(),
+            'delete_form'          => $deleteForm->createView(),
         ]);
     }
-
 }

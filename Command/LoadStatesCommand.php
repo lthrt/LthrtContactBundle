@@ -14,11 +14,11 @@
 
 namespace Lthrt\ContactBundle\Command;
 
+use Lthrt\ContactBundle\DataFixtures\StatesLoader;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Lthrt\ContactBundle\DataFixtures\StatesLoader;
 
 /**
  * Generate entity classes from mapping information.
@@ -63,12 +63,12 @@ EOT
         $result    = $loader->loadStates($overwrite);
         if (isset($result['newStates']) && count($result['newStates'])) {
             $inserted = implode(', ', array_keys($result['newStates']));
-            $output->writeln("<info>".$inserted. "</info> added.");
+            $output->writeln("<info>" . $inserted . "</info> added.");
             $output->writeln("");
         }
         if (isset($result['updatedStates']) && count($result['updatedStates'])) {
             $updated = implode(', ', array_keys($result['updatedStates']));
-            $output->writeln("<info>".$updated. "</info> updated.");
+            $output->writeln("<info>" . $updated . "</info> updated.");
         }
     }
 }

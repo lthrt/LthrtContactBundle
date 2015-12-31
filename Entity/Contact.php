@@ -5,9 +5,8 @@ namespace Lthrt\ContactBundle\Entity;
 use Lthrt\EntityJSONBundle\Entity\UnloggedEntity;
 
 /**
- * Contact
+ * Contact.
  */
-
 class Contact extends UnloggedEntity implements \JSONSerializable
 {
     /**
@@ -20,12 +19,10 @@ class Contact extends UnloggedEntity implements \JSONSerializable
      */
     private $contactType;
 
-
-
     /**
-     * Get value
+     * Get value.
      *
-     * @return string 
+     * @return string
      */
     public function getValue()
     {
@@ -33,9 +30,10 @@ class Contact extends UnloggedEntity implements \JSONSerializable
     }
 
     /**
-     * Set value
+     * Set value.
      *
      * @param string $value
+     *
      * @return Contact
      */
     public function setValue($value)
@@ -46,9 +44,10 @@ class Contact extends UnloggedEntity implements \JSONSerializable
     }
 
     /**
-     * Set contactType
+     * Set contactType.
      *
      * @param \Lthrt\ContactBundle\Entity\ContactType $contactType
+     *
      * @return Contact
      */
     public function setContactType(\Lthrt\ContactBundle\Entity\ContactType $contactType = null)
@@ -59,9 +58,9 @@ class Contact extends UnloggedEntity implements \JSONSerializable
     }
 
     /**
-     * Get contactType
+     * Get contactType.
      *
-     * @return \Lthrt\ContactBundle\Entity\ContactType 
+     * @return \Lthrt\ContactBundle\Entity\ContactType
      */
     public function getContactType()
     {
@@ -69,16 +68,15 @@ class Contact extends UnloggedEntity implements \JSONSerializable
     }
 
     /** jsonSerialize
-      *
-      */
+     *
+     */
     public function JSONSerialize()
     {
         return [
-            'class' => 'Lthrt_ContactBundle_Entity_Contact',
-            'id' => $this->id,
-            'value' => $this->value,
-            'contactType' => $this->contactType ? ['class' => 'Lthrt_ContactBundle_Entity_ContactType','id'=>$this->contactType->id,]:'{}',
+            'class'       => 'Lthrt_ContactBundle_Entity_Contact',
+            'id'          => $this->id,
+            'value'       => $this->value,
+            'contactType' => $this->contactType ? ['class' => 'Lthrt_ContactBundle_Entity_ContactType','id' => $this->contactType->id] : '{}',
         ];
     }
-
 }

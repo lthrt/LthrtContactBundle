@@ -2,12 +2,10 @@
 
 namespace Lthrt\ContactBundle\Controller;
 
-
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
-use Symfony\Component\HttpFoundation\Request;
-use Lthrt\ContactBundle\Entity\Person;
 use Lthrt\ContactBundle\Controller\ControllerTrait\PersonFormController;
+use Lthrt\ContactBundle\Entity\Person;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 //
 // Person controller.
@@ -25,7 +23,7 @@ class PersonController extends Controller
     public function createAction(Request $request)
     {
         $person = new Person();
-        $form = $this->createCreateForm($person);
+        $form   = $this->createCreateForm($person);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -38,7 +36,7 @@ class PersonController extends Controller
 
         return $this->render('LthrtContactBundle:Person:new.html.twig', [
             'person' => $person,
-            'form' => $form->createView(),
+            'form'   => $form->createView(),
         ]);
     }
 
@@ -74,16 +72,15 @@ class PersonController extends Controller
             throw $this->createNotFoundException('Unable to find Person entity.');
         }
 
-        $form = $this->createEditForm($person);
+        $form       = $this->createEditForm($person);
         $deleteForm = $this->createDeleteForm($person);
 
         return $this->render('LthrtContactBundle:Person:edit.html.twig', [
-            'person' => $person,
-            'form' => $form->createView(),
+            'person'      => $person,
+            'form'        => $form->createView(),
             'delete_form' => $deleteForm->createView(),
         ]);
     }
-
 
     //
     // Lists all Person entities.
@@ -98,7 +95,6 @@ class PersonController extends Controller
         ]);
     }
 
-
     //
     // Displays a form to create a new Person entity.
     //
@@ -107,13 +103,12 @@ class PersonController extends Controller
     {
         $person = new Person();
         $form   = $this->createCreateForm($person);
-    
+
         return $this->render('LthrtContactBundle:Person:new.html.twig', [
             'person' => $person,
             'form'   => $form->createView(),
         ]);
     }
-
 
     //
     // Finds and displays a Person entity.
@@ -128,11 +123,10 @@ class PersonController extends Controller
         $deleteForm = $this->createDeleteForm($person);
 
         return $this->render('LthrtContactBundle:Person:show.html.twig', [
-            'person' => $person,
+            'person'      => $person,
             'delete_form' => $deleteForm->createView(),
         ]);
     }
-
 
     //
     // Edits an existing Person entity.
@@ -159,9 +153,8 @@ class PersonController extends Controller
 
         return $this->render('LthrtContactBundle:Person:show.html.twig', [
             'person'      => $person,
-            'form' => $form->createView(),
+            'form'        => $form->createView(),
             'delete_form' => $deleteForm->createView(),
         ]);
     }
-
 }

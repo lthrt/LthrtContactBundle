@@ -2,12 +2,10 @@
 
 namespace Lthrt\ContactBundle\Controller;
 
-
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
-use Symfony\Component\HttpFoundation\Request;
-use Lthrt\ContactBundle\Entity\Zip;
 use Lthrt\ContactBundle\Controller\ControllerTrait\ZipFormController;
+use Lthrt\ContactBundle\Entity\Zip;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 //
 // Zip controller.
@@ -24,7 +22,7 @@ class ZipController extends Controller
     //
     public function createAction(Request $request)
     {
-        $zip = new Zip();
+        $zip  = new Zip();
         $form = $this->createCreateForm($zip);
         $form->handleRequest($request);
 
@@ -37,7 +35,7 @@ class ZipController extends Controller
         }
 
         return $this->render('LthrtContactBundle:Zip:new.html.twig', [
-            'zip' => $zip,
+            'zip'  => $zip,
             'form' => $form->createView(),
         ]);
     }
@@ -74,16 +72,15 @@ class ZipController extends Controller
             throw $this->createNotFoundException('Unable to find Zip entity.');
         }
 
-        $form = $this->createEditForm($zip);
+        $form       = $this->createEditForm($zip);
         $deleteForm = $this->createDeleteForm($zip);
 
         return $this->render('LthrtContactBundle:Zip:edit.html.twig', [
-            'zip' => $zip,
-            'form' => $form->createView(),
+            'zip'         => $zip,
+            'form'        => $form->createView(),
             'delete_form' => $deleteForm->createView(),
         ]);
     }
-
 
     //
     // Lists all Zip entities.
@@ -98,22 +95,20 @@ class ZipController extends Controller
         ]);
     }
 
-
     //
     // Displays a form to create a new Zip entity.
     //
     //
     public function newAction(Request $request)
     {
-        $zip = new Zip();
+        $zip    = new Zip();
         $form   = $this->createCreateForm($zip);
-    
+
         return $this->render('LthrtContactBundle:Zip:new.html.twig', [
-            'zip' => $zip,
+            'zip'    => $zip,
             'form'   => $form->createView(),
         ]);
     }
-
 
     //
     // Finds and displays a Zip entity.
@@ -128,11 +123,10 @@ class ZipController extends Controller
         $deleteForm = $this->createDeleteForm($zip);
 
         return $this->render('LthrtContactBundle:Zip:show.html.twig', [
-            'zip' => $zip,
+            'zip'         => $zip,
             'delete_form' => $deleteForm->createView(),
         ]);
     }
-
 
     //
     // Edits an existing Zip entity.
@@ -158,10 +152,9 @@ class ZipController extends Controller
         $deleteForm = $this->createDeleteForm($zip);
 
         return $this->render('LthrtContactBundle:Zip:show.html.twig', [
-            'zip'      => $zip,
-            'form' => $form->createView(),
+            'zip'         => $zip,
+            'form'        => $form->createView(),
             'delete_form' => $deleteForm->createView(),
         ]);
     }
-
 }

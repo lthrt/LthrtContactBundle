@@ -1,0 +1,14 @@
+county_by_state_form:
+    path:     /county/{state}
+    defaults: { _controller: "LthrtContactBundle:CityCountyState:form" }
+    requirements:
+        state: \d*
+
+state_by_county_form:
+    path:     /state/{county}
+    defaults: { _controller: "LthrtContactBundle:CityCountyState:form" }
+    requirements:
+
+city_county_state_form:
+    path:     /
+    defaults: { _controller: "LthrtContactBundle:CityCountyState:form" }

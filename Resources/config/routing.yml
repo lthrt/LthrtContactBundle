@@ -22,9 +22,9 @@ lthrt_contact_county:
     resource: "@LthrtContactBundle/Resources/config/routing/county.yml"
     prefix:   /county
 
-lthrt_contact_county_state:
-    resource: "@LthrtContactBundle/Resources/config/routing/countystate.yml"
-    prefix:   /countystate
+lthrt_contact_city_county_state:
+    resource: "@LthrtContactBundle/Resources/config/routing/citycountystate.yml"
+    prefix:   /ccs
 
 lthrt_contact_demographic:
     resource: "@LthrtContactBundle/Resources/config/routing/demographic.yml"

@@ -1,6 +1,7 @@
 <?php
 
 namespace Lthrt\ContactBundle\Controller\ControllerTrait;
+
 use Lthrt\ContactBundle\Entity\Zip;
 use Lthrt\ContactBundle\Form\ZipType;
 
@@ -11,8 +12,6 @@ use Lthrt\ContactBundle\Form\ZipType;
 
 trait ZipFormController
 {
-
-
     //
     // Creates a form to create a Zip entity.
     //
@@ -45,8 +44,7 @@ trait ZipFormController
             ->setAction($this->generateUrl('zip_delete', [ 'zip' => $zip->getId() ]))
             ->setMethod('DELETE')
             ->add('submit', 'submit', [ 'label' => 'Delete' ])
-            ->getForm()
-        ;
+            ->getForm();
     }
 
     //
@@ -67,5 +65,4 @@ trait ZipFormController
 
         return $form;
     }
-
 }

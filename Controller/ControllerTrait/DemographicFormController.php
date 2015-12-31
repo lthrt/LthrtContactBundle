@@ -1,6 +1,7 @@
 <?php
 
 namespace Lthrt\ContactBundle\Controller\ControllerTrait;
+
 use Lthrt\ContactBundle\Entity\Demographic;
 use Lthrt\ContactBundle\Form\DemographicType;
 
@@ -11,8 +12,6 @@ use Lthrt\ContactBundle\Form\DemographicType;
 
 trait DemographicFormController
 {
-
-
     //
     // Creates a form to create a Demographic entity.
     //
@@ -45,8 +44,7 @@ trait DemographicFormController
             ->setAction($this->generateUrl('demographic_delete', [ 'demographic' => $demographic->getId() ]))
             ->setMethod('DELETE')
             ->add('submit', 'submit', [ 'label' => 'Delete' ])
-            ->getForm()
-        ;
+            ->getForm();
     }
 
     //
@@ -67,5 +65,4 @@ trait DemographicFormController
 
         return $form;
     }
-
 }

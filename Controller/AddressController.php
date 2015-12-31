@@ -2,12 +2,10 @@
 
 namespace Lthrt\ContactBundle\Controller;
 
-
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
-use Symfony\Component\HttpFoundation\Request;
-use Lthrt\ContactBundle\Entity\Address;
 use Lthrt\ContactBundle\Controller\ControllerTrait\AddressFormController;
+use Lthrt\ContactBundle\Entity\Address;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 //
 // Address controller.
@@ -25,7 +23,7 @@ class AddressController extends Controller
     public function createAction(Request $request)
     {
         $address = new Address();
-        $form = $this->createCreateForm($address);
+        $form    = $this->createCreateForm($address);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -38,7 +36,7 @@ class AddressController extends Controller
 
         return $this->render('LthrtContactBundle:Address:new.html.twig', [
             'address' => $address,
-            'form' => $form->createView(),
+            'form'    => $form->createView(),
         ]);
     }
 
@@ -74,16 +72,15 @@ class AddressController extends Controller
             throw $this->createNotFoundException('Unable to find Address entity.');
         }
 
-        $form = $this->createEditForm($address);
+        $form       = $this->createEditForm($address);
         $deleteForm = $this->createDeleteForm($address);
 
         return $this->render('LthrtContactBundle:Address:edit.html.twig', [
-            'address' => $address,
-            'form' => $form->createView(),
+            'address'     => $address,
+            'form'        => $form->createView(),
             'delete_form' => $deleteForm->createView(),
         ]);
     }
-
 
     //
     // Lists all Address entities.
@@ -98,7 +95,6 @@ class AddressController extends Controller
         ]);
     }
 
-
     //
     // Displays a form to create a new Address entity.
     //
@@ -106,14 +102,13 @@ class AddressController extends Controller
     public function newAction(Request $request)
     {
         $address = new Address();
-        $form   = $this->createCreateForm($address);
-    
+        $form    = $this->createCreateForm($address);
+
         return $this->render('LthrtContactBundle:Address:new.html.twig', [
             'address' => $address,
-            'form'   => $form->createView(),
+            'form'    => $form->createView(),
         ]);
     }
-
 
     //
     // Finds and displays a Address entity.
@@ -128,11 +123,10 @@ class AddressController extends Controller
         $deleteForm = $this->createDeleteForm($address);
 
         return $this->render('LthrtContactBundle:Address:show.html.twig', [
-            'address' => $address,
+            'address'     => $address,
             'delete_form' => $deleteForm->createView(),
         ]);
     }
-
 
     //
     // Edits an existing Address entity.
@@ -159,9 +153,8 @@ class AddressController extends Controller
 
         return $this->render('LthrtContactBundle:Address:show.html.twig', [
             'address'      => $address,
-            'form' => $form->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'form'         => $form->createView(),
+            'delete_form'  => $deleteForm->createView(),
         ]);
     }
-
 }
