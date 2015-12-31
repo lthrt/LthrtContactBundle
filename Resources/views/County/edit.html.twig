@@ -1,0 +1,14 @@
+{% extends 'LthrtContactBundle:County:county.html.twig' %}
+
+{% block body -%}
+    <h1>County Edit</h1>
+    {% include 'LthrtContactBundle:County:form.html.twig' %}
+    <ul class="record_actions">
+    <li>
+        <a href="{{ path('county') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock body %}

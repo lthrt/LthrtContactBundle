@@ -1,7 +1,6 @@
 <?php
 
 namespace Lthrt\ContactBundle\Controller\ControllerTrait;
-
 use Lthrt\ContactBundle\Entity\AddressType;
 use Lthrt\ContactBundle\Form\AddressTypeType;
 
@@ -12,6 +11,8 @@ use Lthrt\ContactBundle\Form\AddressTypeType;
 
 trait AddressTypeFormController
 {
+
+
     //
     // Creates a form to create a AddressType entity.
     //
@@ -44,7 +45,8 @@ trait AddressTypeFormController
             ->setAction($this->generateUrl('addresstype_delete', [ 'addresstype' => $addresstype->getId() ]))
             ->setMethod('DELETE')
             ->add('submit', 'submit', [ 'label' => 'Delete' ])
-            ->getForm();
+            ->getForm()
+        ;
     }
 
     //
@@ -56,12 +58,8 @@ trait AddressTypeFormController
     //
     private function createEditForm(AddressType $addresstype)
     {
-        str_replace('\\', '_', get_class(new AddressType()));
         $form = $this->createForm(new AddressTypeType(), $addresstype, [
-            'action'    => $this->generateUrl('entity_mod', [
-                'class' => str_replace('\\', '_', get_class(new AddressType())),
-                'id'    => $addresstype->getId(),
-            ]),
+            'action' => $this->generateUrl('addresstype_update', [ 'addresstype' => $addresstype->getId() ]),
             'method' => 'PUT',
         ]);
 
@@ -69,4 +67,5 @@ trait AddressTypeFormController
 
         return $form;
     }
+
 }

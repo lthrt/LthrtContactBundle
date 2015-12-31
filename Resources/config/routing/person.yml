@@ -2,12 +2,6 @@ person:
     path:     /
     defaults: { _controller: "LthrtContactBundle:Person:index" }
 
-person_clone:
-    path:     /clone/{person}
-    defaults: { _controller: "LthrtContactBundle:Person:clone" }
-    requirements:
-        person: \d+
-
 person_create:
     path:     /create
     defaults: { _controller: "LthrtContactBundle:Person:create" }

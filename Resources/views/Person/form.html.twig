@@ -1,0 +1,11 @@
+{% block body -%}
+    <h1>Person Edit</h1>
+    {{ form_start(form) }}
+    {{ form_row(form.firstName) }}
+    {{ form_row(form.lastName) }}
+    {{ form_row(form.dob) }}
+    {{ form_row(form.contact) }}
+    {{ form_row(form.demographic) }}
+    {{ form_row(form.address) }}
+    {{ form_rest(form) }}
+    {{ form_end(form) }}

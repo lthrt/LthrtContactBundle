@@ -2,13 +2,7 @@
 
 {% block body -%}
     <h1>City Create</h1>
-
-    {{ form_start(form) }}
-    {{ form_row(form.name) }}
-    {{ form_row(form.state) }}
-    {{ form_rest(form) }}
-    {{ form_end(form) }}
-
+    {% include 'LthrtContactBundle:City:form.html.twig' %}
         <ul class="record_actions">
     <li>
         <a href="{{ path('city') }}">
@@ -16,4 +10,4 @@
         </a>
     </li>
 </ul>
-{% endblock %}
+{% endblock body %}

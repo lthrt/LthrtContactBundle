@@ -17,10 +17,6 @@
                 <th>Dob</th>
                 <td>{{ person.dob|date('Y-m-d H:i:s') }}</td>
             </tr>
-            <tr>
-                <th>Log</th>
-                <td>{{ person.log | json_pretty | raw }}</td>
-            </tr>
         </tbody>
     </table>
 
@@ -37,4 +33,4 @@
     </li>
     <li>{{ form(delete_form) }}</li>
 </ul>
-{% endblock %}
+{% endblock body %}

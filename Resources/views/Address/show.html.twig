@@ -14,8 +14,8 @@
                 <td>{{ address.line2 }}</td>
             </tr>
             <tr>
-                <th>Zip</th>
-                <td>{{ address.zip }}</td>
+                <th>Zipext</th>
+                <td>{{ address.zipExt }}</td>
             </tr>
         </tbody>
     </table>
@@ -33,5 +33,4 @@
     </li>
     <li>{{ form(delete_form) }}</li>
 </ul>
-{{address | json_encode | json_pretty | raw}}
-{% endblock %}
+{% endblock body %}

@@ -2,13 +2,7 @@
 
 {% block body -%}
     <h1>Demographic Create</h1>
-
-    {{ form_start(form) }}
-    {{ form_row(form.value) }}
-    {{ form_row(form.demographicType) }}
-    {{ form_rest(form) }}
-    {{ form_end(form) }}
-
+    {% include 'LthrtContactBundle:Demographic:form.html.twig' %}
         <ul class="record_actions">
     <li>
         <a href="{{ path('demographic') }}">
@@ -16,4 +10,4 @@
         </a>
     </li>
 </ul>
-{% endblock %}
+{% endblock body %}

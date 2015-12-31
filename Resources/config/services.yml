@@ -1,4 +1,22 @@
-services:
+# services:
 #    lthrt_generator.example:
-#        class: Lthrt\GeneratorBundle\Example
+#        class: Lthrt\ContactBundle\Example
 #        arguments: [@service_id, "plain_value", %parameter%]
+services:
+    contact.city.atom:
+        class: Lthrt\ContactBundle\Form\Atom\CityAtom
+        arguments: [@doctrine.orm.entity_manager, @security.token_storage]
+        tags:
+            - { name: form.type, alias: city }
+
+    contact.county.atom:
+        class: Lthrt\ContactBundle\Form\Atom\CountyAtom
+        arguments: [@doctrine.orm.entity_manager, @security.token_storage]
+        tags:
+            - { name: form.type, alias: county }
+
+    contact.state.atom:
+        class: Lthrt\ContactBundle\Form\Atom\StateAtom
+        arguments: [@doctrine.orm.entity_manager, @security.token_storage]
+        tags:
+            - { name: form.type, alias: state }

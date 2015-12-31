@@ -2,10 +2,12 @@
 
 namespace Lthrt\ContactBundle\Controller;
 
-use Lthrt\ContactBundle\Controller\ControllerTrait\ContactFormController;
-use Lthrt\ContactBundle\Entity\Contact;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
 use Symfony\Component\HttpFoundation\Request;
+use Lthrt\ContactBundle\Entity\Contact;
+use Lthrt\ContactBundle\Controller\ControllerTrait\ContactFormController;
 
 //
 // Contact controller.
@@ -23,7 +25,7 @@ class ContactController extends Controller
     public function createAction(Request $request)
     {
         $contact = new Contact();
-        $form    = $this->createCreateForm($contact);
+        $form = $this->createCreateForm($contact);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -36,7 +38,7 @@ class ContactController extends Controller
 
         return $this->render('LthrtContactBundle:Contact:new.html.twig', [
             'contact' => $contact,
-            'form'    => $form->createView(),
+            'form' => $form->createView(),
         ]);
     }
 
@@ -72,15 +74,16 @@ class ContactController extends Controller
             throw $this->createNotFoundException('Unable to find Contact entity.');
         }
 
-        $form       = $this->createEditForm($contact);
+        $form = $this->createEditForm($contact);
         $deleteForm = $this->createDeleteForm($contact);
 
         return $this->render('LthrtContactBundle:Contact:edit.html.twig', [
-            'contact'     => $contact,
-            'form'        => $form->createView(),
+            'contact' => $contact,
+            'form' => $form->createView(),
             'delete_form' => $deleteForm->createView(),
         ]);
     }
+
 
     //
     // Lists all Contact entities.
@@ -95,6 +98,7 @@ class ContactController extends Controller
         ]);
     }
 
+
     //
     // Displays a form to create a new Contact entity.
     //
@@ -102,13 +106,14 @@ class ContactController extends Controller
     public function newAction(Request $request)
     {
         $contact = new Contact();
-        $form    = $this->createCreateForm($contact);
-
+        $form   = $this->createCreateForm($contact);
+    
         return $this->render('LthrtContactBundle:Contact:new.html.twig', [
             'contact' => $contact,
-            'form'    => $form->createView(),
+            'form'   => $form->createView(),
         ]);
     }
+
 
     //
     // Finds and displays a Contact entity.
@@ -123,10 +128,11 @@ class ContactController extends Controller
         $deleteForm = $this->createDeleteForm($contact);
 
         return $this->render('LthrtContactBundle:Contact:show.html.twig', [
-            'contact'     => $contact,
+            'contact' => $contact,
             'delete_form' => $deleteForm->createView(),
         ]);
     }
+
 
     //
     // Edits an existing Contact entity.
@@ -142,7 +148,9 @@ class ContactController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager()->flush();
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($contact);
+            $em->flush();
 
             return $this->redirect($this->generateUrl('contact_show', [ 'contact' => $contact->getId() ]));
         }
@@ -151,8 +159,9 @@ class ContactController extends Controller
 
         return $this->render('LthrtContactBundle:Contact:show.html.twig', [
             'contact'      => $contact,
-            'form'         => $form->createView(),
-            'delete_form'  => $deleteForm->createView(),
+            'form' => $form->createView(),
+            'delete_form' => $deleteForm->createView(),
         ]);
     }
+
 }

@@ -2,10 +2,12 @@
 
 namespace Lthrt\ContactBundle\Controller;
 
-use Lthrt\ContactBundle\Controller\ControllerTrait\AddressTypeFormController;
-use Lthrt\ContactBundle\Entity\AddressType;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
 use Symfony\Component\HttpFoundation\Request;
+use Lthrt\ContactBundle\Entity\AddressType;
+use Lthrt\ContactBundle\Controller\ControllerTrait\AddressTypeFormController;
 
 //
 // AddressType controller.
@@ -16,14 +18,6 @@ class AddressTypeController extends Controller
 {
     use AddressTypeFormController;
 
-    public function cloneAction(Request $request, AddressType $addresstype)
-    {
-        return $this->render('LthrtContactBundle:AddressType:clone.html.twig', [
-            'entity' => $addresstype,
-            'class'  => str_replace('\\', '_', get_class($addresstype)),
-        ]);
-    }
-
     //
     // Creates a new AddressType entity.
     //
@@ -31,7 +25,7 @@ class AddressTypeController extends Controller
     public function createAction(Request $request)
     {
         $addresstype = new AddressType();
-        $form        = $this->createCreateForm($addresstype);
+        $form = $this->createCreateForm($addresstype);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -44,7 +38,7 @@ class AddressTypeController extends Controller
 
         return $this->render('LthrtContactBundle:AddressType:new.html.twig', [
             'addresstype' => $addresstype,
-            'form'        => $form->createView(),
+            'form' => $form->createView(),
         ]);
     }
 
@@ -80,15 +74,16 @@ class AddressTypeController extends Controller
             throw $this->createNotFoundException('Unable to find AddressType entity.');
         }
 
-        $form       = $this->createEditForm($addresstype);
+        $form = $this->createEditForm($addresstype);
         $deleteForm = $this->createDeleteForm($addresstype);
 
         return $this->render('LthrtContactBundle:AddressType:edit.html.twig', [
             'addresstype' => $addresstype,
-            'form'        => $form->createView(),
+            'form' => $form->createView(),
             'delete_form' => $deleteForm->createView(),
         ]);
     }
+
 
     //
     // Lists all AddressType entities.
@@ -103,6 +98,7 @@ class AddressTypeController extends Controller
         ]);
     }
 
+
     //
     // Displays a form to create a new AddressType entity.
     //
@@ -110,13 +106,14 @@ class AddressTypeController extends Controller
     public function newAction(Request $request)
     {
         $addresstype = new AddressType();
-        $form        = $this->createCreateForm($addresstype);
-
+        $form   = $this->createCreateForm($addresstype);
+    
         return $this->render('LthrtContactBundle:AddressType:new.html.twig', [
             'addresstype' => $addresstype,
-            'form'        => $form->createView(),
+            'form'   => $form->createView(),
         ]);
     }
+
 
     //
     // Finds and displays a AddressType entity.
@@ -133,9 +130,9 @@ class AddressTypeController extends Controller
         return $this->render('LthrtContactBundle:AddressType:show.html.twig', [
             'addresstype' => $addresstype,
             'delete_form' => $deleteForm->createView(),
-            'json'        => json_encode($addresstype),
         ]);
     }
+
 
     //
     // Edits an existing AddressType entity.
@@ -151,7 +148,9 @@ class AddressTypeController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager()->flush();
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($addresstype);
+            $em->flush();
 
             return $this->redirect($this->generateUrl('addresstype_show', [ 'addresstype' => $addresstype->getId() ]));
         }
@@ -160,8 +159,9 @@ class AddressTypeController extends Controller
 
         return $this->render('LthrtContactBundle:AddressType:show.html.twig', [
             'addresstype'      => $addresstype,
-            'form'             => $form->createView(),
-            'delete_form'      => $deleteForm->createView(),
+            'form' => $form->createView(),
+            'delete_form' => $deleteForm->createView(),
         ]);
     }
+
 }

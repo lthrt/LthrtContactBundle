@@ -2,17 +2,7 @@
 
 {% block body -%}
     <h1>Address Create</h1>
-
-    {{ form_start(form) }}
-    {{ form_row(form.line) }}
-    {{ form_row(form.line2) }}
-    {{ form_row(form.zip) }}
-    {{ form_row(form.addressType) }}
-    {{ form_row(form.city) }}
-    {{ form_row(form.state) }}
-    {{ form_rest(form) }}
-    {{ form_end(form) }}
-
+    {% include 'LthrtContactBundle:Address:form.html.twig' %}
         <ul class="record_actions">
     <li>
         <a href="{{ path('address') }}">
@@ -20,4 +10,4 @@
         </a>
     </li>
 </ul>
-{% endblock %}
+{% endblock body %}

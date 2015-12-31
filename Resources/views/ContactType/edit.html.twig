@@ -2,11 +2,7 @@
 
 {% block body -%}
     <h1>ContactType Edit</h1>
-    {{ form_start(form) }}
-    {{ form_row(form.name) }}
-    {{ form_rest(form) }}
-    {{ form_end(form) }}
-
+    {% include 'LthrtContactBundle:ContactType:form.html.twig' %}
     <ul class="record_actions">
     <li>
         <a href="{{ path('contacttype') }}">
@@ -15,4 +11,4 @@
     </li>
     <li>{{ form(delete_form) }}</li>
 </ul>
-{% endblock %}
+{% endblock body %}
