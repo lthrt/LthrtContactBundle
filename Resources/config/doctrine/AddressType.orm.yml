@@ -1,4 +1,7 @@
 Lthrt\ContactBundle\Entity\AddressType:
+
+    # eg work, home
+
     type: entity
     table: address_type
     repositoryClass: Lthrt\ContactBundle\Repository\AddressTypeRepository

@@ -1,4 +1,7 @@
 Lthrt\ContactBundle\Entity\DemographicType:
+
+    # eg race, ethnicity, gender
+
     type: entity
     table: demographic_type
     repositoryClass: Lthrt\ContactBundle\Repository\DemographicTypeRepository
