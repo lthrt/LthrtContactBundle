@@ -2,74 +2,116 @@
 
 {# Change state then...  #}
 <script>
-var state = $('#lthrt_contactbundle_citycountystate_state');
-state.change(function() {
-    var form = $(this).closest('form');
-    var data = {};
-    data['state'] = parseInt(state.val());
-    $.ajax({
-        url : form.attr('action'),
-        type: form.attr('method'),
-        data : data,
-        success: function(html) {
-            $('#lthrt_contactbundle_citycountystate_county').replaceWith(
-                $(html).find('#lthrt_contactbundle_citycountystate_county')
-            );
-            $('#lthrt_contactbundle_citycountystate_city').replaceWith(
-                $(html).find('#lthrt_contactbundle_citycountystate_city')
-            );
-        }
-    });
-});
-</script>
+function wire(){
 
-
-{# Change county then...  #}
-<script>
-var county = $('#lthrt_contactbundle_citycountystate_county');
-county.change(function() {
-    var form = $(this).closest('form');
-    console.log('county');
     var data = {};
-    data['county'] = county.val();
-    console.log(data);
-    $.ajax({
-        url : form.attr('action'),
-        type: form.attr('method'),
-        data : data,
-        success: function(html) {
-            $('#lthrt_contactbundle_citycountystate_city').replaceWith(
-                $(html).find('#lthrt_contactbundle_citycountystate_city')
-            );
-            $('#lthrt_contactbundle_citycountystate_state').replaceWith(
-                $(html).find('#lthrt_contactbundle_citycountystate_state')
-            );
-        }
-    });
-});
-</script>
+    var city   = $('#lthrt_contactbundle_citycountystate_city');
+    var county = $('#lthrt_contactbundle_citycountystate_county');
+    var state  = $('#lthrt_contactbundle_citycountystate_state');
 
-{# Change city then...  #}
-<script>
-var city = $('#lthrt_contactbundle_citycountystate_city');
-city.change(function() {
-    var form = $(this).closest('form');
-    console.log('county');
-    var data = {};
-    data['county'] = city.val();
-    console.log(data);
-    $.ajax({
-        url : form.attr('action'),
-        type: form.attr('method'),
-        data : data,
-        success: function(html) {
-            $('#lthrt_contactbundle_citycountystate_county').replaceWith(
-                $(html).find('#lthrt_contactbundle_citycountystate_county')
-            );
-            $('form[name="lthrt_contactbundle_citycountystate_state"]').replaceWith(
-                $(html).find('form[name="lthrt_contactbundle_citycountystate_state"]')
-            );
-        }
+    console.log('wiring');
+    console.log(city);
+    city.off("change");
+    city.on("change",function() {
+        data['city'] = city?city.val():'';
+        data['county'] = county?county.val():'';
+        data['state'] = state?state.val():'';
+        console.log('city');
+        console.log(data);
+        var form = $(this).closest('form');
+        $.ajax({
+            url : form.attr('action'),
+            type: form.attr('method'),
+            data : data,
+            success: function(html) {
+                if (county.val()) {
+                } else {
+                    $('#lthrt_contactbundle_citycountystate_county').replaceWith(
+                        $(html).find('#lthrt_contactbundle_citycountystate_county')
+                    );
+                }
+
+                if (state.val()) {
+                } else {
+                    $('#lthrt_contactbundle_citycountystate_state').replaceWith(
+                        $(html).find('#lthrt_contactbundle_citycountystate_state')
+                    );
+                }
+            },
+            complete: function(jqXHR, status) {
+                wire();
+            }
+        });
     });
-});
+
+    county.off("change");
+    county.on("change",function() {
+        data['city'] = city?city.val():'';
+        data['county'] = county?county.val():'';
+        data['state'] = state?state.val():'';
+        console.log('county');
+        console.log(data);
+        var form = $(this).closest('form');
+        $.ajax({
+            url : form.attr('action'),
+            type: form.attr('method'),
+            data : data,
+            success: function(html) {
+                if (city.val()) {
+                } else {
+                    $('#lthrt_contactbundle_citycountystate_city').replaceWith(
+                        $(html).find('#lthrt_contactbundle_citycountystate_city')
+                    );
+                }
+
+                if (state.val()) {
+                } else {
+                    $('#lthrt_contactbundle_citycountystate_state').replaceWith(
+                        $(html).find('#lthrt_contactbundle_citycountystate_state')
+                    );
+                }
+
+            },
+            complete: function(jqXHR, status) {
+                wire();
+            }
+        });
+    });
+
+    state.off("change");
+    state.on("change",function() {
+        data['city'] = city?city.val():'';
+        data['county'] = county?county.val():'';
+        data['state'] = state?state.val():'';
+        console.log('state');
+        console.log(data);
+        var form = $(this).closest('form');
+        $.ajax({
+            url : form.attr('action'),
+            type: form.attr('method'),
+            data : data,
+            success: function(html) {
+                if (city.val()) {
+                } else {
+                    $('#lthrt_contactbundle_citycountystate_city').replaceWith(
+                        $(html).find('#lthrt_contactbundle_citycountystate_city')
+                    );
+                }
+
+                if (county.val()) {
+                } else {
+                    $('#lthrt_contactbundle_citycountystate_county').replaceWith(
+                        $(html).find('#lthrt_contactbundle_citycountystate_county')
+                    );
+                }
+            },
+            complete: function(jqXHR, status) {
+                wire();
+            }
+        });
+    });
+}
+
+wire();
+
 </script>

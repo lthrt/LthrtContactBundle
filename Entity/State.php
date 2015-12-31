@@ -136,6 +136,8 @@ class State extends UnloggedEntity implements \JSONSerializable
         } else {
             $this->zip[] = $zip;
         }
+        $zip->addState($this);
+
 
         return $this;
     }

@@ -99,6 +99,8 @@ class City extends UnloggedEntity implements \JSONSerializable
         } else {
             $this->zip[] = $zip;
         }
+        $zip->addCity($this);
+
 
         return $this;
     }
@@ -136,6 +138,8 @@ class City extends UnloggedEntity implements \JSONSerializable
         } else {
             $this->county[] = $county;
         }
+
+        $county->addCity($this);
 
         return $this;
     }

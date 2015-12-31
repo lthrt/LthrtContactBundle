@@ -10,11 +10,10 @@ trait AddCityTrait
         $cities = $this->options['state']
                     ? $this->cityRep->findByStateAbbr($this->options['state']->getAbbr())
                     : (
-                        $this->options['city']
-                        ? $this->cityRep->findByCounty($this->options['city'])
+                        $this->options['county']
+                        ? $this->cityRep->findByCounty($this->options['county'])
                         : $this->cityRep->findNames()
                     );
-
         $cities = $cities->getQuery()->getResult();
         // Doctrine returns an array of array for select
         // so transform to choice list

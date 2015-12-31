@@ -13,6 +13,8 @@ class ZipLoader extends StatesLoader
     use ZipsTrait;
     use StatesTrait;
 
+    private $output;
+
     // because of length, source array at end of class
 
     public function __construct($em)
@@ -129,11 +131,12 @@ class ZipLoader extends StatesLoader
             $county->setState($state);
 
             $this->em->persist($county);
-            $this->em->flush($county);
             $this->em->persist($city);
-            $this->em->flush($city);
             $this->em->persist($zip);
+            $this->em->flush($county);
+            $this->em->flush($city);
             $this->em->flush($zip);
+
         }
 
         return $result;

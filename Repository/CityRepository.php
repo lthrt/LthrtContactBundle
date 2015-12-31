@@ -16,14 +16,15 @@ class CityRepository extends \Doctrine\ORM\EntityRepository
 
     const ROOT = 'city';
 
-    public function findByCounty($abbr)
+    public function findByCounty($name)
     {
         $qb = $this->findNames();
-        $qb->join(self::ROOT . '.state', StateRepository::ROOT);
         $qb->join(self::ROOT . '.county', CountyRepository::ROOT);
         $qb->andWhere($qb->expr()->eq(CountyRepository::ROOT . '.name', ':name'));
         $qb->setParameter('name', $name);
-
+var_dump($name);
+var_dump($qb->getQuery()->getSql());
+die;
         return $qb;
     }
 
