@@ -31,14 +31,13 @@ class CityAtom extends AbstractType
                 'class'       => 'LthrtContactBundle:City',
                 'label'       => 'City',
                 'placeholder' => '',
-                'property'    => 'name',
             ]
         );
     }
 
     public function getParent()
     {
-        return 'entity';
+        return 'choice';
     }
 
     /**

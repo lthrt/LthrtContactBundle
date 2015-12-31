@@ -48,7 +48,7 @@ class CityCountyStateController extends Controller
 
         $options['action'] = $this->generateUrl('city_county_state_form');
 
-        $form = $this->createCountyStateForm($options);
+        $form = $this->createCityCountyStateForm($options);
 
         $form->handleRequest($request);
 

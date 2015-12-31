@@ -16,12 +16,13 @@ class CityRepository extends \Doctrine\ORM\EntityRepository
 
     const ROOT = 'city';
 
-    public function findNames()
+    public function findByCounty($abbr)
     {
-        $qb = $this->qb();
-        $qb->orderBy(self::ROOT . '.name');
-        $qb->select(self::ROOT . '.name');
-        $qb->distinct();
+        $qb = $this->findNames();
+        $qb->join(self::ROOT . '.state', StateRepository::ROOT);
+        $qb->join(self::ROOT . '.county', CountyRepository::ROOT);
+        $qb->andWhere($qb->expr()->eq(CountyRepository::ROOT . '.name', ':name'));
+        $qb->setParameter('name', $name);
 
         return $qb;
     }
@@ -32,6 +33,16 @@ class CityRepository extends \Doctrine\ORM\EntityRepository
         $qb->join(self::ROOT . '.state', StateRepository::ROOT);
         $qb->andWhere($qb->expr()->eq(StateRepository::ROOT . '.abbr', ':abbr'));
         $qb->setParameter('abbr', $abbr);
+
+        return $qb;
+    }
+
+    public function findNames()
+    {
+        $qb = $this->qb();
+        $qb->orderBy(self::ROOT . '.name');
+        $qb->select(self::ROOT . '.name');
+        $qb->distinct();
 
         return $qb;
     }
