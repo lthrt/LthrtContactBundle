@@ -1,5 +1,3 @@
-{% extends 'LthrtContactBundle:County:county.html.twig' %}
-
 {% block body -%}
     <h1>County State Form</h1>
     {{ form_start(form) }}
@@ -8,35 +6,6 @@
     {{ form_rest(form) }}
     {{ form_end(form) }}
 
-<script src="/eval/bundles/lthrtschemavisualizer/js/jquery.min.js"></script>
-
-<script>
-var state = $('#lthrt_contactbundle_countystate_state');
-// When sport gets selected ...
-state.change(function() {
-  // ... retrieve the corresponding form.
-  var form = $(this).closest('form');
-  // Simulate form data, but only include the selected sport value.
-  var data = {};
-  data['state'] = parseInt(state.val());
-  console.log(data);
-  console.log(form.attr('action'));
-  // Submit data via AJAX to the form's action path.
-  $.ajax({
-    url : form.attr('action'),
-    type: form.attr('method'),
-    data : data,
-    success: function(html) {
-        console.log($(html).find('#lthrt_contactbundle_countystate_county'));
-      // Replace current position field ...
-      $('#lthrt_contactbundle_countystate_county').replaceWith(
-        // ... with the returned one from the AJAX response.
-        $(html).find('#lthrt_contactbundle_countystate_county')
-      );
-      // Position field now displays the appropriate positions.
-    }
-  });
-});
-</script>
+{% include 'LthrtContactBundle:County:county.html.twig' %}
 
 {% endblock body %}
