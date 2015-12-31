@@ -15,7 +15,7 @@ class StateRepository extends \Doctrine\ORM\EntityRepository
 {
     use ContactBundleRepository;
 
-    const ROOT = 'county';
+    const ROOT = 'state';
 
     public function findAll(){
         $qb = $this->qb('abbr');
