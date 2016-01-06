@@ -16,26 +16,41 @@ class CityRepository extends \Doctrine\ORM\EntityRepository
 
     const ROOT = 'city';
 
-    public function findByCounty($name)
+    public function findByCountyName($name)
     {
+        return $this->findByCountyAndOrState(['county'=> $name]);
+    }
+
+    public function findByCountyAndOrState($options)
+    {
+        $options = array_merge(
+            [
+                'county' => null,
+                'state'  => null,
+            ],
+            $options
+        );
+
         $qb = $this->findNames();
-        $qb->join(self::ROOT . '.county', CountyRepository::ROOT);
-        $qb->andWhere($qb->expr()->eq(CountyRepository::ROOT . '.name', ':name'));
-        $qb->setParameter('name', $name);
-var_dump($name);
-var_dump($qb->getQuery()->getSql());
-die;
+
+        if ($options['county']) {
+            $qb->join(self::ROOT . '.county', CountyRepository::ROOT);
+            $qb->andWhere($qb->expr()->eq(CountyRepository::ROOT . '.name', ':county'));
+            $qb->setParameter('county', $options['county']);
+        }
+
+        if ($options['state']) {
+            $qb->join(self::ROOT . '.state', StateRepository::ROOT);
+            $qb->andWhere($qb->expr()->eq(StateRepository::ROOT . '.abbr', ':state'));
+            $qb->setParameter('state', $options['state']);
+        }
+
         return $qb;
     }
 
     public function findByStateAbbr($abbr)
     {
-        $qb = $this->findNames();
-        $qb->join(self::ROOT . '.state', StateRepository::ROOT);
-        $qb->andWhere($qb->expr()->eq(StateRepository::ROOT . '.abbr', ':abbr'));
-        $qb->setParameter('abbr', $abbr);
-
-        return $qb;
+        return $this->findByCountyAndOrState(['state'=> $abbr]);
     }
 
     public function findNames()

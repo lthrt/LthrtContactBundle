@@ -17,6 +17,10 @@ Lthrt\ContactBundle\Entity\State:
             nullable: true
 
     oneToMany:
+        city:
+            targetEntity: City
+            mappedBy: state
+
         county:
             targetEntity: County
             mappedBy: state

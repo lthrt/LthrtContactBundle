@@ -22,6 +22,11 @@ class State extends UnloggedEntity implements \JSONSerializable
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
+    private $city;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
     private $county;
 
     /**
@@ -34,6 +39,7 @@ class State extends UnloggedEntity implements \JSONSerializable
      */
     public function __construct()
     {
+        $this->city   = new \Doctrine\Common\Collections\ArrayCollection();
         $this->county = new \Doctrine\Common\Collections\ArrayCollection();
         $this->zip    = new \Doctrine\Common\Collections\ArrayCollection();
     }
@@ -85,6 +91,44 @@ class State extends UnloggedEntity implements \JSONSerializable
 
         return $this;
     }
+
+    /**
+     * Add city.
+     *
+     * @param \Lthrt\ContactBundle\Entity\City $city
+     *
+     * @return State
+     */
+    public function addCity(\Lthrt\ContactBundle\Entity\City $city)
+    {
+        if ($this->city->contains($city)) {
+        } else {
+            $this->city[] = $city;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Remove city.
+     *
+     * @param \Lthrt\ContactBundle\Entity\City $city
+     */
+    public function removeCity(\Lthrt\ContactBundle\Entity\City $city)
+    {
+        $this->city->removeElement($city);
+    }
+
+    /**
+     * Get city.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
 
     /**
      * Add county.

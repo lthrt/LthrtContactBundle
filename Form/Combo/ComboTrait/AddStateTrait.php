@@ -10,13 +10,9 @@ trait AddStateTrait
         $formOrBuilder->add('state', 'state',
             [
                 'data'          => $this->options['state'],
-                'query_builder' => $this->options['county']
-                                    ? $this->stateRep->findByCounty($this->options['county'])
-                                    : (
-                                        $this->options['city']
-                                        ? $this->stateRep->findByCity($this->options['city'])
-                                        : $this->stateRep->findAll()
-                                    ),
+                'query_builder' => ($this->options['county'] || $this->options['city'])
+                                    ? $this->stateRep->findByCityAndOrCounty($this->options)
+                                    : $this->stateRep->findAll(),
             ]
         );
     }

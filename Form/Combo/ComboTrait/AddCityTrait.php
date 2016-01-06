@@ -7,13 +7,9 @@ trait AddCityTrait
 {
     private function addCity($formOrBuilder)
     {
-        $cities = $this->options['state']
-                    ? $this->cityRep->findByStateAbbr($this->options['state']->getAbbr())
-                    : (
-                        $this->options['county']
-                        ? $this->cityRep->findByCounty($this->options['county'])
-                        : $this->cityRep->findNames()
-                    );
+        $cities = ( $this->options['state'] || $this->options['county'] )
+                    ? $this->cityRep->findByCountyAndOrState($this->options)
+                    : $this->cityRep->findNames();
         $cities = $cities->getQuery()->getResult();
         // Doctrine returns an array of array for select
         // so transform to choice list
@@ -24,7 +20,7 @@ trait AddCityTrait
 
         $formOrBuilder->add('city', 'city',
             [
-                'data'              => $this->options['city'] ? $this->options['city'] : '',
+                'data'              => $this->options['city'] ? $this->options['city'] : 0,
                 'choices'           => $cities,
                 'choices_as_values' => true,
             ]

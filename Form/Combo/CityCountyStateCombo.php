@@ -12,7 +12,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CityCountyStateType extends AbstractType
+class CityCountyStateCombo extends AbstractType
 {
     use AddCityTrait;
     use AddCountyTrait;

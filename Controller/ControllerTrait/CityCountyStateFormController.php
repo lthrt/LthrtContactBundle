@@ -4,7 +4,7 @@ namespace Lthrt\ContactBundle\Controller\ControllerTrait;
 
 use Lthrt\ContactBundle\Entity\County;
 use Lthrt\ContactBundle\Entity\State;
-use Lthrt\ContactBundle\Form\Combo\CityCountyStateType;
+use Lthrt\ContactBundle\Form\Combo\CityCountyStateCombo;
 
 //
 // CountyFormController Trait.
@@ -76,7 +76,7 @@ trait CityCountyStateFormController
     public function createFinalForm($options)
     {
         $form = $this->createForm(
-            new CityCountyStateType($this->getDoctrine()->getManager(), $options),
+            new CityCountyStateCombo($this->getDoctrine()->getManager(), $options),
              null,
             [
                 'method' => 'POST',

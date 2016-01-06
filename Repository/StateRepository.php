@@ -24,19 +24,41 @@ class StateRepository extends \Doctrine\ORM\EntityRepository
 
     public function findByCity($name)
     {
-        $cityRep = $this->getEntityManager()->getRepository('LthrtContactBundle:City');
-        $qb      = $this->findAll();
-//much work to do where
+        return $this->findByCityAndOrCounty(['city'=> $name]);
+    }
+
+    public function findByCityAndOrCounty($options)
+    {
+        $options = array_merge(
+            [
+                'city'   => null,
+                'county' => null,
+            ],
+            $options
+        );
+
+        $qb = $this->findAll();
+
+        if ($options['city']) {
+            $qb->join(self::ROOT . '.city', CityRepository::ROOT);
+            $qb->andWhere($qb->expr()->eq(CityRepository::ROOT . '.name', ':city'));
+            $qb->setParameter('city', $options['city']);
+        }
+
+        if ($options['county']) {
+            $qb->join(self::ROOT . '.county', CountyRepository::ROOT);
+            $qb->andWhere($qb->expr()->eq(CountyRepository::ROOT . '.name', ':county'));
+            $qb->setParameter('county', $options['county']);
+        }
+
         return $qb;
     }
 
     public function findByCounty($name)
     {
-        $qb = $this->findAll();
-        $qb->join(self::ROOT . '.county', CountyRepository::ROOT);
-        $qb->andWhere($qb->expr()->eq(CountyRepository::ROOT . '.name', ':name'));
-        $qb->setParameter('name', $name);
-
-        return $qb;
+        return $this->findByCityAndOrCounty(['county'=> $name]);
     }
+
+
+
 }

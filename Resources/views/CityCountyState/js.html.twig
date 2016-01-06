@@ -2,114 +2,59 @@
 
 {# Change state then...  #}
 <script>
-function wire(){
+
+function wire() {
 
     var data = {};
     var city   = $('#lthrt_contactbundle_citycountystate_city');
     var county = $('#lthrt_contactbundle_citycountystate_county');
     var state  = $('#lthrt_contactbundle_citycountystate_state');
 
-    console.log('wiring');
-    console.log(city);
-    city.off("change");
-    city.on("change",function() {
-        data['city'] = city?city.val():'';
-        data['county'] = county?county.val():'';
-        data['state'] = state?state.val():'';
-        console.log('city');
-        console.log(data);
-        var form = $(this).closest('form');
-        $.ajax({
-            url : form.attr('action'),
-            type: form.attr('method'),
-            data : data,
-            success: function(html) {
-                if (county.val()) {
-                } else {
-                    $('#lthrt_contactbundle_citycountystate_county').replaceWith(
-                        $(html).find('#lthrt_contactbundle_citycountystate_county')
-                    );
-                }
+    var items = [ city, county, state ];
+    var others = [];
 
-                if (state.val()) {
-                } else {
-                    $('#lthrt_contactbundle_citycountystate_state').replaceWith(
-                        $(html).find('#lthrt_contactbundle_citycountystate_state')
-                    );
-                }
-            },
-            complete: function(jqXHR, status) {
-                wire();
-            }
-        });
-    });
+    $.each(items,
+        function(index, item) {
+            others[item.selector] = items.filter(function(other) {
+                return other.selector != item.selector;
+            });
 
-    county.off("change");
-    county.on("change",function() {
-        data['city'] = city?city.val():'';
-        data['county'] = county?county.val():'';
-        data['state'] = state?state.val():'';
-        console.log('county');
-        console.log(data);
-        var form = $(this).closest('form');
-        $.ajax({
-            url : form.attr('action'),
-            type: form.attr('method'),
-            data : data,
-            success: function(html) {
-                if (city.val()) {
-                } else {
-                    $('#lthrt_contactbundle_citycountystate_city').replaceWith(
-                        $(html).find('#lthrt_contactbundle_citycountystate_city')
-                    );
-                }
+            // get rid of old to put in new
+            item.off("change");
+        }
+    );
 
-                if (state.val()) {
-                } else {
-                    $('#lthrt_contactbundle_citycountystate_state').replaceWith(
-                        $(html).find('#lthrt_contactbundle_citycountystate_state')
-                    );
-                }
+// should probably tryo out promises here
 
-            },
-            complete: function(jqXHR, status) {
-                wire();
-            }
-        });
-    });
-
-    state.off("change");
-    state.on("change",function() {
-        data['city'] = city?city.val():'';
-        data['county'] = county?county.val():'';
-        data['state'] = state?state.val():'';
-        console.log('state');
-        console.log(data);
-        var form = $(this).closest('form');
-        $.ajax({
-            url : form.attr('action'),
-            type: form.attr('method'),
-            data : data,
-            success: function(html) {
-                if (city.val()) {
-                } else {
-                    $('#lthrt_contactbundle_citycountystate_city').replaceWith(
-                        $(html).find('#lthrt_contactbundle_citycountystate_city')
-                    );
-                }
-
-                if (county.val()) {
-                } else {
-                    $('#lthrt_contactbundle_citycountystate_county').replaceWith(
-                        $(html).find('#lthrt_contactbundle_citycountystate_county')
-                    );
-                }
-            },
-            complete: function(jqXHR, status) {
-                wire();
-            }
-        });
-    });
+    $.each(items,
+        function(index, item) {
+            item.on("change",function() {
+                data['city'] = city?city.val():0;
+                data['county'] = county?county.val():0;
+                data['state'] = state?state.val():0;
+                var form = $(this).closest('form');
+                $.ajax({
+                    url : form.attr('action'),
+                    type: form.attr('method'),
+                    data : data,
+                    success: function(html) {
+                        $.each(others[item.selector],
+                            function(otherindex, otheritem) {
+                                if ($(otheritem.selector).val()) {
+                                } else {
+                                    $(otheritem.selector).replaceWith(
+                                        $(html).find(otheritem.selector)
+                                    );
+                                }
+                            }
+                        );
+                    },
+                }).done(function(){
+                    wire();
+                });
+            });
+        }
+    );
 }
 
 wire();

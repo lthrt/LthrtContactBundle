@@ -37,13 +37,13 @@ class CityCountyStateController extends Controller
         }
 
         if ($city) {
-            $options['city']     = $city;
+            $options['city']   = $city;
         }
         if ($county) {
             $options['county'] = $county;
         }
         if ($state) {
-            $options['state']   = $state;
+            $options['state']  = $state->getAbbr();
         }
 
         $options['action'] = $this->generateUrl('city_county_state_form');

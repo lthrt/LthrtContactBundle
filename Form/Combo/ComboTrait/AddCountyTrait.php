@@ -7,14 +7,9 @@ trait AddCountyTrait
 {
     private function addCounty($formOrBuilder)
     {
-        $counties = $this->options['state']
-                    ? $this->countyRep->findByStateAbbr($this->options['state']->getAbbr())
-                    : (
-                        $this->options['city']
-                        ? $this->countyRep->findByCity($this->options['city'])
-                        : $this->countyRep->findNames()
-                    );
-
+        $counties = ( $this->options['state'] || $this->options['county'] )
+                    ? $this->countyRep->findByCityAndOrState($this->options)
+                    : $this->countyRep->findNames();
         $counties = $counties->getQuery()->getResult();
         // Doctrine returns an array of array for select
         // so transform to choice list
@@ -25,7 +20,7 @@ trait AddCountyTrait
 
         $formOrBuilder->add('county', 'county',
             [
-                'data'              => $this->options['county'] ? $this->options['county'] : '',
+                'data'              => $this->options['county'] ? $this->options['county'] : 0,
                 'choices'           => $counties,
                 'choices_as_values' => true,
             ]
