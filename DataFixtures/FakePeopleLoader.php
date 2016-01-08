@@ -21,38 +21,48 @@ class FakePeopleLoader
 
     public function loadFakePeople($overwrite = false)
     {
+
+
         $dbPeople = $this->em->getRepository('LthrtContactBundle:Person')
         ->createQueryBuilder('people')->getQuery()->getResult();
 
-        ksort($this->people);
-
         $updatedPeople = [];
-        $newPeople     = [];
+        $updates       = [];
+        $new           = [];
 
-        // foreach ($this->people as $abbr => $name) {
-        //     if ('header' == $abbr) {
-        //         continue;
-        //     }
-        //     if (in_array($abbr, array_keys($dbPeople))) {
-        //         $state                = $dbPeople[$abbr];
-        //         $updatedPeople[$abbr] = $state->getAbbr();
-        //     } else {
-        //         $state            = new Person();
-        //         $newPeople[$abbr] = $state->getAbbr();
-        //     }
-        //     $state->setAbbr($abbr);
-        //     $state->setName($name);
-        //     $this->em->persist($state);
-        //     $this->em->flush();
-        // }
+        // Sample data does not have last/first collisions
+        foreach ($dbPeople as $key => $person) {
+            $updatedPeople[$person->getLastName()][$person->getFirstName()] = $person;
+        }
 
-        // if ($updatedPeople) {
-        //     ksort($updatedPeople);
-        // }
-        // if ($newPeople) {
-        //     ksort($newPeople);
-        // }
-more work here
-        return ['updatedPeople' => $updatedPeople, 'newPeople' => $newPeople];
+        unset($dbPeople);
+
+        foreach ($this->people as $last => $rest) {
+            foreach ($rest as $first => $dob) {
+
+                if ('header' == $last) {
+                    continue;
+                }
+                if (in_array($last, array_keys($updatedPeople))
+                    && in_array($first, array_keys($updatedPeople[$last]))
+                ) {
+                    $person = $updatedPeople[$last][$first];
+                    $updates[$person->getFirstName()." ".$person->getLastName()] = 1;
+                } else {
+                    $person = new Person();
+                    $newPeople[$last][$first] = $person;
+                    $new[$first." ".$last] = 1;
+                    unset($updatedPeople[$last][$first]);
+                }
+                $person->setFirstName($first);
+                $person->setLastName($last);
+                $person->setDob($dob);
+                $this->em->persist($person);
+                $this->em->flush();
+            }
+
+        }
+
+        return [ 'updates' => $updates, 'new' => $new ];
     }
 }

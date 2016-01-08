@@ -18,24 +18,19 @@ trait FakePeopleTrait
             $csv                    = fopen($file, 'r');
             $this->people['header'] = array_flip(fgetcsv($csv));
             while ($dataRow = fgetcsv($csv)) {
+                var_dump($dataRow);
                 if (
                     isset($dataRow[$this->people['header']['last']])
                     && isset($dataRow[$this->people['header']['first']])
                     && isset($dataRow[$this->people['header']['dob']])
                 ) {
-                    $key =
-                        $dataRow[
-                            $this->people['header']['last']
-                        ]
-                        .'__'
-                        .$dataRow[
-                            $this->people['header']['first']
-                        ]
-                    ;
-                    $value =$dataRow[$this->people['header']['dob']];
+                    $last = $dataRow[$this->people['header']['last']];
+                    $first = $dataRow[$this->people['header']['first']];
+                    $dob = $dataRow[$this->people['header']['dob']];
 
-                    $this->people[$key] = $value;
+                    $this->people[$last][$first] = new \DateTime($dob);
                 }
+
             }
         }
 

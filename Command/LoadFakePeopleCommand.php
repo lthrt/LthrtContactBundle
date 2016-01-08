@@ -60,14 +60,15 @@ EOT
         $manager   = $this->getContainer()->get('doctrine')->getManager($emName);
         $loader    = new FakePeopleLoader($manager);
         $result    = $loader->loadFakePeople($overwrite);
-        if (isset($result['newStates']) && count($result['newStates'])) {
-            $inserted = implode(', ', array_keys($result['newStates']));
-            $output->writeln("<info>" . $inserted . "</info> added.");
+        if (isset($result['new']) && count($result['new'])) {
+            $inserted = implode(",\n", array_keys($result['new']));
+            $output->writeln("<info>" . $inserted . "</info>\nadded.");
             $output->writeln("");
         }
-        if (isset($result['updatedStates']) && count($result['updatedStates'])) {
-            $updated = implode(', ', array_keys($result['updatedStates']));
-            $output->writeln("<info>" . $updated . "</info> updated.");
+        if (isset($result['updates']) && count($result['updates'])) {
+            $updated = implode(",\n", array_keys($result['updates']));
+            $output->writeln("<info>" . $updated . "</info>\nupdated.");
+            $output->writeln("");
         }
     }
 }
