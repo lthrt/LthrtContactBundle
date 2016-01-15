@@ -14,7 +14,7 @@ class StateRepository extends \Doctrine\ORM\EntityRepository
 
     const ROOT = 'state';
 
-    public function findAll()
+    public function findStates()
     {
         $qb = $this->qb('abbr');
         $qb->addOrderBy(self::ROOT . '.abbr');
@@ -37,7 +37,7 @@ class StateRepository extends \Doctrine\ORM\EntityRepository
             $options
         );
 
-        $qb = $this->findAll();
+        $qb = $this->findStates();
 
         if ($options['city']) {
             $qb->join(self::ROOT . '.city', CityRepository::ROOT);

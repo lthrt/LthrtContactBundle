@@ -16,6 +16,10 @@ Lthrt\ContactBundle\Entity\State:
             length: 63
             nullable: true
 
+        active:
+            column: active
+            type: boolean
+
     oneToMany:
         city:
             targetEntity: City

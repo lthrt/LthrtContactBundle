@@ -42,6 +42,7 @@ class StatesLoader
             }
             $state->setAbbr($abbr);
             $state->setName($name);
+            $state->setActive(true);
             $this->em->persist($state);
             $this->em->flush();
         }

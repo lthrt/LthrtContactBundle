@@ -1,9 +1,6 @@
 <?php
-
 namespace Lthrt\ContactBundle\Entity;
-
 use Lthrt\EntityJSONBundle\Entity\UnloggedEntity;
-
 /**
  * State.
  */
@@ -13,26 +10,27 @@ class State extends UnloggedEntity implements \JSONSerializable
      * @var string
      */
     private $abbr;
-
     /**
      * @var string
      */
     private $name;
-
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
     private $city;
-
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
     private $county;
-
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
     private $zip;
+
+    /**
+     * @var boolean
+     */
+    private $active;
 
     /**
      * Constructor.
@@ -43,7 +41,6 @@ class State extends UnloggedEntity implements \JSONSerializable
         $this->county = new \Doctrine\Common\Collections\ArrayCollection();
         $this->zip    = new \Doctrine\Common\Collections\ArrayCollection();
     }
-
     /**
      * Get abbr.
      *
@@ -53,7 +50,6 @@ class State extends UnloggedEntity implements \JSONSerializable
     {
         return $this->abbr;
     }
-
     /**
      * Set abbr.
      *
@@ -64,10 +60,8 @@ class State extends UnloggedEntity implements \JSONSerializable
     public function setAbbr($abbr)
     {
         $this->abbr = $abbr;
-
         return $this;
     }
-
     /**
      * Get name.
      *
@@ -77,7 +71,6 @@ class State extends UnloggedEntity implements \JSONSerializable
     {
         return $this->name;
     }
-
     /**
      * Set name.
      *
@@ -88,10 +81,8 @@ class State extends UnloggedEntity implements \JSONSerializable
     public function setName($name)
     {
         $this->name = $name;
-
         return $this;
     }
-
     /**
      * Add city.
      *
@@ -105,10 +96,8 @@ class State extends UnloggedEntity implements \JSONSerializable
         } else {
             $this->city[] = $city;
         }
-
         return $this;
     }
-
     /**
      * Remove city.
      *
@@ -118,7 +107,6 @@ class State extends UnloggedEntity implements \JSONSerializable
     {
         $this->city->removeElement($city);
     }
-
     /**
      * Get city.
      *
@@ -128,8 +116,6 @@ class State extends UnloggedEntity implements \JSONSerializable
     {
         return $this->city;
     }
-
-
     /**
      * Add county.
      *
@@ -143,10 +129,8 @@ class State extends UnloggedEntity implements \JSONSerializable
         } else {
             $this->county[] = $county;
         }
-
         return $this;
     }
-
     /**
      * Remove county.
      *
@@ -156,7 +140,6 @@ class State extends UnloggedEntity implements \JSONSerializable
     {
         $this->county->removeElement($county);
     }
-
     /**
      * Get county.
      *
@@ -166,7 +149,6 @@ class State extends UnloggedEntity implements \JSONSerializable
     {
         return $this->county;
     }
-
     /**
      * Add zip.
      *
@@ -181,11 +163,8 @@ class State extends UnloggedEntity implements \JSONSerializable
             $this->zip[] = $zip;
         }
         $zip->addState($this);
-
-
         return $this;
     }
-
     /**
      * Remove zip.
      *
@@ -195,7 +174,6 @@ class State extends UnloggedEntity implements \JSONSerializable
     {
         $this->zip->removeElement($zip);
     }
-
     /**
      * Get zip.
      *
@@ -206,18 +184,44 @@ class State extends UnloggedEntity implements \JSONSerializable
         return $this->zip;
     }
 
-    /** jsonSerialize
+    /**
+     * Get active
      *
+     * @return boolean
      */
+    public function getActive()
+    {
+        return $this->active;
+    }
+
+    /**
+     * Set active
+     *
+     * @param boolean $active
+     * @return State
+     */
+    public function setActive($active)
+    {
+        $this->active = $active;
+
+        return $this;
+    }
+
+    /** jsonSerialize
+      *
+      */
     public function JSONSerialize()
     {
         return [
-            'class'  => 'Lthrt_ContactBundle_Entity_State',
-            'id'     => $this->id,
-            'abbr'   => $this->abbr,
-            'name'   => $this->name,
-            'county' => $this->county->map(function ($e) {return ['class' => 'Lthrt_ContactBundle_Entity_County', 'id' => $e->getId()];})->toArray(),
-            'zip'                                                         => $this->zip->map(function ($e) {return ['class' => 'Lthrt_ContactBundle_Entity_Zip', 'id' => $e->getId()];})->toArray(),
+            'class' => 'Lthrt_ContactBundle_Entity_State',
+            'id' => $this->id,
+            'abbr' => $this->abbr,
+            'name' => $this->name,
+            'active' => $this->active,
+            'city' => $this->city->map(function($e){return ['class' => 'Lthrt_ContactBundle_Entity_City','id' => $e->getId(),];})->toArray(),
+            'county' => $this->county->map(function($e){return ['class' => 'Lthrt_ContactBundle_Entity_County','id' => $e->getId(),];})->toArray(),
+            'zip' => $this->zip->map(function($e){return ['class' => 'Lthrt_ContactBundle_Entity_Zip','id' => $e->getId(),];})->toArray(),
         ];
     }
+
 }

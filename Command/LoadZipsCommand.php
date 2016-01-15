@@ -67,7 +67,7 @@ EOT
         if (isset($result['noStates'])) {
             $output->writeln("States must be loaded first: <comment>lthrt:load:states</comment>");
         } else {
-            $output->writeln("<info>" . $result['cities'] . "</info> cities added.>");
+            $output->writeln("<info>" . $result['cities'] . "</info> cities added.");
             $output->writeln("<info>" . $result['counties'] . "</info> counties added.");
             $output->writeln("<info>" . $result['zips'] . "</info> zip codes added.");
         }
