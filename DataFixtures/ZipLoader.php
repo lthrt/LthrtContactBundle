@@ -82,6 +82,11 @@ class ZipLoader extends StatesLoader
             if ('header' == $key) {
                 continue;
             }
+
+            if (!$zipRef['county']){
+                continue;
+            }
+
             if (isset($dbStates[$zipRef['state']])) {
                 $state = $dbStates[$zipRef['state']];
             } else {

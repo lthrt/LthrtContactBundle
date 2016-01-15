@@ -10,18 +10,22 @@ class State extends UnloggedEntity implements \JSONSerializable
      * @var string
      */
     private $abbr;
+
     /**
      * @var string
      */
     private $name;
+
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
     private $city;
+
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
     private $county;
+
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
