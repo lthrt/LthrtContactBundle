@@ -13,8 +13,10 @@ Lthrt\ContactBundle\Entity\City:
     manyToOne:
         state:
             targetEntity: State
+            inversedBy: city
             joinColumn:
                 name: state_id
+
 
     manyToMany:
         zip:

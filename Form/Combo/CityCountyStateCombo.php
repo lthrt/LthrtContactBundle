@@ -18,7 +18,7 @@ class CityCountyStateCombo extends AbstractType
     use AddCountyTrait;
     use AddStateTrait;
 
-    private $cintyRep;
+    private $cityRep;
     private $countyRep;
     private $options;
     private $stateRep;
