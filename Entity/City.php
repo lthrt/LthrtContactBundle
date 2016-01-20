@@ -2,13 +2,13 @@
 
 namespace Lthrt\ContactBundle\Entity;
 
-use Lthrt\EntityJSONBundle\Entity\LoggedEntity;
+use Lthrt\EntityJSONBundle\Entity\UnloggedEntity;
 
 /**
  * City
  */
 
-class City extends LoggedEntity implements \JSONSerializable
+class City extends UnloggedEntity implements \JSONSerializable
 {
     /**
      * @var string

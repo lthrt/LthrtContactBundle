@@ -2,13 +2,13 @@
 
 namespace Lthrt\ContactBundle\Entity;
 
-use Lthrt\EntityJSONBundle\Entity\LoggedEntity;
+use Lthrt\EntityJSONBundle\Entity\UnloggedEntity;
 
 /**
  * County
  */
 
-class County extends LoggedEntity implements \JSONSerializable
+class County extends UnloggedEntity implements \JSONSerializable
 {
     /**
      * @var string

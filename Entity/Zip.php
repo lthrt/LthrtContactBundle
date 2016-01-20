@@ -2,13 +2,13 @@
 
 namespace Lthrt\ContactBundle\Entity;
 
-use Lthrt\EntityJSONBundle\Entity\LoggedEntity;
+use Lthrt\EntityJSONBundle\Entity\UnloggedEntity;
 
 /**
  * Zip
  */
 
-class Zip extends LoggedEntity implements \JSONSerializable
+class Zip extends UnloggedEntity implements \JSONSerializable
 {
     /**
      * @var string
@@ -38,7 +38,7 @@ class Zip extends LoggedEntity implements \JSONSerializable
     {
         $this->city   = new \Doctrine\Common\Collections\ArrayCollection();
         $this->county = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->state = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->state  = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
 

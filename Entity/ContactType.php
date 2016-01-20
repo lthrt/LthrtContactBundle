@@ -1,20 +1,15 @@
 <?php
-
 namespace Lthrt\ContactBundle\Entity;
-
-use Lthrt\EntityJSONBundle\Entity\LoggedEntity;
-
+use Lthrt\EntityJSONBundle\Entity\UnloggedEntity;
 /**
  * ContactType
  */
-
-class ContactType extends LoggedEntity implements \JSONSerializable
+class ContactType extends UnloggedEntity implements \JSONSerializable
 {
     /**
      * @var string
      */
     protected $name;
-
 
 
     /** jsonSerialize
@@ -24,8 +19,8 @@ class ContactType extends LoggedEntity implements \JSONSerializable
     {
         return [
             'class' => 'Lthrt_ContactBundle_Entity_ContactType',
-            'id'    => $this->id,
-            'name'  => $this->name,
+            'id' => $this->id,
+            'name' => $this->name,
         ];
     }
 
