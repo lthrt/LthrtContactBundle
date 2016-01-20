@@ -5,9 +5,8 @@ namespace Lthrt\ContactBundle\Entity;
 use Lthrt\EntityJSONBundle\Entity\LoggedEntity;
 
 /**
- * Address
+ * Address.
  */
-
 class Address extends LoggedEntity implements \JSONSerializable
 {
     /**
@@ -50,19 +49,17 @@ class Address extends LoggedEntity implements \JSONSerializable
      */
     protected $person;
 
-
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
         $this->person = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
-
     /** jsonSerialize
-      *
-      */
+     *
+     */
     public function JSONSerialize()
     {
         return [
@@ -71,12 +68,11 @@ class Address extends LoggedEntity implements \JSONSerializable
             'line'        => $this->line,
             'line2'       => $this->line2,
             'zipExt'      => $this->zipExt,
-            'addressType' => $this->addressType ? ['class' => 'Lthrt_ContactBundle_Entity_AddressType','id'=>$this->addressType->id,]:'{}',
-            'city'        => $this->city ? ['class' => 'Lthrt_ContactBundle_Entity_City','id'=>$this->city->id,]:'{}',
-            'state'       => $this->state ? ['class' => 'Lthrt_ContactBundle_Entity_State','id'=>$this->state->id,]:'{}',
-            'zip'         => $this->zip ? ['class' => 'Lthrt_ContactBundle_Entity_Zip','id'=>$this->zip->id,]:'{}',
-            'person'      => $this->person->map(function($e){return ['class' => 'Lthrt_ContactBundle_Entity_Person','id' => $e->getId(),];})->toArray(),
+            'addressType' => $this->addressType ? ['class'                     => 'Lthrt_ContactBundle_Entity_AddressType','id' => $this->addressType->id] : '{}',
+            'city'        => $this->city ? ['class'                            => 'Lthrt_ContactBundle_Entity_City','id' => $this->city->id] : '{}',
+            'state'       => $this->state ? ['class'                           => 'Lthrt_ContactBundle_Entity_State','id' => $this->state->id] : '{}',
+            'zip'         => $this->zip ? ['class'                             => 'Lthrt_ContactBundle_Entity_Zip','id' => $this->zip->id] : '{}',
+            'person'      => $this->person->map(function ($e) {return ['class' => 'Lthrt_ContactBundle_Entity_Person', 'id' => $e->getId()];})->toArray(),
         ];
     }
-
 }

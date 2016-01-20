@@ -83,7 +83,7 @@ class ZipLoader extends StatesLoader
                 continue;
             }
 
-            if (!$zipRef['county']){
+            if (!$zipRef['county']) {
                 continue;
             }
 
@@ -141,7 +141,6 @@ class ZipLoader extends StatesLoader
             $this->em->flush($county);
             $this->em->flush($city);
             $this->em->flush($zip);
-
         }
 
         return $result;

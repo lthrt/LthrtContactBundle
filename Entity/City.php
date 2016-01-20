@@ -5,9 +5,8 @@ namespace Lthrt\ContactBundle\Entity;
 use Lthrt\EntityJSONBundle\Entity\UnloggedEntity;
 
 /**
- * City
+ * City.
  */
-
 class City extends UnloggedEntity implements \JSONSerializable
 {
     /**
@@ -30,9 +29,8 @@ class City extends UnloggedEntity implements \JSONSerializable
      */
     protected $county;
 
-
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -40,20 +38,18 @@ class City extends UnloggedEntity implements \JSONSerializable
         $this->county = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
-
     /** jsonSerialize
-      *
-      */
+     *
+     */
     public function JSONSerialize()
     {
         return [
             'class'  => 'Lthrt_ContactBundle_Entity_City',
             'id'     => $this->id,
             'name'   => $this->name,
-            'state'  => $this->state ? ['class' => 'Lthrt_ContactBundle_Entity_State','id'=>$this->state->id,]:'{}',
-            'zip'    => $this->zip->map(function($e){return ['class' => 'Lthrt_ContactBundle_Entity_Zip','id' => $e->getId(),];})->toArray(),
-            'county' => $this->county->map(function($e){return ['class' => 'Lthrt_ContactBundle_Entity_County','id' => $e->getId(),];})->toArray(),
+            'state'  => $this->state ? ['class'                        => 'Lthrt_ContactBundle_Entity_State','id' => $this->state->id] : '{}',
+            'zip'    => $this->zip->map(function ($e) {return ['class' => 'Lthrt_ContactBundle_Entity_Zip', 'id' => $e->getId()];})->toArray(),
+            'county'                                                   => $this->county->map(function ($e) {return ['class' => 'Lthrt_ContactBundle_Entity_County', 'id' => $e->getId()];})->toArray(),
         ];
     }
-
 }

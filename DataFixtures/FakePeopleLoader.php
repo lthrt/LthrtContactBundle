@@ -21,8 +21,6 @@ class FakePeopleLoader
 
     public function loadFakePeople($overwrite = false)
     {
-
-
         $dbPeople = $this->em->getRepository('LthrtContactBundle:Person')
         ->createQueryBuilder('people')->getQuery()->getResult();
 
@@ -39,19 +37,18 @@ class FakePeopleLoader
 
         foreach ($this->people as $last => $rest) {
             foreach ($rest as $first => $dob) {
-
                 if ('header' == $last) {
                     continue;
                 }
                 if (in_array($last, array_keys($updatedPeople))
                     && in_array($first, array_keys($updatedPeople[$last]))
                 ) {
-                    $person = $updatedPeople[$last][$first];
-                    $updates[$person->getFirstName()." ".$person->getLastName()] = 1;
+                    $person                                                      = $updatedPeople[$last][$first];
+                    $updates[$person->getFirstName() . " " . $person->getLastName()] = 1;
                 } else {
-                    $person = new Person();
+                    $person                   = new Person();
                     $newPeople[$last][$first] = $person;
-                    $new[$first." ".$last] = 1;
+                    $new[$first . " " . $last]    = 1;
                     unset($updatedPeople[$last][$first]);
                 }
                 $person->setFirstName($first);
@@ -60,7 +57,6 @@ class FakePeopleLoader
                 $this->em->persist($person);
                 $this->em->flush();
             }
-
         }
 
         return [ 'updates' => $updates, 'new' => $new ];

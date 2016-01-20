@@ -2,7 +2,7 @@
 
 namespace Lthrt\ContactBundle\Repository;
 
-use Lthrt\ContactBundle\Repository\RepositoryTrait\ContactBundleRepository;
+use Lthrt\ContactBundle\Repository\RepositoryTrait\ContactBundleRepositoryTrait;
 
 /**
  * CountyRepository
@@ -10,13 +10,13 @@ use Lthrt\ContactBundle\Repository\RepositoryTrait\ContactBundleRepository;
  */
 class CountyRepository extends \Doctrine\ORM\EntityRepository
 {
-    use ContactBundleRepository;
+    use ContactBundleRepositoryTrait;
 
     const ROOT = 'county';
 
     public function findByCityName($name)
     {
-        return $this->findByCityAndOrState(['city'=> $name]);
+        return $this->findByCityAndOrState(['city' => $name]);
     }
 
     public function findByCityAndOrState($options)
@@ -48,6 +48,6 @@ class CountyRepository extends \Doctrine\ORM\EntityRepository
 
     public function findByStateAbbr($abbr)
     {
-        return $this->findByCityAndOrState(['state'=> $abbr]);
+        return $this->findByCityAndOrState(['state' => $abbr]);
     }
 }

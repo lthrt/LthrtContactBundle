@@ -23,13 +23,12 @@ trait FakePeopleTrait
                     && isset($dataRow[$this->people['header']['first']])
                     && isset($dataRow[$this->people['header']['dob']])
                 ) {
-                    $last = $dataRow[$this->people['header']['last']];
+                    $last  = $dataRow[$this->people['header']['last']];
                     $first = $dataRow[$this->people['header']['first']];
-                    $dob = $dataRow[$this->people['header']['dob']];
+                    $dob   = $dataRow[$this->people['header']['dob']];
 
                     $this->people[$last][$first] = new \DateTime($dob);
                 }
-
             }
         }
 
