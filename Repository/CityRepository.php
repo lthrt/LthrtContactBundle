@@ -52,14 +52,4 @@ class CityRepository extends \Doctrine\ORM\EntityRepository
     {
         return $this->findByCountyAndOrState(['state'=> $abbr]);
     }
-
-    public function findNames()
-    {
-        $qb = $this->qb();
-        $qb->orderBy(self::ROOT . '.name');
-        $qb->select(self::ROOT . '.name');
-        $qb->distinct();
-
-        return $qb;
-    }
 }

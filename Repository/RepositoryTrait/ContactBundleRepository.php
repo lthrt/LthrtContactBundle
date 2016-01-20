@@ -20,4 +20,14 @@ trait ContactBundleRepository
 
         return $qb;
     }
+
+    public function findNames()
+    {
+        $qb = $this->qb();
+        $qb->orderBy(self::ROOT . '.name');
+        $qb->select(self::ROOT . '.name');
+        $qb->distinct();
+
+        return $qb;
+    }
 }
