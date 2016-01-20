@@ -7,7 +7,7 @@ namespace Lthrt\ContactBundle\Repository\RepositoryTrait;
 //
 
 
-trait ContactBundleRepository
+trait ContactBundleRepositoryTrait
 {
     private function qb($index = null)
     {
