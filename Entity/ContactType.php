@@ -2,45 +2,24 @@
 
 namespace Lthrt\ContactBundle\Entity;
 
-use Lthrt\EntityJSONBundle\Entity\UnloggedEntity;
+use Lthrt\EntityJSONBundle\Entity\LoggedEntity;
 
 /**
- * ContactType.
+ * ContactType
  */
-class ContactType extends UnloggedEntity implements \JSONSerializable
+
+class ContactType extends LoggedEntity implements \JSONSerializable
 {
     /**
      * @var string
      */
-    private $name;
+    protected $name;
 
-    /**
-     * Get name.
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
 
-    /**
-     * Set name.
-     *
-     * @param string $name
-     *
-     * @return ContactType
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
 
     /** jsonSerialize
-     *
-     */
+      *
+      */
     public function JSONSerialize()
     {
         return [
@@ -49,4 +28,5 @@ class ContactType extends UnloggedEntity implements \JSONSerializable
             'name'  => $this->name,
         ];
     }
+
 }
