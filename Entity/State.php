@@ -21,11 +21,6 @@ class State extends UnloggedEntity implements \JSONSerializable
     protected $name;
 
     /**
-     * @var boolean
-     */
-    protected $active;
-
-    /**
      * @var \Doctrine\Common\Collections\Collection
      */
     protected $city;

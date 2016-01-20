@@ -19,8 +19,8 @@ class DemographicType extends UnloggedEntity implements \JSONSerializable
     {
         return [
             'class' => 'Lthrt_ContactBundle_Entity_DemographicType',
-            'id' => $this->id,
-            'name' => $this->name,
+            'id'    => $this->id,
+            'name'  => $this->name,
         ];
     }
 
