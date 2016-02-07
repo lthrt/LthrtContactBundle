@@ -2,7 +2,6 @@
 
 namespace Lthrt\ContactBundle\Form\Combo\ComboTrait;
 
-
 trait AddStateTrait
 {
     private function addState($formOrBuilder)

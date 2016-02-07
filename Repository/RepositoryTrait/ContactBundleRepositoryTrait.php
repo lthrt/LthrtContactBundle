@@ -2,13 +2,12 @@
 
 namespace Lthrt\ContactBundle\Repository\RepositoryTrait;
 
-
 //
 // AddressFormRepository Trait.
 //
 
 
-trait ContactBundleRepository
+trait ContactBundleRepositoryTrait
 {
     private function qb($index = null)
     {
@@ -17,6 +16,16 @@ trait ContactBundleRepository
         } else {
             $qb = $this->createQueryBuilder(self::ROOT);
         }
+
+        return $qb;
+    }
+
+    public function findNames()
+    {
+        $qb = $this->qb();
+        $qb->orderBy(self::ROOT . '.name');
+        $qb->select(self::ROOT . '.name');
+        $qb->distinct();
 
         return $qb;
     }

@@ -1,5 +1,4 @@
 <?php
-
 namespace Lthrt\ContactBundle\Entity;
 
 use Lthrt\EntityJSONBundle\Entity\UnloggedEntity;
@@ -12,31 +11,7 @@ class ContactType extends UnloggedEntity implements \JSONSerializable
     /**
      * @var string
      */
-    private $name;
-
-    /**
-     * Get name.
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Set name.
-     *
-     * @param string $name
-     *
-     * @return ContactType
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
+    protected $name;
 
     /** jsonSerialize
      *

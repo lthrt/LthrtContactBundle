@@ -11,29 +11,7 @@ class AddressType extends UnloggedEntity implements \JSONSerializable
     /**
      * @var string
      */
-    private $name;
-    /**
-     * Get name.
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-    /**
-     * Set name.
-     *
-     * @param string $name
-     *
-     * @return AddressType
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
+    protected $name;
 
     /** jsonSerialize
      *

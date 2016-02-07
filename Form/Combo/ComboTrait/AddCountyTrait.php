@@ -2,12 +2,11 @@
 
 namespace Lthrt\ContactBundle\Form\Combo\ComboTrait;
 
-
 trait AddCountyTrait
 {
     private function addCounty($formOrBuilder)
     {
-        $counties = ( $this->options['state'] || $this->options['county'] )
+        $counties = ($this->options['state'] || $this->options['county'])
                     ? $this->countyRep->findByCityAndOrState($this->options)
                     : $this->countyRep->findNames();
         $counties = $counties->getQuery()->getResult();
