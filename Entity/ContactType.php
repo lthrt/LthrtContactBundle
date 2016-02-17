@@ -1,15 +1,20 @@
 <?php
+
 namespace Lthrt\ContactBundle\Entity;
-use Lthrt\EntityJSONBundle\Entity\UnloggedEntity;
+
+use Lthrt\EntityJSONBundle\Entity\LoggedEntity;
+
 /**
  * ContactType
  */
-class ContactType extends UnloggedEntity implements \JSONSerializable
+
+class ContactType extends LoggedEntity implements \JSONSerializable
 {
     /**
      * @var string
      */
     protected $name;
+
 
 
     /** jsonSerialize

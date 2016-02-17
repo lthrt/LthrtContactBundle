@@ -1,27 +1,36 @@
 <?php
+
 namespace Lthrt\ContactBundle\Entity;
-use Lthrt\EntityJSONBundle\Entity\UnloggedEntity;
+
+use Lthrt\EntityJSONBundle\Entity\LoggedEntity;
+
 /**
  * Zip
  */
-class Zip extends UnloggedEntity implements \JSONSerializable
+
+class Zip extends LoggedEntity implements \JSONSerializable
 {
     /**
      * @var string
      */
     protected $zip;
+
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
     protected $city;
+
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
     protected $county;
+
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
     protected $state;
+
+
     /**
      * Constructor
      */

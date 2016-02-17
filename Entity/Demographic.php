@@ -1,19 +1,25 @@
 <?php
+
 namespace Lthrt\ContactBundle\Entity;
+
 use Lthrt\EntityJSONBundle\Entity\LoggedEntity;
+
 /**
  * Demographic
  */
+
 class Demographic extends LoggedEntity implements \JSONSerializable
 {
     /**
      * @var string
      */
     protected $value;
+
     /**
      * @var \Lthrt\ContactBundle\Entity\DemographicType
      */
     protected $demographicType;
+
 
 
     /** jsonSerialize

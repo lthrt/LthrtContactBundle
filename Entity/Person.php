@@ -1,35 +1,46 @@
 <?php
+
 namespace Lthrt\ContactBundle\Entity;
+
 use Lthrt\EntityJSONBundle\Entity\LoggedEntity;
+
 /**
  * Person
  */
+
 class Person extends LoggedEntity implements \JSONSerializable
 {
     /**
      * @var string
      */
     protected $firstName;
+
     /**
      * @var string
      */
     protected $lastName;
+
     /**
      * @var date
      */
     protected $dob;
+
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
     protected $contact;
+
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
     protected $demographic;
+
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
     protected $address;
+
+
     /**
      * Constructor
      */
