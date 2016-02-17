@@ -37,6 +37,39 @@ class State extends UnloggedEntity implements \JSONSerializable
     }
 
 
+    /**
+     * returns mappedBy field for property
+     *
+     * @return string
+     */
+    public function inverseCity()
+    {
+
+        return 'state';
+    }
+
+    /**
+     * returns mappedBy field for property
+     *
+     * @return string
+     */
+    public function inverseCounty()
+    {
+
+        return 'state';
+    }
+
+    /**
+     * returns mappedBy field for property
+     *
+     * @return string
+     */
+    public function inverseZip()
+    {
+
+        return 'state';
+    }
+
     /** jsonSerialize
       *
       */

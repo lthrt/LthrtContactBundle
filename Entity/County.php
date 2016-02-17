@@ -32,6 +32,17 @@ class County extends UnloggedEntity implements \JSONSerializable
     }
 
 
+    /**
+     * returns mappedBy field for property
+     *
+     * @return string
+     */
+    public function inverseZip()
+    {
+
+        return 'county';
+    }
+
     /** jsonSerialize
       *
       */

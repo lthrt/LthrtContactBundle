@@ -27,8 +27,26 @@ class City extends UnloggedEntity implements \JSONSerializable
      */
     public function __construct()
     {
-        $this->zip = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->zip    = new \Doctrine\Common\Collections\ArrayCollection();
         $this->county = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    /**
+     * returns mappedBy field for property
+     *
+     * @return string
+     */
+    public function inverseZip()
+    {
+        return 'city';
+    }
+    /**
+     * returns mappedBy field for property
+     *
+     * @return string
+     */
+    public function inverseCounty()
+    {
+        return 'city';
     }
 
 
