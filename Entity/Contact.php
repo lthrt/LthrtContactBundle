@@ -5,8 +5,9 @@ namespace Lthrt\ContactBundle\Entity;
 use Lthrt\EntityJSONBundle\Entity\LoggedEntity;
 
 /**
- * Contact.
+ * Contact
  */
+
 class Contact extends LoggedEntity implements \JSONSerializable
 {
     /**
@@ -19,16 +20,29 @@ class Contact extends LoggedEntity implements \JSONSerializable
      */
     protected $contactType;
 
+
+
     /** jsonSerialize
-     *
-     */
-    public function JSONSerialize()
+      *
+      */
+    public function JSONSerialize($full = true)
     {
-        return [
-            'class'       => 'Lthrt_ContactBundle_Entity_Contact',
-            'id'          => $this->id,
-            'value'       => $this->value,
-            'contactType' => $this->contactType ? ['class' => 'Lthrt_ContactBundle_Entity_ContactType','id' => $this->contactType->id] : '{}',
+        $json = [
+            'class' => 'Lthrt_ContactBundle_Entity_Contact',
+            'id' => $this->id,
+            'value' => $this->value,
+            'contactType' => null,
         ];
+
+        if ($full) {
+            $json = array_merge($json,
+                [
+            'contactType' => $this->contactType ? ['class' => 'Lthrt_ContactBundle_Entity_ContactType','id'=>$this->contactType->id,]:'{}',
+                ]
+            );
+        }
+
+        return $json;
     }
+
 }

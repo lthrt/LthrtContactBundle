@@ -2,12 +2,13 @@
 
 namespace Lthrt\ContactBundle\Entity;
 
-use Lthrt\EntityJSONBundle\Entity\UnloggedEntity;
+use Lthrt\EntityJSONBundle\Entity\LoggedEntity;
 
 /**
- * County.
+ * County
  */
-class County extends UnloggedEntity implements \JSONSerializable
+
+class County extends LoggedEntity implements \JSONSerializable
 {
     /**
      * @var string
@@ -29,27 +30,42 @@ class County extends UnloggedEntity implements \JSONSerializable
      */
     protected $zip;
 
+
     /**
-     * Constructor.
+     * Constructor
      */
     public function __construct()
     {
         $this->city = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->zip  = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->zip = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
+
     /** jsonSerialize
-     *
-     */
-    public function JSONSerialize()
+      *
+      */
+    public function JSONSerialize($full = true)
     {
-        return [
+        $json = [
             'class' => 'Lthrt_ContactBundle_Entity_County',
-            'id'    => $this->id,
-            'name'  => $this->name,
-            'state' => $this->state ? ['class'                         => 'Lthrt_ContactBundle_Entity_State','id' => $this->state->id] : '{}',
-            'city'  => $this->city->map(function ($e) {return ['class' => 'Lthrt_ContactBundle_Entity_City', 'id' => $e->getId()];})->toArray(),
-            'zip'                                                      => $this->zip->map(function ($e) {return ['class' => 'Lthrt_ContactBundle_Entity_Zip', 'id' => $e->getId()];})->toArray(),
+            'id' => $this->id,
+            'name' => $this->name,
+            'state' => null,
+            'city' => null,
+            'zip' => null,
         ];
+
+        if ($full) {
+            $json = array_merge($json,
+                [
+            'state' => $this->state ? ['class' => 'Lthrt_ContactBundle_Entity_State','id'=>$this->state->id,]:'{}',
+            'city' => $this->city->map(function($e){return ['class' => 'Lthrt_ContactBundle_Entity_City','id' => $e->getId(),];})->toArray(),
+            'zip' => $this->zip->map(function($e){return ['class' => 'Lthrt_ContactBundle_Entity_Zip','id' => $e->getId(),];})->toArray(),
+                ]
+            );
+        }
+
+        return $json;
     }
+
 }

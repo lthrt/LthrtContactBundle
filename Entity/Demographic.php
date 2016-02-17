@@ -5,8 +5,9 @@ namespace Lthrt\ContactBundle\Entity;
 use Lthrt\EntityJSONBundle\Entity\LoggedEntity;
 
 /**
- * Demographic.
+ * Demographic
  */
+
 class Demographic extends LoggedEntity implements \JSONSerializable
 {
     /**
@@ -19,16 +20,29 @@ class Demographic extends LoggedEntity implements \JSONSerializable
      */
     protected $demographicType;
 
+
+
     /** jsonSerialize
-     *
-     */
-    public function JSONSerialize()
+      *
+      */
+    public function JSONSerialize($full = true)
     {
-        return [
-            'class'           => 'Lthrt_ContactBundle_Entity_Demographic',
-            'id'              => $this->id,
-            'value'           => $this->value,
-            'demographicType' => $this->demographicType ? ['class' => 'Lthrt_ContactBundle_Entity_DemographicType','id' => $this->demographicType->id] : '{}',
+        $json = [
+            'class' => 'Lthrt_ContactBundle_Entity_Demographic',
+            'id' => $this->id,
+            'value' => $this->value,
+            'demographicType' => null,
         ];
+
+        if ($full) {
+            $json = array_merge($json,
+                [
+            'demographicType' => $this->demographicType ? ['class' => 'Lthrt_ContactBundle_Entity_DemographicType','id'=>$this->demographicType->id,]:'{}',
+                ]
+            );
+        }
+
+        return $json;
     }
+
 }

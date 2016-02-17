@@ -5,8 +5,9 @@ namespace Lthrt\ContactBundle\Entity;
 use Lthrt\EntityJSONBundle\Entity\LoggedEntity;
 
 /**
- * Person.
+ * Person
  */
+
 class Person extends LoggedEntity implements \JSONSerializable
 {
     /**
@@ -20,7 +21,7 @@ class Person extends LoggedEntity implements \JSONSerializable
     protected $lastName;
 
     /**
-     * @var \DateTime
+     * @var date
      */
     protected $dob;
 
@@ -39,30 +40,45 @@ class Person extends LoggedEntity implements \JSONSerializable
      */
     protected $address;
 
+
     /**
-     * Constructor.
+     * Constructor
      */
     public function __construct()
     {
-        $this->contact     = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->contact = new \Doctrine\Common\Collections\ArrayCollection();
         $this->demographic = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->address     = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->address = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
+
     /** jsonSerialize
-     *
-     */
-    public function JSONSerialize()
+      *
+      */
+    public function JSONSerialize($full = true)
     {
-        return [
-            'class'       => 'Lthrt_ContactBundle_Entity_Person',
-            'id'          => $this->id,
-            'firstName'   => $this->firstName,
-            'lastName'    => $this->lastName,
-            'dob'         => $this->dob,
-            'contact'     => $this->contact->map(function ($e) {return ['class' => 'Lthrt_ContactBundle_Entity_Contact', 'id' => $e->getId()];})->toArray(),
-            'demographic'                                                       => $this->demographic->map(function ($e) {return ['class' => 'Lthrt_ContactBundle_Entity_Demographic', 'id' => $e->getId()];})->toArray(),
-            'address'                                                                                                                     => $this->address->map(function ($e) {return ['class' => 'Lthrt_ContactBundle_Entity_Address', 'id' => $e->getId()];})->toArray(),
+        $json = [
+            'class' => 'Lthrt_ContactBundle_Entity_Person',
+            'id' => $this->id,
+            'firstName' => $this->firstName,
+            'lastName' => $this->lastName,
+            'dob' => $this->dob,
+            'contact' => null,
+            'demographic' => null,
+            'address' => null,
         ];
+
+        if ($full) {
+            $json = array_merge($json,
+                [
+            'contact' => $this->contact->map(function($e){return ['class' => 'Lthrt_ContactBundle_Entity_Contact','id' => $e->getId(),];})->toArray(),
+            'demographic' => $this->demographic->map(function($e){return ['class' => 'Lthrt_ContactBundle_Entity_Demographic','id' => $e->getId(),];})->toArray(),
+            'address' => $this->address->map(function($e){return ['class' => 'Lthrt_ContactBundle_Entity_Address','id' => $e->getId(),];})->toArray(),
+                ]
+            );
+        }
+
+        return $json;
     }
+
 }
