@@ -1,0 +1,4 @@
+# for use with Lthrt\EntityJSON\LthrtEntityJSONBundle
+
+person: Lthrt\ContactBundle\Entity\Person
+state: Lthrt\ContactBundle\Entity\State
