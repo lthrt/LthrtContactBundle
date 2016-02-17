@@ -1,36 +1,27 @@
 <?php
-
 namespace Lthrt\ContactBundle\Entity;
-
-use Lthrt\EntityJSONBundle\Entity\LoggedEntity;
-
+use Lthrt\EntityJSONBundle\Entity\UnloggedEntity;
 /**
  * City
  */
-
-class City extends LoggedEntity implements \JSONSerializable
+class City extends UnloggedEntity implements \JSONSerializable
 {
     /**
      * @var string
      */
     protected $name;
-
     /**
      * @var \Lthrt\ContactBundle\Entity\State
      */
     protected $state;
-
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
     protected $zip;
-
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
     protected $county;
-
-
     /**
      * Constructor
      */
@@ -47,20 +38,20 @@ class City extends LoggedEntity implements \JSONSerializable
     public function JSONSerialize($full = true)
     {
         $json = [
-            'class' => 'Lthrt_ContactBundle_Entity_City',
-            'id' => $this->id,
-            'name' => $this->name,
-            'state' => null,
-            'zip' => null,
-            'county' => null,
+                    'class' => 'Lthrt_ContactBundle_Entity_City',
+                'id' => $this->id,
+                'name' => $this->name,
+                'state' => $this->state ? ['class' => 'Lthrt_ContactBundle_Entity_State','id'=>$this->state->id,]:'{}',
+                'zip' => ['class' => 'Lthrt_ContactBundle_Entity_Zip','id'=>[]],
+                'county' => ['class' => 'Lthrt_ContactBundle_Entity_County','id'=>[]],
         ];
 
         if ($full) {
             $json = array_merge($json,
                 [
-            'state' => $this->state ? ['class' => 'Lthrt_ContactBundle_Entity_State','id'=>$this->state->id,]:'{}',
-            'zip' => $this->zip->map(function($e){return ['class' => 'Lthrt_ContactBundle_Entity_Zip','id' => $e->getId(),];})->toArray(),
-            'county' => $this->county->map(function($e){return ['class' => 'Lthrt_ContactBundle_Entity_County','id' => $e->getId(),];})->toArray(),
+                'state' => $this->state ? ['class' => 'Lthrt_ContactBundle_Entity_State','id'=>$this->state->id,]:'{}',
+                'zip' => $this->zip->map(function($e){return ['class' => 'Lthrt_ContactBundle_Entity_Zip','id' => $e->getId(),];})->toArray(),
+                'county' => $this->county->map(function($e){return ['class' => 'Lthrt_ContactBundle_Entity_County','id' => $e->getId(),];})->toArray(),
                 ]
             );
         }

@@ -1,20 +1,15 @@
 <?php
-
 namespace Lthrt\ContactBundle\Entity;
-
-use Lthrt\EntityJSONBundle\Entity\LoggedEntity;
-
+use Lthrt\EntityJSONBundle\Entity\UnloggedEntity;
 /**
  * AddressType
  */
-
-class AddressType extends LoggedEntity implements \JSONSerializable
+class AddressType extends UnloggedEntity implements \JSONSerializable
 {
     /**
      * @var string
      */
     protected $name;
-
 
 
     /** jsonSerialize
@@ -24,17 +19,9 @@ class AddressType extends LoggedEntity implements \JSONSerializable
     {
         $json = [
             'class' => 'Lthrt_ContactBundle_Entity_AddressType',
-            'id' => $this->id,
-            'name' => $this->name,
+                'id' => $this->id,
+                'name' => $this->name,
         ];
-
-        if ($full) {
-            $json = array_merge($json,
-                [
-
-                ]
-            );
-        }
 
         return $json;
     }
