@@ -133,6 +133,7 @@ class ZipLoader extends StatesLoader
             $city->addCounty($county);
 
             $county->setState($state);
+            $county->addCity($city);
 
             $this->em->persist($county);
             $this->em->persist($city);
