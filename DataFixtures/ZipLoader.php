@@ -1,11 +1,10 @@
 <?php
-namespace  Lthrt\ContactBundle\DataFixtures;
+namespace Lthrt\ContactBundle\DataFixtures;
 
 use Lthrt\ContactBundle\DataFixtures\DataTrait\StatesTrait;
 use Lthrt\ContactBundle\DataFixtures\DataTrait\ZipsTrait;
 use Lthrt\ContactBundle\Entity\City;
 use Lthrt\ContactBundle\Entity\County;
-use Lthrt\ContactBundle\Entity\State;
 use Lthrt\ContactBundle\Entity\Zip;
 
 class ZipLoader extends StatesLoader
@@ -36,11 +35,11 @@ class ZipLoader extends StatesLoader
         $this->em->getConnection()->getConfiguration()->setSQLLogger(null);
 
         $dbStates = $this->em->getRepository('LthrtContactBundle:State')
-        ->createQueryBuilder('state', 'state.abbr')
-        ->getQuery()->getResult();
+            ->createQueryBuilder('state', 'state.abbr')
+            ->getQuery()->getResult();
 
         if (0 == count($dbStates)) {
-            return [ 'noStates' => true ];
+            return ['noStates' => true];
         }
 
         $result['cities']   = 0;
@@ -50,14 +49,14 @@ class ZipLoader extends StatesLoader
         $importZips = $this->zips;
 
         $dbCities = $this->em->getRepository('LthrtContactBundle:City')
-        ->createQueryBuilder('city')->join('city.state', 'state')
-        ->addSelect('state')->getQuery()->getResult();
+            ->createQueryBuilder('city')->join('city.state', 'state')
+            ->addSelect('state')->getQuery()->getResult();
 
         $dbCounties = $this->em->getRepository('LthrtContactBundle:County')
-        ->createQueryBuilder('county')->getQuery()->getResult();
+            ->createQueryBuilder('county')->getQuery()->getResult();
 
         $dbZips = $this->em->getRepository('LthrtContactBundle:Zip')
-        ->createQueryBuilder('zip', 'zip.zip')->getQuery()->getResult();
+            ->createQueryBuilder('zip', 'zip.zip')->getQuery()->getResult();
 
         $cities   = [];
         $counties = [];

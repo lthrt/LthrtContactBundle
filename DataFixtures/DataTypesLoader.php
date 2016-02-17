@@ -1,15 +1,13 @@
 <?php
-namespace  Lthrt\ContactBundle\DataFixtures;
+namespace Lthrt\ContactBundle\DataFixtures;
 
 use Lthrt\ContactBundle\DataFixtures\DataTrait\DataTypesTrait;
-use Lthrt\ContactBundle\Entity\DemographicType;
 
 class DataTypesLoader
 {
     use DataTypesTrait;
 
-   // because of length, source array at end of class
-
+    // because of length, source array at end of class
 
     private $em;
 
@@ -38,7 +36,7 @@ class DataTypesLoader
                     }
                 } else {
                     $result['newTypes'][$upperDataType . "/" . $type] = $type;
-                    $entity                                       = new $namespacedDataType();
+                    $entity                                           = new $namespacedDataType();
                     $entity->setName($type);
                     $this->em->persist($entity);
                 }

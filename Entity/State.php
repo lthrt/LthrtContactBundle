@@ -1,5 +1,4 @@
 <?php
-
 namespace Lthrt\ContactBundle\Entity;
 
 use Lthrt\EntityJSONBundle\Entity\UnloggedEntity;
@@ -7,33 +6,28 @@ use Lthrt\EntityJSONBundle\Entity\UnloggedEntity;
 /**
  * State.
  */
-class State extends UnloggedEntity implements \JSONSerializable
+class State extends UnloggedEntity
 {
     /**
      * @var string
      */
     protected $abbr;
-
     /**
      * @var string
      */
     protected $name;
-
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
     protected $city;
-
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
     protected $county;
-
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
     protected $zip;
-
     /**
      * Constructor.
      */
@@ -47,17 +41,26 @@ class State extends UnloggedEntity implements \JSONSerializable
     /** jsonSerialize
      *
      */
-    public function JSONSerialize()
+    public function JSONSerialize($full = true)
     {
-        return [
-            'class'  => 'Lthrt_ContactBundle_Entity_State',
-            'id'     => $this->id,
-            'abbr'   => $this->abbr,
-            'name'   => $this->name,
-            'active' => $this->active,
-            'city'   => $this->city->map(function ($e) {return ['class' => 'Lthrt_ContactBundle_Entity_City', 'id' => $e->getId()];})->toArray(),
-            'county'                                                    => $this->county->map(function ($e) {return ['class' => 'Lthrt_ContactBundle_Entity_County', 'id' => $e->getId()];})->toArray(),
-            'zip'                                                                                                            => $this->zip->map(function ($e) {return ['class' => 'Lthrt_ContactBundle_Entity_Zip', 'id' => $e->getId()];})->toArray(),
+        $json = [
+            'class' => 'Lthrt_ContactBundle_Entity_State',
+            'id'    => $this->id,
+            'abbr'  => $this->abbr,
+            'name'  => $this->name,
         ];
+
+        if ($full) {
+            $json = array_merge($json,
+                [
+                    'city'   => $this->city->map(function ($e) {return ['class' => 'Lthrt_ContactBundle_Entity_City', 'id' => $e->getId()];})->toArray(),
+                    'county' => $this->county->map(function ($e) {return ['class' => 'Lthrt_ContactBundle_Entity_County', 'id' => $e->getId()];})->toArray(),
+                    'zip'    => $this->zip->map(function ($e) {return ['class' => 'Lthrt_ContactBundle_Entity_Zip', 'id' => $e->getId()];})->toArray(),
+                ]
+            );
+        }
+
+        return $json;
     }
+
 }

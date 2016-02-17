@@ -1,5 +1,5 @@
 <?php
-namespace  Lthrt\ContactBundle\DataFixtures;
+namespace Lthrt\ContactBundle\DataFixtures;
 
 use Lthrt\ContactBundle\DataFixtures\DataTrait\StatesTrait;
 use Lthrt\ContactBundle\Entity\State;
@@ -8,8 +8,7 @@ class StatesLoader
 {
     use StatesTrait;
 
-   // because of length, source array at end of class
-
+    // because of length, source array at end of class
 
     private $em;
 
@@ -22,7 +21,7 @@ class StatesLoader
     public function loadStates($overwrite = false)
     {
         $dbStates = $this->em->getRepository('LthrtContactBundle:State')
-        ->createQueryBuilder('state', 'state.abbr')->getQuery()->getResult();
+            ->createQueryBuilder('state', 'state.abbr')->getQuery()->getResult();
 
         ksort($this->states);
 
@@ -42,7 +41,6 @@ class StatesLoader
             }
             $state->setAbbr($abbr);
             $state->setName($name);
-            $state->setActive(true);
             $this->em->persist($state);
             $this->em->flush();
         }
