@@ -1,13 +1,23 @@
 <?php
+
 namespace Lthrt\ContactBundle\Entity;
 
-use Lthrt\EntityJSONBundle\Entity\LoggedEntity;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Address
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="Lthrt\ContactBundle\Repository\AddressRepository")
+ *
  */
-class Address extends LoggedEntity implements \JSONSerializable
+
+class Address implements \JSONSerializable
 {
+
+    use \Lthrt\EntityJSONBundle\Entity\ActiveTrait;
+    use \Lthrt\EntityJSONBundle\Entity\EntityTrait;
+    use \Lthrt\EntityJSONBundle\Entity\LoggedTrait;
+
     /**
      * @var string
      */

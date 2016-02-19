@@ -15,9 +15,8 @@ use Doctrine\ORM\Mapping as ORM;
 
 class DemographicType implements \JSONSerializable
 {
-    use \Lthrt\EntityJSONBundle\Entity\EntityTrait;
-    use \Lthrt\EntityJSONBundle\Entity\LoggedTrait;
     use \Lthrt\EntityJSONBundle\Entity\ActiveTrait;
+    use \Lthrt\EntityJSONBundle\Entity\EntityTrait;
 
     /**
      * @var string
