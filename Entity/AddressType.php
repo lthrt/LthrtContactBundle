@@ -13,11 +13,11 @@ use Doctrine\ORM\Mapping as ORM;
  *
  */
 
-class AddressType implements \JSONSerializable
+class AddressType
 {
-    use \Lthrt\EntityJSONBundle\Entity\ActiveTrait;
-    use \Lthrt\EntityJSONBundle\Entity\EntityTrait;
-    use \Lthrt\EntityJSONBundle\Entity\NameTrait;
+    use \Lthrt\EntityBundle\Entity\ActiveTrait;
+    use \Lthrt\EntityBundle\Entity\EntityTrait;
+    use \Lthrt\EntityBundle\Entity\NameTrait;
 
     /** jsonSerialize
      *

@@ -22,7 +22,7 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/lthrt/EntityJSONBundle.git"
+            "url": "https://github.com/lthrt/EntityBundle.git"
         }
     ],
     "require-dev": {

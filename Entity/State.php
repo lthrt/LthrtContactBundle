@@ -11,12 +11,12 @@ use Doctrine\ORM\Mapping as ORM;
  *
  */
 
-class State implements \JSONSerializable
+class State
 {
-    use \Lthrt\EntityJSONBundle\Entity\AbbrTrait;
-    use \Lthrt\EntityJSONBundle\Entity\ActiveTrait;
-    use \Lthrt\EntityJSONBundle\Entity\EntityTrait;
-    use \Lthrt\EntityJSONBundle\Entity\NameTrait;
+    use \Lthrt\EntityBundle\Entity\AbbrTrait;
+    use \Lthrt\EntityBundle\Entity\ActiveTrait;
+    use \Lthrt\EntityBundle\Entity\EntityTrait;
+    use \Lthrt\EntityBundle\Entity\NameTrait;
 
     /**
      * @var \Doctrine\Common\Collections\Collection

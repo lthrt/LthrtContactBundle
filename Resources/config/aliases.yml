@@ -1,4 +1,4 @@
-# for use with Lthrt\EntityJSON\LthrtEntityJSONBundle
+# for use with Lthrt\Entity\LthrtEntityBundle
 
 city: Lthrt\ContactBundle\Entity\City
 person: Lthrt\ContactBundle\Entity\Person

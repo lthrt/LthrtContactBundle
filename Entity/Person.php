@@ -11,11 +11,11 @@ use Doctrine\ORM\Mapping as ORM;
  *
  */
 
-class Person implements \JSONSerializable
+class Person
 {
-    use \Lthrt\EntityJSONBundle\Entity\ActiveTrait;
-    use \Lthrt\EntityJSONBundle\Entity\EntityTrait;
-    use \Lthrt\EntityJSONBundle\Entity\LoggedTrait;
+    use \Lthrt\EntityBundle\Entity\ActiveTrait;
+    use \Lthrt\EntityBundle\Entity\EntityTrait;
+    use \Lthrt\EntityBundle\Entity\LoggedTrait;
 
     /**
      * @var string
