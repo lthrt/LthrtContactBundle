@@ -24,29 +24,4 @@ class Contact
      * @ORM\ManyToOne(targetEntity="ContactType")
      */
     private $contactType;
-
-    /** jsonSerialize
-     *
-     */
-    public function JSONSerialize($full = true)
-    {
-        $json = [
-            'class'       => 'Lthrt_ContactBundle_Entity_Contact',
-            'id'          => $this->id,
-            'active'      => $this->active,
-            'value'       => $this->value,
-            'contactType' => $this->contactType ? ['class' => 'Lthrt_ContactBundle_Entity_ContactType', 'id' => $this->contactType->id] : '{}',
-        ];
-
-        if ($full) {
-            $json = array_merge($json,
-                [
-                    'contactType' => $this->contactType ? ['class' => 'Lthrt_ContactBundle_Entity_ContactType', 'id' => $this->contactType->id] : '{}',
-                ]
-            );
-        }
-
-        return $json;
-    }
-
 }

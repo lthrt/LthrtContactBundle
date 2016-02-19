@@ -64,34 +64,10 @@ class Person
 
     private $address;
 
-    /** jsonSerialize
-     *
-     */
-    public function JSONSerialize($full = true)
+    public function __construct()
     {
-        $json = [
-            'class'       => 'Lthrt_ContactBundle_Entity_Person',
-            'id'          => $this->id,
-            'active'      => $this->active,
-            'firstName'   => $this->firstName,
-            'lastName'    => $this->lastName,
-            'dob'         => $this->dob,
-            'contact'     => ['class' => 'Lthrt_ContactBundle_Entity_Contact', 'id' => []],
-            'demographic' => ['class' => 'Lthrt_ContactBundle_Entity_Demographic', 'id' => []],
-            'address'     => ['class' => 'Lthrt_ContactBundle_Entity_Address', 'id' => []],
-        ];
-
-        if ($full) {
-            $json = array_merge($json,
-                [
-                    'contact'     => $this->contact->map(function ($e) {return ['class' => 'Lthrt_ContactBundle_Entity_Contact', 'id' => $e->getId()];})->toArray(),
-                    'demographic' => $this->demographic->map(function ($e) {return ['class' => 'Lthrt_ContactBundle_Entity_Demographic', 'id' => $e->getId()];})->toArray(),
-                    'address'     => $this->address->map(function ($e) {return ['class' => 'Lthrt_ContactBundle_Entity_Address', 'id' => $e->getId()];})->toArray(),
-                ]
-            );
-        }
-
-        return $json;
+        $this->address     = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->contact     = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->demographic = new \Doctrine\Common\Collections\ArrayCollection();
     }
-
 }

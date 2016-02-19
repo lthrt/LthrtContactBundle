@@ -24,29 +24,4 @@ class Demographic
      * @ORM\ManyToOne(targetEntity="DemographicType")
      */
     private $demographicType;
-
-    /** jsonSerialize
-     *
-     */
-    public function JSONSerialize($full = true)
-    {
-        $json = [
-            'class'           => 'Lthrt_ContactBundle_Entity_Demographic',
-            'id'              => $this->id,
-            'active'          => $this->active,
-            'value'           => $this->value,
-            'demographicType' => $this->demographicType ? ['class' => 'Lthrt_ContactBundle_Entity_DemographicType', 'id' => $this->demographicType->id] : '{}',
-        ];
-
-        if ($full) {
-            $json = array_merge($json,
-                [
-                    'demographicType' => $this->demographicType ? ['class' => 'Lthrt_ContactBundle_Entity_DemographicType', 'id' => $this->demographicType->id] : '{}',
-                ]
-            );
-        }
-
-        return $json;
-    }
-
 }
