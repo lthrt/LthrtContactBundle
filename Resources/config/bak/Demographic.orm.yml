@@ -1,19 +1,19 @@
-# Lthrt\ContactBundle\Entity\Demographic:
-#     type: entity
-#     table: demographic
-#     repositoryClass: Lthrt\ContactBundle\Repository\DemographicRepository
+Lthrt\ContactBundle\Entity\Demographic:
+    type: entity
+    table: demographic
+    repositoryClass: Lthrt\ContactBundle\Repository\DemographicRepository
 
-#     fields:
-#         value:
-#             column: value
-#             type: string
-#             length: 63
-#             nullable: false
+    fields:
+        value:
+            column: value
+            type: string
+            length: 63
+            nullable: false
 
-#     manyToOne:
-#         demographicType:
-#             targetEntity: DemographicType
-#             joinColumn:
-#                 name: demographic_type_id
+    manyToOne:
+        demographicType:
+            targetEntity: DemographicType
+            joinColumn:
+                name: demographic_type_id
 
-#     lifecycleCallbacks: { }
+    lifecycleCallbacks: { }

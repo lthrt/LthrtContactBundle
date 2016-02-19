@@ -1,16 +1,16 @@
-# Lthrt\ContactBundle\Entity\DemographicType:
+Lthrt\ContactBundle\Entity\DemographicType:
 
-#     # eg race, ethnicity, gender
+    # eg race, ethnicity, gender
 
-#     type: entity
-#     table: demographic_type
-#     repositoryClass: Lthrt\ContactBundle\Repository\DemographicTypeRepository
+    type: entity
+    table: demographic_type
+    repositoryClass: Lthrt\ContactBundle\Repository\DemographicTypeRepository
 
-#     fields:
-#         name:
-#             column: name
-#             type: string
-#             length: 63
-#             nullable: false
+    fields:
+        name:
+            column: name
+            type: string
+            length: 63
+            nullable: false
 
-#     lifecycleCallbacks: { }
+    lifecycleCallbacks: { }

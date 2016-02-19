@@ -5,15 +5,15 @@ namespace Lthrt\ContactBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * AddressType
+ * DemographicType
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Lthrt\ContactBundle\Repository\AddressTypeRepository")
+ * @ORM\Entity(repositoryClass="Lthrt\ContactBundle\Repository\DemographicTypeRepository")
  *
- *  eg work, home
+ * eg gender, race, ethnicity
  *
  */
 
-class AddressType implements \JSONSerializable
+class DemographicType implements \JSONSerializable
 {
     use \Lthrt\EntityJSONBundle\Entity\EntityTrait;
     use \Lthrt\EntityJSONBundle\Entity\LoggedTrait;
@@ -32,7 +32,7 @@ class AddressType implements \JSONSerializable
     public function JSONSerialize($full = true)
     {
         $json = [
-            'class' => 'Lthrt_ContactBundle_Entity_AddressType',
+            'class' => 'Lthrt_ContactBundle_Entity_DemographicType',
             'id'    => $this->id,
             'name'  => $this->name,
         ];
