@@ -50,13 +50,6 @@ class Address implements \JSONSerializable
      * @var \Doctrine\Common\Collections\Collection
      */
     private $person;
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->person = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /** jsonSerialize
      *

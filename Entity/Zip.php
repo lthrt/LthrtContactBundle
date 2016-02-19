@@ -32,15 +32,6 @@ class Zip implements \JSONSerializable
      * @var \Doctrine\Common\Collections\Collection
      */
     private $state;
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->city   = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->county = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->state  = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /** jsonSerialize
      *

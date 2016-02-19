@@ -31,7 +31,7 @@ class PersonController extends Controller
             $em->persist($person);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('person_show', [ 'person' => $person->getId() ]));
+            return $this->redirect($this->generateUrl('person_show', ['person' => $person->getId()]));
         }
 
         return $this->render('LthrtContactBundle:Person:new.html.twig', [
@@ -146,7 +146,7 @@ class PersonController extends Controller
             $em->persist($person);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('person_show', [ 'person' => $person->getId() ]));
+            return $this->redirect($this->generateUrl('person_show', ['person' => $person->getId()]));
         }
 
         $deleteForm = $this->createDeleteForm($person);

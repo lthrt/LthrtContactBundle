@@ -32,11 +32,6 @@ class City implements \JSONSerializable
     /**
      * Constructor
      */
-    public function __construct()
-    {
-        $this->zip    = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->county = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /** jsonSerialize
      *

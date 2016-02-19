@@ -19,37 +19,58 @@ class Person implements \JSONSerializable
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="first_name", type="string", length=255)
      */
     private $firstName;
+
     /**
      * @var string
+     *
+     * @ORM\Column(name="last_name", type="string", length=255)
      */
     private $lastName;
+
     /**
-     * @var date
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dob", type="date")
      */
     private $dob;
+
     /**
      * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Contact")
+     * @ORM\JoinTable(name="person__contact",
+     *     joinColumns={@ORM\JoinColumn(name="person_id", referencedColumnName="id")})
+     *     inverseJoinColumns={@ORM\JoinColumn(name="contact_id", referencedColumnName="id")}
+     * )
      */
+
     private $contact;
     /**
      * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Demographic")
+     * @ORM\JoinTable(name="person__demographic",
+     *     joinColumns={@Orm\Joincolumn(name="person_id", referencedColumnName="id")})
+     *     inverseJoinColumns={@Orm\Joincolumn(name="demographic_id", referencedColumnName="id")}
+     * )
      */
     private $demographic;
+
     /**
      * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Address")
+     * @ORM\JoinTable(name="person__address",
+     *     joinColumns={@Orm\Joincolumn(name="person_id", referencedColumnName="id")})
+     *     inverseJoinColumns={@Orm\Joincolumn(name="address_id", referencedColumnName="id")}
+     * )
      */
+
     private $address;
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->contact     = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->demographic = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->address     = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /** jsonSerialize
      *
