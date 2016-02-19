@@ -17,13 +17,7 @@ class DemographicType implements \JSONSerializable
 {
     use \Lthrt\EntityJSONBundle\Entity\ActiveTrait;
     use \Lthrt\EntityJSONBundle\Entity\EntityTrait;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=255)
-     */
-    private $name;
+    use \Lthrt\EntityJSONBundle\Entity\NameTrait;
 
     /**
      * JSONSerialize
@@ -31,9 +25,10 @@ class DemographicType implements \JSONSerializable
     public function JSONSerialize($full = true)
     {
         $json = [
-            'class' => 'Lthrt_ContactBundle_Entity_DemographicType',
-            'id'    => $this->id,
-            'name'  => $this->name,
+            'class'  => 'Lthrt_ContactBundle_Entity_DemographicType',
+            'id'     => $this->id,
+            'active' => $this->active,
+            'name'   => $this->name,
         ];
 
         return $json;

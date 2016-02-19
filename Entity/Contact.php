@@ -16,15 +16,12 @@ class Contact implements \JSONSerializable
     use \Lthrt\EntityJSONBundle\Entity\ActiveTrait;
     use \Lthrt\EntityJSONBundle\Entity\EntityTrait;
     use \Lthrt\EntityJSONBundle\Entity\LoggedTrait;
+    use \Lthrt\EntityJSONBundle\Entity\ValueTrait;
 
-    /**
-     * @var string
-     */
-    protected $value;
     /**
      * @var \Lthrt\ContactBundle\Entity\ContactType
      */
-    protected $contactType;
+    private $contactType;
 
     /** jsonSerialize
      *
@@ -34,6 +31,7 @@ class Contact implements \JSONSerializable
         $json = [
             'class'       => 'Lthrt_ContactBundle_Entity_Contact',
             'id'          => $this->id,
+            'active'      => $this->active,
             'value'       => $this->value,
             'contactType' => $this->contactType ? ['class' => 'Lthrt_ContactBundle_Entity_ContactType', 'id' => $this->contactType->id] : '{}',
         ];

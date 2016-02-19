@@ -21,35 +21,35 @@ class Address implements \JSONSerializable
     /**
      * @var string
      */
-    protected $line;
+    private $line;
     /**
      * @var string
      */
-    protected $line2;
+    private $line2;
     /**
      * @var string
      */
-    protected $zipExt;
+    private $zipExt;
     /**
      * @var \Lthrt\ContactBundle\Entity\AddressType
      */
-    protected $addressType;
+    private $addressType;
     /**
      * @var \Lthrt\ContactBundle\Entity\City
      */
-    protected $city;
+    private $city;
     /**
      * @var \Lthrt\ContactBundle\Entity\State
      */
-    protected $state;
+    private $state;
     /**
      * @var \Lthrt\ContactBundle\Entity\Zip
      */
-    protected $zip;
+    private $zip;
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
-    protected $person;
+    private $person;
     /**
      * Constructor
      */
@@ -66,6 +66,7 @@ class Address implements \JSONSerializable
         $json = [
             'class'       => 'Lthrt_ContactBundle_Entity_Address',
             'id'          => $this->id,
+            'active'      => $this->active,
             'line'        => $this->line,
             'line2'       => $this->line2,
             'zipExt'      => $this->zipExt,

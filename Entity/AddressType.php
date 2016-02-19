@@ -17,13 +17,7 @@ class AddressType implements \JSONSerializable
 {
     use \Lthrt\EntityJSONBundle\Entity\ActiveTrait;
     use \Lthrt\EntityJSONBundle\Entity\EntityTrait;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=255)
-     */
-    protected $name;
+    use \Lthrt\EntityJSONBundle\Entity\NameTrait;
 
     /** jsonSerialize
      *
@@ -31,9 +25,10 @@ class AddressType implements \JSONSerializable
     public function JSONSerialize($full = true)
     {
         $json = [
-            'class' => 'Lthrt_ContactBundle_Entity_AddressType',
-            'id'    => $this->id,
-            'name'  => $this->name,
+            'class'  => 'Lthrt_ContactBundle_Entity_AddressType',
+            'id'     => $this->id,
+            'active' => $this->active,
+            'name'   => $this->name,
         ];
 
         return $json;

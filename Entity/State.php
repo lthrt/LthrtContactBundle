@@ -13,29 +13,23 @@ use Doctrine\ORM\Mapping as ORM;
 
 class State implements \JSONSerializable
 {
+    use \Lthrt\EntityJSONBundle\Entity\AbbrTrait;
     use \Lthrt\EntityJSONBundle\Entity\ActiveTrait;
     use \Lthrt\EntityJSONBundle\Entity\EntityTrait;
+    use \Lthrt\EntityJSONBundle\Entity\NameTrait;
 
     /**
-     * @var string
+     * @var \Doctrine\Common\Collections\Collection
      */
-    protected $abbr;
-    /**
-     * @var string
-     */
-    protected $name;
+    private $city;
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
-    protected $city;
+    private $county;
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
-    protected $county;
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    protected $zip;
+    private $zip;
     /**
      * Constructor
      */
@@ -54,6 +48,7 @@ class State implements \JSONSerializable
         $json = [
             'class'  => 'Lthrt_ContactBundle_Entity_State',
             'id'     => $this->id,
+            'active' => $this->active,
             'abbr'   => $this->abbr,
             'name'   => $this->name,
             'city'   => ['class' => 'Lthrt_ContactBundle_Entity_City', 'id' => []],

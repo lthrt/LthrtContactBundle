@@ -20,27 +20,27 @@ class Person implements \JSONSerializable
     /**
      * @var string
      */
-    protected $firstName;
+    private $firstName;
     /**
      * @var string
      */
-    protected $lastName;
+    private $lastName;
     /**
      * @var date
      */
-    protected $dob;
+    private $dob;
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
-    protected $contact;
+    private $contact;
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
-    protected $demographic;
+    private $demographic;
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
-    protected $address;
+    private $address;
     /**
      * Constructor
      */
@@ -59,6 +59,7 @@ class Person implements \JSONSerializable
         $json = [
             'class'       => 'Lthrt_ContactBundle_Entity_Person',
             'id'          => $this->id,
+            'active'      => $this->active,
             'firstName'   => $this->firstName,
             'lastName'    => $this->lastName,
             'dob'         => $this->dob,

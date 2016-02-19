@@ -15,23 +15,20 @@ class County implements \JSONSerializable
 {
     use \Lthrt\EntityJSONBundle\Entity\ActiveTrait;
     use \Lthrt\EntityJSONBundle\Entity\EntityTrait;
+    use \Lthrt\EntityJSONBundle\Entity\NameTrait;
 
-    /**
-     * @var string
-     */
-    protected $name;
     /**
      * @var \Lthrt\ContactBundle\Entity\State
      */
-    protected $state;
+    private $state;
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
-    protected $city;
+    private $city;
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
-    protected $zip;
+    private $zip;
     /**
      * Constructor
      */
@@ -47,12 +44,13 @@ class County implements \JSONSerializable
     public function JSONSerialize($full = true)
     {
         $json = [
-            'class' => 'Lthrt_ContactBundle_Entity_County',
-            'id'    => $this->id,
-            'name'  => $this->name,
-            'state' => $this->state ? ['class' => 'Lthrt_ContactBundle_Entity_State', 'id' => $this->state->id] : '{}',
-            'city'  => ['class' => 'Lthrt_ContactBundle_Entity_City', 'id' => []],
-            'zip'   => ['class' => 'Lthrt_ContactBundle_Entity_Zip', 'id' => []],
+            'class'  => 'Lthrt_ContactBundle_Entity_County',
+            'id'     => $this->id,
+            'active' => $this->active,
+            'name'   => $this->name,
+            'state'  => $this->state ? ['class' => 'Lthrt_ContactBundle_Entity_State', 'id' => $this->state->id] : '{}',
+            'city'   => ['class' => 'Lthrt_ContactBundle_Entity_City', 'id' => []],
+            'zip'    => ['class' => 'Lthrt_ContactBundle_Entity_Zip', 'id' => []],
         ];
 
         if ($full) {

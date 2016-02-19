@@ -16,15 +16,12 @@ class Demographic implements \JSONSerializable
     use \Lthrt\EntityJSONBundle\Entity\ActiveTrait;
     use \Lthrt\EntityJSONBundle\Entity\EntityTrait;
     use \Lthrt\EntityJSONBundle\Entity\LoggedTrait;
+    use \Lthrt\EntityJSONBundle\Entity\ValueTrait;
 
-    /**
-     * @var string
-     */
-    protected $value;
     /**
      * @var \Lthrt\ContactBundle\Entity\DemographicType
      */
-    protected $demographicType;
+    private $demographicType;
 
     /** jsonSerialize
      *
@@ -34,6 +31,7 @@ class Demographic implements \JSONSerializable
         $json = [
             'class'           => 'Lthrt_ContactBundle_Entity_Demographic',
             'id'              => $this->id,
+            'active'          => $this->active,
             'value'           => $this->value,
             'demographicType' => $this->demographicType ? ['class' => 'Lthrt_ContactBundle_Entity_DemographicType', 'id' => $this->demographicType->id] : '{}',
         ];

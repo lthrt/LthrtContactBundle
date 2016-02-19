@@ -15,23 +15,20 @@ class City implements \JSONSerializable
 {
     use \Lthrt\EntityJSONBundle\Entity\ActiveTrait;
     use \Lthrt\EntityJSONBundle\Entity\EntityTrait;
+    use \Lthrt\EntityJSONBundle\Entity\NameTrait;
 
-    /**
-     * @var string
-     */
-    protected $name;
     /**
      * @var \Lthrt\ContactBundle\Entity\State
      */
-    protected $state;
+    private $state;
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
-    protected $zip;
+    private $zip;
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
-    protected $county;
+    private $county;
     /**
      * Constructor
      */
@@ -49,6 +46,7 @@ class City implements \JSONSerializable
         $json = [
             'class'  => 'Lthrt_ContactBundle_Entity_City',
             'id'     => $this->id,
+            'active' => $this->active,
             'name'   => $this->name,
             'state'  => $this->state ? ['class' => 'Lthrt_ContactBundle_Entity_State', 'id' => $this->state->id] : '{}',
             'zip'    => ['class' => 'Lthrt_ContactBundle_Entity_Zip', 'id' => []],

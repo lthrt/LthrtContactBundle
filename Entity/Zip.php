@@ -19,19 +19,19 @@ class Zip implements \JSONSerializable
     /**
      * @var string
      */
-    protected $zip;
+    private $zip;
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
-    protected $city;
+    private $city;
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
-    protected $county;
+    private $county;
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
-    protected $state;
+    private $state;
     /**
      * Constructor
      */
@@ -50,6 +50,7 @@ class Zip implements \JSONSerializable
         $json = [
             'class'  => 'Lthrt_ContactBundle_Entity_Zip',
             'id'     => $this->id,
+            'active' => $this->active,
             'zip'    => $this->zip,
             'city'   => ['class' => 'Lthrt_ContactBundle_Entity_City', 'id' => []],
             'county' => ['class' => 'Lthrt_ContactBundle_Entity_County', 'id' => []],
