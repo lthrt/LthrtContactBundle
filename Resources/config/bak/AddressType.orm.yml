@@ -1,0 +1,16 @@
+# Lthrt\ContactBundle\Entity\AddressType:
+
+#     # eg work, home
+
+#     type: entity
+#     table: address_type
+#     repositoryClass: Lthrt\ContactBundle\Repository\AddressTypeRepository
+
+#     fields:
+#         name:
+#             column: name
+#             type: string
+#             length: 63
+#             nullable: false
+
+#     lifecycleCallbacks: { }
