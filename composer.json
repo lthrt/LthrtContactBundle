@@ -17,7 +17,7 @@
     ],
     "require": {
         "php": ">=5.3.2",
-        "lthrt/entity-json-bundle": "dev-traits"
+        "lthrt/entity-bundle": "dev-traits"
     },
     "repositories": [
         {
