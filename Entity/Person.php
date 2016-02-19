@@ -42,32 +42,24 @@ class Person
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="Contact")
-     * @ORM\JoinTable(name="person__contact",
-     *     joinColumns={@ORM\JoinColumn(name="person_id", referencedColumnName="id")})
-     *     inverseJoinColumns={@ORM\JoinColumn(name="contact_id", referencedColumnName="id")}
-     * )
+     * @ORM\JoinTable(name="person__contact")
      */
 
     private $contact;
+
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="Demographic")
-     * @ORM\JoinTable(name="person__demographic",
-     *     joinColumns={@Orm\Joincolumn(name="person_id", referencedColumnName="id")})
-     *     inverseJoinColumns={@Orm\Joincolumn(name="demographic_id", referencedColumnName="id")}
-     * )
+     * @ORM\JoinTable(name="person__demographic")
      */
     private $demographic;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="Address")
-     * @ORM\JoinTable(name="person__address",
-     *     joinColumns={@Orm\Joincolumn(name="person_id", referencedColumnName="id")})
-     *     inverseJoinColumns={@Orm\Joincolumn(name="address_id", referencedColumnName="id")}
-     * )
+     * @ORM\ManyToMany(targetEntity="Address", inversedBy="person")
+     * @ORM\JoinTable(name="person__address")
      */
 
     private $address;

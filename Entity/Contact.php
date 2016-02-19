@@ -20,6 +20,8 @@ class Contact
 
     /**
      * @var \Lthrt\ContactBundle\Entity\ContactType
+     *
+     * @ORM\ManyToOne(targetEntity="ContactType")
      */
     private $contactType;
 

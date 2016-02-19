@@ -18,15 +18,23 @@ class County
     use \Lthrt\EntityBundle\Entity\NameTrait;
 
     /**
-     * @var \Lthrt\ContactBundle\Entity\State
-     */
-    private $state;
-    /**
      * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="City", inversedBy="county")
      */
     private $city;
+
+    /**
+     * @var \Lthrt\ContactBundle\Entity\State
+     *
+     * @ORM\ManyToMany(targetEntity="State", inversedBy="county")
+     */
+    private $state;
+
     /**
      * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Zip", mappedBy="county")
      */
     private $zip;
 

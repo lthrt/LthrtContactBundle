@@ -20,6 +20,8 @@ class Demographic
 
     /**
      * @var \Lthrt\ContactBundle\Entity\DemographicType
+     *
+     * @ORM\ManyToOne(targetEntity="DemographicType")
      */
     private $demographicType;
 

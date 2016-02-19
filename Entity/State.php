@@ -20,14 +20,22 @@ class State
 
     /**
      * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="City", mappedBy="state")
      */
     private $city;
+
     /**
      * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="County", mappedBy="state")
      */
     private $county;
+
     /**
      * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Zip", mappedBy="state")
      */
     private $zip;
 

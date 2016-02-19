@@ -20,34 +20,57 @@ class Address
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="line", type="string", length=255)
      */
     private $line;
+
     /**
      * @var string
+     *
+     * @ORM\Column(name="line2", type="string", length=255)
      */
     private $line2;
+
     /**
      * @var string
+     *
+     * @ORM\Column(name="zip_ext", type="string", length=4)
      */
     private $zipExt;
+
     /**
      * @var \Lthrt\ContactBundle\Entity\AddressType
+     *
+     * @ORM\ManyToOne(targetEntity="AddressType")
      */
     private $addressType;
+
     /**
      * @var \Lthrt\ContactBundle\Entity\City
+     *
+     * @ORM\ManyToOne(targetEntity="City")
      */
     private $city;
+
     /**
      * @var \Lthrt\ContactBundle\Entity\State
+     *
+     * @ORM\ManyToOne(targetEntity="State")
      */
     private $state;
+
     /**
      * @var \Lthrt\ContactBundle\Entity\Zip
+     *
+     * @ORM\ManyToOne(targetEntity="Zip")
      */
     private $zip;
+
     /**
      * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Person", mappedBy="address")
      */
     private $person;
 

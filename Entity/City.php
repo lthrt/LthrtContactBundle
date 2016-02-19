@@ -18,20 +18,25 @@ class City
     use \Lthrt\EntityBundle\Entity\NameTrait;
 
     /**
-     * @var \Lthrt\ContactBundle\Entity\State
-     */
-    private $state;
-    /**
      * @var \Doctrine\Common\Collections\Collection
-     */
-    private $zip;
-    /**
-     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="County", mappedBy="city")
      */
     private $county;
+
     /**
-     * Constructor
+     * @var \Lthrt\ContactBundle\Entity\State
+     *
+     * @ORM\ManyToOne(targetEntity="State", inversedBy="city")
      */
+    private $state;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Zip", mappedBy="city")
+     */
+    private $zip;
 
     /** jsonSerialize
      *
