@@ -6,7 +6,7 @@
         "contact",
         "bundle"
     ],
-    "homepage": "https://github.com/lthrt/ContactBundle",
+    "homepage": "https://github.com/lthrt/LthrtContactBundle",
     "license": "MIT",
     "type": "symfony-bundle",
     "authors": [
@@ -22,7 +22,7 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/lthrt/EntityJSONBundle.git"
+            "url": "https://github.com/lthrt/LthrtEntityBundle.git"
         }
     ],
     "require-dev": {
