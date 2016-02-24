@@ -2,7 +2,8 @@
 
 {% block body -%}
     <h1>Person</h1>
-{{person.log.log|json_pretty|raw}}
+{{logger.current|json_pretty|raw}}
+{{logger.log|json_pretty|raw}}
     <table class="record_properties">
         <tbody>
             <tr>
