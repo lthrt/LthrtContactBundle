@@ -1,17 +1,4 @@
 <?php
-
-/*
- * This file is part of the Doctrine Bundle
- *
- * The code was originally distributed inside the Symfony framework.
- *
- * (c) Fabien Potencier <fabien@symfony.com>
- * (c) Doctrine Project, Benjamin Eberlei <kontakt@beberlei.de>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 namespace Lthrt\ContactBundle\Command;
 
 use Lthrt\ContactBundle\DataFixtures\StatesLoader;
@@ -20,15 +7,6 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-/**
- * Generate entity classes from mapping information.
- *
- * @author Fabien Potencier <fabien@symfony.com>
- * @author Jonathan H. Wage <jonwage@gmail.com>
- * @author  lthrt <lighthart.coder@gmail.com>
- *
- * Modified by lthrt to be more in line with his purposes
- */
 class LoadStatesCommand extends ContainerAwareCommand
 {
     /**
@@ -48,7 +26,7 @@ States are 'present' in database if their abbreviation already exists
 
 
 EOT
-        );
+            );
     }
 
     /**

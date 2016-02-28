@@ -34,13 +34,13 @@ class StatesLoader
             }
             if (in_array($abbr, array_keys($dbStates))) {
                 $state                = $dbStates[$abbr];
-                $updatedStates[$abbr] = $state->getAbbr();
+                $updatedStates[$abbr] = $state->abbr;
             } else {
                 $state            = new State();
-                $newStates[$abbr] = $state->getAbbr();
+                $newStates[$abbr] = $state->abbr;
             }
-            $state->setAbbr($abbr);
-            $state->setName($name);
+            $state->abbr = $abbr;
+            $state->name = $name;
             $this->em->persist($state);
             $this->em->flush();
         }

@@ -4,6 +4,7 @@ namespace Lthrt\ContactBundle\Controller;
 
 use Lthrt\ContactBundle\Controller\ControllerTrait\PersonFormController;
 use Lthrt\ContactBundle\Entity\Person;
+use Lthrt\EntityBundle\Model\EntityLogger;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -31,7 +32,7 @@ class PersonController extends Controller
             $em->persist($person);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('person_show', [ 'person' => $person->getId() ]));
+            return $this->redirect($this->generateUrl('person_show', ['person' => $person->getId()]));
         }
 
         return $this->render('LthrtContactBundle:Person:new.html.twig', [
@@ -120,10 +121,16 @@ class PersonController extends Controller
             throw $this->createNotFoundException('Unable to find Person entity.');
         }
 
+        $logger = new EntityLogger(
+            $person,
+            $this->getDoctrine()->getManager()
+        );
+
         $deleteForm = $this->createDeleteForm($person);
 
         return $this->render('LthrtContactBundle:Person:show.html.twig', [
             'person'      => $person,
+            'logger'      => $logger,
             'delete_form' => $deleteForm->createView(),
         ]);
     }
@@ -146,7 +153,7 @@ class PersonController extends Controller
             $em->persist($person);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('person_show', [ 'person' => $person->getId() ]));
+            return $this->redirect($this->generateUrl('person_show', ['person' => $person->getId()]));
         }
 
         $deleteForm = $this->createDeleteForm($person);

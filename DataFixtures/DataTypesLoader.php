@@ -36,8 +36,9 @@ class DataTypesLoader
                     }
                 } else {
                     $result['newTypes'][$upperDataType . "/" . $type] = $type;
-                    $entity                                           = new $namespacedDataType();
-                    $entity->setName($type);
+
+                    $entity       = new $namespacedDataType();
+                    $entity->name = $type;
                     $this->em->persist($entity);
                 }
             }

@@ -29,7 +29,7 @@ class FakePeopleLoader
 
         // Sample data does not have last/first collisions
         foreach ($dbPeople as $key => $person) {
-            $updatedPeople[$person->getLastName()][$person->getFirstName()] = $person;
+            $updatedPeople[$person->lastName][$person->firstName] = $person;
         }
 
         unset($dbPeople);
@@ -42,17 +42,18 @@ class FakePeopleLoader
                 if (in_array($last, array_keys($updatedPeople))
                     && in_array($first, array_keys($updatedPeople[$last]))
                 ) {
-                    $person                                                          = $updatedPeople[$last][$first];
-                    $updates[$person->getFirstName() . " " . $person->getLastName()] = 1;
+                    $person = $updatedPeople[$last][$first];
+
+                    $updates[$person->firstName . " " . $person->lastName] = 1;
                 } else {
                     $person                    = new Person();
                     $newPeople[$last][$first]  = $person;
                     $new[$first . " " . $last] = 1;
                     unset($updatedPeople[$last][$first]);
                 }
-                $person->setFirstName($first);
-                $person->setLastName($last);
-                $person->setDob($dob);
+                $person->firstName = $first;
+                $person->lastName  = $last;
+                $person->dob       = $dob;
                 $this->em->persist($person);
                 $this->em->flush();
             }
