@@ -2,8 +2,9 @@
 
 {% block body -%}
     <h1>Person</h1>
-{{logger.current|json_pretty|raw}}
-{{logger.log|json_pretty|raw}}
+    {% for item in log %}
+        {{ item.log|json_pretty|raw }}
+    {% endfor %}
     <table class="record_properties">
         <tbody>
             <tr>
@@ -21,17 +22,17 @@
         </tbody>
     </table>
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('person') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('person_edit', { 'person' : person.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+    <ul class="record_actions">
+        <li>
+            <a href="{{ path('person') }}">
+                Back to the list
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('person_edit', { 'person' : person.id }) }}">
+                Edit
+            </a>
+        </li>
+        <li>{{ form(delete_form) }}</li>
+    </ul>
 {% endblock body %}

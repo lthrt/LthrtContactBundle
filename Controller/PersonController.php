@@ -121,16 +121,14 @@ class PersonController extends Controller
             throw $this->createNotFoundException('Unable to find Person entity.');
         }
 
-        $logger = new EntityLogger(
-            $person,
-            $this->getDoctrine()->getManager()
-        );
+        $logger = new EntityLogger($this->getDoctrine()->getManager());
+        $log    = $logger->findLog($person);
 
         $deleteForm = $this->createDeleteForm($person);
 
         return $this->render('LthrtContactBundle:Person:show.html.twig', [
             'person'      => $person,
-            'logger'      => $logger,
+            'log'         => $log,
             'delete_form' => $deleteForm->createView(),
         ]);
     }
