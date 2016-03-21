@@ -23,5 +23,5 @@ class Contact
      *
      * @ORM\ManyToOne(targetEntity="ContactType")
      */
-    private $contactType;
+    private $type;
 }

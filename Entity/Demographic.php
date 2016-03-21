@@ -23,5 +23,5 @@ class Demographic
      *
      * @ORM\ManyToOne(targetEntity="DemographicType")
      */
-    private $demographicType;
+    private $type;
 }

@@ -2,6 +2,7 @@
 namespace Lthrt\ContactBundle\DataFixtures;
 
 use Lthrt\ContactBundle\DataFixtures\DataTrait\FakePeopleTrait;
+use Lthrt\ContactBundle\Entity\Demographic;
 use Lthrt\ContactBundle\Entity\Person;
 
 class FakePeopleLoader
@@ -18,10 +19,33 @@ class FakePeopleLoader
         $this->people = $this->getPeople();
     }
 
+    public function getRaces()
+    {
+
+        $qb = $this->em->getRepository('LthrtContactBundle:Demographic')
+            ->createQueryBuilder('race', 'race.value');
+        $qb->join('race.type', 'demotype')
+            ->andWhere($qb->expr()->eq('demotype.name', ':demotype'))
+            ->setParameter('demotype', 'race');
+
+        return $qb->getQuery()->getResult();
+    }
+
     public function loadFakePeople($overwrite = false)
     {
         $dbPeople = $this->em->getRepository('LthrtContactBundle:Person')
             ->createQueryBuilder('people')->getQuery()->getResult();
+        $races    = $this->getRaces();
+        $raceType = $this->em->getRepository('LthrtContactBundle:DemographicType')
+            ->createQueryBuilder('demotype');
+        $raceType = $raceType
+            ->andWhere($raceType->expr()->eq('demotype.name', ':demotype'))
+            ->setParameter('demotype', 'race')->getQuery()->getOneOrNullResult();
+
+        if ($raceType) {
+        } else {
+            throw new \Exception("Demographic types must be loaded first. \n" . __FILE__ . ': ' . __LINE__);
+        }
 
         $updatedPeople = [];
         $updates       = [];
@@ -34,11 +58,26 @@ class FakePeopleLoader
 
         unset($dbPeople);
 
-        foreach ($this->people as $last => $rest) {
-            foreach ($rest as $first => $dob) {
-                if ('header' == $last) {
+        foreach ($this->people as $lastName => $rest) {
+            foreach ($rest as $firstName => $dataRow) {
+                if ('header' == $lastName) {
                     continue;
                 }
+                $last  = $dataRow[$this->people['header']['last']];
+                $first = $dataRow[$this->people['header']['first']];
+                $dob   = $dataRow[$this->people['header']['dob']];
+                $race  = $dataRow[$this->people['header']['race']];
+
+                if (isset($races[$race])) {
+                } else {
+                    $newRace        = new Demographic();
+                    $newRace->value = $race;
+                    $newRace->type  = $raceType;
+                    $this->em->persist($newRace);
+                    $this->em->flush();
+                    $races = $this->getRaces();
+                }
+
                 if (in_array($last, array_keys($updatedPeople))
                     && in_array($first, array_keys($updatedPeople[$last]))
                 ) {
@@ -53,7 +92,8 @@ class FakePeopleLoader
                 }
                 $person->firstName = $first;
                 $person->lastName  = $last;
-                $person->dob       = $dob;
+                $person->dob       = new \DateTime($dob);
+                $person->addDemographic($races[$race]);
                 $this->em->persist($person);
                 $this->em->flush();
             }

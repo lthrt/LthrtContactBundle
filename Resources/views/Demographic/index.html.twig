@@ -6,7 +6,8 @@
     <table class="records_list">
         <thead>
             <tr>
-                <th>Value</th>
+                <th>Name</th>
+                <th>Type</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -14,6 +15,7 @@
         {% for demographic in demographicCollection %}
             <tr>
                 <td><a href="{{ path('demographic_show', { 'demographic': demographic.id }) }}">{{ demographic.value }}</a></td>
+                <td>{{ demographic.type.name }}</td>
                 <td>
                 <ul>
                     <li>

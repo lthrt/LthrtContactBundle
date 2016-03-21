@@ -2,7 +2,6 @@
 
 {% block body -%}
     <h1>Person</h1>
-    {{ log|json_pretty|raw}}
     <table class="record_properties">
         <tbody>
             <tr>
@@ -15,7 +14,19 @@
             </tr>
             <tr>
                 <th>Dob</th>
-                <td>{{ person.dob|date('Y-m-d H:i:s') }}</td>
+                <td>{{ person.dob|date('Y-m-d') }}</td>
+            </tr>
+            <tr>
+                <th>Demo</th>
+                <td>
+                    <ul>
+                        {%- for demo in person.demographic -%}
+                            <li>
+                                {{-demo.value-}}
+                            </li>
+                        {%- endfor -%}
+                    </ul>
+                </td>
             </tr>
         </tbody>
     </table>
@@ -33,4 +44,5 @@
         </li>
         <li>{{ form(delete_form) }}</li>
     </ul>
+    {{ log|json_pretty|raw}}
 {% endblock body %}

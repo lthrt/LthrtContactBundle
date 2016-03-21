@@ -21,6 +21,7 @@ class County
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="City", inversedBy="county")
+     * @ORM\JoinTable(name="county__city"))
      */
     private $city;
 
@@ -28,6 +29,7 @@ class County
      * @var \Lthrt\ContactBundle\Entity\State
      *
      * @ORM\ManyToMany(targetEntity="State", inversedBy="county")
+     * @ORM\JoinTable(name="county__state"))
      */
     private $state;
 

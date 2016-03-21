@@ -16,7 +16,10 @@ class DemographicType extends AbstractType
     {
         $builder
             ->add('value')
-            ->add('demographicType');
+            ->add('demographicType', null, [
+                'choice_label'      => 'name',
+                'choices_as_values' => true,
+            ]);
     }
 
     /**

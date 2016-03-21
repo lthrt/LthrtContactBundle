@@ -19,7 +19,7 @@ class PersonType extends AbstractType
             ->add('lastName')
             ->add('dob')
             ->add('contact', null, ['property' => 'value'])
-            ->add('demographic')
+            ->add('demographic', null, ['property' => 'value'])
             ->add('address');
     }
 

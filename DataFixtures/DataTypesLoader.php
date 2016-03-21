@@ -18,9 +18,6 @@ class DataTypesLoader
 
     public function loadDataTypes($overwrite = false)
     {
-        // $dbStates = $this->em->getRepository('LthrtContactBundle:DemographicType')
-        // ->createQueryBuilder('state', 'state.abbr')->getQuery()->getResult();
-
         foreach (['address', 'contact', 'demographic'] as $types) {
             $dataType           = $types . "Type";
             $dataTypes          = $dataType . "s";

@@ -44,7 +44,7 @@ class Address
      *
      * @ORM\ManyToOne(targetEntity="AddressType")
      */
-    private $addressType;
+    private $type;
 
     /**
      * @var \Lthrt\ContactBundle\Entity\City

@@ -9,6 +9,7 @@
                 <th>Firstname</th>
                 <th>Lastname</th>
                 <th>Dob</th>
+                <th>Demographics</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -17,7 +18,17 @@
             <tr>
                 <td><a href="{{ path('person_show', { 'person': person.id }) }}">{{ person.firstName }}</a></td>
                 <td>{{ person.lastName }}</td>
-                <td>{% if person.dob %}{{ person.dob|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if person.dob %}{{ person.dob|date('Y-m-d') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        {%- for demo in person.demographic -%}
+                            <li>
+                                {{-demo.value-}}
+                            </li>
+                        {%- endfor -%}
+                    </ul>
+                </td>
+
                 <td>
                 <ul>
                     <li>

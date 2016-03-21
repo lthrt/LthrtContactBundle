@@ -28,6 +28,7 @@ class City
      * @var \Lthrt\ContactBundle\Entity\State
      *
      * @ORM\ManyToOne(targetEntity="State", inversedBy="city")
+     * @ORM\JoinTable(name="city__state")
      */
     private $state;
 
