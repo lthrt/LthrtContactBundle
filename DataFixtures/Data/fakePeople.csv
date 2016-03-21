@@ -1,8 +1,8 @@
-last,first,dob,race
-The Destroyer,Sennakerib,2015-04-24,Dog
-The Surly,Misha,2000-08-29,Dog
-The Jerk,Jane,2014-02-12,Cat
-The Happy,Dima,2002-07-04,Dog
+last,first,dob,race,ethnicity
+The Destroyer,Sennakerib,2015-04-24,Dog,Australian
+The Surly,Misha,2000-08-29,Dog,Alaskan
+The Jerk,Jane,2014-02-12,Cat,
+The Happy,Dima,2002-07-04,Dog,American
 
 
 
