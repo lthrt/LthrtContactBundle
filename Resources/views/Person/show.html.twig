@@ -2,9 +2,7 @@
 
 {% block body -%}
     <h1>Person</h1>
-    {% for item in log %}
-        {{ item.log|json_pretty|raw }}
-    {% endfor %}
+    {{ log|json_pretty|raw}}
     <table class="record_properties">
         <tbody>
             <tr>
