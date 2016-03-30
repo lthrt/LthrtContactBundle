@@ -5,18 +5,18 @@
 services:
     contact.city.atom:
         class: Lthrt\ContactBundle\Form\Atom\CityAtom
-        arguments: [@doctrine.orm.entity_manager, @security.token_storage]
+        arguments: ["@doctrine.orm.entity_manager", "@security.token_storage"]
         tags:
             - { name: form.type, alias: city }
 
     contact.county.atom:
         class: Lthrt\ContactBundle\Form\Atom\CountyAtom
-        arguments: [@doctrine.orm.entity_manager, @security.token_storage]
+        arguments: ["@doctrine.orm.entity_manager", "@security.token_storage"]
         tags:
             - { name: form.type, alias: county }
 
     contact.state.atom:
         class: Lthrt\ContactBundle\Form\Atom\StateAtom
-        arguments: [@doctrine.orm.entity_manager, @security.token_storage]
+        arguments: ["@doctrine.orm.entity_manager", "@security.token_storage"]
         tags:
             - { name: form.type, alias: state }
