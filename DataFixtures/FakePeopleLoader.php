@@ -21,7 +21,6 @@ class FakePeopleLoader
 
     public function getRaces()
     {
-
         $qb = $this->em->getRepository('LthrtContactBundle:Demographic')
             ->createQueryBuilder('race', 'race.value');
         $qb->join('race.type', 'demotype')
@@ -33,7 +32,6 @@ class FakePeopleLoader
 
     public function getEthnicities()
     {
-
         $qb = $this->em->getRepository('LthrtContactBundle:Demographic')
             ->createQueryBuilder('race', 'race.value');
         $qb->join('race.type', 'demotype')
@@ -116,7 +114,7 @@ class FakePeopleLoader
                 } else {
                     $person                    = new Person();
                     $newPeople[$last][$first]  = $person;
-                    $new[$first . " " . $last] = 1;
+                    $new[$first . " " . $last]     = 1;
                     unset($updatedPeople[$last][$first]);
                 }
                 $person->firstName = $first;

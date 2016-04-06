@@ -5,15 +5,13 @@ namespace Lthrt\ContactBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Address
+ * Address.
+ *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Lthrt\ContactBundle\Repository\AddressRepository")
- *
  */
-
 class Address
 {
-
     use \Lthrt\EntityBundle\Entity\ActiveTrait;
     use \Lthrt\EntityBundle\Entity\EntityTrait;
     use \Lthrt\EntityBundle\Entity\LoggedTrait;

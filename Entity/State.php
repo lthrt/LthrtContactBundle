@@ -5,12 +5,11 @@ namespace Lthrt\ContactBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * State
+ * State.
+ *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Lthrt\ContactBundle\Repository\StateRepository")
- *
  */
-
 class State
 {
     use \Lthrt\EntityBundle\Entity\AbbrTrait;

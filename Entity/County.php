@@ -5,12 +5,11 @@ namespace Lthrt\ContactBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * County
+ * County.
+ *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Lthrt\ContactBundle\Repository\CountyRepository")
- *
  */
-
 class County
 {
     use \Lthrt\EntityBundle\Entity\ActiveTrait;

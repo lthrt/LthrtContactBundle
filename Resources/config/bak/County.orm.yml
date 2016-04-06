@@ -41,4 +41,3 @@ Lthrt\ContactBundle\Entity\County:
                     state_id: ~
 
     lifecycleCallbacks: { }
-

@@ -5,12 +5,11 @@ namespace Lthrt\ContactBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Person
+ * Person.
+ *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Lthrt\ContactBundle\Repository\PersonRepository")
- *
  */
-
 class Person
 {
     use \Lthrt\EntityBundle\Entity\ActiveTrait;
@@ -44,7 +43,6 @@ class Person
      * @ORM\ManyToMany(targetEntity="Contact")
      * @ORM\JoinTable(name="person__contact")
      */
-
     private $contact;
 
     /**
@@ -61,7 +59,6 @@ class Person
      * @ORM\ManyToMany(targetEntity="Address", inversedBy="person")
      * @ORM\JoinTable(name="person__address")
      */
-
     private $address;
 
     public function __construct()

@@ -5,12 +5,11 @@ namespace Lthrt\ContactBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Demographic
+ * Demographic.
+ *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Lthrt\ContactBundle\Repository\DemographicRepository")
- *
  */
-
 class Demographic
 {
     use \Lthrt\EntityBundle\Entity\ActiveTrait;

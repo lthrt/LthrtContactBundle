@@ -99,7 +99,7 @@ class ZipLoader extends StatesLoader
             } else {
                 $city                                          = new City();
                 $city->name                                    = $zipRef['city'];
-                $cities[$city->name . '__' . $zipRef['state']] = $city;
+                $cities[$city->name . '__' . $zipRef['state']]     = $city;
                 $result['cities']++;
             }
 

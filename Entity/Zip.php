@@ -5,12 +5,11 @@ namespace Lthrt\ContactBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Zip
+ * Zip.
+ *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Lthrt\ContactBundle\Repository\ZipRepository")
- *
  */
-
 class Zip
 {
     use \Lthrt\EntityBundle\Entity\ActiveTrait;
