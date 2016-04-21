@@ -4,11 +4,11 @@ namespace Lthrt\ContactBundle\Controller\ControllerTrait;
 
 use Lthrt\ContactBundle\Entity\Person;
 use Lthrt\ContactBundle\Form\PersonType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 //
 // PersonFormController Trait.
 //
-
 
 trait PersonFormController
 {
@@ -26,7 +26,7 @@ trait PersonFormController
             'method' => 'POST',
         ]);
 
-        $form->add('submit', 'submit', [ 'label' => 'Create' ]);
+        $form->add('submit', SubmitType::class, ['label' => 'Create']);
 
         return $form;
     }
@@ -41,9 +41,9 @@ trait PersonFormController
     private function createDeleteForm(Person $person)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('person_delete', [ 'person' => $person->getId() ]))
+            ->setAction($this->generateUrl('person_delete', ['person' => $person->getId()]))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', [ 'label' => 'Delete' ])
+            ->add('submit', SubmitType::class, ['label' => 'Delete'])
             ->getForm();
     }
 
@@ -57,11 +57,11 @@ trait PersonFormController
     private function createEditForm(Person $person)
     {
         $form = $this->createForm(new PersonType(), $person, [
-            'action' => $this->generateUrl('person_update', [ 'person' => $person->getId() ]),
+            'action' => $this->generateUrl('person_update', ['person' => $person->getId()]),
             'method' => 'PUT',
         ]);
 
-        $form->add('submit', 'submit', ['label' => 'Update']);
+        $form->add('submit', SubmitType::class, ['label' => 'Update']);
 
         return $form;
     }

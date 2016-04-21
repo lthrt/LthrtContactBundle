@@ -9,7 +9,6 @@ use Lthrt\ContactBundle\Form\AddressTypeType;
 // AddressTypeFormController Trait.
 //
 
-
 trait AddressTypeFormController
 {
     //
@@ -26,7 +25,7 @@ trait AddressTypeFormController
             'method' => 'POST',
         ]);
 
-        $form->add('submit', 'submit', [ 'label' => 'Create' ]);
+        $form->add('submit', SubmitType::class, ['label' => 'Create']);
 
         return $form;
     }
@@ -41,9 +40,9 @@ trait AddressTypeFormController
     private function createDeleteForm(AddressType $addresstype)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('addresstype_delete', [ 'addresstype' => $addresstype->getId() ]))
+            ->setAction($this->generateUrl('addresstype_delete', ['addresstype' => $addresstype->getId()]))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', [ 'label' => 'Delete' ])
+            ->add('submit', SubmitType::class, ['label' => 'Delete'])
             ->getForm();
     }
 
@@ -57,11 +56,11 @@ trait AddressTypeFormController
     private function createEditForm(AddressType $addresstype)
     {
         $form = $this->createForm(new AddressTypeType(), $addresstype, [
-            'action' => $this->generateUrl('addresstype_update', [ 'addresstype' => $addresstype->getId() ]),
+            'action' => $this->generateUrl('addresstype_update', ['addresstype' => $addresstype->getId()]),
             'method' => 'PUT',
         ]);
 
-        $form->add('submit', 'submit', ['label' => 'Update']);
+        $form->add('submit', SubmitType::class, ['label' => 'Update']);
 
         return $form;
     }

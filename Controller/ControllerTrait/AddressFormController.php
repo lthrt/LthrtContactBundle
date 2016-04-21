@@ -9,7 +9,6 @@ use Lthrt\ContactBundle\Form\AddressType;
 // AddressFormController Trait.
 //
 
-
 trait AddressFormController
 {
     //
@@ -26,7 +25,7 @@ trait AddressFormController
             'method' => 'POST',
         ]);
 
-        $form->add('submit', 'submit', [ 'label' => 'Create' ]);
+        $form->add('submit', SubmitType::class, ['label' => 'Create']);
 
         return $form;
     }
@@ -41,9 +40,9 @@ trait AddressFormController
     private function createDeleteForm(Address $address)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('address_delete', [ 'address' => $address->getId() ]))
+            ->setAction($this->generateUrl('address_delete', ['address' => $address->getId()]))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', [ 'label' => 'Delete' ])
+            ->add('submit', SubmitType::class, ['label' => 'Delete'])
             ->getForm();
     }
 
@@ -57,11 +56,11 @@ trait AddressFormController
     private function createEditForm(Address $address)
     {
         $form = $this->createForm(new AddressType(), $address, [
-            'action' => $this->generateUrl('address_update', [ 'address' => $address->getId() ]),
+            'action' => $this->generateUrl('address_update', ['address' => $address->getId()]),
             'method' => 'PUT',
         ]);
 
-        $form->add('submit', 'submit', ['label' => 'Update']);
+        $form->add('submit', SubmitType::class, ['label' => 'Update']);
 
         return $form;
     }

@@ -9,7 +9,6 @@ use Lthrt\ContactBundle\Form\CityType;
 // CityFormController Trait.
 //
 
-
 trait CityFormController
 {
     //
@@ -26,7 +25,7 @@ trait CityFormController
             'method' => 'POST',
         ]);
 
-        $form->add('submit', 'submit', [ 'label' => 'Create' ]);
+        $form->add('submit', SubmitType::class, ['label' => 'Create']);
 
         return $form;
     }
@@ -41,9 +40,9 @@ trait CityFormController
     private function createDeleteForm(City $city)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('city_delete', [ 'city' => $city->getId() ]))
+            ->setAction($this->generateUrl('city_delete', ['city' => $city->getId()]))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', [ 'label' => 'Delete' ])
+            ->add('submit', SubmitType::class, ['label' => 'Delete'])
             ->getForm();
     }
 
@@ -57,11 +56,11 @@ trait CityFormController
     private function createEditForm(City $city)
     {
         $form = $this->createForm(new CityType(), $city, [
-            'action' => $this->generateUrl('city_update', [ 'city' => $city->getId() ]),
+            'action' => $this->generateUrl('city_update', ['city' => $city->getId()]),
             'method' => 'PUT',
         ]);
 
-        $form->add('submit', 'submit', ['label' => 'Update']);
+        $form->add('submit', SubmitType::class, ['label' => 'Update']);
 
         return $form;
     }

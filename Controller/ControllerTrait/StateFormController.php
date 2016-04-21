@@ -9,7 +9,6 @@ use Lthrt\ContactBundle\Form\StateType;
 // StateFormController Trait.
 //
 
-
 trait StateFormController
 {
     //
@@ -26,7 +25,7 @@ trait StateFormController
             'method' => 'POST',
         ]);
 
-        $form->add('submit', 'submit', [ 'label' => 'Create' ]);
+        $form->add('submit', SubmitType::class, ['label' => 'Create']);
 
         return $form;
     }
@@ -41,9 +40,9 @@ trait StateFormController
     private function createDeleteForm(State $state)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('state_delete', [ 'state' => $state->getId() ]))
+            ->setAction($this->generateUrl('state_delete', ['state' => $state->getId()]))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', [ 'label' => 'Delete' ])
+            ->add('submit', SubmitType::class, ['label' => 'Delete'])
             ->getForm();
     }
 
@@ -57,11 +56,11 @@ trait StateFormController
     private function createEditForm(State $state)
     {
         $form = $this->createForm(new StateType(), $state, [
-            'action' => $this->generateUrl('state_update', [ 'state' => $state->getId() ]),
+            'action' => $this->generateUrl('state_update', ['state' => $state->getId()]),
             'method' => 'PUT',
         ]);
 
-        $form->add('submit', 'submit', ['label' => 'Update']);
+        $form->add('submit', SubmitType::class, ['label' => 'Update']);
 
         return $form;
     }

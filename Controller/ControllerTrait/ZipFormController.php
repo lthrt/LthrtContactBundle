@@ -9,7 +9,6 @@ use Lthrt\ContactBundle\Form\ZipType;
 // ZipFormController Trait.
 //
 
-
 trait ZipFormController
 {
     //
@@ -26,7 +25,7 @@ trait ZipFormController
             'method' => 'POST',
         ]);
 
-        $form->add('submit', 'submit', [ 'label' => 'Create' ]);
+        $form->add('submit', SubmitType::class, ['label' => 'Create']);
 
         return $form;
     }
@@ -41,9 +40,9 @@ trait ZipFormController
     private function createDeleteForm(Zip $zip)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('zip_delete', [ 'zip' => $zip->getId() ]))
+            ->setAction($this->generateUrl('zip_delete', ['zip' => $zip->getId()]))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', [ 'label' => 'Delete' ])
+            ->add('submit', SubmitType::class, ['label' => 'Delete'])
             ->getForm();
     }
 
@@ -57,11 +56,11 @@ trait ZipFormController
     private function createEditForm(Zip $zip)
     {
         $form = $this->createForm(new ZipType(), $zip, [
-            'action' => $this->generateUrl('zip_update', [ 'zip' => $zip->getId() ]),
+            'action' => $this->generateUrl('zip_update', ['zip' => $zip->getId()]),
             'method' => 'PUT',
         ]);
 
-        $form->add('submit', 'submit', ['label' => 'Update']);
+        $form->add('submit', SubmitType::class, ['label' => 'Update']);
 
         return $form;
     }

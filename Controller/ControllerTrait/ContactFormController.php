@@ -9,7 +9,6 @@ use Lthrt\ContactBundle\Form\ContactType;
 // ContactFormController Trait.
 //
 
-
 trait ContactFormController
 {
     //
@@ -26,7 +25,7 @@ trait ContactFormController
             'method' => 'POST',
         ]);
 
-        $form->add('submit', 'submit', [ 'label' => 'Create' ]);
+        $form->add('submit', SubmitType::class, ['label' => 'Create']);
 
         return $form;
     }
@@ -41,9 +40,9 @@ trait ContactFormController
     private function createDeleteForm(Contact $contact)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('contact_delete', [ 'contact' => $contact->getId() ]))
+            ->setAction($this->generateUrl('contact_delete', ['contact' => $contact->getId()]))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', [ 'label' => 'Delete' ])
+            ->add('submit', SubmitType::class, ['label' => 'Delete'])
             ->getForm();
     }
 
@@ -57,11 +56,11 @@ trait ContactFormController
     private function createEditForm(Contact $contact)
     {
         $form = $this->createForm(new ContactType(), $contact, [
-            'action' => $this->generateUrl('contact_update', [ 'contact' => $contact->getId() ]),
+            'action' => $this->generateUrl('contact_update', ['contact' => $contact->getId()]),
             'method' => 'PUT',
         ]);
 
-        $form->add('submit', 'submit', ['label' => 'Update']);
+        $form->add('submit', SubmitType::class, ['label' => 'Update']);
 
         return $form;
     }

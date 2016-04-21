@@ -9,7 +9,6 @@ use Lthrt\ContactBundle\Form\CountyType;
 // CountyFormController Trait.
 //
 
-
 trait CountyFormController
 {
     //
@@ -26,7 +25,7 @@ trait CountyFormController
             'method' => 'POST',
         ]);
 
-        $form->add('submit', 'submit', [ 'label' => 'Create' ]);
+        $form->add('submit', SubmitType::class, ['label' => 'Create']);
 
         return $form;
     }
@@ -41,9 +40,9 @@ trait CountyFormController
     private function createDeleteForm(County $county)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('county_delete', [ 'county' => $county->getId() ]))
+            ->setAction($this->generateUrl('county_delete', ['county' => $county->getId()]))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', [ 'label' => 'Delete' ])
+            ->add('submit', SubmitType::class, ['label' => 'Delete'])
             ->getForm();
     }
 
@@ -57,11 +56,11 @@ trait CountyFormController
     private function createEditForm(County $county)
     {
         $form = $this->createForm(new CountyType(), $county, [
-            'action' => $this->generateUrl('county_update', [ 'county' => $county->getId() ]),
+            'action' => $this->generateUrl('county_update', ['county' => $county->getId()]),
             'method' => 'PUT',
         ]);
 
-        $form->add('submit', 'submit', ['label' => 'Update']);
+        $form->add('submit', SubmitType::class, ['label' => 'Update']);
 
         return $form;
     }

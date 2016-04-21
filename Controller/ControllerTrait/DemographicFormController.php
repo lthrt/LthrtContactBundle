@@ -9,7 +9,6 @@ use Lthrt\ContactBundle\Form\DemographicType;
 // DemographicFormController Trait.
 //
 
-
 trait DemographicFormController
 {
     //
@@ -26,7 +25,7 @@ trait DemographicFormController
             'method' => 'POST',
         ]);
 
-        $form->add('submit', 'submit', [ 'label' => 'Create' ]);
+        $form->add('submit', SubmitType::class, ['label' => 'Create']);
 
         return $form;
     }
@@ -41,9 +40,9 @@ trait DemographicFormController
     private function createDeleteForm(Demographic $demographic)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('demographic_delete', [ 'demographic' => $demographic->getId() ]))
+            ->setAction($this->generateUrl('demographic_delete', ['demographic' => $demographic->getId()]))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', [ 'label' => 'Delete' ])
+            ->add('submit', SubmitType::class, ['label' => 'Delete'])
             ->getForm();
     }
 
@@ -57,11 +56,11 @@ trait DemographicFormController
     private function createEditForm(Demographic $demographic)
     {
         $form = $this->createForm(new DemographicType(), $demographic, [
-            'action' => $this->generateUrl('demographic_update', [ 'demographic' => $demographic->getId() ]),
+            'action' => $this->generateUrl('demographic_update', ['demographic' => $demographic->getId()]),
             'method' => 'PUT',
         ]);
 
-        $form->add('submit', 'submit', ['label' => 'Update']);
+        $form->add('submit', SubmitType::class, ['label' => 'Update']);
 
         return $form;
     }
