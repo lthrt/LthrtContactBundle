@@ -26,8 +26,6 @@ trait PersonFormController
             'method' => 'POST',
         ]);
 
-        $form->add('submit', SubmitType::class, ['label' => 'Create']);
-
         return $form;
     }
 
@@ -56,12 +54,10 @@ trait PersonFormController
     //
     private function createEditForm(Person $person)
     {
-        $form = $this->createForm(new PersonType(), $person, [
+        $form = $this->createForm(get_class(new PersonType()), $person, [
             'action' => $this->generateUrl('person_update', ['person' => $person->getId()]),
             'method' => 'PUT',
         ]);
-
-        $form->add('submit', SubmitType::class, ['label' => 'Update']);
 
         return $form;
     }

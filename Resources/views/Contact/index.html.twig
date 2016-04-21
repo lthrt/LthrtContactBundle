@@ -1,20 +1,27 @@
-{% extends 'LthrtContactBundle:Contact:contact.html.twig' %}
+    {% extends 'LthrtContactBundle:Contact:contact.html.twig' %}
 
-{% block body -%}
+    {% block body -%}
     <h1>Contact list</h1>
 
     <table class="records_list">
         <thead>
             <tr>
-                <th>Value</th>
+                    <th>Active</th>
+                    <th>Created</th>
+                    <th>Updated</th>
+                    <th>Id</th>
+                    <th>Value</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for contact in contactCollection %}
+            {% for contact in contactCollection %}
             <tr>
-                <td><a href="{{ path('contact_show', { 'contact': contact.id }) }}">{{ contact.value }}</a></td>
-                <td>
+                        <td>{{ contact.active }}</td>
+                        <td>{% if contact.created %}{{ contact.created|date('Y-m-d H:i:s') }}{% endif %}</td>
+                        <td>{% if contact.updated %}{{ contact.updated|date('Y-m-d H:i:s') }}{% endif %}</td>                <td><a href="{{ path('contact_show', { 'contact': contact.id }) }}">{{ contact.id }}</a></td>
+                        <td>{{ contact.value }}</td>
+                        <td>
                 <ul>
                     <li>
                         <a href="{{ path('contact_show', { 'contact' : contact.id }) }}">show</a>
@@ -23,17 +30,17 @@
                         <a href="{{ path('contact_edit', { 'contact' : contact.id }) }}">edit</a>
                     </li>
                 </ul>
-                </td>
+                        </td>
             </tr>
-        {% endfor %}
+            {% endfor %}
         </tbody>
     </table>
 
-        <ul>
-        <li>
-            <a href="{{ path('contact_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
-{% endblock body %}
+            <ul>
+            <li>
+                <a href="{{ path('contact_new') }}">
+                    Create a new entry
+                </a>
+            </li>
+        </ul>
+    {% endblock body %}

@@ -2,7 +2,7 @@
 
 {% block body -%}
     <h1>Contact Create</h1>
-    {% include 'LthrtContactBundle:Contact:form.html.twig' %}
+    {% include 'LthrtContactBundle:Contact:form.html.twig' with { 'submitLabel' : 'Create' } %}
         <ul class="record_actions">
     <li>
         <a href="{{ path('contact') }}">

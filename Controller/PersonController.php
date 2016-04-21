@@ -45,8 +45,10 @@ class PersonController extends Controller
     // Deletes a Person entity.
     //
     //
-    public function deleteAction(Request $request, Person $person)
-    {
+    public function deleteAction(
+        Request $request,
+        Person  $person
+    ) {
         $form = $this->createDeleteForm($person);
         $form->handleRequest($request);
 
@@ -67,8 +69,10 @@ class PersonController extends Controller
     // Displays a form to edit an existing Person entity.
     //
     //
-    public function editAction(Request $request, Person $person)
-    {
+    public function editAction(
+        Request $request,
+        Person  $person
+    ) {
         if (!$person) {
             throw $this->createNotFoundException('Unable to find Person entity.');
         }
@@ -79,7 +83,9 @@ class PersonController extends Controller
         return $this->render('LthrtContactBundle:Person:edit.html.twig', [
             'person'      => $person,
             'form'        => $form->createView(),
+            'submit'      => $this->createSubmitform('Update')->createView(),
             'delete_form' => $deleteForm->createView(),
+
         ]);
     }
 
@@ -115,8 +121,10 @@ class PersonController extends Controller
     // Finds and displays a Person entity.
     //
     //
-    public function showAction(Request $request, Person $person)
-    {
+    public function showAction(
+        Request $request,
+        Person  $person
+    ) {
         if (!$person) {
             throw $this->createNotFoundException('Unable to find Person entity.');
         }
@@ -137,8 +145,10 @@ class PersonController extends Controller
     // Edits an existing Person entity.
     //
     //
-    public function updateAction(Request $request, Person $person)
-    {
+    public function updateAction(
+        Request $request,
+        Person  $person
+    ) {
         if (!$person) {
             throw $this->createNotFoundException('Unable to find Person entity.');
         }

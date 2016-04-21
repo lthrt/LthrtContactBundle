@@ -12,14 +12,16 @@ class PersonType extends AbstractType
      * @param FormBuilderInterface $builder
      * @param array                $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
+    public function buildForm(
+        FormBuilderInterface $builder,
+        array                $options
+    ) {
         $builder
             ->add('firstName')
             ->add('lastName')
             ->add('dob')
-            ->add('contact', null, ['property' => 'value'])
-            ->add('demographic', null, ['property' => 'value'])
+            // ->add('contact', null, ['choice_label' => 'value'])
+            // ->add('demographic', null, ['choice_label' => 'value'])
             ->add('address');
     }
 
