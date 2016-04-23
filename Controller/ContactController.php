@@ -2,13 +2,12 @@
 
 namespace Lthrt\ContactBundle\Controller;
 
+use Lthrt\ContactBundle\Entity\Contact;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Lthrt\ContactBundle\Entity\Contact;
-
 
 /**
  * Contact controller.
@@ -18,7 +17,7 @@ use Lthrt\ContactBundle\Entity\Contact;
 
 class ContactController extends Controller
 {
-use Lthrt\ContactBundle\Traits\Controller\ContactFormTrait;
+    use \Lthrt\ContactBundle\Traits\Controller\ContactFormTrait;
 
     /**
      * Creates a new Contact entity.
@@ -30,7 +29,7 @@ use Lthrt\ContactBundle\Traits\Controller\ContactFormTrait;
     public function createAction(Request $request)
     {
         $contact = new Contact();
-        $form = $this->createEditForm($contact);
+        $form    = $this->createEditForm($contact);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -38,12 +37,12 @@ use Lthrt\ContactBundle\Traits\Controller\ContactFormTrait;
             $em->persist($contact);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('contact_show', [ 'contact' => $contact->getId() ]));
+            return $this->redirect($this->generateUrl('contact_show', ['contact' => $contact->getId()]));
         }
 
         return [
             'contact' => $contact,
-            'form' => $form->createView(),
+            'form'    => $form->createView(),
         ];
     }
 
@@ -85,16 +84,15 @@ use Lthrt\ContactBundle\Traits\Controller\ContactFormTrait;
             throw $this->createNotFoundException('Unable to find Contact entity.');
         }
 
-        $form = $this->createEditForm($contact);
+        $form       = $this->createEditForm($contact);
         $deleteForm = $this->createDeleteForm($contact);
 
         return [
-            'contact' => $contact,
-            'form' => $form->createView(),
+            'contact'     => $contact,
+            'form'        => $form->createView(),
             'delete_form' => $deleteForm->createView(),
         ];
     }
-
 
     /**
      * Lists all Contact entities.
@@ -112,7 +110,6 @@ use Lthrt\ContactBundle\Traits\Controller\ContactFormTrait;
         ];
     }
 
-
     /**
      * Displays a form to create a new Contact entity.
      *
@@ -123,14 +120,13 @@ use Lthrt\ContactBundle\Traits\Controller\ContactFormTrait;
     public function newAction(Request $request)
     {
         $contact = new Contact();
-        $form   = $this->createEditForm($contact);
-    
+        $form    = $this->createEditForm($contact);
+
         return [
             'contact' => $contact,
-            'form'   => $form->createView(),
+            'form'    => $form->createView(),
         ];
     }
-
 
     /**
      * Finds and displays a Contact entity.
@@ -148,11 +144,10 @@ use Lthrt\ContactBundle\Traits\Controller\ContactFormTrait;
         $deleteForm = $this->createDeleteForm($contact);
 
         return [
-            'contact'      => $contact,
+            'contact'     => $contact,
             'delete_form' => $deleteForm->createView(),
         ];
     }
-
 
     /**
      * Edits an existing Contact entity.
@@ -175,14 +170,14 @@ use Lthrt\ContactBundle\Traits\Controller\ContactFormTrait;
             $em->persist($contact);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('contact_show', [ 'contact' => $contact->getId() ]));
+            return $this->redirect($this->generateUrl('contact_show', ['contact' => $contact->getId()]));
         }
 
         $deleteForm = $this->createDeleteForm($contact);
 
         return [
-            'contact'      => $contact,
-            'form' => $form->createView(),
+            'contact'     => $contact,
+            'form'        => $form->createView(),
             'delete_form' => $deleteForm->createView(),
         ];
     }

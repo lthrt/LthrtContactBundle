@@ -45,4 +45,5 @@
         <li>{{ form(delete_form) }}</li>
     </ul>
     {{ log|json_pretty|raw}}
+{% block js %}{{parent()}}{% endblock js %}
 {% endblock body %}
