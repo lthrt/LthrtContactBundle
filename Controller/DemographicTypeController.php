@@ -2,146 +2,126 @@
 
 namespace Lthrt\ContactBundle\Controller;
 
-use Lthrt\ContactBundle\Controller\ControllerTrait\DemographicTypeFormController;
-use Lthrt\ContactBundle\Entity\DemographicType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Lthrt\ContactBundle\Entity\DemographicType;
 
-//
-// DemographicType controller.
-//
-//
+/**
+ * DemographicType controller.
+ *
+ * @Route("/demographictype")
+ */
 
 class DemographicTypeController extends Controller
 {
-    use DemographicTypeFormController;
+    use \Lthrt\ContactBundle\Traits\Controller\DemographicTypeFormTrait;
+    use \Lthrt\ContactBundle\Traits\Controller\DemographicTypeNotFoundTrait;
 
-    //
-    // Creates a new DemographicType entity.
-    //
-    //
-    public function createAction(Request $request)
-    {
-        $demographictype = new DemographicType();
-        $form            = $this->createCreateForm($demographictype);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($demographictype);
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('demographictype_show', [ 'demographictype' => $demographictype->getId() ]));
-        }
-
-        return $this->render('LthrtContactBundle:DemographicType:new.html.twig', [
-            'demographictype' => $demographictype,
-            'form'            => $form->createView(),
-        ]);
-    }
-
-    //
-    // Deletes a DemographicType entity.
-    //
-    //
-    public function deleteAction(Request $request, DemographicType $demographictype)
-    {
-        $form = $this->createDeleteForm($demographictype);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            if (!$demographictype) {
-                throw $this->createNotFoundException('Unable to find DemographicType entity.');
-            }
-
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($demographictype);
-            $em->flush();
-        }
-
-        return $this->redirect($this->generateUrl('demographictype'));
-    }
-
-    //
-    // Displays a form to edit an existing DemographicType entity.
-    //
-    //
+    /**
+     * Gets edit form existing DemographicType entity.
+     *
+     * @Route("/{demographictype}/edit", name="demographictype_edit")
+     * @Method({"GET"})
+     * @Template("LthrtContactBundle:DemographicType:edit.html.twig")
+     */
     public function editAction(Request $request, DemographicType $demographictype)
     {
-        if (!$demographictype) {
-            throw $this->createNotFoundException('Unable to find DemographicType entity.');
-        }
+        $this->notFound($demographictype);
 
-        $form       = $this->createEditForm($demographictype);
+        $form = $this->createEditForm($demographictype);
         $deleteForm = $this->createDeleteForm($demographictype);
 
         return $this->render('LthrtContactBundle:DemographicType:edit.html.twig', [
-            'demographictype' => $demographictype,
-            'form'            => $form->createView(),
-            'delete_form'     => $deleteForm->createView(),
+            'demographictype'      => $demographictype,
+            'form' => $form->createView(),
+            'delete_form' => $deleteForm->createView(),
         ]);
     }
 
-    //
-    // Lists all DemographicType entities.
-    //
-    //
+        /**
+     * Lists all DemographicType entities.
+     *
+     * @Route("/", name="demographictype")
+     * @Method("GET")
+     * @Template("LthrtContactBundle:DemographicType:index.html.twig")
+     */
     public function indexAction(Request $request)
     {
         $demographictypeCollection = $this->getDoctrine()->getManager()->getRepository('LthrtContactBundle:DemographicType')->findAll();
 
-        return $this->render('LthrtContactBundle:DemographicType:index.html.twig', [
+        return [
             'demographictypeCollection' => $demographictypeCollection,
-        ]);
+        ];
     }
 
-    //
-    // Displays a form to create a new DemographicType entity.
-    //
-    //
+        /**
+     * Routing for BackBone API for existing DemographicType entity.
+     * Handles show, update and delete
+     *
+     * @Route("/{demographictype}", name="demographictype_single")
+     * @Method({"DELETE","GET","PUT"})
+     * @Template("LthrtContactBundle:DemographicType:edit.html.twig")
+     */
+    public function knownAction(Request $request, DemographicType $demographictype)
+    {
+        $this->notFound($demographictype);
+
+        if ($request->isMethod('GET')) {  
+            return $this->forward('LthrtContactBundle:DemographicType:show', [ 'demographictype' => $demographictype, ]); 
+        } else { // Method is PUT or DELETE
+            $form = $this->createEditForm($demographictype);
+            $deleteForm = $this->createDeleteForm($demographictype);
+            $form->handleRequest($request);
+            $em = $this->getDoctrine()->getManager();
+            if ($request->isMethod('PUT')) {
+                if ($form->isValid() && $form->isSubmitted()) {
+                    $em->persist($demographictype);
+                    $em->flush();
+
+                    return $this->forward('LthrtContactBundle:DemographicType:show', [ 'demographictype' => $demographictype, ]);  
+                } else {
+
+                    return $this->render('LthrtContactBundle:DemographicType:edit.html.twig', [
+                        'demographictype' => $demographictype,
+                        'form' => $form->createView(),
+                        'delete_form' => $deleteForm->createView(),
+                    ]);
+                }
+            } else {
+                if ($request->isMethod('DELETE')){
+                    if ($form->isValid() && $form->isSubmitted()) {
+                        $em->remove($demographictype);
+                        $em->flush();
+
+                        return $this->forward($this->generateUrl('demographictype'));
+                    } else {
+                        return $this->forward('LthrtContactBundle:DemographicType:show', [ 'demographictype' => $demographictype, ]); 
+                    }
+                }
+            }
+        }
+    }
+    
+        /**
+     * Creates a new DemographicType entity.
+     *
+     * @Route("/new", name="demographictype_new")
+     * @Method({"GET", "POST"})
+     * @Template("LthrtContactBundle:DemographicType:new.html.twig")
+     */
     public function newAction(Request $request)
     {
         $demographictype = new DemographicType();
-        $form            = $this->createCreateForm($demographictype);
-
-        return $this->render('LthrtContactBundle:DemographicType:new.html.twig', [
-            'demographictype' => $demographictype,
-            'form'            => $form->createView(),
-        ]);
-    }
-
-    //
-    // Finds and displays a DemographicType entity.
-    //
-    //
-    public function showAction(Request $request, DemographicType $demographictype)
-    {
-        if (!$demographictype) {
-            throw $this->createNotFoundException('Unable to find DemographicType entity.');
-        }
-
-        $deleteForm = $this->createDeleteForm($demographictype);
-
-        return $this->render('LthrtContactBundle:DemographicType:show.html.twig', [
-            'demographictype' => $demographictype,
-            'delete_form'     => $deleteForm->createView(),
-        ]);
-    }
-
-    //
-    // Edits an existing DemographicType entity.
-    //
-    //
-    public function updateAction(Request $request, DemographicType $demographictype)
-    {
-        if (!$demographictype) {
-            throw $this->createNotFoundException('Unable to find DemographicType entity.');
-        }
-
         $form = $this->createEditForm($demographictype);
         $form->handleRequest($request);
-
-        if ($form->isValid()) {
+        if (
+            $request->isMethod('POST') && 
+            $form->isValid() && 
+            $form->isSubmitted()
+        ) {        
             $em = $this->getDoctrine()->getManager();
             $em->persist($demographictype);
             $em->flush();
@@ -149,12 +129,29 @@ class DemographicTypeController extends Controller
             return $this->redirect($this->generateUrl('demographictype_show', [ 'demographictype' => $demographictype->getId() ]));
         }
 
+        return [
+            'demographictype' => $demographictype,
+            'form' => $form->createView(),
+        ];
+    }
+
+        /**
+     * Finds and displays a DemographicType entity.
+     *
+     * @Route("/{demographictype}/show", name="demographictype_show")
+     * @Method("GET")
+     * @Template("LthrtContactBundle:DemographicType:show.html.twig")
+     */
+    public function showAction(Request $request, DemographicType $demographictype)
+    {
+        $this->notFound($demographictype);
+
         $deleteForm = $this->createDeleteForm($demographictype);
 
-        return $this->render('LthrtContactBundle:DemographicType:show.html.twig', [
+        return [
             'demographictype'      => $demographictype,
-            'form'                 => $form->createView(),
-            'delete_form'          => $deleteForm->createView(),
-        ]);
+            'delete_form' => $deleteForm->createView(),
+        ];
     }
+
 }

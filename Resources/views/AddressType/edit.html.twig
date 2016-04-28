@@ -2,7 +2,7 @@
 
 {% block body -%}
     <h1>AddressType Edit</h1>
-    {% include 'LthrtContactBundle:AddressType:form.html.twig' %}
+    {% include 'LthrtContactBundle:AddressType:form.html.twig' with { 'submitLabel' : 'Update' } %}
     <ul class="record_actions">
     <li>
         <a href="{{ path('addresstype') }}">

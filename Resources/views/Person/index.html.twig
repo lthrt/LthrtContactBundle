@@ -1,35 +1,31 @@
-{% extends 'LthrtContactBundle:Person:person.html.twig' %}
+    {% extends 'LthrtContactBundle:Person:person.html.twig' %}
 
-{% block body -%}
+    {% block body -%}
     <h1>Person list</h1>
 
     <table class="records_list">
         <thead>
             <tr>
-                <th>Firstname</th>
-                <th>Lastname</th>
-                <th>Dob</th>
-                <th>Demographics</th>
+                    <th>Firstname</th>
+                    <th>Lastname</th>
+                    <th>Dob</th>
+                    <th>Active</th>
+                    <th>Created</th>
+                    <th>Updated</th>
+                    <th>Id</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for person in personCollection %}
+            {% for person in personCollection %}
             <tr>
-                <td><a href="{{ path('person_show', { 'person': person.id }) }}">{{ person.firstName }}</a></td>
-                <td>{{ person.lastName }}</td>
-                <td>{% if person.dob %}{{ person.dob|date('Y-m-d') }}{% endif %}</td>
-                <td>
-                    <ul>
-                        {%- for demo in person.demographic -%}
-                            <li>
-                                {{-demo.value-}}
-                            </li>
-                        {%- endfor -%}
-                    </ul>
-                </td>
-
-                <td>
+                        <td>{{ person.firstName }}</td>
+                        <td>{{ person.lastName }}</td>
+                        <td>{% if person.dob %}{{ person.dob|date('Y-m-d H:i:s') }}{% endif %}</td>
+                        <td>{{ person.active }}</td>
+                        <td>{% if person.created %}{{ person.created|date('Y-m-d H:i:s') }}{% endif %}</td>
+                        <td>{% if person.updated %}{{ person.updated|date('Y-m-d H:i:s') }}{% endif %}</td>                <td><a href="{{ path('person_show', { 'person': person.id }) }}">{{ person.id }}</a></td>
+                        <td>
                 <ul>
                     <li>
                         <a href="{{ path('person_show', { 'person' : person.id }) }}">show</a>
@@ -38,17 +34,17 @@
                         <a href="{{ path('person_edit', { 'person' : person.id }) }}">edit</a>
                     </li>
                 </ul>
-                </td>
+                        </td>
             </tr>
-        {% endfor %}
+            {% endfor %}
         </tbody>
     </table>
 
-        <ul>
-        <li>
-            <a href="{{ path('person_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
-{% endblock body %}
+            <ul>
+            <li>
+                <a href="{{ path('person_new') }}">
+                    Create a new entry
+                </a>
+            </li>
+        </ul>
+    {% endblock body %}

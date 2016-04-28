@@ -1,20 +1,27 @@
-{% extends 'LthrtContactBundle:County:county.html.twig' %}
+    {% extends 'LthrtContactBundle:County:county.html.twig' %}
 
-{% block body -%}
+    {% block body -%}
     <h1>County list</h1>
 
     <table class="records_list">
         <thead>
             <tr>
-                <th>Name</th>
+                    <th>Active</th>
+                    <th>Created</th>
+                    <th>Updated</th>
+                    <th>Id</th>
+                    <th>Name</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for county in countyCollection %}
+            {% for county in countyCollection %}
             <tr>
-                <td><a href="{{ path('county_show', { 'county': county.id }) }}">{{ county.name }}</a></td>
-                <td>
+                        <td>{{ county.active }}</td>
+                        <td>{% if county.created %}{{ county.created|date('Y-m-d H:i:s') }}{% endif %}</td>
+                        <td>{% if county.updated %}{{ county.updated|date('Y-m-d H:i:s') }}{% endif %}</td>                <td><a href="{{ path('county_show', { 'county': county.id }) }}">{{ county.id }}</a></td>
+                        <td>{{ county.name }}</td>
+                        <td>
                 <ul>
                     <li>
                         <a href="{{ path('county_show', { 'county' : county.id }) }}">show</a>
@@ -23,17 +30,17 @@
                         <a href="{{ path('county_edit', { 'county' : county.id }) }}">edit</a>
                     </li>
                 </ul>
-                </td>
+                        </td>
             </tr>
-        {% endfor %}
+            {% endfor %}
         </tbody>
     </table>
 
-        <ul>
-        <li>
-            <a href="{{ path('county_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
-{% endblock body %}
+            <ul>
+            <li>
+                <a href="{{ path('county_new') }}">
+                    Create a new entry
+                </a>
+            </li>
+        </ul>
+    {% endblock body %}

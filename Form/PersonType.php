@@ -10,29 +10,31 @@ class PersonType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array                $options
+     * @param array $options
      */
-    public function buildForm(
-        FormBuilderInterface $builder,
-        array                $options
-    ) {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         $builder
             ->add('firstName')
             ->add('lastName')
             ->add('dob')
-            // ->add('contact', null, ['choice_label' => 'value'])
-            // ->add('demographic', null, ['choice_label' => 'value'])
-            ->add('address');
+            ->add('active')
+            ->add('created')
+            ->add('updated')
+            ->add('contact')
+            ->add('demographic')
+            ->add('address')
+        ;
     }
-
+    
     /**
      * @param OptionsResolverInterface $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => 'Lthrt\ContactBundle\Entity\Person',
-        ]);
+        $resolver->setDefaults(array(
+            'data_class' => 'Lthrt\ContactBundle\Entity\Person'
+        ));
     }
 
     /**

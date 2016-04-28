@@ -1,20 +1,27 @@
-{% extends 'LthrtContactBundle:Zip:zip.html.twig' %}
+    {% extends 'LthrtContactBundle:Zip:zip.html.twig' %}
 
-{% block body -%}
+    {% block body -%}
     <h1>Zip list</h1>
 
     <table class="records_list">
         <thead>
             <tr>
-                <th>Zip</th>
+                    <th>Zip</th>
+                    <th>Active</th>
+                    <th>Created</th>
+                    <th>Updated</th>
+                    <th>Id</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for zip in zipCollection %}
+            {% for zip in zipCollection %}
             <tr>
-                <td><a href="{{ path('zip_show', { 'zip': zip.id }) }}">{{ zip.zip }}</a></td>
-                <td>
+                        <td>{{ zip.zip }}</td>
+                        <td>{{ zip.active }}</td>
+                        <td>{% if zip.created %}{{ zip.created|date('Y-m-d H:i:s') }}{% endif %}</td>
+                        <td>{% if zip.updated %}{{ zip.updated|date('Y-m-d H:i:s') }}{% endif %}</td>                <td><a href="{{ path('zip_show', { 'zip': zip.id }) }}">{{ zip.id }}</a></td>
+                        <td>
                 <ul>
                     <li>
                         <a href="{{ path('zip_show', { 'zip' : zip.id }) }}">show</a>
@@ -23,17 +30,17 @@
                         <a href="{{ path('zip_edit', { 'zip' : zip.id }) }}">edit</a>
                     </li>
                 </ul>
-                </td>
+                        </td>
             </tr>
-        {% endfor %}
+            {% endfor %}
         </tbody>
     </table>
 
-        <ul>
-        <li>
-            <a href="{{ path('zip_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
-{% endblock body %}
+            <ul>
+            <li>
+                <a href="{{ path('zip_new') }}">
+                    Create a new entry
+                </a>
+            </li>
+        </ul>
+    {% endblock body %}

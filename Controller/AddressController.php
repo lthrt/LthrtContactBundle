@@ -2,146 +2,126 @@
 
 namespace Lthrt\ContactBundle\Controller;
 
-use Lthrt\ContactBundle\Controller\ControllerTrait\AddressFormController;
-use Lthrt\ContactBundle\Entity\Address;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Lthrt\ContactBundle\Entity\Address;
 
-//
-// Address controller.
-//
-//
+/**
+ * Address controller.
+ *
+ * @Route("/address")
+ */
 
 class AddressController extends Controller
 {
-    use AddressFormController;
+    use \Lthrt\ContactBundle\Traits\Controller\AddressFormTrait;
+    use \Lthrt\ContactBundle\Traits\Controller\AddressNotFoundTrait;
 
-    //
-    // Creates a new Address entity.
-    //
-    //
-    public function createAction(Request $request)
-    {
-        $address = new Address();
-        $form    = $this->createCreateForm($address);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($address);
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('address_show', [ 'address' => $address->getId() ]));
-        }
-
-        return $this->render('LthrtContactBundle:Address:new.html.twig', [
-            'address' => $address,
-            'form'    => $form->createView(),
-        ]);
-    }
-
-    //
-    // Deletes a Address entity.
-    //
-    //
-    public function deleteAction(Request $request, Address $address)
-    {
-        $form = $this->createDeleteForm($address);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            if (!$address) {
-                throw $this->createNotFoundException('Unable to find Address entity.');
-            }
-
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($address);
-            $em->flush();
-        }
-
-        return $this->redirect($this->generateUrl('address'));
-    }
-
-    //
-    // Displays a form to edit an existing Address entity.
-    //
-    //
+    /**
+     * Gets edit form existing Address entity.
+     *
+     * @Route("/{address}/edit", name="address_edit")
+     * @Method({"GET"})
+     * @Template("LthrtContactBundle:Address:edit.html.twig")
+     */
     public function editAction(Request $request, Address $address)
     {
-        if (!$address) {
-            throw $this->createNotFoundException('Unable to find Address entity.');
-        }
+        $this->notFound($address);
 
-        $form       = $this->createEditForm($address);
+        $form = $this->createEditForm($address);
         $deleteForm = $this->createDeleteForm($address);
 
         return $this->render('LthrtContactBundle:Address:edit.html.twig', [
-            'address'     => $address,
-            'form'        => $form->createView(),
+            'address'      => $address,
+            'form' => $form->createView(),
             'delete_form' => $deleteForm->createView(),
         ]);
     }
 
-    //
-    // Lists all Address entities.
-    //
-    //
+        /**
+     * Lists all Address entities.
+     *
+     * @Route("/", name="address")
+     * @Method("GET")
+     * @Template("LthrtContactBundle:Address:index.html.twig")
+     */
     public function indexAction(Request $request)
     {
         $addressCollection = $this->getDoctrine()->getManager()->getRepository('LthrtContactBundle:Address')->findAll();
 
-        return $this->render('LthrtContactBundle:Address:index.html.twig', [
+        return [
             'addressCollection' => $addressCollection,
-        ]);
+        ];
     }
 
-    //
-    // Displays a form to create a new Address entity.
-    //
-    //
+        /**
+     * Routing for BackBone API for existing Address entity.
+     * Handles show, update and delete
+     *
+     * @Route("/{address}", name="address_single")
+     * @Method({"DELETE","GET","PUT"})
+     * @Template("LthrtContactBundle:Address:edit.html.twig")
+     */
+    public function knownAction(Request $request, Address $address)
+    {
+        $this->notFound($address);
+
+        if ($request->isMethod('GET')) {  
+            return $this->forward('LthrtContactBundle:Address:show', [ 'address' => $address, ]); 
+        } else { // Method is PUT or DELETE
+            $form = $this->createEditForm($address);
+            $deleteForm = $this->createDeleteForm($address);
+            $form->handleRequest($request);
+            $em = $this->getDoctrine()->getManager();
+            if ($request->isMethod('PUT')) {
+                if ($form->isValid() && $form->isSubmitted()) {
+                    $em->persist($address);
+                    $em->flush();
+
+                    return $this->forward('LthrtContactBundle:Address:show', [ 'address' => $address, ]);  
+                } else {
+
+                    return $this->render('LthrtContactBundle:Address:edit.html.twig', [
+                        'address' => $address,
+                        'form' => $form->createView(),
+                        'delete_form' => $deleteForm->createView(),
+                    ]);
+                }
+            } else {
+                if ($request->isMethod('DELETE')){
+                    if ($form->isValid() && $form->isSubmitted()) {
+                        $em->remove($address);
+                        $em->flush();
+
+                        return $this->forward($this->generateUrl('address'));
+                    } else {
+                        return $this->forward('LthrtContactBundle:Address:show', [ 'address' => $address, ]); 
+                    }
+                }
+            }
+        }
+    }
+    
+        /**
+     * Creates a new Address entity.
+     *
+     * @Route("/new", name="address_new")
+     * @Method({"GET", "POST"})
+     * @Template("LthrtContactBundle:Address:new.html.twig")
+     */
     public function newAction(Request $request)
     {
         $address = new Address();
-        $form    = $this->createCreateForm($address);
-
-        return $this->render('LthrtContactBundle:Address:new.html.twig', [
-            'address' => $address,
-            'form'    => $form->createView(),
-        ]);
-    }
-
-    //
-    // Finds and displays a Address entity.
-    //
-    //
-    public function showAction(Request $request, Address $address)
-    {
-        if (!$address) {
-            throw $this->createNotFoundException('Unable to find Address entity.');
-        }
-
-        $deleteForm = $this->createDeleteForm($address);
-
-        return $this->render('LthrtContactBundle:Address:show.html.twig', [
-            'address'     => $address,
-            'delete_form' => $deleteForm->createView(),
-        ]);
-    }
-
-    //
-    // Edits an existing Address entity.
-    //
-    //
-    public function updateAction(Request $request, Address $address)
-    {
-        if (!$address) {
-            throw $this->createNotFoundException('Unable to find Address entity.');
-        }
-
         $form = $this->createEditForm($address);
         $form->handleRequest($request);
-
-        if ($form->isValid()) {
+        if (
+            $request->isMethod('POST') && 
+            $form->isValid() && 
+            $form->isSubmitted()
+        ) {        
             $em = $this->getDoctrine()->getManager();
             $em->persist($address);
             $em->flush();
@@ -149,12 +129,29 @@ class AddressController extends Controller
             return $this->redirect($this->generateUrl('address_show', [ 'address' => $address->getId() ]));
         }
 
+        return [
+            'address' => $address,
+            'form' => $form->createView(),
+        ];
+    }
+
+        /**
+     * Finds and displays a Address entity.
+     *
+     * @Route("/{address}/show", name="address_show")
+     * @Method("GET")
+     * @Template("LthrtContactBundle:Address:show.html.twig")
+     */
+    public function showAction(Request $request, Address $address)
+    {
+        $this->notFound($address);
+
         $deleteForm = $this->createDeleteForm($address);
 
-        return $this->render('LthrtContactBundle:Address:show.html.twig', [
+        return [
             'address'      => $address,
-            'form'         => $form->createView(),
-            'delete_form'  => $deleteForm->createView(),
-        ]);
+            'delete_form' => $deleteForm->createView(),
+        ];
     }
+
 }

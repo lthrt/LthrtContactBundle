@@ -2,146 +2,126 @@
 
 namespace Lthrt\ContactBundle\Controller;
 
-use Lthrt\ContactBundle\Controller\ControllerTrait\StateFormController;
-use Lthrt\ContactBundle\Entity\State;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Lthrt\ContactBundle\Entity\State;
 
-//
-// State controller.
-//
-//
+/**
+ * State controller.
+ *
+ * @Route("/state")
+ */
 
 class StateController extends Controller
 {
-    use StateFormController;
+    use \Lthrt\ContactBundle\Traits\Controller\StateFormTrait;
+    use \Lthrt\ContactBundle\Traits\Controller\StateNotFoundTrait;
 
-    //
-    // Creates a new State entity.
-    //
-    //
-    public function createAction(Request $request)
-    {
-        $state = new State();
-        $form  = $this->createCreateForm($state);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($state);
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('state_show', [ 'state' => $state->getId() ]));
-        }
-
-        return $this->render('LthrtContactBundle:State:new.html.twig', [
-            'state' => $state,
-            'form'  => $form->createView(),
-        ]);
-    }
-
-    //
-    // Deletes a State entity.
-    //
-    //
-    public function deleteAction(Request $request, State $state)
-    {
-        $form = $this->createDeleteForm($state);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            if (!$state) {
-                throw $this->createNotFoundException('Unable to find State entity.');
-            }
-
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($state);
-            $em->flush();
-        }
-
-        return $this->redirect($this->generateUrl('state'));
-    }
-
-    //
-    // Displays a form to edit an existing State entity.
-    //
-    //
+    /**
+     * Gets edit form existing State entity.
+     *
+     * @Route("/{state}/edit", name="state_edit")
+     * @Method({"GET"})
+     * @Template("LthrtContactBundle:State:edit.html.twig")
+     */
     public function editAction(Request $request, State $state)
     {
-        if (!$state) {
-            throw $this->createNotFoundException('Unable to find State entity.');
-        }
+        $this->notFound($state);
 
-        $form       = $this->createEditForm($state);
+        $form = $this->createEditForm($state);
         $deleteForm = $this->createDeleteForm($state);
 
         return $this->render('LthrtContactBundle:State:edit.html.twig', [
-            'state'       => $state,
-            'form'        => $form->createView(),
+            'state'      => $state,
+            'form' => $form->createView(),
             'delete_form' => $deleteForm->createView(),
         ]);
     }
 
-    //
-    // Lists all State entities.
-    //
-    //
+        /**
+     * Lists all State entities.
+     *
+     * @Route("/", name="state")
+     * @Method("GET")
+     * @Template("LthrtContactBundle:State:index.html.twig")
+     */
     public function indexAction(Request $request)
     {
         $stateCollection = $this->getDoctrine()->getManager()->getRepository('LthrtContactBundle:State')->findAll();
 
-        return $this->render('LthrtContactBundle:State:index.html.twig', [
+        return [
             'stateCollection' => $stateCollection,
-        ]);
+        ];
     }
 
-    //
-    // Displays a form to create a new State entity.
-    //
-    //
+        /**
+     * Routing for BackBone API for existing State entity.
+     * Handles show, update and delete
+     *
+     * @Route("/{state}", name="state_single")
+     * @Method({"DELETE","GET","PUT"})
+     * @Template("LthrtContactBundle:State:edit.html.twig")
+     */
+    public function knownAction(Request $request, State $state)
+    {
+        $this->notFound($state);
+
+        if ($request->isMethod('GET')) {  
+            return $this->forward('LthrtContactBundle:State:show', [ 'state' => $state, ]); 
+        } else { // Method is PUT or DELETE
+            $form = $this->createEditForm($state);
+            $deleteForm = $this->createDeleteForm($state);
+            $form->handleRequest($request);
+            $em = $this->getDoctrine()->getManager();
+            if ($request->isMethod('PUT')) {
+                if ($form->isValid() && $form->isSubmitted()) {
+                    $em->persist($state);
+                    $em->flush();
+
+                    return $this->forward('LthrtContactBundle:State:show', [ 'state' => $state, ]);  
+                } else {
+
+                    return $this->render('LthrtContactBundle:State:edit.html.twig', [
+                        'state' => $state,
+                        'form' => $form->createView(),
+                        'delete_form' => $deleteForm->createView(),
+                    ]);
+                }
+            } else {
+                if ($request->isMethod('DELETE')){
+                    if ($form->isValid() && $form->isSubmitted()) {
+                        $em->remove($state);
+                        $em->flush();
+
+                        return $this->forward($this->generateUrl('state'));
+                    } else {
+                        return $this->forward('LthrtContactBundle:State:show', [ 'state' => $state, ]); 
+                    }
+                }
+            }
+        }
+    }
+    
+        /**
+     * Creates a new State entity.
+     *
+     * @Route("/new", name="state_new")
+     * @Method({"GET", "POST"})
+     * @Template("LthrtContactBundle:State:new.html.twig")
+     */
     public function newAction(Request $request)
     {
-        $state  = new State();
-        $form   = $this->createCreateForm($state);
-
-        return $this->render('LthrtContactBundle:State:new.html.twig', [
-            'state'  => $state,
-            'form'   => $form->createView(),
-        ]);
-    }
-
-    //
-    // Finds and displays a State entity.
-    //
-    //
-    public function showAction(Request $request, State $state)
-    {
-        if (!$state) {
-            throw $this->createNotFoundException('Unable to find State entity.');
-        }
-
-        $deleteForm = $this->createDeleteForm($state);
-
-        return $this->render('LthrtContactBundle:State:show.html.twig', [
-            'state'       => $state,
-            'delete_form' => $deleteForm->createView(),
-        ]);
-    }
-
-    //
-    // Edits an existing State entity.
-    //
-    //
-    public function updateAction(Request $request, State $state)
-    {
-        if (!$state) {
-            throw $this->createNotFoundException('Unable to find State entity.');
-        }
-
+        $state = new State();
         $form = $this->createEditForm($state);
         $form->handleRequest($request);
-
-        if ($form->isValid()) {
+        if (
+            $request->isMethod('POST') && 
+            $form->isValid() && 
+            $form->isSubmitted()
+        ) {        
             $em = $this->getDoctrine()->getManager();
             $em->persist($state);
             $em->flush();
@@ -149,12 +129,29 @@ class StateController extends Controller
             return $this->redirect($this->generateUrl('state_show', [ 'state' => $state->getId() ]));
         }
 
+        return [
+            'state' => $state,
+            'form' => $form->createView(),
+        ];
+    }
+
+        /**
+     * Finds and displays a State entity.
+     *
+     * @Route("/{state}/show", name="state_show")
+     * @Method("GET")
+     * @Template("LthrtContactBundle:State:show.html.twig")
+     */
+    public function showAction(Request $request, State $state)
+    {
+        $this->notFound($state);
+
         $deleteForm = $this->createDeleteForm($state);
 
-        return $this->render('LthrtContactBundle:State:show.html.twig', [
-            'state'       => $state,
-            'form'        => $form->createView(),
+        return [
+            'state'      => $state,
             'delete_form' => $deleteForm->createView(),
-        ]);
+        ];
     }
+
 }

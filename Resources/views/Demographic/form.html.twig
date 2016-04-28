@@ -1,5 +1,9 @@
-    {{ form_start(form) }}
-    {{ form_row(form.value) }}
-    {{ form_row(form.demographicType) }}
-    {{ form_rest(form) }}
-    {{ form_end(form) }}
+{{ form_start(form) }}
+{{ form_row(form.active) }}
+{{ form_row(form.created) }}
+{{ form_row(form.updated) }}
+{{ form_row(form.value) }}
+{{ form_row(form.type) }}
+<input type="submit" value="{{ submitLabel }}" class="btn btn-default pull-right" />
+{{ form_rest(form) }}
+{{ form_end(form) }}

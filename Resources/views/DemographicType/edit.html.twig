@@ -2,7 +2,7 @@
 
 {% block body -%}
     <h1>DemographicType Edit</h1>
-    {% include 'LthrtContactBundle:DemographicType:form.html.twig' %}
+    {% include 'LthrtContactBundle:DemographicType:form.html.twig' with { 'submitLabel' : 'Update' } %}
     <ul class="record_actions">
     <li>
         <a href="{{ path('demographictype') }}">

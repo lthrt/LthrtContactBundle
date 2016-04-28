@@ -1,20 +1,27 @@
-{% extends 'LthrtContactBundle:AddressType:addresstype.html.twig' %}
+    {% extends 'LthrtContactBundle:AddressType:addresstype.html.twig' %}
 
-{% block body -%}
+    {% block body -%}
     <h1>AddressType list</h1>
 
     <table class="records_list">
         <thead>
             <tr>
-                <th>Name</th>
+                    <th>Active</th>
+                    <th>Created</th>
+                    <th>Updated</th>
+                    <th>Id</th>
+                    <th>Name</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for addresstype in addresstypeCollection %}
+            {% for addresstype in addresstypeCollection %}
             <tr>
-                <td><a href="{{ path('addresstype_show', { 'addresstype': addresstype.id }) }}">{{ addresstype.name }}</a></td>
-                <td>
+                        <td>{{ addresstype.active }}</td>
+                        <td>{% if addresstype.created %}{{ addresstype.created|date('Y-m-d H:i:s') }}{% endif %}</td>
+                        <td>{% if addresstype.updated %}{{ addresstype.updated|date('Y-m-d H:i:s') }}{% endif %}</td>                <td><a href="{{ path('addresstype_show', { 'addresstype': addresstype.id }) }}">{{ addresstype.id }}</a></td>
+                        <td>{{ addresstype.name }}</td>
+                        <td>
                 <ul>
                     <li>
                         <a href="{{ path('addresstype_show', { 'addresstype' : addresstype.id }) }}">show</a>
@@ -23,17 +30,17 @@
                         <a href="{{ path('addresstype_edit', { 'addresstype' : addresstype.id }) }}">edit</a>
                     </li>
                 </ul>
-                </td>
+                        </td>
             </tr>
-        {% endfor %}
+            {% endfor %}
         </tbody>
     </table>
 
-        <ul>
-        <li>
-            <a href="{{ path('addresstype_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
-{% endblock body %}
+            <ul>
+            <li>
+                <a href="{{ path('addresstype_new') }}">
+                    Create a new entry
+                </a>
+            </li>
+        </ul>
+    {% endblock body %}

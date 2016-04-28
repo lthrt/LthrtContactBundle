@@ -17,6 +17,22 @@
                 <th>Zipext</th>
                 <td>{{ address.zipExt }}</td>
             </tr>
+            <tr>
+                <th>Active</th>
+                <td>{{ address.active }}</td>
+            </tr>
+            <tr>
+                <th>Created</th>
+                <td>{{ address.created|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Updated</th>
+                <td>{{ address.updated|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Id</th>
+                <td>{{ address.id }}</td>
+            </tr>
         </tbody>
     </table>
 

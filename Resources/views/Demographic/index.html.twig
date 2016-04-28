@@ -1,22 +1,27 @@
-{% extends 'LthrtContactBundle:Demographic:demographic.html.twig' %}
+    {% extends 'LthrtContactBundle:Demographic:demographic.html.twig' %}
 
-{% block body -%}
+    {% block body -%}
     <h1>Demographic list</h1>
 
     <table class="records_list">
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Type</th>
+                    <th>Active</th>
+                    <th>Created</th>
+                    <th>Updated</th>
+                    <th>Id</th>
+                    <th>Value</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for demographic in demographicCollection %}
+            {% for demographic in demographicCollection %}
             <tr>
-                <td><a href="{{ path('demographic_show', { 'demographic': demographic.id }) }}">{{ demographic.value }}</a></td>
-                <td>{{ demographic.type.name }}</td>
-                <td>
+                        <td>{{ demographic.active }}</td>
+                        <td>{% if demographic.created %}{{ demographic.created|date('Y-m-d H:i:s') }}{% endif %}</td>
+                        <td>{% if demographic.updated %}{{ demographic.updated|date('Y-m-d H:i:s') }}{% endif %}</td>                <td><a href="{{ path('demographic_show', { 'demographic': demographic.id }) }}">{{ demographic.id }}</a></td>
+                        <td>{{ demographic.value }}</td>
+                        <td>
                 <ul>
                     <li>
                         <a href="{{ path('demographic_show', { 'demographic' : demographic.id }) }}">show</a>
@@ -25,17 +30,17 @@
                         <a href="{{ path('demographic_edit', { 'demographic' : demographic.id }) }}">edit</a>
                     </li>
                 </ul>
-                </td>
+                        </td>
             </tr>
-        {% endfor %}
+            {% endfor %}
         </tbody>
     </table>
 
-        <ul>
-        <li>
-            <a href="{{ path('demographic_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
-{% endblock body %}
+            <ul>
+            <li>
+                <a href="{{ path('demographic_new') }}">
+                    Create a new entry
+                </a>
+            </li>
+        </ul>
+    {% endblock body %}

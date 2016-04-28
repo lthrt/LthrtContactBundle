@@ -1,20 +1,27 @@
-{% extends 'LthrtContactBundle:City:city.html.twig' %}
+    {% extends 'LthrtContactBundle:City:city.html.twig' %}
 
-{% block body -%}
+    {% block body -%}
     <h1>City list</h1>
 
     <table class="records_list">
         <thead>
             <tr>
-                <th>Name</th>
+                    <th>Active</th>
+                    <th>Created</th>
+                    <th>Updated</th>
+                    <th>Id</th>
+                    <th>Name</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for city in cityCollection %}
+            {% for city in cityCollection %}
             <tr>
-                <td><a href="{{ path('city_show', { 'city': city.id }) }}">{{ city.name }}</a></td>
-                <td>
+                        <td>{{ city.active }}</td>
+                        <td>{% if city.created %}{{ city.created|date('Y-m-d H:i:s') }}{% endif %}</td>
+                        <td>{% if city.updated %}{{ city.updated|date('Y-m-d H:i:s') }}{% endif %}</td>                <td><a href="{{ path('city_show', { 'city': city.id }) }}">{{ city.id }}</a></td>
+                        <td>{{ city.name }}</td>
+                        <td>
                 <ul>
                     <li>
                         <a href="{{ path('city_show', { 'city' : city.id }) }}">show</a>
@@ -23,17 +30,17 @@
                         <a href="{{ path('city_edit', { 'city' : city.id }) }}">edit</a>
                     </li>
                 </ul>
-                </td>
+                        </td>
             </tr>
-        {% endfor %}
+            {% endfor %}
         </tbody>
     </table>
 
-        <ul>
-        <li>
-            <a href="{{ path('city_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
-{% endblock body %}
+            <ul>
+            <li>
+                <a href="{{ path('city_new') }}">
+                    Create a new entry
+                </a>
+            </li>
+        </ul>
+    {% endblock body %}

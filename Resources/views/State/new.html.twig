@@ -2,7 +2,7 @@
 
 {% block body -%}
     <h1>State Create</h1>
-    {% include 'LthrtContactBundle:State:form.html.twig' %}
+    {% include 'LthrtContactBundle:State:form.html.twig' with { 'submitLabel' : 'Create' } %}
         <ul class="record_actions">
     <li>
         <a href="{{ path('state') }}">

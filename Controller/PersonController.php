@@ -2,174 +2,156 @@
 
 namespace Lthrt\ContactBundle\Controller;
 
-use Lthrt\ContactBundle\Controller\ControllerTrait\PersonFormController;
-use Lthrt\ContactBundle\Entity\Person;
-use Lthrt\EntityBundle\Model\EntityLogger;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Lthrt\ContactBundle\Entity\Person;
 
-//
-// Person controller.
-//
-//
+/**
+ * Person controller.
+ *
+ * @Route("/person")
+ */
 
 class PersonController extends Controller
 {
-    use PersonFormController;
+    use \Lthrt\ContactBundle\Traits\Controller\PersonFormTrait;
+    use \Lthrt\ContactBundle\Traits\Controller\PersonNotFoundTrait;
 
-    //
-    // Creates a new Person entity.
-    //
-    //
-    public function createAction(Request $request)
+    /**
+     * Gets edit form existing Person entity.
+     *
+     * @Route("/{person}/edit", name="person_edit")
+     * @Method({"GET"})
+     * @Template("LthrtContactBundle:Person:edit.html.twig")
+     */
+    public function editAction(Request $request, Person $person)
     {
-        $person = new Person();
-        $form   = $this->createCreateForm($person);
-        $form->handleRequest($request);
+        $this->notFound($person);
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($person);
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('person_show', ['person' => $person->getId()]));
-        }
-
-        return $this->render('LthrtContactBundle:Person:new.html.twig', [
-            'person' => $person,
-            'form'   => $form->createView(),
-        ]);
-    }
-
-    //
-    // Deletes a Person entity.
-    //
-    //
-    public function deleteAction(
-        Request $request,
-        Person  $person
-    ) {
-        $form = $this->createDeleteForm($person);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            if (!$person) {
-                throw $this->createNotFoundException('Unable to find Person entity.');
-            }
-
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($person);
-            $em->flush();
-        }
-
-        return $this->redirect($this->generateUrl('person'));
-    }
-
-    //
-    // Displays a form to edit an existing Person entity.
-    //
-    //
-    public function editAction(
-        Request $request,
-        Person  $person
-    ) {
-        if (!$person) {
-            throw $this->createNotFoundException('Unable to find Person entity.');
-        }
-
-        $form       = $this->createEditForm($person);
+        $form = $this->createEditForm($person);
         $deleteForm = $this->createDeleteForm($person);
 
         return $this->render('LthrtContactBundle:Person:edit.html.twig', [
             'person'      => $person,
-            'form'        => $form->createView(),
-            'submit'      => $this->createSubmitform('Update')->createView(),
+            'form' => $form->createView(),
             'delete_form' => $deleteForm->createView(),
-
         ]);
     }
 
-    //
-    // Lists all Person entities.
-    //
-    //
+        /**
+     * Lists all Person entities.
+     *
+     * @Route("/", name="person")
+     * @Method("GET")
+     * @Template("LthrtContactBundle:Person:index.html.twig")
+     */
     public function indexAction(Request $request)
     {
         $personCollection = $this->getDoctrine()->getManager()->getRepository('LthrtContactBundle:Person')->findAll();
 
-        return $this->render('LthrtContactBundle:Person:index.html.twig', [
+        return [
             'personCollection' => $personCollection,
-        ]);
+        ];
     }
 
-    //
-    // Displays a form to create a new Person entity.
-    //
-    //
+        /**
+     * Routing for BackBone API for existing Person entity.
+     * Handles show, update and delete
+     *
+     * @Route("/{person}", name="person_single")
+     * @Method({"DELETE","GET","PUT"})
+     * @Template("LthrtContactBundle:Person:edit.html.twig")
+     */
+    public function knownAction(Request $request, Person $person)
+    {
+        $this->notFound($person);
+
+        if ($request->isMethod('GET')) {  
+            return $this->forward('LthrtContactBundle:Person:show', [ 'person' => $person, ]); 
+        } else { // Method is PUT or DELETE
+            $form = $this->createEditForm($person);
+            $deleteForm = $this->createDeleteForm($person);
+            $form->handleRequest($request);
+            $em = $this->getDoctrine()->getManager();
+            if ($request->isMethod('PUT')) {
+                if ($form->isValid() && $form->isSubmitted()) {
+                    $em->persist($person);
+                    $em->flush();
+
+                    return $this->forward('LthrtContactBundle:Person:show', [ 'person' => $person, ]);  
+                } else {
+
+                    return $this->render('LthrtContactBundle:Person:edit.html.twig', [
+                        'person' => $person,
+                        'form' => $form->createView(),
+                        'delete_form' => $deleteForm->createView(),
+                    ]);
+                }
+            } else {
+                if ($request->isMethod('DELETE')){
+                    if ($form->isValid() && $form->isSubmitted()) {
+                        $em->remove($person);
+                        $em->flush();
+
+                        return $this->forward($this->generateUrl('person'));
+                    } else {
+                        return $this->forward('LthrtContactBundle:Person:show', [ 'person' => $person, ]); 
+                    }
+                }
+            }
+        }
+    }
+    
+        /**
+     * Creates a new Person entity.
+     *
+     * @Route("/new", name="person_new")
+     * @Method({"GET", "POST"})
+     * @Template("LthrtContactBundle:Person:new.html.twig")
+     */
     public function newAction(Request $request)
     {
         $person = new Person();
-        $form   = $this->createCreateForm($person);
-
-        return $this->render('LthrtContactBundle:Person:new.html.twig', [
-            'person' => $person,
-            'form'   => $form->createView(),
-        ]);
-    }
-
-    //
-    // Finds and displays a Person entity.
-    //
-    //
-    public function showAction(
-        Request $request,
-        Person  $person
-    ) {
-        if (!$person) {
-            throw $this->createNotFoundException('Unable to find Person entity.');
-        }
-
-        $logger = new EntityLogger($this->getDoctrine()->getManager());
-        $log    = $logger->findLog($person);
-
-        $deleteForm = $this->createDeleteForm($person);
-
-        return $this->render('LthrtContactBundle:Person:show.html.twig', [
-            'person'      => $person,
-            'log'         => $log,
-            'delete_form' => $deleteForm->createView(),
-        ]);
-    }
-
-    //
-    // Edits an existing Person entity.
-    //
-    //
-    public function updateAction(
-        Request $request,
-        Person  $person
-    ) {
-        if (!$person) {
-            throw $this->createNotFoundException('Unable to find Person entity.');
-        }
-
         $form = $this->createEditForm($person);
         $form->handleRequest($request);
-
-        if ($form->isValid()) {
+        if (
+            $request->isMethod('POST') && 
+            $form->isValid() && 
+            $form->isSubmitted()
+        ) {        
             $em = $this->getDoctrine()->getManager();
             $em->persist($person);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('person_show', ['person' => $person->getId()]));
+            return $this->redirect($this->generateUrl('person_show', [ 'person' => $person->getId() ]));
         }
+
+        return [
+            'person' => $person,
+            'form' => $form->createView(),
+        ];
+    }
+
+        /**
+     * Finds and displays a Person entity.
+     *
+     * @Route("/{person}/show", name="person_show")
+     * @Method("GET")
+     * @Template("LthrtContactBundle:Person:show.html.twig")
+     */
+    public function showAction(Request $request, Person $person)
+    {
+        $this->notFound($person);
 
         $deleteForm = $this->createDeleteForm($person);
 
-        return $this->render('LthrtContactBundle:Person:show.html.twig', [
+        return [
             'person'      => $person,
-            'form'        => $form->createView(),
             'delete_form' => $deleteForm->createView(),
-        ]);
+        ];
     }
+
 }

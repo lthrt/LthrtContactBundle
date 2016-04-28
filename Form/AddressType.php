@@ -10,27 +10,33 @@ class AddressType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array                $options
+     * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('line', null, ['required' => false])
-            ->add('line2', null, ['required' => false])
-            ->add('zip', null, ['required' => false])
-            ->add('addressType')
+            ->add('line')
+            ->add('line2')
+            ->add('zipExt')
+            ->add('active')
+            ->add('created')
+            ->add('updated')
+            ->add('type')
             ->add('city')
-            ->add('state');
+            ->add('state')
+            ->add('zip')
+            ->add('person')
+        ;
     }
-
+    
     /**
      * @param OptionsResolverInterface $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => 'Lthrt\ContactBundle\Entity\Address',
-        ]);
+        $resolver->setDefaults(array(
+            'data_class' => 'Lthrt\ContactBundle\Entity\Address'
+        ));
     }
 
     /**

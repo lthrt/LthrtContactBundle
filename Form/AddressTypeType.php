@@ -10,22 +10,26 @@ class AddressTypeType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array                $options
+     * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name');
+            ->add('active')
+            ->add('created')
+            ->add('updated')
+            ->add('name')
+        ;
     }
-
+    
     /**
      * @param OptionsResolverInterface $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => 'Lthrt\ContactBundle\Entity\AddressType',
-        ]);
+        $resolver->setDefaults(array(
+            'data_class' => 'Lthrt\ContactBundle\Entity\AddressType'
+        ));
     }
 
     /**

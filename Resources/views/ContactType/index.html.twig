@@ -1,20 +1,27 @@
-{% extends 'LthrtContactBundle:ContactType:contacttype.html.twig' %}
+    {% extends 'LthrtContactBundle:ContactType:contacttype.html.twig' %}
 
-{% block body -%}
+    {% block body -%}
     <h1>ContactType list</h1>
 
     <table class="records_list">
         <thead>
             <tr>
-                <th>Name</th>
+                    <th>Active</th>
+                    <th>Created</th>
+                    <th>Updated</th>
+                    <th>Id</th>
+                    <th>Name</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for contacttype in contacttypeCollection %}
+            {% for contacttype in contacttypeCollection %}
             <tr>
-                <td><a href="{{ path('contacttype_show', { 'contacttype': contacttype.id }) }}">{{ contacttype.name }}</a></td>
-                <td>
+                        <td>{{ contacttype.active }}</td>
+                        <td>{% if contacttype.created %}{{ contacttype.created|date('Y-m-d H:i:s') }}{% endif %}</td>
+                        <td>{% if contacttype.updated %}{{ contacttype.updated|date('Y-m-d H:i:s') }}{% endif %}</td>                <td><a href="{{ path('contacttype_show', { 'contacttype': contacttype.id }) }}">{{ contacttype.id }}</a></td>
+                        <td>{{ contacttype.name }}</td>
+                        <td>
                 <ul>
                     <li>
                         <a href="{{ path('contacttype_show', { 'contacttype' : contacttype.id }) }}">show</a>
@@ -23,17 +30,17 @@
                         <a href="{{ path('contacttype_edit', { 'contacttype' : contacttype.id }) }}">edit</a>
                     </li>
                 </ul>
-                </td>
+                        </td>
             </tr>
-        {% endfor %}
+            {% endfor %}
         </tbody>
     </table>
 
-        <ul>
-        <li>
-            <a href="{{ path('contacttype_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
-{% endblock body %}
+            <ul>
+            <li>
+                <a href="{{ path('contacttype_new') }}">
+                    Create a new entry
+                </a>
+            </li>
+        </ul>
+    {% endblock body %}

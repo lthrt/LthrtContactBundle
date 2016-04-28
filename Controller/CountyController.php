@@ -2,146 +2,126 @@
 
 namespace Lthrt\ContactBundle\Controller;
 
-use Lthrt\ContactBundle\Controller\ControllerTrait\CountyFormController;
-use Lthrt\ContactBundle\Entity\County;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Lthrt\ContactBundle\Entity\County;
 
-//
-// County controller.
-//
-//
+/**
+ * County controller.
+ *
+ * @Route("/county")
+ */
 
 class CountyController extends Controller
 {
-    use CountyFormController;
+    use \Lthrt\ContactBundle\Traits\Controller\CountyFormTrait;
+    use \Lthrt\ContactBundle\Traits\Controller\CountyNotFoundTrait;
 
-    //
-    // Creates a new County entity.
-    //
-    //
-    public function createAction(Request $request)
-    {
-        $county = new County();
-        $form   = $this->createCreateForm($county);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($county);
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('county_show', [ 'county' => $county->getId() ]));
-        }
-
-        return $this->render('LthrtContactBundle:County:new.html.twig', [
-            'county' => $county,
-            'form'   => $form->createView(),
-        ]);
-    }
-
-    //
-    // Deletes a County entity.
-    //
-    //
-    public function deleteAction(Request $request, County $county)
-    {
-        $form = $this->createDeleteForm($county);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            if (!$county) {
-                throw $this->createNotFoundException('Unable to find County entity.');
-            }
-
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($county);
-            $em->flush();
-        }
-
-        return $this->redirect($this->generateUrl('county'));
-    }
-
-    //
-    // Displays a form to edit an existing County entity.
-    //
-    //
+    /**
+     * Gets edit form existing County entity.
+     *
+     * @Route("/{county}/edit", name="county_edit")
+     * @Method({"GET"})
+     * @Template("LthrtContactBundle:County:edit.html.twig")
+     */
     public function editAction(Request $request, County $county)
     {
-        if (!$county) {
-            throw $this->createNotFoundException('Unable to find County entity.');
-        }
+        $this->notFound($county);
 
-        $form       = $this->createEditForm($county);
+        $form = $this->createEditForm($county);
         $deleteForm = $this->createDeleteForm($county);
 
         return $this->render('LthrtContactBundle:County:edit.html.twig', [
             'county'      => $county,
-            'form'        => $form->createView(),
+            'form' => $form->createView(),
             'delete_form' => $deleteForm->createView(),
         ]);
     }
 
-    //
-    // Lists all County entities.
-    //
-    //
+        /**
+     * Lists all County entities.
+     *
+     * @Route("/", name="county")
+     * @Method("GET")
+     * @Template("LthrtContactBundle:County:index.html.twig")
+     */
     public function indexAction(Request $request)
     {
         $countyCollection = $this->getDoctrine()->getManager()->getRepository('LthrtContactBundle:County')->findAll();
 
-        return $this->render('LthrtContactBundle:County:index.html.twig', [
+        return [
             'countyCollection' => $countyCollection,
-        ]);
+        ];
     }
 
-    //
-    // Displays a form to create a new County entity.
-    //
-    //
+        /**
+     * Routing for BackBone API for existing County entity.
+     * Handles show, update and delete
+     *
+     * @Route("/{county}", name="county_single")
+     * @Method({"DELETE","GET","PUT"})
+     * @Template("LthrtContactBundle:County:edit.html.twig")
+     */
+    public function knownAction(Request $request, County $county)
+    {
+        $this->notFound($county);
+
+        if ($request->isMethod('GET')) {  
+            return $this->forward('LthrtContactBundle:County:show', [ 'county' => $county, ]); 
+        } else { // Method is PUT or DELETE
+            $form = $this->createEditForm($county);
+            $deleteForm = $this->createDeleteForm($county);
+            $form->handleRequest($request);
+            $em = $this->getDoctrine()->getManager();
+            if ($request->isMethod('PUT')) {
+                if ($form->isValid() && $form->isSubmitted()) {
+                    $em->persist($county);
+                    $em->flush();
+
+                    return $this->forward('LthrtContactBundle:County:show', [ 'county' => $county, ]);  
+                } else {
+
+                    return $this->render('LthrtContactBundle:County:edit.html.twig', [
+                        'county' => $county,
+                        'form' => $form->createView(),
+                        'delete_form' => $deleteForm->createView(),
+                    ]);
+                }
+            } else {
+                if ($request->isMethod('DELETE')){
+                    if ($form->isValid() && $form->isSubmitted()) {
+                        $em->remove($county);
+                        $em->flush();
+
+                        return $this->forward($this->generateUrl('county'));
+                    } else {
+                        return $this->forward('LthrtContactBundle:County:show', [ 'county' => $county, ]); 
+                    }
+                }
+            }
+        }
+    }
+    
+        /**
+     * Creates a new County entity.
+     *
+     * @Route("/new", name="county_new")
+     * @Method({"GET", "POST"})
+     * @Template("LthrtContactBundle:County:new.html.twig")
+     */
     public function newAction(Request $request)
     {
         $county = new County();
-        $form   = $this->createCreateForm($county);
-
-        return $this->render('LthrtContactBundle:County:new.html.twig', [
-            'county' => $county,
-            'form'   => $form->createView(),
-        ]);
-    }
-
-    //
-    // Finds and displays a County entity.
-    //
-    //
-    public function showAction(Request $request, County $county)
-    {
-        if (!$county) {
-            throw $this->createNotFoundException('Unable to find County entity.');
-        }
-
-        $deleteForm = $this->createDeleteForm($county);
-
-        return $this->render('LthrtContactBundle:County:show.html.twig', [
-            'county'      => $county,
-            'delete_form' => $deleteForm->createView(),
-        ]);
-    }
-
-    //
-    // Edits an existing County entity.
-    //
-    //
-    public function updateAction(Request $request, County $county)
-    {
-        if (!$county) {
-            throw $this->createNotFoundException('Unable to find County entity.');
-        }
-
         $form = $this->createEditForm($county);
         $form->handleRequest($request);
-
-        if ($form->isValid()) {
+        if (
+            $request->isMethod('POST') && 
+            $form->isValid() && 
+            $form->isSubmitted()
+        ) {        
             $em = $this->getDoctrine()->getManager();
             $em->persist($county);
             $em->flush();
@@ -149,12 +129,29 @@ class CountyController extends Controller
             return $this->redirect($this->generateUrl('county_show', [ 'county' => $county->getId() ]));
         }
 
+        return [
+            'county' => $county,
+            'form' => $form->createView(),
+        ];
+    }
+
+        /**
+     * Finds and displays a County entity.
+     *
+     * @Route("/{county}/show", name="county_show")
+     * @Method("GET")
+     * @Template("LthrtContactBundle:County:show.html.twig")
+     */
+    public function showAction(Request $request, County $county)
+    {
+        $this->notFound($county);
+
         $deleteForm = $this->createDeleteForm($county);
 
-        return $this->render('LthrtContactBundle:County:show.html.twig', [
+        return [
             'county'      => $county,
-            'form'        => $form->createView(),
             'delete_form' => $deleteForm->createView(),
-        ]);
+        ];
     }
+
 }

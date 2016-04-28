@@ -4,7 +4,7 @@ namespace Lthrt\ContactBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class ContactType extends AbstractType
 {
@@ -16,20 +16,28 @@ class ContactType extends AbstractType
     {
         $builder
             ->add('active')
-            ->add('created', 'datetime')
-            ->add('updated', 'datetime')
+            ->add('created')
+            ->add('updated')
             ->add('value')
             ->add('type')
         ;
     }
     
     /**
-     * @param OptionsResolver $resolver
+     * @param OptionsResolverInterface $resolver
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => 'Lthrt\ContactBundle\Entity\Contact'
         ));
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return 'lthrt_contactbundle_contact';
     }
 }

@@ -2,12 +2,7 @@
 
 namespace Lthrt\ContactBundle\Controller;
 
-use Lthrt\ContactBundle\Controller\ControllerTrait\CityCountyStateFormController;
-use Lthrt\ContactBundle\Entity\City;
-use Lthrt\ContactBundle\Entity\County;
-use Lthrt\ContactBundle\Entity\State;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 
 //
 // County controller.
@@ -16,16 +11,20 @@ use Symfony\Component\HttpFoundation\Request;
 
 class CityCountyStateController extends Controller
 {
-    use CityCountyStateFormController;
+    use \Lthrt\ContactBundle\Traits\Controller\CityCountyStateFormController;
 
-    public function formAction(Request $request, County $county = null, State $state = null, City $city = null)
-    {
+    public function formAction(
+        Request $request,
+        County  $county = null,
+        State   $state = null,
+        City    $city = null
+    ) {
         $options = [];
 
         if ($request->request->get('state')) {
             $state = $this->getDoctrine()->getManager()
-            ->getRepository('LthrtContactBundle:State')
-            ->findOneById(intval($request->request->get('state')));
+                ->getRepository('LthrtContactBundle:State')
+                ->findOneById(intval($request->request->get('state')));
         }
 
         if ($request->request->get('county')) {
@@ -37,13 +36,13 @@ class CityCountyStateController extends Controller
         }
 
         if ($city) {
-            $options['city']   = $city;
+            $options['city'] = $city;
         }
         if ($county) {
             $options['county'] = $county;
         }
         if ($state) {
-            $options['state']  = $state->getAbbr();
+            $options['state'] = $state->getAbbr();
         }
 
         $options['action'] = $this->generateUrl('city_county_state_form');

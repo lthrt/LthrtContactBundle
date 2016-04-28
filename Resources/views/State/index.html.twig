@@ -1,22 +1,29 @@
-{% extends 'LthrtContactBundle:State:state.html.twig' %}
+    {% extends 'LthrtContactBundle:State:state.html.twig' %}
 
-{% block body -%}
+    {% block body -%}
     <h1>State list</h1>
 
     <table class="records_list">
         <thead>
             <tr>
-                <th>Abbr</th>
-                <th>Name</th>
+                    <th>Abbr</th>
+                    <th>Active</th>
+                    <th>Created</th>
+                    <th>Updated</th>
+                    <th>Id</th>
+                    <th>Name</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for state in stateCollection %}
+            {% for state in stateCollection %}
             <tr>
-                <td><a href="{{ path('state_show', { 'state': state.id }) }}">{{ state.abbr }}</a></td>
-                <td>{{ state.name }}</td>
-                <td>
+                        <td>{{ state.abbr }}</td>
+                        <td>{{ state.active }}</td>
+                        <td>{% if state.created %}{{ state.created|date('Y-m-d H:i:s') }}{% endif %}</td>
+                        <td>{% if state.updated %}{{ state.updated|date('Y-m-d H:i:s') }}{% endif %}</td>                <td><a href="{{ path('state_show', { 'state': state.id }) }}">{{ state.id }}</a></td>
+                        <td>{{ state.name }}</td>
+                        <td>
                 <ul>
                     <li>
                         <a href="{{ path('state_show', { 'state' : state.id }) }}">show</a>
@@ -25,17 +32,17 @@
                         <a href="{{ path('state_edit', { 'state' : state.id }) }}">edit</a>
                     </li>
                 </ul>
-                </td>
+                        </td>
             </tr>
-        {% endfor %}
+            {% endfor %}
         </tbody>
     </table>
 
-        <ul>
-        <li>
-            <a href="{{ path('state_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
-{% endblock body %}
+            <ul>
+            <li>
+                <a href="{{ path('state_new') }}">
+                    Create a new entry
+                </a>
+            </li>
+        </ul>
+    {% endblock body %}
