@@ -9,5 +9,3 @@ con lt:gen:crud --no-interaction --with-write --overwrite --entity=LthrtContactB
 con lt:gen:crud --no-interaction --with-write --overwrite --entity=LthrtContactBundle:Person
 con lt:gen:crud --no-interaction --with-write --overwrite --entity=LthrtContactBundle:State
 con lt:gen:crud --no-interaction --with-write --overwrite --entity=LthrtContactBundle:Zip
-
-

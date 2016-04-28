@@ -34,11 +34,11 @@ class AddressController extends Controller
         $form = $this->createEditForm($address);
         $deleteForm = $this->createDeleteForm($address);
 
-        return $this->render('LthrtContactBundle:Address:edit.html.twig', [
+         return [
             'address'      => $address,
             'form' => $form->createView(),
             'delete_form' => $deleteForm->createView(),
-        ]);
+        ];
     }
 
         /**
@@ -61,7 +61,7 @@ class AddressController extends Controller
      * Routing for BackBone API for existing Address entity.
      * Handles show, update and delete
      *
-     * @Route("/{address}", name="address_known")
+     * @Route("/{address}", name="address_known", requirements={"address":"\d+"})
      * @Method({"DELETE","GET","PUT"})
      * @Template("LthrtContactBundle:Address:edit.html.twig")
      */

@@ -34,11 +34,11 @@ class CountyController extends Controller
         $form = $this->createEditForm($county);
         $deleteForm = $this->createDeleteForm($county);
 
-        return $this->render('LthrtContactBundle:County:edit.html.twig', [
+         return [
             'county'      => $county,
             'form' => $form->createView(),
             'delete_form' => $deleteForm->createView(),
-        ]);
+        ];
     }
 
         /**
@@ -61,7 +61,7 @@ class CountyController extends Controller
      * Routing for BackBone API for existing County entity.
      * Handles show, update and delete
      *
-     * @Route("/{county}", name="county_known")
+     * @Route("/{county}", name="county_known", requirements={"county":"\d+"})
      * @Method({"DELETE","GET","PUT"})
      * @Template("LthrtContactBundle:County:edit.html.twig")
      */

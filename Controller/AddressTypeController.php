@@ -34,11 +34,11 @@ class AddressTypeController extends Controller
         $form = $this->createEditForm($addresstype);
         $deleteForm = $this->createDeleteForm($addresstype);
 
-        return $this->render('LthrtContactBundle:AddressType:edit.html.twig', [
+         return [
             'addresstype'      => $addresstype,
             'form' => $form->createView(),
             'delete_form' => $deleteForm->createView(),
-        ]);
+        ];
     }
 
         /**
@@ -61,7 +61,7 @@ class AddressTypeController extends Controller
      * Routing for BackBone API for existing AddressType entity.
      * Handles show, update and delete
      *
-     * @Route("/{addresstype}", name="addresstype_known")
+     * @Route("/{addresstype}", name="addresstype_known", requirements={"addresstype":"\d+"})
      * @Method({"DELETE","GET","PUT"})
      * @Template("LthrtContactBundle:AddressType:edit.html.twig")
      */

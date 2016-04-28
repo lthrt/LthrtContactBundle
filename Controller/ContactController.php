@@ -34,11 +34,11 @@ class ContactController extends Controller
         $form = $this->createEditForm($contact);
         $deleteForm = $this->createDeleteForm($contact);
 
-        return $this->render('LthrtContactBundle:Contact:edit.html.twig', [
+         return [
             'contact'      => $contact,
             'form' => $form->createView(),
             'delete_form' => $deleteForm->createView(),
-        ]);
+        ];
     }
 
         /**
@@ -61,7 +61,7 @@ class ContactController extends Controller
      * Routing for BackBone API for existing Contact entity.
      * Handles show, update and delete
      *
-     * @Route("/{contact}", name="contact_known")
+     * @Route("/{contact}", name="contact_known", requirements={"contact":"\d+"})
      * @Method({"DELETE","GET","PUT"})
      * @Template("LthrtContactBundle:Contact:edit.html.twig")
      */

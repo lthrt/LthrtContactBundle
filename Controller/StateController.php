@@ -34,11 +34,11 @@ class StateController extends Controller
         $form = $this->createEditForm($state);
         $deleteForm = $this->createDeleteForm($state);
 
-        return $this->render('LthrtContactBundle:State:edit.html.twig', [
+         return [
             'state'      => $state,
             'form' => $form->createView(),
             'delete_form' => $deleteForm->createView(),
-        ]);
+        ];
     }
 
         /**
@@ -61,7 +61,7 @@ class StateController extends Controller
      * Routing for BackBone API for existing State entity.
      * Handles show, update and delete
      *
-     * @Route("/{state}", name="state_known")
+     * @Route("/{state}", name="state_known", requirements={"state":"\d+"})
      * @Method({"DELETE","GET","PUT"})
      * @Template("LthrtContactBundle:State:edit.html.twig")
      */

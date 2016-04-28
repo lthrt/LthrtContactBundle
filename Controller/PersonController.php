@@ -34,11 +34,11 @@ class PersonController extends Controller
         $form = $this->createEditForm($person);
         $deleteForm = $this->createDeleteForm($person);
 
-        return $this->render('LthrtContactBundle:Person:edit.html.twig', [
+         return [
             'person'      => $person,
             'form' => $form->createView(),
             'delete_form' => $deleteForm->createView(),
-        ]);
+        ];
     }
 
         /**
@@ -61,7 +61,7 @@ class PersonController extends Controller
      * Routing for BackBone API for existing Person entity.
      * Handles show, update and delete
      *
-     * @Route("/{person}", name="person_known")
+     * @Route("/{person}", name="person_known", requirements={"person":"\d+"})
      * @Method({"DELETE","GET","PUT"})
      * @Template("LthrtContactBundle:Person:edit.html.twig")
      */

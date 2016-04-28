@@ -34,11 +34,11 @@ class DemographicTypeController extends Controller
         $form = $this->createEditForm($demographictype);
         $deleteForm = $this->createDeleteForm($demographictype);
 
-        return $this->render('LthrtContactBundle:DemographicType:edit.html.twig', [
+         return [
             'demographictype'      => $demographictype,
             'form' => $form->createView(),
             'delete_form' => $deleteForm->createView(),
-        ]);
+        ];
     }
 
         /**
@@ -61,7 +61,7 @@ class DemographicTypeController extends Controller
      * Routing for BackBone API for existing DemographicType entity.
      * Handles show, update and delete
      *
-     * @Route("/{demographictype}", name="demographictype_known")
+     * @Route("/{demographictype}", name="demographictype_known", requirements={"demographictype":"\d+"})
      * @Method({"DELETE","GET","PUT"})
      * @Template("LthrtContactBundle:DemographicType:edit.html.twig")
      */

@@ -34,11 +34,11 @@ class CityController extends Controller
         $form = $this->createEditForm($city);
         $deleteForm = $this->createDeleteForm($city);
 
-        return $this->render('LthrtContactBundle:City:edit.html.twig', [
+         return [
             'city'      => $city,
             'form' => $form->createView(),
             'delete_form' => $deleteForm->createView(),
-        ]);
+        ];
     }
 
         /**
@@ -61,7 +61,7 @@ class CityController extends Controller
      * Routing for BackBone API for existing City entity.
      * Handles show, update and delete
      *
-     * @Route("/{city}", name="city_known")
+     * @Route("/{city}", name="city_known", requirements={"city":"\d+"})
      * @Method({"DELETE","GET","PUT"})
      * @Template("LthrtContactBundle:City:edit.html.twig")
      */

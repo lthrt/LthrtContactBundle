@@ -34,11 +34,11 @@ class ContactTypeController extends Controller
         $form = $this->createEditForm($contacttype);
         $deleteForm = $this->createDeleteForm($contacttype);
 
-        return $this->render('LthrtContactBundle:ContactType:edit.html.twig', [
+         return [
             'contacttype'      => $contacttype,
             'form' => $form->createView(),
             'delete_form' => $deleteForm->createView(),
-        ]);
+        ];
     }
 
         /**
@@ -61,7 +61,7 @@ class ContactTypeController extends Controller
      * Routing for BackBone API for existing ContactType entity.
      * Handles show, update and delete
      *
-     * @Route("/{contacttype}", name="contacttype_known")
+     * @Route("/{contacttype}", name="contacttype_known", requirements={"contacttype":"\d+"})
      * @Method({"DELETE","GET","PUT"})
      * @Template("LthrtContactBundle:ContactType:edit.html.twig")
      */

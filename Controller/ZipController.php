@@ -34,11 +34,11 @@ class ZipController extends Controller
         $form = $this->createEditForm($zip);
         $deleteForm = $this->createDeleteForm($zip);
 
-        return $this->render('LthrtContactBundle:Zip:edit.html.twig', [
+         return [
             'zip'      => $zip,
             'form' => $form->createView(),
             'delete_form' => $deleteForm->createView(),
-        ]);
+        ];
     }
 
         /**
@@ -61,7 +61,7 @@ class ZipController extends Controller
      * Routing for BackBone API for existing Zip entity.
      * Handles show, update and delete
      *
-     * @Route("/{zip}", name="zip_known")
+     * @Route("/{zip}", name="zip_known", requirements={"zip":"\d+"})
      * @Method({"DELETE","GET","PUT"})
      * @Template("LthrtContactBundle:Zip:edit.html.twig")
      */
