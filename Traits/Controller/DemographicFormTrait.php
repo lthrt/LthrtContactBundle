@@ -23,7 +23,7 @@ trait DemographicFormTrait
     private function createDeleteForm(Demographic $demographic)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('demographic_delete', [ 'demographic' => $demographic->getId() ]))
+            ->setAction($this->generateUrl('demographic_known', [ 'demographic' => $demographic->getId() ]))
             ->setMethod('DELETE')
             ->add('submit', SubmitType::class, [ 'label' => 'Delete' ])
             ->getForm()
@@ -55,6 +55,5 @@ trait DemographicFormTrait
             return $form;
         }
     }
-g
 
 }

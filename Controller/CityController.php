@@ -61,7 +61,7 @@ class CityController extends Controller
      * Routing for BackBone API for existing City entity.
      * Handles show, update and delete
      *
-     * @Route("/{city}", name="city_single")
+     * @Route("/{city}", name="city_known")
      * @Method({"DELETE","GET","PUT"})
      * @Template("LthrtContactBundle:City:edit.html.twig")
      */

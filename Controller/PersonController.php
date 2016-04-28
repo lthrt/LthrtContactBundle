@@ -61,7 +61,7 @@ class PersonController extends Controller
      * Routing for BackBone API for existing Person entity.
      * Handles show, update and delete
      *
-     * @Route("/{person}", name="person_single")
+     * @Route("/{person}", name="person_known")
      * @Method({"DELETE","GET","PUT"})
      * @Template("LthrtContactBundle:Person:edit.html.twig")
      */

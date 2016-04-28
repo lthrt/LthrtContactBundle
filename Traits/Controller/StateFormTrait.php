@@ -23,7 +23,7 @@ trait StateFormTrait
     private function createDeleteForm(State $state)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('state_delete', [ 'state' => $state->getId() ]))
+            ->setAction($this->generateUrl('state_known', [ 'state' => $state->getId() ]))
             ->setMethod('DELETE')
             ->add('submit', SubmitType::class, [ 'label' => 'Delete' ])
             ->getForm()
@@ -55,6 +55,5 @@ trait StateFormTrait
             return $form;
         }
     }
-g
 
 }

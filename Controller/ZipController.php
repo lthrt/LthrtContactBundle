@@ -61,7 +61,7 @@ class ZipController extends Controller
      * Routing for BackBone API for existing Zip entity.
      * Handles show, update and delete
      *
-     * @Route("/{zip}", name="zip_single")
+     * @Route("/{zip}", name="zip_known")
      * @Method({"DELETE","GET","PUT"})
      * @Template("LthrtContactBundle:Zip:edit.html.twig")
      */

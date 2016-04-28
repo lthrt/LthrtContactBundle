@@ -61,7 +61,7 @@ class DemographicController extends Controller
      * Routing for BackBone API for existing Demographic entity.
      * Handles show, update and delete
      *
-     * @Route("/{demographic}", name="demographic_single")
+     * @Route("/{demographic}", name="demographic_known")
      * @Method({"DELETE","GET","PUT"})
      * @Template("LthrtContactBundle:Demographic:edit.html.twig")
      */

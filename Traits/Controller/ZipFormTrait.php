@@ -23,7 +23,7 @@ trait ZipFormTrait
     private function createDeleteForm(Zip $zip)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('zip_delete', [ 'zip' => $zip->getId() ]))
+            ->setAction($this->generateUrl('zip_known', [ 'zip' => $zip->getId() ]))
             ->setMethod('DELETE')
             ->add('submit', SubmitType::class, [ 'label' => 'Delete' ])
             ->getForm()
@@ -55,6 +55,5 @@ trait ZipFormTrait
             return $form;
         }
     }
-g
 
 }

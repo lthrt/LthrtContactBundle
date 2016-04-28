@@ -61,7 +61,7 @@ class ContactTypeController extends Controller
      * Routing for BackBone API for existing ContactType entity.
      * Handles show, update and delete
      *
-     * @Route("/{contacttype}", name="contacttype_single")
+     * @Route("/{contacttype}", name="contacttype_known")
      * @Method({"DELETE","GET","PUT"})
      * @Template("LthrtContactBundle:ContactType:edit.html.twig")
      */

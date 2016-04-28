@@ -61,7 +61,7 @@ class StateController extends Controller
      * Routing for BackBone API for existing State entity.
      * Handles show, update and delete
      *
-     * @Route("/{state}", name="state_single")
+     * @Route("/{state}", name="state_known")
      * @Method({"DELETE","GET","PUT"})
      * @Template("LthrtContactBundle:State:edit.html.twig")
      */

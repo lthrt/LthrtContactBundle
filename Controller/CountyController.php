@@ -61,7 +61,7 @@ class CountyController extends Controller
      * Routing for BackBone API for existing County entity.
      * Handles show, update and delete
      *
-     * @Route("/{county}", name="county_single")
+     * @Route("/{county}", name="county_known")
      * @Method({"DELETE","GET","PUT"})
      * @Template("LthrtContactBundle:County:edit.html.twig")
      */

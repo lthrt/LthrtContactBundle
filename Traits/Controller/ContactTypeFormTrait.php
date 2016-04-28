@@ -23,7 +23,7 @@ trait ContactTypeFormTrait
     private function createDeleteForm(ContactType $contacttype)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('contacttype_delete', [ 'contacttype' => $contacttype->getId() ]))
+            ->setAction($this->generateUrl('contacttype_known', [ 'contacttype' => $contacttype->getId() ]))
             ->setMethod('DELETE')
             ->add('submit', SubmitType::class, [ 'label' => 'Delete' ])
             ->getForm()
@@ -55,6 +55,5 @@ trait ContactTypeFormTrait
             return $form;
         }
     }
-g
 
 }

@@ -61,7 +61,7 @@ class AddressTypeController extends Controller
      * Routing for BackBone API for existing AddressType entity.
      * Handles show, update and delete
      *
-     * @Route("/{addresstype}", name="addresstype_single")
+     * @Route("/{addresstype}", name="addresstype_known")
      * @Method({"DELETE","GET","PUT"})
      * @Template("LthrtContactBundle:AddressType:edit.html.twig")
      */

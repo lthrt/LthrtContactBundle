@@ -23,7 +23,7 @@ trait CountyFormTrait
     private function createDeleteForm(County $county)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('county_delete', [ 'county' => $county->getId() ]))
+            ->setAction($this->generateUrl('county_known', [ 'county' => $county->getId() ]))
             ->setMethod('DELETE')
             ->add('submit', SubmitType::class, [ 'label' => 'Delete' ])
             ->getForm()
@@ -55,6 +55,5 @@ trait CountyFormTrait
             return $form;
         }
     }
-g
 
 }

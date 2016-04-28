@@ -23,7 +23,7 @@ trait PersonFormTrait
     private function createDeleteForm(Person $person)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('person_delete', [ 'person' => $person->getId() ]))
+            ->setAction($this->generateUrl('person_known', [ 'person' => $person->getId() ]))
             ->setMethod('DELETE')
             ->add('submit', SubmitType::class, [ 'label' => 'Delete' ])
             ->getForm()
@@ -55,6 +55,5 @@ trait PersonFormTrait
             return $form;
         }
     }
-g
 
 }

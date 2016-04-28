@@ -23,7 +23,7 @@ trait AddressFormTrait
     private function createDeleteForm(Address $address)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('address_delete', [ 'address' => $address->getId() ]))
+            ->setAction($this->generateUrl('address_known', [ 'address' => $address->getId() ]))
             ->setMethod('DELETE')
             ->add('submit', SubmitType::class, [ 'label' => 'Delete' ])
             ->getForm()
@@ -55,6 +55,5 @@ trait AddressFormTrait
             return $form;
         }
     }
-g
 
 }
