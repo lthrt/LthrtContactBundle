@@ -44,7 +44,7 @@ class ContactController extends Controller
         /**
      * Lists all Contact entities.
      *
-     * @Route("/", name="contact")
+     * @Route("/", name="contact_list")
      * @Method("GET")
      * @Template("LthrtContactBundle:Contact:index.html.twig")
      */
@@ -60,12 +60,13 @@ class ContactController extends Controller
         /**
      * Routing for BackBone API for existing Contact entity.
      * Handles show, update and delete
+     * action on a 'single' entity
      *
-     * @Route("/{contact}", name="contact_known", requirements={"contact":"\d+"})
+     * @Route("/{contact}", name="contact", requirements={"contact":"\d+"})
      * @Method({"DELETE","GET","PUT"})
      * @Template("LthrtContactBundle:Contact:edit.html.twig")
      */
-    public function knownAction(Request $request, Contact $contact)
+    public function singleAction(Request $request, Contact $contact)
     {
         $this->notFound($contact);
 

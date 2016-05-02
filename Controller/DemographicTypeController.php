@@ -44,7 +44,7 @@ class DemographicTypeController extends Controller
         /**
      * Lists all DemographicType entities.
      *
-     * @Route("/", name="demographictype")
+     * @Route("/", name="demographictype_list")
      * @Method("GET")
      * @Template("LthrtContactBundle:DemographicType:index.html.twig")
      */
@@ -60,12 +60,13 @@ class DemographicTypeController extends Controller
         /**
      * Routing for BackBone API for existing DemographicType entity.
      * Handles show, update and delete
+     * action on a 'single' entity
      *
-     * @Route("/{demographictype}", name="demographictype_known", requirements={"demographictype":"\d+"})
+     * @Route("/{demographictype}", name="demographictype", requirements={"demographictype":"\d+"})
      * @Method({"DELETE","GET","PUT"})
      * @Template("LthrtContactBundle:DemographicType:edit.html.twig")
      */
-    public function knownAction(Request $request, DemographicType $demographictype)
+    public function singleAction(Request $request, DemographicType $demographictype)
     {
         $this->notFound($demographictype);
 

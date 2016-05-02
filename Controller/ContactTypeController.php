@@ -44,7 +44,7 @@ class ContactTypeController extends Controller
         /**
      * Lists all ContactType entities.
      *
-     * @Route("/", name="contacttype")
+     * @Route("/", name="contacttype_list")
      * @Method("GET")
      * @Template("LthrtContactBundle:ContactType:index.html.twig")
      */
@@ -60,12 +60,13 @@ class ContactTypeController extends Controller
         /**
      * Routing for BackBone API for existing ContactType entity.
      * Handles show, update and delete
+     * action on a 'single' entity
      *
-     * @Route("/{contacttype}", name="contacttype_known", requirements={"contacttype":"\d+"})
+     * @Route("/{contacttype}", name="contacttype", requirements={"contacttype":"\d+"})
      * @Method({"DELETE","GET","PUT"})
      * @Template("LthrtContactBundle:ContactType:edit.html.twig")
      */
-    public function knownAction(Request $request, ContactType $contacttype)
+    public function singleAction(Request $request, ContactType $contacttype)
     {
         $this->notFound($contacttype);
 

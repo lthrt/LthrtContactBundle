@@ -44,7 +44,7 @@ class AddressTypeController extends Controller
         /**
      * Lists all AddressType entities.
      *
-     * @Route("/", name="addresstype")
+     * @Route("/", name="addresstype_list")
      * @Method("GET")
      * @Template("LthrtContactBundle:AddressType:index.html.twig")
      */
@@ -60,12 +60,13 @@ class AddressTypeController extends Controller
         /**
      * Routing for BackBone API for existing AddressType entity.
      * Handles show, update and delete
+     * action on a 'single' entity
      *
-     * @Route("/{addresstype}", name="addresstype_known", requirements={"addresstype":"\d+"})
+     * @Route("/{addresstype}", name="addresstype", requirements={"addresstype":"\d+"})
      * @Method({"DELETE","GET","PUT"})
      * @Template("LthrtContactBundle:AddressType:edit.html.twig")
      */
-    public function knownAction(Request $request, AddressType $addresstype)
+    public function singleAction(Request $request, AddressType $addresstype)
     {
         $this->notFound($addresstype);
 

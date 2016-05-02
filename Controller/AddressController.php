@@ -44,7 +44,7 @@ class AddressController extends Controller
         /**
      * Lists all Address entities.
      *
-     * @Route("/", name="address")
+     * @Route("/", name="address_list")
      * @Method("GET")
      * @Template("LthrtContactBundle:Address:index.html.twig")
      */
@@ -60,12 +60,13 @@ class AddressController extends Controller
         /**
      * Routing for BackBone API for existing Address entity.
      * Handles show, update and delete
+     * action on a 'single' entity
      *
-     * @Route("/{address}", name="address_known", requirements={"address":"\d+"})
+     * @Route("/{address}", name="address", requirements={"address":"\d+"})
      * @Method({"DELETE","GET","PUT"})
      * @Template("LthrtContactBundle:Address:edit.html.twig")
      */
-    public function knownAction(Request $request, Address $address)
+    public function singleAction(Request $request, Address $address)
     {
         $this->notFound($address);
 

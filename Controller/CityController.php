@@ -44,7 +44,7 @@ class CityController extends Controller
         /**
      * Lists all City entities.
      *
-     * @Route("/", name="city")
+     * @Route("/", name="city_list")
      * @Method("GET")
      * @Template("LthrtContactBundle:City:index.html.twig")
      */
@@ -60,12 +60,13 @@ class CityController extends Controller
         /**
      * Routing for BackBone API for existing City entity.
      * Handles show, update and delete
+     * action on a 'single' entity
      *
-     * @Route("/{city}", name="city_known", requirements={"city":"\d+"})
+     * @Route("/{city}", name="city", requirements={"city":"\d+"})
      * @Method({"DELETE","GET","PUT"})
      * @Template("LthrtContactBundle:City:edit.html.twig")
      */
-    public function knownAction(Request $request, City $city)
+    public function singleAction(Request $request, City $city)
     {
         $this->notFound($city);
 

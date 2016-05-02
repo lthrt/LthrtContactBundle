@@ -44,7 +44,7 @@ class CountyController extends Controller
         /**
      * Lists all County entities.
      *
-     * @Route("/", name="county")
+     * @Route("/", name="county_list")
      * @Method("GET")
      * @Template("LthrtContactBundle:County:index.html.twig")
      */
@@ -60,12 +60,13 @@ class CountyController extends Controller
         /**
      * Routing for BackBone API for existing County entity.
      * Handles show, update and delete
+     * action on a 'single' entity
      *
-     * @Route("/{county}", name="county_known", requirements={"county":"\d+"})
+     * @Route("/{county}", name="county", requirements={"county":"\d+"})
      * @Method({"DELETE","GET","PUT"})
      * @Template("LthrtContactBundle:County:edit.html.twig")
      */
-    public function knownAction(Request $request, County $county)
+    public function singleAction(Request $request, County $county)
     {
         $this->notFound($county);
 

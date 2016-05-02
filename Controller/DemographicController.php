@@ -44,7 +44,7 @@ class DemographicController extends Controller
         /**
      * Lists all Demographic entities.
      *
-     * @Route("/", name="demographic")
+     * @Route("/", name="demographic_list")
      * @Method("GET")
      * @Template("LthrtContactBundle:Demographic:index.html.twig")
      */
@@ -60,12 +60,13 @@ class DemographicController extends Controller
         /**
      * Routing for BackBone API for existing Demographic entity.
      * Handles show, update and delete
+     * action on a 'single' entity
      *
-     * @Route("/{demographic}", name="demographic_known", requirements={"demographic":"\d+"})
+     * @Route("/{demographic}", name="demographic", requirements={"demographic":"\d+"})
      * @Method({"DELETE","GET","PUT"})
      * @Template("LthrtContactBundle:Demographic:edit.html.twig")
      */
-    public function knownAction(Request $request, Demographic $demographic)
+    public function singleAction(Request $request, Demographic $demographic)
     {
         $this->notFound($demographic);
 

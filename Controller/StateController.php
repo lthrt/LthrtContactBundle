@@ -44,7 +44,7 @@ class StateController extends Controller
         /**
      * Lists all State entities.
      *
-     * @Route("/", name="state")
+     * @Route("/", name="state_list")
      * @Method("GET")
      * @Template("LthrtContactBundle:State:index.html.twig")
      */
@@ -60,12 +60,13 @@ class StateController extends Controller
         /**
      * Routing for BackBone API for existing State entity.
      * Handles show, update and delete
+     * action on a 'single' entity
      *
-     * @Route("/{state}", name="state_known", requirements={"state":"\d+"})
+     * @Route("/{state}", name="state", requirements={"state":"\d+"})
      * @Method({"DELETE","GET","PUT"})
      * @Template("LthrtContactBundle:State:edit.html.twig")
      */
-    public function knownAction(Request $request, State $state)
+    public function singleAction(Request $request, State $state)
     {
         $this->notFound($state);
 

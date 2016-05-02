@@ -44,7 +44,7 @@ class ZipController extends Controller
         /**
      * Lists all Zip entities.
      *
-     * @Route("/", name="zip")
+     * @Route("/", name="zip_list")
      * @Method("GET")
      * @Template("LthrtContactBundle:Zip:index.html.twig")
      */
@@ -60,12 +60,13 @@ class ZipController extends Controller
         /**
      * Routing for BackBone API for existing Zip entity.
      * Handles show, update and delete
+     * action on a 'single' entity
      *
-     * @Route("/{zip}", name="zip_known", requirements={"zip":"\d+"})
+     * @Route("/{zip}", name="zip", requirements={"zip":"\d+"})
      * @Method({"DELETE","GET","PUT"})
      * @Template("LthrtContactBundle:Zip:edit.html.twig")
      */
-    public function knownAction(Request $request, Zip $zip)
+    public function singleAction(Request $request, Zip $zip)
     {
         $this->notFound($zip);
 

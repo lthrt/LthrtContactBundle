@@ -44,7 +44,7 @@ class PersonController extends Controller
         /**
      * Lists all Person entities.
      *
-     * @Route("/", name="person")
+     * @Route("/", name="person_list")
      * @Method("GET")
      * @Template("LthrtContactBundle:Person:index.html.twig")
      */
@@ -60,12 +60,13 @@ class PersonController extends Controller
         /**
      * Routing for BackBone API for existing Person entity.
      * Handles show, update and delete
+     * action on a 'single' entity
      *
-     * @Route("/{person}", name="person_known", requirements={"person":"\d+"})
+     * @Route("/{person}", name="person", requirements={"person":"\d+"})
      * @Method({"DELETE","GET","PUT"})
      * @Template("LthrtContactBundle:Person:edit.html.twig")
      */
-    public function knownAction(Request $request, Person $person)
+    public function singleAction(Request $request, Person $person)
     {
         $this->notFound($person);
 
