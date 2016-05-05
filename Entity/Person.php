@@ -10,11 +10,11 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Lthrt\ContactBundle\Repository\PersonRepository")
  */
-class Person
+class Person implements \Lthrt\EntityBundle\Entity\EntityLogging;
+
 {
     use \Lthrt\EntityBundle\Entity\ActiveTrait;
     use \Lthrt\EntityBundle\Entity\EntityTrait;
-    use \Lthrt\EntityBundle\Entity\LoggedTrait;
 
     /**
      * @var string
