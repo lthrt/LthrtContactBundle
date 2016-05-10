@@ -10,7 +10,6 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
  * AddressFormController Trait.
  */
 
-
 trait AddressFormTrait
 {
     /**
@@ -23,9 +22,9 @@ trait AddressFormTrait
     private function createDeleteForm(Address $address)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('address_known', [ 'address' => $address->getId() ]))
+            ->setAction($this->generateUrl('address', ['address' => $address->getId()]))
             ->setMethod('DELETE')
-            ->add('submit', SubmitType::class, [ 'label' => 'Delete' ])
+            ->add('submit', SubmitType::class, ['label' => 'Delete'])
             ->getForm()
         ;
     }
@@ -41,7 +40,7 @@ trait AddressFormTrait
     {
         if ($address->getId()) {
             $form = $this->createForm(AddressType::class, $address, [
-                'action' => $this->generateUrl('address_known', [ 'address' => $address->getId() ]),
+                'action' => $this->generateUrl('address', ['address' => $address->getId()]),
                 'method' => 'PUT',
             ]);
 
@@ -55,5 +54,4 @@ trait AddressFormTrait
             return $form;
         }
     }
-
 }

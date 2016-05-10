@@ -10,7 +10,6 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
  * CountyFormController Trait.
  */
 
-
 trait CountyFormTrait
 {
     /**
@@ -23,9 +22,9 @@ trait CountyFormTrait
     private function createDeleteForm(County $county)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('county_known', [ 'county' => $county->getId() ]))
+            ->setAction($this->generateUrl('county', ['county' => $county->getId()]))
             ->setMethod('DELETE')
-            ->add('submit', SubmitType::class, [ 'label' => 'Delete' ])
+            ->add('submit', SubmitType::class, ['label' => 'Delete'])
             ->getForm()
         ;
     }
@@ -41,7 +40,7 @@ trait CountyFormTrait
     {
         if ($county->getId()) {
             $form = $this->createForm(CountyType::class, $county, [
-                'action' => $this->generateUrl('county_known', [ 'county' => $county->getId() ]),
+                'action' => $this->generateUrl('county', ['county' => $county->getId()]),
                 'method' => 'PUT',
             ]);
 
@@ -55,5 +54,4 @@ trait CountyFormTrait
             return $form;
         }
     }
-
 }
