@@ -99,8 +99,8 @@ class ZipLoader extends StatesLoader
             } else {
                 $city                                          = new City();
                 $city->name                                    = $zipRef['city'];
-                $cities[$city->name . '__' . $zipRef['state']]     = $city;
-                $result['cities']++;
+                $cities[$city->name . '__' . $zipRef['state']] = $city;
+                ++$result['cities'];
             }
 
             if (isset($counties[$zipRef['county'] . '__' . $zipRef['state']])) {
@@ -113,7 +113,7 @@ class ZipLoader extends StatesLoader
                     $county->name = strtoupper($zipRef['city']) . '_' . strtoupper($zipRef['state']) . '_' . $key;
                 }
                 $counties[$county->name . '__' . $zipRef['state']] = $county;
-                $result['counties']++;
+                ++$result['counties'];
             }
 
             if (isset($dbZips[$key])) {
@@ -122,18 +122,21 @@ class ZipLoader extends StatesLoader
                 $zip               = new Zip();
                 $zip->zip          = $key;
                 $dbZips[$zip->zip] = $zip;
-                $result['zips']++;
+                ++$result['zips'];
             }
 
             $zip->addCounty($counties[$county->name . '__' . $state->abbr]);
             $zip->addCity($cities[$city->name . '__' . $state->abbr]);
             $zip->addState($state);
+            $zip->updatedBy = "DataFixtures";
 
             $city->state = $state;
             $city->addCounty($county);
+            $city->updatedBy = "DataFixtures";
 
             $county->addState($state);
             $county->addCity($city);
+            $county->updatedBy = "DataFixtures";
 
             $this->em->persist($county);
             $this->em->persist($city);
