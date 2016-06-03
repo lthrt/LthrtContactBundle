@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Lthrt\ContactBundle\Repository\PersonRepository")
  */
-class Person implements \Lthrt\EntityBundle\Entity\EntityLogging
+class Person implements \Lthrt\EntityBundle\Entity\EntityLog
 {
     use \Lthrt\EntityBundle\Entity\ActiveTrait;
     use \Lthrt\EntityBundle\Entity\EntityTrait;
