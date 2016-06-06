@@ -116,7 +116,7 @@ class FakePeopleLoader
                 } else {
                     $person                    = new Person();
                     $newPeople[$last][$first]  = $person;
-                    $new[$first . " " . $last] = 1;
+                    $new[$first . " " . $last]     = 1;
                     unset($updatedPeople[$last][$first]);
                 }
                 $person->firstName = $first;

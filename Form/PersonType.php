@@ -10,7 +10,7 @@ class PersonType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -23,18 +23,17 @@ class PersonType extends AbstractType
             ->add('updated')
             ->add('contact')
             ->add('demographic')
-            ->add('address')
-        ;
+            ->add('address');
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'Lthrt\ContactBundle\Entity\Person'
-        ));
+        $resolver->setDefaults([
+            'data_class' => 'Lthrt\ContactBundle\Entity\Person',
+        ]);
     }
 
     /**

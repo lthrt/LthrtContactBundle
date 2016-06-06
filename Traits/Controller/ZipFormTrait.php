@@ -9,7 +9,6 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 /**
  * ZipFormController Trait.
  */
-
 trait ZipFormTrait
 {
     /**
@@ -25,8 +24,7 @@ trait ZipFormTrait
             ->setAction($this->generateUrl('zip', ['zip' => $zip->getId()]))
             ->setMethod('DELETE')
             ->add('submit', SubmitType::class, ['label' => 'Delete'])
-            ->getForm()
-        ;
+            ->getForm();
     }
 
     /**

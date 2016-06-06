@@ -9,7 +9,6 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 /**
  * PersonFormController Trait.
  */
-
 trait PersonFormTrait
 {
     /**
@@ -25,8 +24,7 @@ trait PersonFormTrait
             ->setAction($this->generateUrl('person', ['person' => $person->getId()]))
             ->setMethod('DELETE')
             ->add('submit', SubmitType::class, ['label' => 'Delete'])
-            ->getForm()
-        ;
+            ->getForm();
     }
 
     /**

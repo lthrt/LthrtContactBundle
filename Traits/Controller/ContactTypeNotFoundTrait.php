@@ -7,8 +7,6 @@ use Lthrt\ContactBundle\Entity\ContactType;
 /**
  * ContactTypeNotFoundTrait.
  */
-
-
 trait ContactTypeNotFoundTrait
 {
     private function notFound(ContactType $contacttype)

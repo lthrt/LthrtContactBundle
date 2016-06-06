@@ -7,8 +7,6 @@ use Lthrt\ContactBundle\Entity\City;
 /**
  * CityNotFoundTrait.
  */
-
-
 trait CityNotFoundTrait
 {
     private function notFound(City $city)

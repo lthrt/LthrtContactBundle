@@ -7,8 +7,6 @@ use Lthrt\ContactBundle\Entity\DemographicType;
 /**
  * DemographicTypeNotFoundTrait.
  */
-
-
 trait DemographicTypeNotFoundTrait
 {
     private function notFound(DemographicType $demographictype)

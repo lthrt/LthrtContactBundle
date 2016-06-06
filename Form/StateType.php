@@ -10,7 +10,7 @@ class StateType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -21,18 +21,17 @@ class StateType extends AbstractType
             ->add('updated')
             ->add('name')
             ->add('county')
-            ->add('zip')
-        ;
+            ->add('zip');
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'Lthrt\ContactBundle\Entity\State'
-        ));
+        $resolver->setDefaults([
+            'data_class' => 'Lthrt\ContactBundle\Entity\State',
+        ]);
     }
 
     /**

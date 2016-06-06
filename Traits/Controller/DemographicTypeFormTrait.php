@@ -9,7 +9,6 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 /**
  * DemographicTypeFormController Trait.
  */
-
 trait DemographicTypeFormTrait
 {
     /**
@@ -25,8 +24,7 @@ trait DemographicTypeFormTrait
             ->setAction($this->generateUrl('demographictype', ['demographictype' => $demographictype->getId()]))
             ->setMethod('DELETE')
             ->add('submit', SubmitType::class, ['label' => 'Delete'])
-            ->getForm()
-        ;
+            ->getForm();
     }
 
     /**

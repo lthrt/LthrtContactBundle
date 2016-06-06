@@ -9,7 +9,6 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 /**
  * StateFormController Trait.
  */
-
 trait StateFormTrait
 {
     /**
@@ -25,8 +24,7 @@ trait StateFormTrait
             ->setAction($this->generateUrl('state', ['state' => $state->getId()]))
             ->setMethod('DELETE')
             ->add('submit', SubmitType::class, ['label' => 'Delete'])
-            ->getForm()
-        ;
+            ->getForm();
     }
 
     /**

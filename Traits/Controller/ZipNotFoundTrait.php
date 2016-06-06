@@ -7,8 +7,6 @@ use Lthrt\ContactBundle\Entity\Zip;
 /**
  * ZipNotFoundTrait.
  */
-
-
 trait ZipNotFoundTrait
 {
     private function notFound(Zip $zip)

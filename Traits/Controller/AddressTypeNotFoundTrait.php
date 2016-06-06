@@ -7,8 +7,6 @@ use Lthrt\ContactBundle\Entity\AddressType;
 /**
  * AddressTypeNotFoundTrait.
  */
-
-
 trait AddressTypeNotFoundTrait
 {
     private function notFound(AddressType $addresstype)

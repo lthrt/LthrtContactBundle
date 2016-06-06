@@ -2,19 +2,18 @@
 
 namespace Lthrt\ContactBundle\Controller;
 
+use Lthrt\ContactBundle\Entity\ContactType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Lthrt\ContactBundle\Entity\ContactType;
 
 /**
  * ContactType controller.
  *
  * @Route("/contacttype")
  */
-
 class ContactTypeController extends Controller
 {
     use \Lthrt\ContactBundle\Traits\Controller\ContactTypeFormTrait;
@@ -24,6 +23,7 @@ class ContactTypeController extends Controller
      * Gets edit form existing ContactType entity.
      *
      * @Route("/{contacttype}/edit", name="contacttype_edit")
+     *
      * @Method({"GET"})
      * @Template("LthrtContactBundle:ContactType:edit.html.twig")
      */
@@ -31,20 +31,21 @@ class ContactTypeController extends Controller
     {
         $this->notFound($contacttype);
 
-        $form = $this->createEditForm($contacttype);
+        $form       = $this->createEditForm($contacttype);
         $deleteForm = $this->createDeleteForm($contacttype);
 
-         return [
+        return [
             'contacttype'      => $contacttype,
-            'form' => $form->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'form'             => $form->createView(),
+            'delete_form'      => $deleteForm->createView(),
         ];
     }
 
-        /**
+    /**
      * Lists all ContactType entities.
      *
      * @Route("/", name="contacttype_list")
+     *
      * @Method("GET")
      * @Template("LthrtContactBundle:ContactType:index.html.twig")
      */
@@ -57,12 +58,13 @@ class ContactTypeController extends Controller
         ];
     }
 
-        /**
+    /**
      * Routing for BackBone API for existing ContactType entity.
      * Handles show, update and delete
-     * action on a 'single' entity
+     * action on a 'single' entity.
      *
      * @Route("/{contacttype}", name="contacttype", requirements={"contacttype":"\d+"})
+     *
      * @Method({"DELETE","GET","PUT"})
      * @Template("LthrtContactBundle:ContactType:edit.html.twig")
      */
@@ -70,10 +72,10 @@ class ContactTypeController extends Controller
     {
         $this->notFound($contacttype);
 
-        if ($request->isMethod('GET')) {  
-            return $this->forward('LthrtContactBundle:ContactType:show', [ 'contacttype' => $contacttype, ]); 
+        if ($request->isMethod('GET')) {
+            return $this->forward('LthrtContactBundle:ContactType:show', [ 'contacttype' => $contacttype]);
         } else { // Method is PUT or DELETE
-            $form = $this->createEditForm($contacttype);
+            $form       = $this->createEditForm($contacttype);
             $deleteForm = $this->createDeleteForm($contacttype);
             $form->handleRequest($request);
             $em = $this->getDoctrine()->getManager();
@@ -82,47 +84,47 @@ class ContactTypeController extends Controller
                     $em->persist($contacttype);
                     $em->flush();
 
-                    return $this->forward('LthrtContactBundle:ContactType:show', [ 'contacttype' => $contacttype, ]);  
+                    return $this->forward('LthrtContactBundle:ContactType:show', [ 'contacttype' => $contacttype]);
                 } else {
-
                     return $this->render('LthrtContactBundle:ContactType:edit.html.twig', [
                         'contacttype' => $contacttype,
-                        'form' => $form->createView(),
+                        'form'        => $form->createView(),
                         'delete_form' => $deleteForm->createView(),
                     ]);
                 }
             } else {
-                if ($request->isMethod('DELETE')){
+                if ($request->isMethod('DELETE')) {
                     if ($form->isValid() && $form->isSubmitted()) {
                         $em->remove($contacttype);
                         $em->flush();
 
                         return $this->forward($this->generateUrl('contacttype'));
                     } else {
-                        return $this->forward('LthrtContactBundle:ContactType:show', [ 'contacttype' => $contacttype, ]); 
+                        return $this->forward('LthrtContactBundle:ContactType:show', [ 'contacttype' => $contacttype]);
                     }
                 }
             }
         }
     }
-    
-        /**
+
+    /**
      * Creates a new ContactType entity.
      *
      * @Route("/new", name="contacttype_new")
+     *
      * @Method({"GET", "POST"})
      * @Template("LthrtContactBundle:ContactType:new.html.twig")
      */
     public function newAction(Request $request)
     {
         $contacttype = new ContactType();
-        $form = $this->createEditForm($contacttype);
+        $form        = $this->createEditForm($contacttype);
         $form->handleRequest($request);
         if (
-            $request->isMethod('POST') && 
-            $form->isValid() && 
+            $request->isMethod('POST') &&
+            $form->isValid() &&
             $form->isSubmitted()
-        ) {        
+        ) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($contacttype);
             $em->flush();
@@ -132,14 +134,15 @@ class ContactTypeController extends Controller
 
         return [
             'contacttype' => $contacttype,
-            'form' => $form->createView(),
+            'form'        => $form->createView(),
         ];
     }
 
-        /**
+    /**
      * Finds and displays a ContactType entity.
      *
      * @Route("/{contacttype}/show", name="contacttype_show")
+     *
      * @Method("GET")
      * @Template("LthrtContactBundle:ContactType:show.html.twig")
      */
@@ -151,8 +154,7 @@ class ContactTypeController extends Controller
 
         return [
             'contacttype'      => $contacttype,
-            'delete_form' => $deleteForm->createView(),
+            'delete_form'      => $deleteForm->createView(),
         ];
     }
-
 }

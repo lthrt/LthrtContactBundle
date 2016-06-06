@@ -7,8 +7,6 @@ use Lthrt\ContactBundle\Entity\County;
 /**
  * CountyNotFoundTrait.
  */
-
-
 trait CountyNotFoundTrait
 {
     private function notFound(County $county)

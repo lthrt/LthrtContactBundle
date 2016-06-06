@@ -7,8 +7,6 @@ use Lthrt\ContactBundle\Entity\State;
 /**
  * StateNotFoundTrait.
  */
-
-
 trait StateNotFoundTrait
 {
     private function notFound(State $state)

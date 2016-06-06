@@ -7,7 +7,6 @@ use Lthrt\ContactBundle\Form\Combo\CityCountyStateCombo;
 /**
  * CountyFormController Trait.
  */
-
 trait CityCountyStateFormController
 {
     private function createCityCountyStateForm($options = [])

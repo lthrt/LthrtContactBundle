@@ -10,7 +10,7 @@ class ContactTypeType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -18,18 +18,17 @@ class ContactTypeType extends AbstractType
             ->add('active')
             ->add('created')
             ->add('updated')
-            ->add('name')
-        ;
+            ->add('name');
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'Lthrt\ContactBundle\Entity\ContactType'
-        ));
+        $resolver->setDefaults([
+            'data_class' => 'Lthrt\ContactBundle\Entity\ContactType',
+        ]);
     }
 
     /**
