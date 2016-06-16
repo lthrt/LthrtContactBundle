@@ -1,25 +1,36 @@
 {% extends 'LthrtTemplateBundle::dashboard.html.twig' %}
+{% block widget1 %}
+    {% include 'LthrtContactBundle:Person:raceDemographic.html.twig' %}
+{% endblock widget1 %}
+{% block widget2 %}
+    {# {% include 'LthrtContactBundle:Person:ethnicityDemographic.html.twig' %} #}
+{% endblock widget2 %}
+{% block widget3 %}
+    {# {% include 'LthrtContactBundle:Person:genderDemographic.html.twig' %} #}
+{% endblock widget3 %}
 {% block content %}
     <h1>Person list</h1>
     <table class="records_list table-bordered table-condensed table-hover table-striped table-responsive">
         <thead>
             <tr>
+                <th>Active</th>
                 <th>Id</th>
                 <th>Firstname</th>
                 <th>Lastname</th>
                 <th>Dob</th>
-                <th>Active</th>
+                <th>Demographic</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
             {% for person in personCollection %}
                 <tr>
+                    <td>{{ person.active|boolean|raw }}</td>
                     <td><a href="{{ path('person_show', { 'person': person.id }) }}">{{ person.id }}</a></td>
                     <td>{{ person.firstName }}</td>
                     <td>{{ person.lastName }}</td>
                     <td>{% if person.dob %}{{ person.dob|date('Y-m-d') }}{% endif %}</td>
-                    <td>{{ person.active|boolean|raw }}</td>
+                    <td><ul>{% for demo in person.demographic|sort %}<li>{{ demo.value }}</li>{% endfor %}</ul></td>
                     <td>
                         <ul>
                             <li>
@@ -34,7 +45,6 @@
             {% endfor %}
         </tbody>
     </table>
-
     <ul>
         <li>
             <a href="{{ path('person_new') }}">
@@ -46,4 +56,3 @@
 {%- block js -%}
     {{- parent() -}}
 {%- endblock js -%}
-{# {% endembed %} #}

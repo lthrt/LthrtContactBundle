@@ -1,19 +1,18 @@
-last,first,dob,race,ethnicity
-The Destroyer,Sennakerib,2015-04-24,Dog,Australian
-The Surly,Misha,2000-08-29,Dog,Alaskan
-The Jerk,Jane,2014-02-12,Cat,
-The Happy,Dima,2002-07-04,Dog,American
-The Master,Tom,1919-11-09,Cat,Cartoon
-The Lazy,Garfield,1978-06-19,Cat,Comic
-The Dane,Marmaduke,1954-04-01,Dog,Comic
-The Megalomaniac,Dogbert,1957-06-08,Dog,Comic
-The HR Director,Catbert,1994-09-12,Cat,Comic
-The Narf,Pinky,1995-09-09,Mouse,Cartoon
-The Megalomaniac,Brain,1995-09-09,Mouse,Cartoon
-Bunny,Bugs,1938-04-30,Rabbit,Cartoon
-Duck,Daffy,1937-04-17,Duck,Cartoon
-The Strungout,Bill,1982-06-13,Cat,Comic
-The Meek,Opus,1981-06-26,Penguin,Comic
-The Red Baron,Snoopy,1950-10-04,Dog,Comic
-The Loyal,Woodstock,1966-03-04,Bird,Comic
-The Imaginary,Calvin,Cat,Cat,Comic
+last,first,dob,race,ethnicity,gender
+The Destroyer,Sennakerib,2015-04-24,Dog,Australian,Male
+The Surly,Misha,2000-08-29,Dog,Alaskan,Male
+The Jerk,Jane,2014-02-12,Cat,,Female
+The Happy,Dima,2002-07-04,Dog,American,Male
+The Lazy,Garfield,1978-06-19,Cat,Comic,Male
+The Dane,Marmaduke,1954-04-01,Dog,Comic,Male
+The Megalomaniac,Dogbert,1957-06-08,Dog,Comic,Male
+The HR Director,Catbert,1994-09-12,Cat,Comic,Female
+The Narf,Pinky,1995-09-09,Mouse,Cartoon,Male
+The Megalomaniac,Brain,1995-09-09,Mouse,Cartoon,Male
+Bunny,Bugs,1938-04-30,Rabbit,Cartoon,Male
+Duck,Daffy,1937-04-17,Duck,Cartoon,Male
+The Strungout,Bill,1982-06-13,Cat,Comic,Male
+The Meek,Opus,1981-06-26,Penguin,Comic,Male
+The Red Baron,Snoopy,1950-10-04,Dog,Comic,Male
+The Loyal,Woodstock,1966-03-04,Bird,Comic,Female
+The Imaginary,Calvin,1985-11-18,Cat,Comic,Male

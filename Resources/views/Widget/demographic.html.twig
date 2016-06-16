@@ -1,0 +1,50 @@
+<div id="pieChart_{{type}}"></div>
+<script src="http://d3js.org/d3.v3.min.js"  charset="utf-8"></script>
+<script src="{{ asset('bundles/lthrttemplate/d3/d3pie.min.js') }}" ></script>
+<script>
+var pie = new d3pie("pieChart_{{type}}", {
+    "header": {
+        "title": {
+          "text": "{{type|title}} Distribution",
+          "fontSize": 22,
+          "font": "Arial"
+        }
+    },
+    data: {
+        content: {{ result|raw }},
+        sortOrder: "value-asc"
+
+    },
+   // size: {
+   //    canvasHeight: 180,
+   //    canvasWidth: 180,
+   //    pieInnerRadius: 0,
+   //    pieOuterRadius: 80,
+   //  },
+    labels: {
+            mainLabel: {
+            color: "#333333",
+            font: "arial",
+            fontSize: 13
+        },
+      outer: {
+        hideWhenLessThanPercentage: 100,
+      },
+      inner :{
+          format: "label-percentage1",
+          fontSize:12
+      },
+      percentage : {
+          color: "#000000",
+          fontSize:12
+      }
+    //   value : {
+    //       color: "#000000",
+    //       fontSize:12
+    //   },
+    //   tooltips : {
+    //       enabled: true
+    //   }
+    }
+});
+</script>

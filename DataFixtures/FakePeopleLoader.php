@@ -19,17 +19,6 @@ class FakePeopleLoader
         $this->people = $this->getPeople();
     }
 
-    public function getRaces()
-    {
-        $qb = $this->em->getRepository('LthrtContactBundle:Demographic')
-            ->createQueryBuilder('race', 'race.value');
-        $qb->join('race.type', 'demotype')
-            ->andWhere($qb->expr()->eq('demotype.name', ':demotype'))
-            ->setParameter('demotype', 'race');
-
-        return $qb->getQuery()->getResult();
-    }
-
     public function getEthnicities()
     {
         $qb = $this->em->getRepository('LthrtContactBundle:Demographic')
@@ -41,22 +30,53 @@ class FakePeopleLoader
         return $qb->getQuery()->getResult();
     }
 
+    public function getGenders()
+    {
+        $qb = $this->em->getRepository('LthrtContactBundle:Demographic')
+            ->createQueryBuilder('gender', 'gender.value');
+        $qb->join('gender.type', 'demotype')
+            ->andWhere($qb->expr()->eq('demotype.name', ':demotype'))
+            ->setParameter('demotype', 'gender');
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function getRaces()
+    {
+        $qb = $this->em->getRepository('LthrtContactBundle:Demographic')
+            ->createQueryBuilder('race', 'race.value');
+        $qb->join('race.type', 'demotype')
+            ->andWhere($qb->expr()->eq('demotype.name', ':demotype'))
+            ->setParameter('demotype', 'race');
+
+        return $qb->getQuery()->getResult();
+    }
+
     public function loadFakePeople($overwrite = false)
     {
         $dbPeople = $this->em->getRepository('LthrtContactBundle:Person')
             ->createQueryBuilder('people')->getQuery()->getResult();
-        $races       = $this->getRaces();
         $ethnicities = $this->getEthnicities();
-        $raceType    = $this->em->getRepository('LthrtContactBundle:DemographicType')
-            ->createQueryBuilder('demotype');
-        $raceType = $raceType
-            ->andWhere($raceType->expr()->eq('demotype.name', ':demotype'))
-            ->setParameter('demotype', 'race')->getQuery()->getOneOrNullResult();
+        $genders     = $this->getGenders();
+        $races       = $this->getRaces();
+
         $ethnicityType = $this->em->getRepository('LthrtContactBundle:DemographicType')
             ->createQueryBuilder('demotype');
         $ethnicityType = $ethnicityType
             ->andWhere($ethnicityType->expr()->eq('demotype.name', ':demotype'))
             ->setParameter('demotype', 'ethnicity')->getQuery()->getOneOrNullResult();
+
+        $genderType = $this->em->getRepository('LthrtContactBundle:DemographicType')
+            ->createQueryBuilder('demotype');
+        $genderType = $genderType
+            ->andWhere($genderType->expr()->eq('demotype.name', ':demotype'))
+            ->setParameter('demotype', 'gender')->getQuery()->getOneOrNullResult();
+
+        $raceType = $this->em->getRepository('LthrtContactBundle:DemographicType')
+            ->createQueryBuilder('demotype');
+        $raceType = $raceType
+            ->andWhere($raceType->expr()->eq('demotype.name', ':demotype'))
+            ->setParameter('demotype', 'race')->getQuery()->getOneOrNullResult();
 
         if ($raceType) {
         } else {
@@ -79,23 +99,14 @@ class FakePeopleLoader
                 if ('header' == $lastName) {
                     continue;
                 }
-                $last      = $dataRow[$this->people['header']['last']];
-                $first     = $dataRow[$this->people['header']['first']];
-                $dob       = $dataRow[$this->people['header']['dob']];
-                $race      = $dataRow[$this->people['header']['race']];
-                $ethnicity = $dataRow[$this->people['header']['ethnicity']];
+                $last      = trim($dataRow[$this->people['header']['last']]);
+                $first     = trim($dataRow[$this->people['header']['first']]);
+                $dob       = trim($dataRow[$this->people['header']['dob']]);
+                $race      = trim($dataRow[$this->people['header']['race']]);
+                $ethnicity = trim($dataRow[$this->people['header']['ethnicity']]);
+                $gender    = trim($dataRow[$this->people['header']['gender']]);
 
-                if ($race && isset($races[$race])) {
-                } else {
-                    $newRace        = new Demographic();
-                    $newRace->value = $race;
-                    $newRace->type  = $raceType;
-                    $this->em->persist($newRace);
-                    $this->em->flush();
-                    $races = $this->getRaces();
-                }
-
-                if ($ethnicity && isset($ethnicities[$ethnicity])) {
+                if (!$ethnicity || isset($ethnicities[$ethnicity])) {
                 } else {
                     $newEthnicity        = new Demographic();
                     $newEthnicity->value = $ethnicity;
@@ -103,6 +114,26 @@ class FakePeopleLoader
                     $this->em->persist($newEthnicity);
                     $this->em->flush();
                     $ethnicities = $this->getEthnicities();
+                }
+
+                if (!$gender || isset($genders[$gender])) {
+                } else {
+                    $newGender        = new Demographic();
+                    $newGender->value = $gender;
+                    $newGender->type  = $genderType;
+                    $this->em->persist($newGender);
+                    $this->em->flush();
+                    $genders = $this->getGenders();
+                }
+
+                if (!$race || isset($races[$race])) {
+                } else {
+                    $newRace        = new Demographic();
+                    $newRace->value = $race;
+                    $newRace->type  = $raceType;
+                    $this->em->persist($newRace);
+                    $this->em->flush();
+                    $races = $this->getRaces();
                 }
 
                 if (in_array($last, array_keys($updatedPeople))
@@ -120,11 +151,14 @@ class FakePeopleLoader
                 $person->firstName = $first;
                 $person->lastName  = $last;
                 $person->dob       = new \DateTime($dob);
-                if ($race) {
-                    $person->addDemographic($races[$race]);
-                }
                 if ($ethnicity) {
                     $person->addDemographic($ethnicities[$ethnicity]);
+                }
+                if ($gender) {
+                    $person->addDemographic($genders[$gender]);
+                }
+                if ($race) {
+                    $person->addDemographic($races[$race]);
                 }
                 $this->em->persist($person);
                 $this->em->flush();
