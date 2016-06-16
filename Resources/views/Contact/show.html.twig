@@ -10,14 +10,6 @@
                 <td>{{ contact.active }}</td>
             </tr>
             <tr>
-                <th>Created</th>
-                <td>{{ contact.created|date('Y-m-d H:i:s') }}</td>
-            </tr>
-            <tr>
-                <th>Updated</th>
-                <td>{{ contact.updated|date('Y-m-d H:i:s') }}</td>
-            </tr>
-            <tr>
                 <th>Id</th>
                 <td>{{ contact.id }}</td>
             </tr>
@@ -28,17 +20,17 @@
         </tbody>
     </table>
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('contact_list') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('contact_edit', { 'contact' : contact.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+    <ul class="record_actions">
+        <li>
+            <a href="{{ path('contact_list') }}">
+                Back to the list
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('contact_edit', { 'contact' : contact.id }) }}">
+                Edit
+            </a>
+        </li>
+        <li>{{ form(delete_form) }}</li>
+    </ul>
 {% endblock body %}

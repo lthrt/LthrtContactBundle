@@ -9,8 +9,6 @@
                 <th>Lastname</th>
                 <th>Dob</th>
                 <th>Active</th>
-                <th>Created</th>
-                <th>Updated</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -22,8 +20,6 @@
                     <td>{{ person.lastName }}</td>
                     <td>{% if person.dob %}{{ person.dob|date('Y-m-d') }}{% endif %}</td>
                     <td>{{ person.active|boolean|raw }}</td>
-                    <td>{% if person.created %}{{ person.created|date('Y-m-d') }}{% endif %}</td>
-                    <td>{% if person.updated %}{{ person.updated|date('Y-m-d') }}{% endif %}</td>
                     <td>
                         <ul>
                             <li>

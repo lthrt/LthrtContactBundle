@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * eg email, work phone
  */
-class ContactType
+class ContactType implements \Lthrt\EntityBundle\Entity\EntityLedger
 {
     use \Lthrt\EntityBundle\Entity\ActiveTrait;
     use \Lthrt\EntityBundle\Entity\EntityTrait;

@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * eg work, home
  */
-class AddressType
+class AddressType implements \Lthrt\EntityBundle\Entity\EntityLedger
 {
     use \Lthrt\EntityBundle\Entity\ActiveTrait;
     use \Lthrt\EntityBundle\Entity\EntityTrait;

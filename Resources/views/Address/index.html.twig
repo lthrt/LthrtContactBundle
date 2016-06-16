@@ -1,50 +1,46 @@
-    {% extends 'LthrtContactBundle:Address:address.html.twig' %}
+{% extends 'LthrtContactBundle:Address:address.html.twig' %}
 
-    {% block body -%}
+{% block body -%}
     <h1>Address list</h1>
 
     <table class="records_list">
         <thead>
             <tr>
-                    <th>Line</th>
-                    <th>Line2</th>
-                    <th>Zipext</th>
-                    <th>Active</th>
-                    <th>Created</th>
-                    <th>Updated</th>
-                    <th>Id</th>
+                <th>Line</th>
+                <th>Line2</th>
+                <th>Zipext</th>
+                <th>Active</th>
+                <th>Id</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
             {% for address in addressCollection %}
-            <tr>
-                        <td>{{ address.line }}</td>
-                        <td>{{ address.line2 }}</td>
-                        <td>{{ address.zipExt }}</td>
-                        <td>{{ address.active }}</td>
-                        <td>{% if address.created %}{{ address.created|date('Y-m-d H:i:s') }}{% endif %}</td>
-                        <td>{% if address.updated %}{{ address.updated|date('Y-m-d H:i:s') }}{% endif %}</td>                <td><a href="{{ path('address_show', { 'address': address.id }) }}">{{ address.id }}</a></td>
-                        <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('address_show', { 'address' : address.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('address_edit', { 'address' : address.id }) }}">edit</a>
-                    </li>
-                </ul>
-                        </td>
-            </tr>
+                <tr>
+                    <td>{{ address.line }}</td>
+                    <td>{{ address.line2 }}</td>
+                    <td>{{ address.zipExt }}</td>
+                    <td><a href="{{ path('address_show', { 'address': address.id }) }}">{{ address.id }}</a></td>
+                    <td>
+                        <ul>
+                            <li>
+                                <a href="{{ path('address_show', { 'address' : address.id }) }}">show</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('address_edit', { 'address' : address.id }) }}">edit</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
             {% endfor %}
         </tbody>
     </table>
 
-            <ul>
-            <li>
-                <a href="{{ path('address_new') }}">
-                    Create a new entry
-                </a>
-            </li>
-        </ul>
-    {% endblock body %}
+    <ul>
+        <li>
+            <a href="{{ path('address_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+{% endblock body %}

@@ -99,7 +99,7 @@ class ZipLoader extends StatesLoader
             } else {
                 $city                                          = new City();
                 $city->name                                    = $zipRef['city'];
-                $cities[$city->name . '__' . $zipRef['state']]     = $city;
+                $cities[$city->name . '__' . $zipRef['state']] = $city;
                 ++$result['cities'];
             }
 
@@ -128,15 +128,12 @@ class ZipLoader extends StatesLoader
             $zip->addCounty($counties[$county->name . '__' . $state->abbr]);
             $zip->addCity($cities[$city->name . '__' . $state->abbr]);
             $zip->addState($state);
-            $zip->updatedBy = "DataFixtures";
 
             $city->state = $state;
             $city->addCounty($county);
-            $city->updatedBy = "DataFixtures";
 
             $county->addState($state);
             $county->addCity($city);
-            $county->updatedBy = "DataFixtures";
 
             $this->em->persist($county);
             $this->em->persist($city);

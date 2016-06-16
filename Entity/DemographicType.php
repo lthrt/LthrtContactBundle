@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * eg gender, race, ethnicity
  */
-class DemographicType
+class DemographicType implements \Lthrt\EntityBundle\Entity\EntityLedger
 {
     use \Lthrt\EntityBundle\Entity\ActiveTrait;
     use \Lthrt\EntityBundle\Entity\EntityTrait;

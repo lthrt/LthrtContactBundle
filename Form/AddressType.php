@@ -12,15 +12,15 @@ class AddressType extends AbstractType
      * @param FormBuilderInterface $builder
      * @param array                $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
+    public function buildForm(
+        FormBuilderInterface $builder,
+        array                $options
+    ) {
         $builder
             ->add('line')
             ->add('line2')
             ->add('zipExt')
             ->add('active')
-            ->add('created')
-            ->add('updated')
             ->add('type')
             ->add('city')
             ->add('state')

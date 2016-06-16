@@ -12,13 +12,13 @@ class StateType extends AbstractType
      * @param FormBuilderInterface $builder
      * @param array                $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
+    public function buildForm(
+        FormBuilderInterface $builder,
+        array                $options
+    ) {
         $builder
             ->add('abbr')
             ->add('active')
-            ->add('created')
-            ->add('updated')
             ->add('name')
             ->add('county')
             ->add('zip');

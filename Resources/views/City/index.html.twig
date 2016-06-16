@@ -1,42 +1,39 @@
     {% extends 'LthrtContactBundle:City:city.html.twig' %}
 
     {% block body -%}
-    <h1>City list</h1>
+        <h1>City list</h1>
 
-    <table class="records_list">
-        <thead>
-            <tr>
+        <table class="records_list">
+            <thead>
+                <tr>
                     <th>Active</th>
-                    <th>Created</th>
-                    <th>Updated</th>
                     <th>Id</th>
                     <th>Name</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for city in cityCollection %}
-            <tr>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for city in cityCollection %}
+                    <tr>
                         <td>{{ city.active }}</td>
-                        <td>{% if city.created %}{{ city.created|date('Y-m-d H:i:s') }}{% endif %}</td>
-                        <td>{% if city.updated %}{{ city.updated|date('Y-m-d H:i:s') }}{% endif %}</td>                <td><a href="{{ path('city_show', { 'city': city.id }) }}">{{ city.id }}</a></td>
+                        <td><a href="{{ path('city_show', { 'city': city.id }) }}">{{ city.id }}</a></td>
                         <td>{{ city.name }}</td>
                         <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('city_show', { 'city' : city.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('city_edit', { 'city' : city.id }) }}">edit</a>
-                    </li>
-                </ul>
+                            <ul>
+                                <li>
+                                    <a href="{{ path('city_show', { 'city' : city.id }) }}">show</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('city_edit', { 'city' : city.id }) }}">edit</a>
+                                </li>
+                            </ul>
                         </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
 
-            <ul>
+        <ul>
             <li>
                 <a href="{{ path('city_new') }}">
                     Create a new entry

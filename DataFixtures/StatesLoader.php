@@ -39,9 +39,8 @@ class StatesLoader
                 $state            = new State();
                 $newStates[$abbr] = $state->abbr;
             }
-            $state->abbr      = $abbr;
-            $state->name      = $name;
-            $state->updatedBy = "DataFixtures";
+            $state->abbr = $abbr;
+            $state->name = $name;
             $this->em->persist($state);
             $this->em->flush();
         }

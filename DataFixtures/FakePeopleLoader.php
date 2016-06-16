@@ -87,10 +87,9 @@ class FakePeopleLoader
 
                 if ($race && isset($races[$race])) {
                 } else {
-                    $newRace            = new Demographic();
-                    $newRace->value     = $race;
-                    $newRace->type      = $raceType;
-                    $newRace->updatedBy = "DataFixtures";
+                    $newRace        = new Demographic();
+                    $newRace->value = $race;
+                    $newRace->type  = $raceType;
                     $this->em->persist($newRace);
                     $this->em->flush();
                     $races = $this->getRaces();
@@ -98,10 +97,9 @@ class FakePeopleLoader
 
                 if ($ethnicity && isset($ethnicities[$ethnicity])) {
                 } else {
-                    $newEthnicity            = new Demographic();
-                    $newEthnicity->value     = $ethnicity;
-                    $newEthnicity->type      = $ethnicityType;
-                    $newEthnicity->updatedBy = "DataFixtures";
+                    $newEthnicity        = new Demographic();
+                    $newEthnicity->value = $ethnicity;
+                    $newEthnicity->type  = $ethnicityType;
                     $this->em->persist($newEthnicity);
                     $this->em->flush();
                     $ethnicities = $this->getEthnicities();
@@ -116,7 +114,7 @@ class FakePeopleLoader
                 } else {
                     $person                    = new Person();
                     $newPeople[$last][$first]  = $person;
-                    $new[$first . " " . $last]     = 1;
+                    $new[$first . " " . $last] = 1;
                     unset($updatedPeople[$last][$first]);
                 }
                 $person->firstName = $first;

@@ -7,8 +7,6 @@
         <thead>
             <tr>
                     <th>Active</th>
-                    <th>Created</th>
-                    <th>Updated</th>
                     <th>Id</th>
                     <th>Value</th>
                 <th>Actions</th>
@@ -18,8 +16,7 @@
             {% for demographic in demographicCollection %}
             <tr>
                         <td>{{ demographic.active }}</td>
-                        <td>{% if demographic.created %}{{ demographic.created|date('Y-m-d H:i:s') }}{% endif %}</td>
-                        <td>{% if demographic.updated %}{{ demographic.updated|date('Y-m-d H:i:s') }}{% endif %}</td>                <td><a href="{{ path('demographic_show', { 'demographic': demographic.id }) }}">{{ demographic.id }}</a></td>
+                        <td><a href="{{ path('demographic_show', { 'demographic': demographic.id }) }}">{{ demographic.id }}</a></td>
                         <td>{{ demographic.value }}</td>
                         <td>
                 <ul>

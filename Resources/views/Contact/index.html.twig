@@ -7,8 +7,6 @@
         <thead>
             <tr>
                     <th>Active</th>
-                    <th>Created</th>
-                    <th>Updated</th>
                     <th>Id</th>
                     <th>Value</th>
                 <th>Actions</th>
@@ -18,8 +16,7 @@
             {% for contact in contactCollection %}
             <tr>
                         <td>{{ contact.active }}</td>
-                        <td>{% if contact.created %}{{ contact.created|date('Y-m-d H:i:s') }}{% endif %}</td>
-                        <td>{% if contact.updated %}{{ contact.updated|date('Y-m-d H:i:s') }}{% endif %}</td>                <td><a href="{{ path('contact_show', { 'contact': contact.id }) }}">{{ contact.id }}</a></td>
+                        <td><a href="{{ path('contact_show', { 'contact': contact.id }) }}">{{ contact.id }}</a></td>
                         <td>{{ contact.value }}</td>
                         <td>
                 <ul>

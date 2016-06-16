@@ -1,42 +1,39 @@
     {% extends 'LthrtContactBundle:AddressType:addresstype.html.twig' %}
 
     {% block body -%}
-    <h1>AddressType list</h1>
+        <h1>AddressType list</h1>
 
-    <table class="records_list">
-        <thead>
-            <tr>
+        <table class="records_list">
+            <thead>
+                <tr>
                     <th>Active</th>
-                    <th>Created</th>
-                    <th>Updated</th>
                     <th>Id</th>
                     <th>Name</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for addresstype in addresstypeCollection %}
-            <tr>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for addresstype in addresstypeCollection %}
+                    <tr>
                         <td>{{ addresstype.active }}</td>
-                        <td>{% if addresstype.created %}{{ addresstype.created|date('Y-m-d H:i:s') }}{% endif %}</td>
-                        <td>{% if addresstype.updated %}{{ addresstype.updated|date('Y-m-d H:i:s') }}{% endif %}</td>                <td><a href="{{ path('addresstype_show', { 'addresstype': addresstype.id }) }}">{{ addresstype.id }}</a></td>
+                        <td><a href="{{ path('addresstype_show', { 'addresstype': addresstype.id }) }}">{{ addresstype.id }}</a></td>
                         <td>{{ addresstype.name }}</td>
                         <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('addresstype_show', { 'addresstype' : addresstype.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('addresstype_edit', { 'addresstype' : addresstype.id }) }}">edit</a>
-                    </li>
-                </ul>
+                            <ul>
+                                <li>
+                                    <a href="{{ path('addresstype_show', { 'addresstype' : addresstype.id }) }}">show</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('addresstype_edit', { 'addresstype' : addresstype.id }) }}">edit</a>
+                                </li>
+                            </ul>
                         </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
 
-            <ul>
+        <ul>
             <li>
                 <a href="{{ path('addresstype_new') }}">
                     Create a new entry
