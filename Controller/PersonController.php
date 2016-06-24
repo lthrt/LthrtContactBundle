@@ -27,8 +27,10 @@ class PersonController extends Controller
      * @Method({"GET"})
      * @Template("LthrtContactBundle:Person:edit.html.twig")
      */
-    public function editAction(Request $request, Person $person)
-    {
+    public function editAction(
+        Request $request,
+        Person  $person
+    ) {
         $this->notFound($person);
 
         $form       = $this->createEditForm($person);
@@ -51,7 +53,10 @@ class PersonController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $personCollection = $this->getDoctrine()->getManager()->getRepository('LthrtContactBundle:Person')->findAll();
+        $personCollection = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('LthrtContactBundle:Person')
+            ->findBy([], ['firstName' => 'ASC']);
 
         return [
             'personCollection' => $personCollection,
@@ -68,13 +73,16 @@ class PersonController extends Controller
      * @Method({"DELETE","GET","PUT"})
      * @Template("LthrtContactBundle:Person:edit.html.twig")
      */
-    public function singleAction(Request $request, Person $person)
-    {
+    public function singleAction(
+        Request $request,
+        Person  $person
+    ) {
         $this->notFound($person);
 
         if ($request->isMethod('GET')) {
-            return $this->forward('LthrtContactBundle:Person:show', [ 'person' => $person]);
-        } else { // Method is PUT or DELETE
+            return $this->forward('LthrtContactBundle:Person:show', ['person' => $person]);
+        } else {
+            // Method is PUT or DELETE
             $form       = $this->createEditForm($person);
             $deleteForm = $this->createDeleteForm($person);
             $form->handleRequest($request);
@@ -84,7 +92,7 @@ class PersonController extends Controller
                     $em->persist($person);
                     $em->flush();
 
-                    return $this->forward('LthrtContactBundle:Person:show', [ 'person' => $person]);
+                    return $this->forward('LthrtContactBundle:Person:show', ['person' => $person]);
                 } else {
                     return $this->render('LthrtContactBundle:Person:edit.html.twig', [
                         'person'      => $person,
@@ -100,7 +108,7 @@ class PersonController extends Controller
 
                         return $this->forward($this->generateUrl('person'));
                     } else {
-                        return $this->forward('LthrtContactBundle:Person:show', [ 'person' => $person]);
+                        return $this->forward('LthrtContactBundle:Person:show', ['person' => $person]);
                     }
                 }
             }
@@ -129,7 +137,7 @@ class PersonController extends Controller
             $em->persist($person);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('person_show', [ 'person' => $person->getId() ]));
+            return $this->redirect($this->generateUrl('person_show', ['person' => $person->getId()]));
         }
 
         return [
@@ -146,8 +154,10 @@ class PersonController extends Controller
      * @Method("GET")
      * @Template("LthrtContactBundle:Person:show.html.twig")
      */
-    public function showAction(Request $request, Person $person)
-    {
+    public function showAction(
+        Request $request,
+        Person  $person
+    ) {
         $this->notFound($person);
 
         $deleteForm = $this->createDeleteForm($person);
