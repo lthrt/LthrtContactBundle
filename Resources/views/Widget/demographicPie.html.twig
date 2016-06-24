@@ -1,0 +1,6 @@
+{% include 'LthrtContactBundle:Widget:demographicPieCss.html.twig' %}
+<h3>{{type|title ~ ' demographics'|title}}</h3>
+<div id="{{type}}" class="widget pie"></div>
+{# {{result|json_pretty|raw}} #}
+{% include 'LthrtContactBundle:Widget:demographicJSON.html.twig' with {'type': type, 'result': result } %}
+

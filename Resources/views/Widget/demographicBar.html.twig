@@ -1,0 +1,6 @@
+{% include 'LthrtContactBundle:Widget:demographicBarCss.html.twig' %}
+<h3>{{type|title ~ ' demographics'|title}}</h3>
+<div id="{{type}}" class="widget bar"></div>
+{# {{result|json_pretty|raw}} #}
+{% include 'LthrtContactBundle:Widget:demographicJSON.html.twig' with {'type': type, 'result': result } %}
+

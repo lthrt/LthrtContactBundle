@@ -2,6 +2,7 @@
 
 namespace Lthrt\ContactBundle\Form;
 
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -22,13 +23,29 @@ class PersonType extends AbstractType
             ->add('dob')
             ->add('active')
             ->add('contact')
-            ->add('demographic')
+            ->add('demographic', null,
+                [
+                    // 'expanded'      => true,
+                    'query_builder' => function (EntityRepository $rep) {
+                        return $rep->getOrderedTypes();
+                    },
+                    'choice_label'  => 'value',
+                    'label'         => 'Demographic',
+                    'group_by'      => function (
+                        $val,
+                        $key,
+                        $index
+                    ) {
+                        return $val->getType()->getName();
+                    },
+                ]
+            )
             ->add('address');
     }
 
-    /**
-     * @param OptionsResolverInterface $resolver
-     */
+/**
+ * @param OptionsResolverInterface $resolver
+ */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
@@ -36,9 +53,9 @@ class PersonType extends AbstractType
         ]);
     }
 
-    /**
-     * @return string
-     */
+/**
+ * @return string
+ */
     public function getName()
     {
         return 'lthrt_contactbundle_person';
