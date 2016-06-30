@@ -10,9 +10,16 @@ $.each(types, function(index, val) {
         .width();
     var height = width;
     var svg = d3.select('#' + val)
+        .append("div")
+        .classed("svg-container", true)
         .append("svg")
-        .attr("width", width)
-        .attr("height", height);
+        // .attr("width", width)
+        // .attr("height", height)
+        .attr("preserveAspectRatio", "xMinYMin meet")
+        .attr("viewBox", "0 0 " + width + " " + height)
+         //class to make it responsive
+        .classed("svg-content-responsive", true)
+        ;
     var data = window[val];
 
     var max_value = 0;
