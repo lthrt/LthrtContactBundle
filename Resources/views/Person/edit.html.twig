@@ -1,14 +1,6 @@
-{% extends 'LthrtContactBundle:Person:person.html.twig' %}
+{% extends 'LthrtTemplateBundle::form.html.twig' %}
 
-{% block body -%}
-    <h1>Person Edit</h1>
+{% block content -%}
+    <h1>Person Edit: {{form.vars.data.firstName}}  {{form.vars.data.lastName}}</h1>
     {% include 'LthrtContactBundle:Person:form.html.twig' with { 'submitLabel' : 'Update' } %}
-    <ul class="record_actions">
-    <li>
-        <a href="{{ path('person_list') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
-{% endblock body %}
+{% endblock content %}

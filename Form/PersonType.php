@@ -25,7 +25,7 @@ class PersonType extends AbstractType
             ->add('contact')
             ->add('demographic', null,
                 [
-                    // 'expanded'      => true,
+                    'expanded'      => true,
                     'query_builder' => function (EntityRepository $rep) {
                         return $rep->getOrderedTypes();
                     },

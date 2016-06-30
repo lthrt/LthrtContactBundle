@@ -1,3 +1,5 @@
+{% form_theme form.demographic 'LthrtContactBundle:Person:demographicForm.html.twig' %}
+
 {{ form_start(form) }}
 {{ form_row(form.firstName) }}
 {{ form_row(form.lastName) }}
@@ -6,6 +8,8 @@
 {{ form_row(form.contact) }}
 {{ form_row(form.demographic) }}
 {{ form_row(form.address) }}
+<div style="position: relative;">
 <input type="submit" value="{{ submitLabel }}" class="btn btn-default pull-right" />
+</div>
 {{ form_rest(form) }}
 {{ form_end(form) }}

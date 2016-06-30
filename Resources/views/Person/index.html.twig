@@ -14,8 +14,7 @@
     <table class="records_list table-bordered table-condensed table-hover table-striped table-responsive">
         <thead>
             <tr>
-                <th>Active</th>
-                <th>Id</th>
+                <th title="Active">A</th>
                 <th>Firstname</th>
                 <th>Lastname</th>
                 <th>Dob</th>
@@ -27,9 +26,8 @@
             {% for person in personCollection %}
                 <tr>
                     <td>{{ person.active|boolean|raw }}</td>
-                    <td><a href="{{ path('person_show', { 'person': person.id }) }}">{{ person.id }}</a></td>
-                    <td>{{ person.firstName }}</td>
-                    <td>{{ person.lastName }}</td>
+                    <td><a href="{{ path('person_show', { 'person': person.id }) }}">{{ person.firstName }}</a></td>
+                    <td><a href="{{ path('person_show', { 'person': person.id }) }}">{{ person.lastName }}</a></td>
                     <td>{% if person.dob %}{{ person.dob|date('Y-m-d') }}{% endif %}</td>
                     <td><ul>{% for demo in person.demographic|sort %}<li>{{ demo.value }}</li>{% endfor %}</ul></td>
                     <td>
