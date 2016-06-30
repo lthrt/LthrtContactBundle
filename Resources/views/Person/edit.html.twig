@@ -1,5 +1,4 @@
 {% extends 'LthrtTemplateBundle::form.html.twig' %}
-
 {% block content -%}
     <h1>Person Edit: {{form.vars.data.firstName}}  {{form.vars.data.lastName}}</h1>
     {% include 'LthrtContactBundle:Person:form.html.twig' with { 'submitLabel' : 'Save' } %}
