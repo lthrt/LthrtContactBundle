@@ -7,8 +7,9 @@
 {{ form_row(form.contact) }}
 {{ form_row(form.demographic) }}
 {{ form_row(form.address) }}
-<div style="position: fixed; bottom: 10%; right: 30%;">
-<input type="submit" value="{{ submitLabel }}" class="btn btn-default pull-right" />
-</div>
+{# floating button #}
+<button style="position: fixed; bottom: 10%; right: 30%;" type="submit" value="{{ submitLabel }}" class="btn btn-primary">
+    <span class="fa fa-save"></span> Save
+</button>
 {{ form_rest(form) }}
 {{ form_end(form) }}
