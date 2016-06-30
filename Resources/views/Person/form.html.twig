@@ -8,8 +8,6 @@
 {{ form_row(form.demographic) }}
 {{ form_row(form.address) }}
 {# floating button #}
-<button style="position: fixed; bottom: 10%; right: 30%;" type="submit" value="{{ submitLabel }}" class="btn btn-primary">
-    <span class="fa fa-save"></span> Save
-</button>
+{% include 'LthrtTemplateBundle:Form:floatingSubmit.html.twig' with {'submitLabel' : 'Save'} %}
 {{ form_rest(form) }}
 {{ form_end(form) }}
