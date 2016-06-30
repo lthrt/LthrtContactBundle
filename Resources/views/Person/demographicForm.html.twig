@@ -1,0 +1,21 @@
+{% form_theme choice_widget_expanded _self %}
+
+    {% block choice_widget_expanded %}
+        <div class="row">
+            <div {{ block('widget_container_attributes') }}>
+                {% for group_label, group in choices %}
+                    <div class="col-md-4">
+                        {%- if group is iterable -%}
+                            <label class="control-label"><b>{{ group_label|trans({}, translation_domain) }}</b></label>
+                            {% for key, choice in group %}
+                                <div>
+                                    {{- form_widget(form[key]) -}}
+                                    {{- form_label(form[key]) -}}
+                                </div>
+                            {% endfor %}
+                        {%- endif -%}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endblock choice_widget_expanded %}
