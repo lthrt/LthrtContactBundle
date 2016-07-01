@@ -108,6 +108,7 @@ class PersonController extends Controller
 
                         return $this->forward($this->generateUrl('person'));
                     } else {
+                        return $this->forward($this->generateUrl('person'));
                         return $this->forward('LthrtContactBundle:Person:show', ['person' => $person]);
                     }
                 }

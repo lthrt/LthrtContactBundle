@@ -1,44 +1,56 @@
-{% extends 'LthrtContactBundle:Person:person.html.twig' %}
+{% form_theme delete_form.submit 'LthrtTemplateBundle:Form:delete_widget.html.twig' %}
+{% embed 'LthrtTemplateBundle:Modal:modal.html.twig' with {'modalName': 'modal' } %}
+    {% block modalTitle %}
+        <h2>Person Detail: {{person.firstName}}  {{person.lastName}}</h2>
+    {% endblock modalTitle %}
+    {% block modalBody -%}
+        <div class="row">
+            <div class="col-sm-2"><label>Firstname</label>
+            </div>
+            <div class="col-sm-10">
+                {{ person.firstName }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-2"><label>Lastname</label>
+            </div>
+            <div class="col-sm-10">
+                {{ person.lastName }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-2"><label>Dob</label>
+            </div>
+            <div class="col-sm-10">
+                {{ person.dob|date('Y-m-d H:i:s') }}
+            </div>
+        </div>
 
-{% block body -%}
-    <h1>Person</h1>
-
-    <table class="record_properties">
-        <tbody>
-            <tr>
-                <th>Firstname</th>
-                <td>{{ person.firstName }}</td>
-            </tr>
-            <tr>
-                <th>Lastname</th>
-                <td>{{ person.lastName }}</td>
-            </tr>
-            <tr>
-                <th>Dob</th>
-                <td>{{ person.dob|date('Y-m-d H:i:s') }}</td>
-            </tr>
-            <tr>
-                <th>Active</th>
-                <td>{{ person.active }}</td>
-            </tr>
-            <tr>
-                <th>Id</th>
-                <td>{{ person.id }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('person_list') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('person_edit', { 'person' : person.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
-{% endblock body %}
+        <div class="row">
+            <div class="col-sm-2">
+                <label>Active</label>
+            </div>
+            <div class="col-sm-10">
+                {{ person.active|boolean|raw }}
+            </div>
+        </div>
+    {% endblock modalBody %}
+    {% block modalFooterBlock %}
+        <div class="row">
+            <div class="col-sm-2">
+            </div>
+            <div class="col-sm-4">
+                <a href="{{ path('person_edit', { 'person' : person.id }) }}" class="btn btn-primary">
+                    <span class="fa fa-pencil"></span>&nbsp;Edit
+                </a>
+            </div>
+            <div class="col-sm-6">
+                {{ form_start(delete_form)}}
+                <div class="pull-right">
+                    {{ form_widget(delete_form.submit) }}
+                </div>
+                {{ form_rest(delete_form)}}
+            </div>
+        </div>
+    {% endblock modalFooterBlock %}
+{% endembed %}

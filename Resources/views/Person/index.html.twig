@@ -8,38 +8,39 @@
 {% block widget3 %}
     {% include 'LthrtContactBundle:Person:ethnicityDemographic.html.twig' %}
 {% endblock widget3 %}
-{% block widget4 %}{% endblock widget4 %}
+{% block widget4 %}
+{% endblock widget4 %}
 {% block content %}
     <h1>Person list</h1>
     <table class="records_list table-bordered table-condensed table-hover table-striped table-responsive">
         <thead>
             <tr>
+                <th></th>
                 <th title="Active">A</th>
                 <th>Firstname</th>
                 <th>Lastname</th>
                 <th>Dob</th>
                 <th>Demographic</th>
-                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
             {% for person in personCollection %}
                 <tr>
+                    <td>
+                        <span class="btn-group">
+                            <a href="{{ path('person_show', { 'person' : person.id }) }}" class="btn btn-default btn-xs modal-link">
+                                <span class="fa fa-search-plus "></span>                                    
+                            </a>
+                            <a href="{{ path('person_edit', { 'person' : person.id }) }}" class="btn btn-default btn-xs modal-link">
+                                <span class="fa fa-pencil "></span>                                    
+                            </a>
+                        </span>
+                    </td>
                     <td>{{ person.active|boolean|raw }}</td>
-                    <td><a href="{{ path('person_show', { 'person': person.id }) }}">{{ person.firstName }}</a></td>
-                    <td><a href="{{ path('person_show', { 'person': person.id }) }}">{{ person.lastName }}</a></td>
+                    <td>{{ person.firstName }}</td>
+                    <td>{{ person.lastName }}</td>
                     <td>{% if person.dob %}{{ person.dob|date('Y-m-d') }}{% endif %}</td>
                     <td><ul>{% for demo in person.demographic|sort %}<li>{{ demo.value }}</li>{% endfor %}</ul></td>
-                    <td>
-                        <ul>
-                            <li>
-                                <a href="{{ path('person_show', { 'person' : person.id }) }}">show</a>
-                            </li>
-                            <li>
-                                <a href="{{ path('person_edit', { 'person' : person.id }) }}">edit</a>
-                            </li>
-                        </ul>
-                    </td>
                 </tr>
             {% endfor %}
         </tbody>
@@ -51,9 +52,12 @@
             </a>
         </li>
     </ul>
+    {% include 'LthrtTemplateBundle:Modal:modal.html.twig' with { 'modalName' : 'modal' } %}
 {% endblock content %}
 {%- block js -%}
     {{- parent() -}}
+    {% include 'LthrtContactBundle:Widget:d3Js.html.twig' %}
     {% include 'LthrtContactBundle:Widget:demographicBarJs.html.twig' %}
     {% include 'LthrtContactBundle:Widget:demographicPieJs.html.twig' %}
+    {% include 'LthrtContactBundle:Person:modalEditJs.html.twig' %}
 {%- endblock js -%}
