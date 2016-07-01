@@ -25,7 +25,6 @@ class PersonController extends Controller
      * @Route("/{person}/edit", name="person_edit")
      *
      * @Method({"GET"})
-     * @Template("LthrtContactBundle:Person:edit.html.twig")
      */
     public function editAction(
         Request $request,
@@ -36,11 +35,13 @@ class PersonController extends Controller
         $form       = $this->createEditForm($person);
         $deleteForm = $this->createDeleteForm($person);
 
-        return [
-            'person'      => $person,
-            'form'        => $form->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ];
+        return $this->render("LthrtContactBundle:Person:edit.html.twig",
+            [
+                'person'      => $person,
+                'form'        => $form->createView(),
+                'delete_form' => $deleteForm->createView(),
+            ]
+        );
     }
 
     /**
@@ -58,9 +59,11 @@ class PersonController extends Controller
             ->getRepository('LthrtContactBundle:Person')
             ->findBy([], ['firstName' => 'ASC']);
 
-        return [
-            'personCollection' => $personCollection,
-        ];
+        return $this->render("LthrtContactBundle:Person:index.html.twig",
+            [
+                'personCollection' => $personCollection,
+            ]
+        );
     }
 
     /**
@@ -71,7 +74,6 @@ class PersonController extends Controller
      * @Route("/{person}", name="person", requirements={"person":"\d+"})
      *
      * @Method({"DELETE","GET","PUT"})
-     * @Template("LthrtContactBundle:Person:edit.html.twig")
      */
     public function singleAction(
         Request $request,
@@ -80,6 +82,7 @@ class PersonController extends Controller
         $this->notFound($person);
 
         if ($request->isMethod('GET')) {
+            return $this->forward($this->generateUrl('person_list'));
             return $this->forward('LthrtContactBundle:Person:show', ['person' => $person]);
         } else {
             // Method is PUT or DELETE
@@ -92,7 +95,7 @@ class PersonController extends Controller
                     $em->persist($person);
                     $em->flush();
 
-                    return $this->forward('LthrtContactBundle:Person:show', ['person' => $person]);
+                    return $this->forward($this->generateUrl('person_list'));
                 } else {
                     return $this->render('LthrtContactBundle:Person:edit.html.twig', [
                         'person'      => $person,
@@ -106,10 +109,9 @@ class PersonController extends Controller
                         $em->remove($person);
                         $em->flush();
 
-                        return $this->forward($this->generateUrl('person'));
+                        return $this->forward($this->generateUrl('person_list'));
                     } else {
-                        return $this->forward($this->generateUrl('person'));
-                        return $this->forward('LthrtContactBundle:Person:show', ['person' => $person]);
+                        return $this->forward($this->generateUrl('person_list'));
                     }
                 }
             }
@@ -141,10 +143,12 @@ class PersonController extends Controller
             return $this->redirect($this->generateUrl('person_show', ['person' => $person->getId()]));
         }
 
-        return [
-            'person' => $person,
-            'form'   => $form->createView(),
-        ];
+        return $this->render("LthrtContactBundle:Person:new.html.twig",
+            [
+                'person' => $person,
+                'form'   => $form->createView(),
+            ]
+        );
     }
 
     /**
@@ -153,19 +157,19 @@ class PersonController extends Controller
      * @Route("/{person}/show", name="person_show")
      *
      * @Method("GET")
-     * @Template("LthrtContactBundle:Person:show.html.twig")
      */
     public function showAction(
         Request $request,
         Person  $person
     ) {
         $this->notFound($person);
-
         $deleteForm = $this->createDeleteForm($person);
 
-        return [
-            'person'      => $person,
-            'delete_form' => $deleteForm->createView(),
-        ];
+        return $this->render("LthrtContactBundle:Person:show.html.twig",
+            [
+                'person'      => $person,
+                'delete_form' => $deleteForm->createView(),
+            ]
+        );
     }
 }

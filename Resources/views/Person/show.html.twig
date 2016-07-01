@@ -35,16 +35,16 @@
             </div>
         </div>
     {% endblock modalBody %}
-    {% block modalFooterBlock %}
+    {% block modalFooter %}
         <div class="row">
             <div class="col-sm-2">
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-1">
                 <a href="{{ path('person_edit', { 'person' : person.id }) }}" class="btn btn-primary">
                     <span class="fa fa-pencil"></span>&nbsp;Edit
                 </a>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-9">
                 {{ form_start(delete_form)}}
                 <div class="pull-right">
                     {{ form_widget(delete_form.submit) }}
@@ -52,5 +52,5 @@
                 {{ form_rest(delete_form)}}
             </div>
         </div>
-    {% endblock modalFooterBlock %}
+    {% endblock modalFooter %}
 {% endembed %}
