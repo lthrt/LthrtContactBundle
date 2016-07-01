@@ -7,6 +7,8 @@
 {{ form_row(form.contact) }}
 {{ form_row(form.demographic) }}
 {{ form_row(form.address) }}
-{% include 'LthrtTemplateBundle:Form:floatingSubmit.html.twig' %}
+{% block modalFooter %}
+    {{ form_row(form.submit, {'label': 'Save', 'value':'Update'}) }}
+{% endblock modalFooter %}
 {{ form_rest(form) }}
 {{ form_end(form) }}

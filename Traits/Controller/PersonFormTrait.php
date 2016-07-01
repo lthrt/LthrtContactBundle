@@ -41,6 +41,7 @@ trait PersonFormTrait
                 'action' => $this->generateUrl('person', ['person' => $person->getId()]),
                 'method' => 'PUT',
             ]);
+            $form->add('submit', SubmitType::class, ['label' => 'Save']);
 
             return $form;
         } else {
@@ -48,6 +49,7 @@ trait PersonFormTrait
                 'action' => $this->generateUrl('person_new'),
                 'method' => 'PUT',
             ]);
+            $form->add('submit', SubmitType::class, ['label' => 'Save']);
 
             return $form;
         }

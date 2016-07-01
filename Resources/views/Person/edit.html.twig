@@ -1,5 +1,5 @@
-{% extends 'LthrtTemplateBundle::form.html.twig' %}
-{% block content -%}
+{% extends 'LthrtTemplateBundle::modal.html.twig' %}
+{% block modalContent -%}
     <h1>Person Edit: {{form.vars.data.firstName}}  {{form.vars.data.lastName}}</h1>
-    {% include 'LthrtContactBundle:Person:form.html.twig' with { 'submitLabel' : 'Save' } %}
-{% endblock content %}
+    {% include 'LthrtContactBundle:Person:form.html.twig' with { 'label' : 'Saved' } %}
+{% endblock modalContent %}
