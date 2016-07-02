@@ -28,7 +28,7 @@ class PersonController extends Controller
      */
     public function editAction(
         Request $request,
-        Person  $person
+        Person $person
     ) {
         $this->notFound($person);
 
@@ -77,7 +77,7 @@ class PersonController extends Controller
      */
     public function singleAction(
         Request $request,
-        Person  $person
+        Person $person
     ) {
         $this->notFound($person);
 
@@ -95,7 +95,7 @@ class PersonController extends Controller
                     $em->persist($person);
                     $em->flush();
 
-                    return $this->forward($this->generateUrl('person_list'));
+                    return $this->redirect($this->generateUrl('person_list'));
                 } else {
                     return $this->render('LthrtContactBundle:Person:edit.html.twig', [
                         'person'      => $person,
@@ -109,9 +109,9 @@ class PersonController extends Controller
                         $em->remove($person);
                         $em->flush();
 
-                        return $this->forward($this->generateUrl('person_list'));
+                        return $this->redirect($this->generateUrl('person_list'));
                     } else {
-                        return $this->forward($this->generateUrl('person_list'));
+                        return $this->redirect($this->generateUrl('person_list'));
                     }
                 }
             }
@@ -160,7 +160,7 @@ class PersonController extends Controller
      */
     public function showAction(
         Request $request,
-        Person  $person
+        Person $person
     ) {
         $this->notFound($person);
         $deleteForm = $this->createDeleteForm($person);
