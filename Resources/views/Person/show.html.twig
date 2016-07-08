@@ -1,56 +1,55 @@
-{% form_theme delete_form.submit 'LthrtTemplateBundle:Form:delete_widget.html.twig' %}
-{% embed 'LthrtTemplateBundle:Modal:modal.html.twig' with {'modalName': 'modal' } %}
-    {% block modalTitle %}
-        <h2>Person Detail: {{person.firstName}}  {{person.lastName}}</h2>
-    {% endblock modalTitle %}
-    {% block modalBody -%}
-        <div class="row">
-            <div class="col-sm-2"><label>Firstname</label>
-            </div>
-            <div class="col-sm-10">
-                {{ person.firstName }}
-            </div>
+{% form_theme delete_form 'LthrtTemplateBundle:Form:delete_inline_form.html.twig' %}
+{% extends 'LthrtTemplateBundle::page.html.twig' %}
+{% block content %}
+        <h2 class="form-inline">Person Detail: {{person.firstName}}  {{person.lastName}}
+            {{ form_start(delete_form) }}
+            {{- form_widget(delete_form.submit) -}}
+            {{ form_rest(delete_form) }}
+        </h2>
+    <div class="row">
+    </div>
+    <div class="row">
+        <div class="col-sm-2"><label>Firstname</label>
         </div>
-        <div class="row">
-            <div class="col-sm-2"><label>Lastname</label>
-            </div>
-            <div class="col-sm-10">
-                {{ person.lastName }}
-            </div>
+        <div class="col-sm-10">
+            {{ person.firstName }}
         </div>
-        <div class="row">
-            <div class="col-sm-2"><label>Dob</label>
-            </div>
-            <div class="col-sm-10">
-                {{ person.dob|date('Y-m-d H:i:s') }}
-            </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2"><label>Lastname</label>
         </div>
+        <div class="col-sm-10">
+            {{ person.lastName }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2"><label>Dob</label>
+        </div>
+        <div class="col-sm-10">
+            {{ person.dob|date('Y-m-d H:i:s') }}
+        </div>
+    </div>
 
-        <div class="row">
-            <div class="col-sm-2">
-                <label>Active</label>
-            </div>
-            <div class="col-sm-10">
-                {{ person.active|boolean|raw }}
-            </div>
+    <div class="row">
+        <div class="col-sm-2">
+            <label>Active</label>
         </div>
-    {% endblock modalBody %}
-    {% block modalFooter %}
-        <div class="row">
-            <div class="col-sm-2">
-            </div>
-            <div class="col-sm-1">
-                <a href="{{ path('person_edit', { 'person' : person.id }) }}" class="btn btn-primary">
-                    <span class="fa fa-pencil"></span>&nbsp;Edit
-                </a>
-            </div>
-            <div class="col-sm-9">
-                {{ form_start(delete_form)}}
-                <div class="pull-right">
-                    {{ form_widget(delete_form.submit) }}
-                </div>
-                {{ form_rest(delete_form)}}
-            </div>
+        <div class="col-sm-10">
+            {{ person.active|boolean|raw }}
         </div>
-    {% endblock modalFooter %}
-{% endembed %}
+    </div>
+    <div class="row">
+        <div class="col-sm-2">
+        </div>
+        <div class="col-sm-2">
+            <a href="{{ path('person_edit', { 'person' : person.id }) }}" class="btn btn-default">
+                <span class="fa fa-pencil"></span>&nbsp;Edit
+            </a>
+        </div>
+        <div class="col-sm-4">
+            {{ form_start(delete_form)}}
+            {{ form_widget(delete_form.submit) }}
+            {{ form_rest(delete_form)}}
+        </div>
+    </div>
+{% endblock content %}

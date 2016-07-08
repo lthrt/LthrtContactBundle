@@ -23,7 +23,13 @@ trait PersonFormTrait
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('person', ['person' => $person->getId()]))
             ->setMethod('DELETE')
-            ->add('submit', SubmitType::class, ['label' => 'Delete'])
+            ->add('submit', SubmitType::class, [
+                'label' => 'Delete',
+                'attr'  => [
+                    'class' => 'form-inline',
+                ],
+            ]
+            )
             ->getForm();
     }
 
