@@ -52,12 +52,10 @@
             </a>
         </li>
     </ul>
-    {% include 'LthrtTemplateBundle:Modal:modal.html.twig' with { 'modalName' : 'modal' } %}
 {% endblock content %}
 {%- block js -%}
     {{- parent() -}}
     {% include 'LthrtContactBundle:Widget:d3Js.html.twig' %}
     {% include 'LthrtContactBundle:Widget:demographicBarJs.html.twig' %}
     {% include 'LthrtContactBundle:Widget:demographicPieJs.html.twig' %}
-    {% include 'LthrtContactBundle:Person:modalEditJs.html.twig' %}
 {%- endblock js -%}
