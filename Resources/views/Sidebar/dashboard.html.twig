@@ -1,0 +1,17 @@
+{% extends 'LthrtContactBundle:Sidebar:sidebar.html.twig' %}
+{# {% set user = app.security.getToken().getUser() %} #}
+{% set actions = {
+  'dashboard' : {
+  'roles': true                                                                 ,
+  'title': 'Dashboard'                                                            ,
+  'icon' : 'fa fa-users'                                                        ,
+  'param': null                                                                 ,
+  },
+  'person_list' : {
+  'roles': true                                                                 ,
+  'title': 'Persons'                                                            ,
+  'icon' : 'fa fa-users'                                                        ,
+  'param': null                                                                 ,
+  },
+}
+%}

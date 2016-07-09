@@ -1,0 +1,19 @@
+{% block sidebarInner %}
+    <ul class="nav nav-sidebar">
+        {% for action, info in actions %}
+            {% if info.route is defined %}
+                {% set route = info.route %}
+                {% else %}
+                {% set route = action %}
+            {% endif %}
+            {% if info.roles %}
+                <li {% if ((route == app.request.attributes.get('_route') and (info.param is null or info.param == app.request.attributes.get('_route_params'))) ) %} class="active"{% endif %}>
+                    <a href="{% if info.param is not null %}{{ path(route,  info.param) }}{% else %}{{ path(route)}}{% endif %}" title="{{info.title}}">
+                        <span class="{{info.icon}} icon fa-fixed-width"></span>
+                        <span class="pull-right sidebar-label"> {{info.title}}</span>
+                    </a>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+{% endblock sidebarInner %}
