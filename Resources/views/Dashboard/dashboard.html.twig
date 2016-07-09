@@ -3,17 +3,25 @@
     {% include 'LthrtContactBundle:Sidebar:dashboard.html.twig' %}
 {% endblock sideMenu %}
 {% block dashboard %}
-{% block widget1 %}
-    {% include 'LthrtContactBundle:Dashboard:raceDemographic.html.twig' %}
-{% endblock widget1 %}
-{% block widget2 %}
-    {% include 'LthrtContactBundle:Dashboard:genderDemographic.html.twig' %}
-{% endblock widget2 %}
-{% block widget3 %}
-    {% include 'LthrtContactBundle:Dashboard:ethnicityDemographic.html.twig' %}
-{% endblock widget3 %}
-{% block widget4 %}
-{% endblock widget4 %}
+    <div class="col-xs-6 col-sm-3 placeholder" id="widget1">
+        {% block widget1 %}
+            {% include 'LthrtContactBundle:Dashboard:raceDemographic.html.twig' %}
+        {% endblock widget1 %}
+    </div>
+    <div class="col-xs-6 col-sm-3 placeholder" id="widge21">
+        {% block widget2 %}
+            {% include 'LthrtContactBundle:Dashboard:genderDemographic.html.twig' %}
+        {% endblock widget2 %}
+    </div>
+    <div class="col-xs-6 col-sm-3 placeholder" id="widget3">
+        {% block widget3 %}
+            {% include 'LthrtContactBundle:Dashboard:ethnicityDemographic.html.twig' %}
+        {% endblock widget3 %}
+    </div>
+    <div class="col-xs-6 col-sm-3 placeholder" id="widget4">
+        {% block widget4 %}
+        {% endblock widget4 %}
+    </div>
 {% endblock dashboard %}
 {% block content %}
 {% endblock content %}
