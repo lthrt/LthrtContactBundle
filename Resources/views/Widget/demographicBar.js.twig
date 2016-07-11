@@ -17,9 +17,8 @@ $.each(types, function(index, val) {
         // .attr("height", height)
         .attr("preserveAspectRatio", "xMinYMin meet")
         .attr("viewBox", "0 0 " + width + " " + height)
-         //class to make it responsive
-        .classed("svg-content-responsive", true)
-        ;
+        //class to make it responsive
+        .classed("svg-content-responsive", true);
     var data = window[val];
 
     var max_value = 0;
@@ -28,7 +27,7 @@ $.each(types, function(index, val) {
     }
 
     var scale = 0.70;
-    var offset = -5;
+    var offset = -15;
     var font = 16;
     var dx = width / data.length;
     var dy = height / max_value * scale;
@@ -42,7 +41,7 @@ $.each(types, function(index, val) {
             return "bar " + d.label;
         })
         .attr("y", function(d, i) {
-            return (height) - (dy * d.value);
+            return (height) - (dy * d.value) + offset + 5;
         })
         .attr("x", function(d, i) {
             return dx * i;
@@ -52,18 +51,27 @@ $.each(types, function(index, val) {
         })
         .attr("width", dx)
         .style("fill", function(d, i) {
-            var prime = Math.floor(i/data.length*100+150).toString(16);
-            var alt = Math.floor(1*i/data.length*200+50).toString(16);
-            var other = Math.floor(2*i/data.length*75+50).toString(16)
-            if (i%3 == 1) {
-                return "#"+prime+alt+other;
-            } else if (i%3 == 2) {
-                return "#"+alt+prime+other;
-            } else {
-                return "#"+alt+other+prime;
+            var prime = Math.floor(i / data.length * 100 + 150)
+                .toString(16);
+            var alt = Math.floor(1 * i / data.length * 200 + 50)
+                .toString(16);
+            var other = Math.floor(2 * i / data.length * 75 + 50)
+                .toString(16)
+            if (i % 3 == 1) {
+                return "#" + prime + alt + other;
+            }
+            else if (i % 3 == 2) {
+                return "#" + alt + prime + other;
+            }
+            else {
+                return "#" + alt + other + prime;
             }
         })
-        .style("stroke", "gray");
+        .style("stroke", "gray")
+        .append("svg:title")
+        .text(function(d) {
+            return d.label + " (" + d.value + ")";
+        });
 
     // labels
     var text = svg.selectAll("text")
@@ -71,7 +79,7 @@ $.each(types, function(index, val) {
         .enter()
         .append("text")
         .text(function(d) {
-            return d.label + " (" + d.value + ")";
+            return d.label;
         })
         .attr("transform", function(d, i) {
             return "rotate(-90 " + ((dx * i) + (dx / 2) + (font / 2)) + " " + (dy * (max_value / scale - d.value) + offset) + ")";
@@ -85,5 +93,6 @@ $.each(types, function(index, val) {
         .attr("x", function(d, i) {
             return ((dx * i) + (dx / 2) + (font / 2));
         })
-        .attr("font-size", (font) + "px");
+        .attr("font-size", (font) + "px")
+        ;
 });
