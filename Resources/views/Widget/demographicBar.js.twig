@@ -28,9 +28,9 @@ $.each(types, function(index, val) {
 
     var scale = 0.70;
     var offset = -15;
-    var font = 16;
     var dx = width / data.length;
     var dy = height / max_value * scale;
+    var font = dx/2;
 
     // bars
     var bars = svg.selectAll(".bar")
@@ -41,7 +41,7 @@ $.each(types, function(index, val) {
             return "bar " + d.label;
         })
         .attr("y", function(d, i) {
-            return (height) - (dy * d.value) + offset + 5;
+            return (height) - (dy * d.value);
         })
         .attr("x", function(d, i) {
             return dx * i;
@@ -74,6 +74,7 @@ $.each(types, function(index, val) {
         });
 
     // labels
+    // x and y are transposed becuase of rotation
     var text = svg.selectAll("text")
         .data(data)
         .enter()
@@ -88,11 +89,12 @@ $.each(types, function(index, val) {
             return "bar-label " + d.label;
         })
         .attr("y", function(d, i) {
-            return (dy * (max_value / scale - d.value)) + offset;
+            return (dy * (max_value / scale - d.value)) - dy/2;
         })
         .attr("x", function(d, i) {
             return ((dx * i) + (dx / 2) + (font / 2));
         })
-        .attr("font-size", (font) + "px")
+        // .attr("font-size", (font) + "px")
+        .style("fill", 'rgb(0,0,0)')
         ;
 });
