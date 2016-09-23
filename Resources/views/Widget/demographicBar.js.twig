@@ -89,7 +89,7 @@ $.each(types, function(index, val) {
             return "bar-label " + d.label;
         })
         .attr("y", function(d, i) {
-            return (dy * (max_value / scale - d.value)) - dy/2;
+            return (dy * (max_value / scale - d.value)) - font;
         })
         .attr("x", function(d, i) {
             return ((dx * i) + (dx / 2) + (font / 2));
