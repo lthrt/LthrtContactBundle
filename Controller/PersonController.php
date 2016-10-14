@@ -28,7 +28,7 @@ class PersonController extends Controller
      */
     public function editAction(
         Request $request,
-        Person $person
+        Person  $person
     ) {
         $this->notFound($person);
 
@@ -77,7 +77,7 @@ class PersonController extends Controller
      */
     public function singleAction(
         Request $request,
-        Person $person
+        Person  $person
     ) {
         $this->notFound($person);
 
@@ -160,7 +160,7 @@ class PersonController extends Controller
      */
     public function showAction(
         Request $request,
-        Person $person
+        Person  $person
     ) {
         $this->notFound($person);
         $deleteForm = $this->createDeleteForm($person);
