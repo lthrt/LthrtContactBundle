@@ -14,6 +14,8 @@ class Person implements \Lthrt\EntityBundle\Entity\EntityLog
 {
     use \Lthrt\EntityBundle\Entity\ActiveTrait;
     use \Lthrt\EntityBundle\Entity\EntityTrait;
+    use \Lthrt\EntityBundle\Entity\JsonTrait;
+    use \Lthrt\EntityBundle\Entity\LoggingDisabledTrait;
 
     /**
      * @var string

@@ -82,7 +82,7 @@ class PersonController extends Controller
         $this->notFound($person);
 
         if ($request->isMethod('GET')) {
-            return $this->forward($this->generateUrl('person_list'));
+            // return $this->forward($this->generateUrl('person_list'));
             return $this->forward('LthrtContactBundle:Person:show', ['person' => $person]);
         } else {
             // Method is PUT or DELETE
@@ -164,11 +164,13 @@ class PersonController extends Controller
     ) {
         $this->notFound($person);
         $deleteForm = $this->createDeleteForm($person);
+        $log        = $this->get('lthrt.entity.logger')->findLog($person);
 
         return $this->render("LthrtContactBundle:Person:show.html.twig",
             [
                 'person'      => $person,
                 'delete_form' => $deleteForm->createView(),
+                'log'         => $log,
             ]
         );
     }
