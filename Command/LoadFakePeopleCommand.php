@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Security\Core\Authentication\Token\PreAuthenticatedToken as Token;
 
 class LoadFakePeopleCommand extends ContainerAwareCommand
 {
@@ -32,8 +33,14 @@ EOT
     /**
      * {@inheritDoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
-    {
+    protected function execute(
+        InputInterface  $input,
+        OutputInterface $output
+    ) {
+        // For logging
+        $token = new Token('Console', 'Console', 'Console');
+        $this->getContainer()->get('security.token_storage')->setToken($token);
+
         $overwrite = $input->getOption('overwrite') ?: false;
         $emName    = $input->getOption('em');
         $manager   = $this->getContainer()->get('doctrine')->getManager($emName);
