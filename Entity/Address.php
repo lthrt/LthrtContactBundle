@@ -12,8 +12,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Address implements \Lthrt\EntityBundle\Entity\EntityLog
 {
+    use \Lthrt\EntityBundle\Entity\DoctrineEntityTrait;
+
     use \Lthrt\EntityBundle\Entity\ActiveTrait;
-    use \Lthrt\EntityBundle\Entity\EntityTrait;
 
     /**
      * @var string
@@ -42,27 +43,6 @@ class Address implements \Lthrt\EntityBundle\Entity\EntityLog
      * @ORM\ManyToOne(targetEntity="AddressType")
      */
     private $type;
-
-    /**
-     * @var \Lthrt\ContactBundle\Entity\City
-     *
-     * @ORM\ManyToOne(targetEntity="City")
-     */
-    private $city;
-
-    /**
-     * @var \Lthrt\ContactBundle\Entity\State
-     *
-     * @ORM\ManyToOne(targetEntity="State")
-     */
-    private $state;
-
-    /**
-     * @var \Lthrt\ContactBundle\Entity\Zip
-     *
-     * @ORM\ManyToOne(targetEntity="Zip")
-     */
-    private $zip;
 
     /**
      * @var \Doctrine\Common\Collections\Collection

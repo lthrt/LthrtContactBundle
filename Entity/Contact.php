@@ -12,8 +12,10 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Contact implements \Lthrt\EntityBundle\Entity\EntityLog
 {
+    use \Lthrt\EntityBundle\Entity\DoctrineEntityTrait;
+
     use \Lthrt\EntityBundle\Entity\ActiveTrait;
-    use \Lthrt\EntityBundle\Entity\EntityTrait;
+
     use \Lthrt\EntityBundle\Entity\ValueTrait;
 
     /**

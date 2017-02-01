@@ -14,7 +14,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class DemographicType implements \Lthrt\EntityBundle\Entity\EntityLedger
 {
+    use \Lthrt\EntityBundle\Entity\DoctrineEntityTrait;
+
     use \Lthrt\EntityBundle\Entity\ActiveTrait;
-    use \Lthrt\EntityBundle\Entity\EntityTrait;
     use \Lthrt\EntityBundle\Entity\NameTrait;
 }

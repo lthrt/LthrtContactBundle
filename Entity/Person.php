@@ -3,6 +3,7 @@
 namespace Lthrt\ContactBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Lthrt\EntityBundle\Annotation\NoLog;
 
 /**
  * Person.
@@ -12,14 +13,16 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Person implements \Lthrt\EntityBundle\Entity\EntityLog
 {
+    use \Lthrt\EntityBundle\Entity\DoctrineEntityTrait;
+
     use \Lthrt\EntityBundle\Entity\ActiveTrait;
-    use \Lthrt\EntityBundle\Entity\EntityTrait;
     use \Lthrt\EntityBundle\Entity\JsonTrait;
     use \Lthrt\EntityBundle\Entity\LoggingDisabledTrait;
 
     /**
      * @var string
      *
+     * @Lthrt\EntityBundle\Annotation\NoLog(active=true)
      * @ORM\Column(name="first_name", type="string", length=255)
      */
     private $firstName;
@@ -27,6 +30,7 @@ class Person implements \Lthrt\EntityBundle\Entity\EntityLog
     /**
      * @var string
      *
+     * @Lthrt\EntityBundle\Annotation\NoLog(active=true)
      * @ORM\Column(name="last_name", type="string", length=255)
      */
     private $lastName;
