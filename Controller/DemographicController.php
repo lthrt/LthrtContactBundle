@@ -22,22 +22,24 @@ class DemographicController extends Controller
     /**
      * Gets edit form existing Demographic entity.
      *
-     * @Route("/{demographic}/edit", name="demographic_edit")
+     * @Route("/{demographic}/edit", name="demographic_edit", requirements={"demographic":"\d+"})
      *
      * @Method({"GET"})
      * @Template("LthrtContactBundle:Demographic:edit.html.twig")
      */
-    public function editAction(Request $request, Demographic $demographic)
-    {
+    public function editAction(
+        Request     $request,
+        Demographic $demographic
+    ) {
         $this->notFound($demographic);
 
         $form       = $this->createEditForm($demographic);
         $deleteForm = $this->createDeleteForm($demographic);
 
         return [
-            'demographic'      => $demographic,
-            'form'             => $form->createView(),
-            'delete_form'      => $deleteForm->createView(),
+            'demographic' => $demographic,
+            'form'        => $form->createView(),
+            'delete_form' => $deleteForm->createView(),
         ];
     }
 
@@ -68,13 +70,16 @@ class DemographicController extends Controller
      * @Method({"DELETE","GET","PUT"})
      * @Template("LthrtContactBundle:Demographic:edit.html.twig")
      */
-    public function singleAction(Request $request, Demographic $demographic)
-    {
+    public function singleAction(
+        Request     $request,
+        Demographic $demographic
+    ) {
         $this->notFound($demographic);
 
         if ($request->isMethod('GET')) {
-            return $this->forward('LthrtContactBundle:Demographic:show', [ 'demographic' => $demographic]);
-        } else { // Method is PUT or DELETE
+            return $this->forward('LthrtContactBundle:Demographic:show', ['demographic' => $demographic]);
+        } else {
+            // Method is PUT or DELETE
             $form       = $this->createEditForm($demographic);
             $deleteForm = $this->createDeleteForm($demographic);
             $form->handleRequest($request);
@@ -84,7 +89,7 @@ class DemographicController extends Controller
                     $em->persist($demographic);
                     $em->flush();
 
-                    return $this->forward('LthrtContactBundle:Demographic:show', [ 'demographic' => $demographic]);
+                    return $this->forward('LthrtContactBundle:Demographic:show', ['demographic' => $demographic]);
                 } else {
                     return $this->render('LthrtContactBundle:Demographic:edit.html.twig', [
                         'demographic' => $demographic,
@@ -100,7 +105,7 @@ class DemographicController extends Controller
 
                         return $this->forward($this->generateUrl('demographic'));
                     } else {
-                        return $this->forward('LthrtContactBundle:Demographic:show', [ 'demographic' => $demographic]);
+                        return $this->forward('LthrtContactBundle:Demographic:show', ['demographic' => $demographic]);
                     }
                 }
             }
@@ -129,7 +134,7 @@ class DemographicController extends Controller
             $em->persist($demographic);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('demographic_show', [ 'demographic' => $demographic->getId() ]));
+            return $this->redirect($this->generateUrl('demographic_show', ['demographic' => $demographic->getId()]));
         }
 
         return [
@@ -141,20 +146,22 @@ class DemographicController extends Controller
     /**
      * Finds and displays a Demographic entity.
      *
-     * @Route("/{demographic}/show", name="demographic_show")
+     * @Route("/{demographic}/show", name="demographic_show", requirements={"demographic":"\d+"})
      *
      * @Method("GET")
      * @Template("LthrtContactBundle:Demographic:show.html.twig")
      */
-    public function showAction(Request $request, Demographic $demographic)
-    {
+    public function showAction(
+        Request     $request,
+        Demographic $demographic
+    ) {
         $this->notFound($demographic);
 
         $deleteForm = $this->createDeleteForm($demographic);
 
         return [
-            'demographic'      => $demographic,
-            'delete_form'      => $deleteForm->createView(),
+            'demographic' => $demographic,
+            'delete_form' => $deleteForm->createView(),
         ];
     }
 }

@@ -22,22 +22,24 @@ class AddressTypeController extends Controller
     /**
      * Gets edit form existing AddressType entity.
      *
-     * @Route("/{addresstype}/edit", name="addresstype_edit")
+     * @Route("/{addresstype}/edit", name="addresstype_edit", requirements={"addresstype":"\d+"})
      *
      * @Method({"GET"})
      * @Template("LthrtContactBundle:AddressType:edit.html.twig")
      */
-    public function editAction(Request $request, AddressType $addresstype)
-    {
+    public function editAction(
+        Request     $request,
+        AddressType $addresstype
+    ) {
         $this->notFound($addresstype);
 
         $form       = $this->createEditForm($addresstype);
         $deleteForm = $this->createDeleteForm($addresstype);
 
         return [
-            'addresstype'      => $addresstype,
-            'form'             => $form->createView(),
-            'delete_form'      => $deleteForm->createView(),
+            'addresstype' => $addresstype,
+            'form'        => $form->createView(),
+            'delete_form' => $deleteForm->createView(),
         ];
     }
 
@@ -68,13 +70,16 @@ class AddressTypeController extends Controller
      * @Method({"DELETE","GET","PUT"})
      * @Template("LthrtContactBundle:AddressType:edit.html.twig")
      */
-    public function singleAction(Request $request, AddressType $addresstype)
-    {
+    public function singleAction(
+        Request     $request,
+        AddressType $addresstype
+    ) {
         $this->notFound($addresstype);
 
         if ($request->isMethod('GET')) {
-            return $this->forward('LthrtContactBundle:AddressType:show', [ 'addresstype' => $addresstype]);
-        } else { // Method is PUT or DELETE
+            return $this->forward('LthrtContactBundle:AddressType:show', ['addresstype' => $addresstype]);
+        } else {
+            // Method is PUT or DELETE
             $form       = $this->createEditForm($addresstype);
             $deleteForm = $this->createDeleteForm($addresstype);
             $form->handleRequest($request);
@@ -84,7 +89,7 @@ class AddressTypeController extends Controller
                     $em->persist($addresstype);
                     $em->flush();
 
-                    return $this->forward('LthrtContactBundle:AddressType:show', [ 'addresstype' => $addresstype]);
+                    return $this->forward('LthrtContactBundle:AddressType:show', ['addresstype' => $addresstype]);
                 } else {
                     return $this->render('LthrtContactBundle:AddressType:edit.html.twig', [
                         'addresstype' => $addresstype,
@@ -100,7 +105,7 @@ class AddressTypeController extends Controller
 
                         return $this->forward($this->generateUrl('addresstype'));
                     } else {
-                        return $this->forward('LthrtContactBundle:AddressType:show', [ 'addresstype' => $addresstype]);
+                        return $this->forward('LthrtContactBundle:AddressType:show', ['addresstype' => $addresstype]);
                     }
                 }
             }
@@ -129,7 +134,7 @@ class AddressTypeController extends Controller
             $em->persist($addresstype);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('addresstype_show', [ 'addresstype' => $addresstype->getId() ]));
+            return $this->redirect($this->generateUrl('addresstype_show', ['addresstype' => $addresstype->getId()]));
         }
 
         return [
@@ -141,20 +146,22 @@ class AddressTypeController extends Controller
     /**
      * Finds and displays a AddressType entity.
      *
-     * @Route("/{addresstype}/show", name="addresstype_show")
+     * @Route("/{addresstype}/show", name="addresstype_show", requirements={"addresstype":"\d+"})
      *
      * @Method("GET")
      * @Template("LthrtContactBundle:AddressType:show.html.twig")
      */
-    public function showAction(Request $request, AddressType $addresstype)
-    {
+    public function showAction(
+        Request     $request,
+        AddressType $addresstype
+    ) {
         $this->notFound($addresstype);
 
         $deleteForm = $this->createDeleteForm($addresstype);
 
         return [
-            'addresstype'      => $addresstype,
-            'delete_form'      => $deleteForm->createView(),
+            'addresstype' => $addresstype,
+            'delete_form' => $deleteForm->createView(),
         ];
     }
 }

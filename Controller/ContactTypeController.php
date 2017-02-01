@@ -22,22 +22,24 @@ class ContactTypeController extends Controller
     /**
      * Gets edit form existing ContactType entity.
      *
-     * @Route("/{contacttype}/edit", name="contacttype_edit")
+     * @Route("/{contacttype}/edit", name="contacttype_edit", requirements={"contacttype":"\d+"})
      *
      * @Method({"GET"})
      * @Template("LthrtContactBundle:ContactType:edit.html.twig")
      */
-    public function editAction(Request $request, ContactType $contacttype)
-    {
+    public function editAction(
+        Request     $request,
+        ContactType $contacttype
+    ) {
         $this->notFound($contacttype);
 
         $form       = $this->createEditForm($contacttype);
         $deleteForm = $this->createDeleteForm($contacttype);
 
         return [
-            'contacttype'      => $contacttype,
-            'form'             => $form->createView(),
-            'delete_form'      => $deleteForm->createView(),
+            'contacttype' => $contacttype,
+            'form'        => $form->createView(),
+            'delete_form' => $deleteForm->createView(),
         ];
     }
 
@@ -68,13 +70,16 @@ class ContactTypeController extends Controller
      * @Method({"DELETE","GET","PUT"})
      * @Template("LthrtContactBundle:ContactType:edit.html.twig")
      */
-    public function singleAction(Request $request, ContactType $contacttype)
-    {
+    public function singleAction(
+        Request     $request,
+        ContactType $contacttype
+    ) {
         $this->notFound($contacttype);
 
         if ($request->isMethod('GET')) {
-            return $this->forward('LthrtContactBundle:ContactType:show', [ 'contacttype' => $contacttype]);
-        } else { // Method is PUT or DELETE
+            return $this->forward('LthrtContactBundle:ContactType:show', ['contacttype' => $contacttype]);
+        } else {
+            // Method is PUT or DELETE
             $form       = $this->createEditForm($contacttype);
             $deleteForm = $this->createDeleteForm($contacttype);
             $form->handleRequest($request);
@@ -84,7 +89,7 @@ class ContactTypeController extends Controller
                     $em->persist($contacttype);
                     $em->flush();
 
-                    return $this->forward('LthrtContactBundle:ContactType:show', [ 'contacttype' => $contacttype]);
+                    return $this->forward('LthrtContactBundle:ContactType:show', ['contacttype' => $contacttype]);
                 } else {
                     return $this->render('LthrtContactBundle:ContactType:edit.html.twig', [
                         'contacttype' => $contacttype,
@@ -100,7 +105,7 @@ class ContactTypeController extends Controller
 
                         return $this->forward($this->generateUrl('contacttype'));
                     } else {
-                        return $this->forward('LthrtContactBundle:ContactType:show', [ 'contacttype' => $contacttype]);
+                        return $this->forward('LthrtContactBundle:ContactType:show', ['contacttype' => $contacttype]);
                     }
                 }
             }
@@ -129,7 +134,7 @@ class ContactTypeController extends Controller
             $em->persist($contacttype);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('contacttype_show', [ 'contacttype' => $contacttype->getId() ]));
+            return $this->redirect($this->generateUrl('contacttype_show', ['contacttype' => $contacttype->getId()]));
         }
 
         return [
@@ -141,20 +146,22 @@ class ContactTypeController extends Controller
     /**
      * Finds and displays a ContactType entity.
      *
-     * @Route("/{contacttype}/show", name="contacttype_show")
+     * @Route("/{contacttype}/show", name="contacttype_show", requirements={"contacttype":"\d+"})
      *
      * @Method("GET")
      * @Template("LthrtContactBundle:ContactType:show.html.twig")
      */
-    public function showAction(Request $request, ContactType $contacttype)
-    {
+    public function showAction(
+        Request     $request,
+        ContactType $contacttype
+    ) {
         $this->notFound($contacttype);
 
         $deleteForm = $this->createDeleteForm($contacttype);
 
         return [
-            'contacttype'      => $contacttype,
-            'delete_form'      => $deleteForm->createView(),
+            'contacttype' => $contacttype,
+            'delete_form' => $deleteForm->createView(),
         ];
     }
 }

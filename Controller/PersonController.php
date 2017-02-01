@@ -22,7 +22,7 @@ class PersonController extends Controller
     /**
      * Gets edit form existing Person entity.
      *
-     * @Route("/{person}/edit", name="person_edit")
+     * @Route("/{person}/edit", name="person_edit", requirements={"person":"\d+"})
      *
      * @Method({"GET"})
      */
@@ -154,7 +154,7 @@ class PersonController extends Controller
     /**
      * Finds and displays a Person entity.
      *
-     * @Route("/{person}/show", name="person_show")
+     * @Route("/{person}/show", name="person_show", requirements={"person":"\d+"})
      *
      * @Method("GET")
      */

@@ -18,4 +18,6 @@ class AddressType implements \Lthrt\EntityBundle\Entity\EntityLedger
 
     use \Lthrt\EntityBundle\Entity\ActiveTrait;
     use \Lthrt\EntityBundle\Entity\NameTrait;
+
+    use \Lthrt\EntityBundle\Entity\LoggingDisabledTrait;
 }

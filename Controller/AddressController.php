@@ -22,22 +22,24 @@ class AddressController extends Controller
     /**
      * Gets edit form existing Address entity.
      *
-     * @Route("/{address}/edit", name="address_edit")
+     * @Route("/{address}/edit", name="address_edit", requirements={"address":"\d+"})
      *
      * @Method({"GET"})
      * @Template("LthrtContactBundle:Address:edit.html.twig")
      */
-    public function editAction(Request $request, Address $address)
-    {
+    public function editAction(
+        Request $request,
+        Address $address
+    ) {
         $this->notFound($address);
 
         $form       = $this->createEditForm($address);
         $deleteForm = $this->createDeleteForm($address);
 
         return [
-            'address'      => $address,
-            'form'         => $form->createView(),
-            'delete_form'  => $deleteForm->createView(),
+            'address'     => $address,
+            'form'        => $form->createView(),
+            'delete_form' => $deleteForm->createView(),
         ];
     }
 
@@ -68,13 +70,16 @@ class AddressController extends Controller
      * @Method({"DELETE","GET","PUT"})
      * @Template("LthrtContactBundle:Address:edit.html.twig")
      */
-    public function singleAction(Request $request, Address $address)
-    {
+    public function singleAction(
+        Request $request,
+        Address $address
+    ) {
         $this->notFound($address);
 
         if ($request->isMethod('GET')) {
-            return $this->forward('LthrtContactBundle:Address:show', [ 'address' => $address]);
-        } else { // Method is PUT or DELETE
+            return $this->forward('LthrtContactBundle:Address:show', ['address' => $address]);
+        } else {
+            // Method is PUT or DELETE
             $form       = $this->createEditForm($address);
             $deleteForm = $this->createDeleteForm($address);
             $form->handleRequest($request);
@@ -84,7 +89,7 @@ class AddressController extends Controller
                     $em->persist($address);
                     $em->flush();
 
-                    return $this->forward('LthrtContactBundle:Address:show', [ 'address' => $address]);
+                    return $this->forward('LthrtContactBundle:Address:show', ['address' => $address]);
                 } else {
                     return $this->render('LthrtContactBundle:Address:edit.html.twig', [
                         'address'     => $address,
@@ -100,7 +105,7 @@ class AddressController extends Controller
 
                         return $this->forward($this->generateUrl('address'));
                     } else {
-                        return $this->forward('LthrtContactBundle:Address:show', [ 'address' => $address]);
+                        return $this->forward('LthrtContactBundle:Address:show', ['address' => $address]);
                     }
                 }
             }
@@ -129,7 +134,7 @@ class AddressController extends Controller
             $em->persist($address);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('address_show', [ 'address' => $address->getId() ]));
+            return $this->redirect($this->generateUrl('address_show', ['address' => $address->getId()]));
         }
 
         return [
@@ -141,20 +146,22 @@ class AddressController extends Controller
     /**
      * Finds and displays a Address entity.
      *
-     * @Route("/{address}/show", name="address_show")
+     * @Route("/{address}/show", name="address_show", requirements={"address":"\d+"})
      *
      * @Method("GET")
      * @Template("LthrtContactBundle:Address:show.html.twig")
      */
-    public function showAction(Request $request, Address $address)
-    {
+    public function showAction(
+        Request $request,
+        Address $address
+    ) {
         $this->notFound($address);
 
         $deleteForm = $this->createDeleteForm($address);
 
         return [
-            'address'      => $address,
-            'delete_form'  => $deleteForm->createView(),
+            'address'     => $address,
+            'delete_form' => $deleteForm->createView(),
         ];
     }
 }
