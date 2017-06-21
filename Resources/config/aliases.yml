@@ -1,5 +1,0 @@
-# for use with Lthrt\Entity\LthrtEntityBundle
-
-city: Lthrt\ContactBundle\Entity\City
-person: Lthrt\ContactBundle\Entity\Person
-state: Lthrt\ContactBundle\Entity\State
