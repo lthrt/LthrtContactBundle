@@ -31,7 +31,7 @@ class ContactTypeController extends Controller
         Request     $request,
         ContactType $contacttype
     ) {
-        $this->notFound($contacttype);
+        $this->ifNotFound($contacttype);
 
         $form       = $this->createEditForm($contacttype);
         $deleteForm = $this->createDeleteForm($contacttype);
@@ -74,7 +74,7 @@ class ContactTypeController extends Controller
         Request     $request,
         ContactType $contacttype
     ) {
-        $this->notFound($contacttype);
+        $this->ifNotFound($contacttype);
 
         if ($request->isMethod('GET')) {
             return $this->forward('LthrtContactBundle:ContactType:show', ['contacttype' => $contacttype]);
@@ -155,7 +155,7 @@ class ContactTypeController extends Controller
         Request     $request,
         ContactType $contacttype
     ) {
-        $this->notFound($contacttype);
+        $this->ifNotFound($contacttype);
 
         $deleteForm = $this->createDeleteForm($contacttype);
 

@@ -12,9 +12,11 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * eg gender, race, ethnicity
  */
-class DemographicType implements \Lthrt\EntityBundle\Entity\EntityLedger
+class DemographicType implements \Lthrt\EntityBundle\Entity\EntityLedger, \JsonSerializable
 {
     use \Lthrt\EntityBundle\Entity\DoctrineEntityTrait;
+    use \Lthrt\EntityBundle\Entity\JsonTrait;
+    // use \Lthrt\EntityBundle\Entity\LoggingDisabledTrait;
 
     use \Lthrt\EntityBundle\Entity\ActiveTrait;
     use \Lthrt\EntityBundle\Entity\NameTrait;

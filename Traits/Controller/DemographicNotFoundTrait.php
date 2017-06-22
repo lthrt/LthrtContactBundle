@@ -9,7 +9,7 @@ use Lthrt\ContactBundle\Entity\Demographic;
  */
 trait DemographicNotFoundTrait
 {
-    private function notFound(Demographic $demographic)
+    private function ifNotFound(Demographic $demographic)
     {
         if (!$demographic) {
             throw $this->createNotFoundException('Unable to find Demographic entity.');

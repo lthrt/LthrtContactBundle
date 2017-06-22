@@ -12,9 +12,11 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * eg email, work phone
  */
-class ContactType implements \Lthrt\EntityBundle\Entity\EntityLedger
+class ContactType implements \Lthrt\EntityBundle\Entity\EntityLedger, \JsonSerializable
 {
     use \Lthrt\EntityBundle\Entity\DoctrineEntityTrait;
+    use \Lthrt\EntityBundle\Entity\JsonTrait;
+    // use \Lthrt\EntityBundle\Entity\LoggingDisabledTrait;
 
     use \Lthrt\EntityBundle\Entity\ActiveTrait;
     use \Lthrt\EntityBundle\Entity\NameTrait;

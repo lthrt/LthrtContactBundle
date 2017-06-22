@@ -31,7 +31,7 @@ class AddressTypeController extends Controller
         Request     $request,
         AddressType $addresstype
     ) {
-        $this->notFound($addresstype);
+        $this->ifNotFound($addresstype);
 
         $form       = $this->createEditForm($addresstype);
         $deleteForm = $this->createDeleteForm($addresstype);
@@ -74,7 +74,7 @@ class AddressTypeController extends Controller
         Request     $request,
         AddressType $addresstype
     ) {
-        $this->notFound($addresstype);
+        $this->ifNotFound($addresstype);
 
         if ($request->isMethod('GET')) {
             return $this->forward('LthrtContactBundle:AddressType:show', ['addresstype' => $addresstype]);
@@ -155,7 +155,7 @@ class AddressTypeController extends Controller
         Request     $request,
         AddressType $addresstype
     ) {
-        $this->notFound($addresstype);
+        $this->ifNotFound($addresstype);
 
         $deleteForm = $this->createDeleteForm($addresstype);
 

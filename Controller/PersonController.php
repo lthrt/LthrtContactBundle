@@ -30,7 +30,7 @@ class PersonController extends Controller
         Request $request,
         Person  $person
     ) {
-        $this->notFound($person);
+        $this->ifNotFound($person);
 
         $form       = $this->createEditForm($person);
         $deleteForm = $this->createDeleteForm($person);
@@ -79,7 +79,7 @@ class PersonController extends Controller
         Request $request,
         Person  $person
     ) {
-        $this->notFound($person);
+        $this->ifNotFound($person);
 
         if ($request->isMethod('GET')) {
             // return $this->forward($this->generateUrl('person_list'));
@@ -162,7 +162,7 @@ class PersonController extends Controller
         Request $request,
         Person  $person
     ) {
-        $this->notFound($person);
+        $this->ifNotFound($person);
         $deleteForm = $this->createDeleteForm($person);
         $log        = $this->get('lthrt.entity.logger')->findLog($person);
 

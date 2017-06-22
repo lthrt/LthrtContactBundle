@@ -9,7 +9,7 @@ use Lthrt\ContactBundle\Entity\ContactType;
  */
 trait ContactTypeNotFoundTrait
 {
-    private function notFound(ContactType $contacttype)
+    private function ifNotFound(ContactType $contacttype)
     {
         if (!$contacttype) {
             throw $this->createNotFoundException('Unable to find ContactType entity.');

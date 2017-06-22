@@ -31,7 +31,7 @@ class DemographicTypeController extends Controller
         Request         $request,
         DemographicType $demographictype
     ) {
-        $this->notFound($demographictype);
+        $this->ifNotFound($demographictype);
 
         $form       = $this->createEditForm($demographictype);
         $deleteForm = $this->createDeleteForm($demographictype);
@@ -72,7 +72,7 @@ class DemographicTypeController extends Controller
         Request         $request,
         DemographicType $demographictype
     ) {
-        $this->notFound($demographictype);
+        $this->ifNotFound($demographictype);
 
         if ($request->isMethod('GET')) {
             return $this->forward('LthrtContactBundle:DemographicType:show', ['demographictype' => $demographictype]);
@@ -151,7 +151,7 @@ class DemographicTypeController extends Controller
         Request         $request,
         DemographicType $demographictype
     ) {
-        $this->notFound($demographictype);
+        $this->ifNotFound($demographictype);
 
         $deleteForm = $this->createDeleteForm($demographictype);
 

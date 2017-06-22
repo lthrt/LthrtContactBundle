@@ -12,12 +12,12 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * eg work, home
  */
-class AddressType implements \Lthrt\EntityBundle\Entity\EntityLedger
+class AddressType implements \Lthrt\EntityBundle\Entity\EntityLedger, \JsonSerializable
 {
     use \Lthrt\EntityBundle\Entity\DoctrineEntityTrait;
+    use \Lthrt\EntityBundle\Entity\JsonTrait;
+    // use \Lthrt\EntityBundle\Entity\LoggingDisabledTrait;
 
     use \Lthrt\EntityBundle\Entity\ActiveTrait;
     use \Lthrt\EntityBundle\Entity\NameTrait;
-
-    use \Lthrt\EntityBundle\Entity\LoggingDisabledTrait;
 }

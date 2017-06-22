@@ -10,9 +10,10 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Lthrt\ContactBundle\Repository\DemographicRepository")
  */
-class Demographic implements \Lthrt\EntityBundle\Entity\EntityLedger
+class Demographic implements \Lthrt\EntityBundle\Entity\EntityLedger, \JsonSerializable
 {
     use \Lthrt\EntityBundle\Entity\DoctrineEntityTrait;
+    use \Lthrt\EntityBundle\Entity\JsonTrait;
 
     use \Lthrt\EntityBundle\Entity\ActiveTrait;
     use \Lthrt\EntityBundle\Entity\ValueTrait;

@@ -31,7 +31,7 @@ class DemographicController extends Controller
         Request     $request,
         Demographic $demographic
     ) {
-        $this->notFound($demographic);
+        $this->ifNotFound($demographic);
 
         $form       = $this->createEditForm($demographic);
         $deleteForm = $this->createDeleteForm($demographic);
@@ -74,7 +74,7 @@ class DemographicController extends Controller
         Request     $request,
         Demographic $demographic
     ) {
-        $this->notFound($demographic);
+        $this->ifNotFound($demographic);
 
         if ($request->isMethod('GET')) {
             return $this->forward('LthrtContactBundle:Demographic:show', ['demographic' => $demographic]);
@@ -155,7 +155,7 @@ class DemographicController extends Controller
         Request     $request,
         Demographic $demographic
     ) {
-        $this->notFound($demographic);
+        $this->ifNotFound($demographic);
 
         $deleteForm = $this->createDeleteForm($demographic);
 

@@ -11,12 +11,12 @@ use Lthrt\EntityBundle\Annotation\NoLog;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Lthrt\ContactBundle\Repository\PersonRepository")
  */
-class Person implements \Lthrt\EntityBundle\Entity\EntityLog
+class Person implements \Lthrt\EntityBundle\Entity\EntityLog, \JsonSerializable
 {
     use \Lthrt\EntityBundle\Entity\DoctrineEntityTrait;
+    use \Lthrt\EntityBundle\Entity\JsonTrait;
 
     use \Lthrt\EntityBundle\Entity\ActiveTrait;
-    use \Lthrt\EntityBundle\Entity\JsonTrait;
 
     /**
      * @var string

@@ -10,12 +10,12 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Lthrt\ContactBundle\Repository\ContactRepository")
  */
-class Contact implements \Lthrt\EntityBundle\Entity\EntityLog
+class Contact implements \Lthrt\EntityBundle\Entity\EntityLog, \JsonSerializable
 {
     use \Lthrt\EntityBundle\Entity\DoctrineEntityTrait;
+    use \Lthrt\EntityBundle\Entity\JsonTrait;
 
     use \Lthrt\EntityBundle\Entity\ActiveTrait;
-
     use \Lthrt\EntityBundle\Entity\ValueTrait;
 
     /**
