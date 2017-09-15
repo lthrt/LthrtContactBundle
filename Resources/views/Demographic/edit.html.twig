@@ -1,6 +1,6 @@
 {% extends 'LthrtContactBundle:Demographic:demographic.html.twig' %}
 
-{% block body -%}
+{% block contentbody -%}
     <h1>Demographic Edit</h1>
     {% include 'LthrtContactBundle:Demographic:form.html.twig' with { 'submitLabel' : 'Update' } %}
     <ul class="record_actions">
@@ -11,4 +11,4 @@
     </li>
     <li>{{ form(delete_form) }}</li>
 </ul>
-{% endblock body %}
+{% endblock contentbody %}

@@ -1,6 +1,6 @@
-{% form_theme delete_form 'LthrtTemplateBundle:Form:delete_inline_form.html.twig' %}
-{% extends 'LthrtTemplateBundle::page.html.twig' %}
-{% block content %}
+{% form_theme delete_form 'AppBundle:Form:delete_inline_form.html.twig' %}
+{% extends 'AppBundle::base.html.twig' %}
+{% block contentbody %}
         <h2 class="form-inline">Person Detail: {{person.firstName}}  {{person.lastName}}
             {{ form_start(delete_form) }}
             {{- form_widget(delete_form.submit) -}}
@@ -54,4 +54,4 @@
     </div>
 
     {{log|json_pretty|raw}}
-{% endblock content %}
+{% endblock contentbody %}

@@ -1,12 +1,19 @@
+{% block contentbody %}
+    <div class="row">
+        <div class="col-sm-8">
+            {{ form_start(form) }}
+            {{ form_row(form.firstName) }}
+            {{ form_row(form.lastName) }}
+            {{ form_row(form.dob) }}
+            {{ form_row(form.active) }}
+            {{ form_row(form.contact) }}
+            {{ form_row(form.demographic) }}
+            {{ form_row(form.address) }}
+            {{ form_row(form.submit, {'label': 'Save', 'value':'Update'}) }}
+            {{ form_rest(form) }}
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock contentbody %}
+
 {% form_theme form.demographic 'LthrtContactBundle:Person:demographicForm.html.twig' %}
-{{ form_start(form) }}
-{{ form_row(form.firstName) }}
-{{ form_row(form.lastName) }}
-{{ form_row(form.dob) }}
-{{ form_row(form.active) }}
-{{ form_row(form.contact) }}
-{{ form_row(form.demographic) }}
-{{ form_row(form.address) }}
-{{ form_row(form.submit, {'label': 'Save', 'value':'Update'}) }}
-{{ form_rest(form) }}
-{{ form_end(form) }}

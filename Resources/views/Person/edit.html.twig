@@ -1,7 +1,5 @@
-{% form_theme delete_form.submit 'LthrtTemplateBundle:Form:delete_widget.html.twig' %}
-{% embed 'LthrtTemplateBundle::form.html.twig' %}
-    {% block content %}
-        <h2>Person Edit: {{form.vars.data.firstName}}  {{form.vars.data.lastName}}</h2>
-        {% include 'LthrtContactBundle:Person:form.html.twig' with { 'label' : 'Saved' } %}
-    {% endblock content %}
-{% endembed %}
+{% extends 'base.html.twig' %}
+{% set pageTitle = 'Person Edit: {{form.vars.data.firstName}}  {{form.vars.data.lastName}}' %}
+{% block contentbody %}
+{% include 'LthrtContactBundle:Person:form.html.twig' with { 'label' : 'Update' } %}
+{% endblock contentbody %}

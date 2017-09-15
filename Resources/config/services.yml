@@ -20,3 +20,9 @@ services:
         arguments: ["@doctrine.orm.entity_manager", "@security.token_storage"]
         tags:
             - { name: form.type, alias: state }
+
+    contact.boolean.extension:
+        class: Lthrt\ContactBundle\Twig\BooleanExtension
+        arguments: [ "@twig" ]
+        tags:
+            - { name: twig.extension }

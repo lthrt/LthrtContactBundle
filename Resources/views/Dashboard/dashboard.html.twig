@@ -1,4 +1,4 @@
-{% extends 'LthrtTemplateBundle::dashboard.html.twig' %}
+{% extends 'AppBundle::dashboard.html.twig' %}
 {% block sideMenu %}
     {% include 'LthrtContactBundle:Sidebar:dashboard.html.twig' %}
 {% endblock sideMenu %}
@@ -13,7 +13,7 @@
 {% endblock widget3 %}
 {% block widget4 %}
 {% endblock widget4 %}
-{% block content %}
+{% block contentbody %}
     <div class="col-xs-12">
     <h2>Issues</h2>
     <ul>
@@ -23,7 +23,7 @@
         <li>Maybe some borders?</li>
     </ul>
 </div>
-{% endblock content %}
+{% endblock contentbody %}
 {%- block js -%}
     {{- parent() -}}
     {% include 'LthrtContactBundle:Widget:d3.js.html.twig' %}
